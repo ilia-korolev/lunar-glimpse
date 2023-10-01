@@ -72,8 +72,14 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
   }
 
   Date _calculateStartDate(int page, int count) {
-    //https://github.com/nasa/apod-api/issues/26
-    //00:00 UTC-4 (Eastern Time)
+    // https://github.com/nasa/apod-api/issues/26
+    // 00:00 UTC-4 (Eastern Time)
+
+    // TODO(ilia-korolev): a new image isn't created at 00:00
+    // But a little bit later
+    // There is a but with hasReachedMax = true
+    // after 00:00 but before a new image is created
+    // Find a way to fix this bug
 
     final usEasternTime = timezone.getLocation('US/Eastern');
     final today = timezone.TZDateTime.now(usEasternTime);
