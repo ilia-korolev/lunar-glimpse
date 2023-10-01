@@ -1,0 +1,15 @@
+{
+    "@@locale": "en",
+    "dailyMediaTitle": "Daily Media",
+    "newsTitle": "News",
+    "settingsTitle": "Settings",
+    "themeSettingsTitle": "Theme",
+    "systemThemeModeTitle": "System default",
+    "lightThemeModeTitle": "Light",
+    "darkThemeModeTitle": "Dark",
+    "aboutSettingsTitle": "About",
+    "aboutSettingsDescription": "All the stuff you need to know",
+    "responseErrorTitle": "Oops!",
+    "responseErrorText": "Something went wrong",
+    "tryAgainButton": "Try again"
+}

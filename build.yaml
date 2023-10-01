@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - require_trailing_commas
+            - non_constant_identifier_names
+            - unnecessary_null_checks
+            - lines_longer_than_80_chars
