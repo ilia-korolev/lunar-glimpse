@@ -17,7 +17,6 @@ class DailyMediaState with _$DailyMediaState {
   const factory DailyMediaState({
     required DailyMediaStatus status,
     @Default([]) List<Media> mediaList,
-    @Default(0) int page,
     @Default(false) bool hasReachedMax,
   }) = _DailyMediaState;
 
@@ -29,7 +28,6 @@ class DailyMediaState with _$DailyMediaState {
 DailyMediaState(
   status: ${status.name},
   mediaList.length: ${mediaList.length},
-  page: $page,
   hasReachedMax: $hasReachedMax,
 )
 ''';

@@ -6,6 +6,8 @@ import 'package:flutter_astronomy/domain/_export.dart';
 abstract class RemoteDailyMediaDataSource {
   const RemoteDailyMediaDataSource();
 
+  Future<Media> getTodayMedia();
+
   Future<List<Media>> getDailyMedia({
     required Date startDate,
     required Date endDate,
@@ -21,6 +23,30 @@ class NasaApodDataSource extends RemoteDailyMediaDataSource {
 
   final Dio _dio;
   final String _apiKey;
+
+  @override
+  Future<Media> getTodayMedia() async {
+    final request = ApodRequestDto(
+      apiKey: _apiKey,
+    );
+
+    final response = await _dio.get<dynamic>(
+      'https://api.nasa.gov/planetary/apod',
+      queryParameters: request.toJson(),
+      options: Options(responseType: ResponseType.json),
+    );
+
+    final jsonData = response.data;
+
+    if (jsonData == null) {
+      throw InvalidResponseException();
+    }
+
+    final mediaDto = ApodResponseDto.fromJson(jsonData as Map<String, dynamic>);
+    final media = mediaDto.toModel();
+
+    return media;
+  }
 
   @override
   Future<List<Media>> getDailyMedia({

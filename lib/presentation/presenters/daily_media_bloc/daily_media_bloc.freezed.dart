@@ -470,7 +470,6 @@ abstract class _FavoriteToggled implements DailyMediaEvent {
 mixin _$DailyMediaState {
   DailyMediaStatus get status => throw _privateConstructorUsedError;
   List<Media> get mediaList => throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
   bool get hasReachedMax => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -485,10 +484,7 @@ abstract class $DailyMediaStateCopyWith<$Res> {
       _$DailyMediaStateCopyWithImpl<$Res, DailyMediaState>;
   @useResult
   $Res call(
-      {DailyMediaStatus status,
-      List<Media> mediaList,
-      int page,
-      bool hasReachedMax});
+      {DailyMediaStatus status, List<Media> mediaList, bool hasReachedMax});
 }
 
 /// @nodoc
@@ -506,7 +502,6 @@ class _$DailyMediaStateCopyWithImpl<$Res, $Val extends DailyMediaState>
   $Res call({
     Object? status = null,
     Object? mediaList = null,
-    Object? page = null,
     Object? hasReachedMax = null,
   }) {
     return _then(_value.copyWith(
@@ -518,10 +513,6 @@ class _$DailyMediaStateCopyWithImpl<$Res, $Val extends DailyMediaState>
           ? _value.mediaList
           : mediaList // ignore: cast_nullable_to_non_nullable
               as List<Media>,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
       hasReachedMax: null == hasReachedMax
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -539,10 +530,7 @@ abstract class _$$_DailyMediaStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DailyMediaStatus status,
-      List<Media> mediaList,
-      int page,
-      bool hasReachedMax});
+      {DailyMediaStatus status, List<Media> mediaList, bool hasReachedMax});
 }
 
 /// @nodoc
@@ -558,7 +546,6 @@ class __$$_DailyMediaStateCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? mediaList = null,
-    Object? page = null,
     Object? hasReachedMax = null,
   }) {
     return _then(_$_DailyMediaState(
@@ -570,10 +557,6 @@ class __$$_DailyMediaStateCopyWithImpl<$Res>
           ? _value._mediaList
           : mediaList // ignore: cast_nullable_to_non_nullable
               as List<Media>,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
       hasReachedMax: null == hasReachedMax
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -588,7 +571,6 @@ class _$_DailyMediaState extends _DailyMediaState {
   const _$_DailyMediaState(
       {required this.status,
       final List<Media> mediaList = const [],
-      this.page = 0,
       this.hasReachedMax = false})
       : _mediaList = mediaList,
         super._();
@@ -606,9 +588,6 @@ class _$_DailyMediaState extends _DailyMediaState {
 
   @override
   @JsonKey()
-  final int page;
-  @override
-  @JsonKey()
   final bool hasReachedMax;
 
   @override
@@ -619,14 +598,13 @@ class _$_DailyMediaState extends _DailyMediaState {
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality()
                 .equals(other._mediaList, _mediaList) &&
-            (identical(other.page, page) || other.page == page) &&
             (identical(other.hasReachedMax, hasReachedMax) ||
                 other.hasReachedMax == hasReachedMax));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status,
-      const DeepCollectionEquality().hash(_mediaList), page, hasReachedMax);
+      const DeepCollectionEquality().hash(_mediaList), hasReachedMax);
 
   @JsonKey(ignore: true)
   @override
@@ -639,7 +617,6 @@ abstract class _DailyMediaState extends DailyMediaState {
   const factory _DailyMediaState(
       {required final DailyMediaStatus status,
       final List<Media> mediaList,
-      final int page,
       final bool hasReachedMax}) = _$_DailyMediaState;
   const _DailyMediaState._() : super._();
 
@@ -647,8 +624,6 @@ abstract class _DailyMediaState extends DailyMediaState {
   DailyMediaStatus get status;
   @override
   List<Media> get mediaList;
-  @override
-  int get page;
   @override
   bool get hasReachedMax;
   @override

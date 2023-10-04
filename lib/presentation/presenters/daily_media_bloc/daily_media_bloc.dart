@@ -47,12 +47,12 @@ class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
         ),
       );
 
-      final page = state.mediaList.isEmpty ? 0 : state.page + 1;
-
-      final response = await _repository.getDailyMedia(
-        page: page,
-        count: pageSize,
-      );
+      final response = state.mediaList.isEmpty
+          ? await _repository.getLatestMedia(count: pageSize)
+          : await _repository.getDailyMedia(
+              endDate: state.mediaList.last.date.yesterday,
+              count: pageSize,
+            );
 
       final mediaList = [
         ...state.mediaList,
@@ -65,7 +65,6 @@ class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
         state.copyWith(
           status: DailyMediaStatus.success,
           mediaList: mediaList,
-          page: page,
           hasReachedMax: response.length < pageSize,
         ),
       );

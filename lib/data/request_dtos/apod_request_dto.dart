@@ -9,15 +9,11 @@ part 'apod_request_dto.g.dart';
 class ApodRequestDto with _$ApodRequestDto {
   @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
   @Assert(
-    '''date != null || (startDate != null && endDate != null) || count != null''',
-    '''At least one of the fields (date or [startDate & endDate] or count) must not be null''',
-  )
-  @Assert(
     '''(date == null) || (startDate == null && endDate == null && count == null)''',
     '''date cannot be used with count or startDate and endDate.''',
   )
   @Assert(
-    '''(startDate == null && endDate == null) || (startDate != null && endDate != null && date == null && count == null)''',
+    '''(startDate == null && endDate == null) || (startDate != null && date == null && count == null)''',
     '''startDate and endDate cannot be used with date or count.''',
   )
   @Assert(
@@ -28,6 +24,8 @@ class ApodRequestDto with _$ApodRequestDto {
     /// The date of the APOD image to retrieve.
     ///
     /// Cannot be used with count or startDate and endDate.
+    ///
+    /// Default value is today
     @DateConverterNullable() Date? date,
 
     /// The start of a date range, when requesting date for a range of dates.
@@ -38,6 +36,8 @@ class ApodRequestDto with _$ApodRequestDto {
     /// The end of the date range, when used with startDate.
     ///
     /// Cannot be used with date or count.
+    ///
+    /// Default value is today
     @DateConverterNullable() Date? endDate,
 
     /// If this is specified then count randomly chosen images will be returned.

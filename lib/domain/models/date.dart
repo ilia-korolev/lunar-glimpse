@@ -66,8 +66,16 @@ The input number must have 8 digits: $integer''',
     return format.format(toDateTime());
   }
 
+  Date get yesterday => subtract(const Duration(days: 1));
+
   Date add(Duration duration) {
     final dateTime = toDateTime().add(duration);
+
+    return Date.fromDateTime(dateTime: dateTime);
+  }
+
+  Date subtract(Duration duration) {
+    final dateTime = toDateTime().subtract(duration);
 
     return Date.fromDateTime(dateTime: dateTime);
   }

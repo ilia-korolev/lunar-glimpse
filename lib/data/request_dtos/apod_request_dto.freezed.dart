@@ -23,6 +23,8 @@ mixin _$ApodRequestDto {
   /// The date of the APOD image to retrieve.
   ///
   /// Cannot be used with count or startDate and endDate.
+  ///
+  /// Default value is today
   @DateConverterNullable()
   Date? get date => throw _privateConstructorUsedError;
 
@@ -35,6 +37,8 @@ mixin _$ApodRequestDto {
   /// The end of the date range, when used with startDate.
   ///
   /// Cannot be used with date or count.
+  ///
+  /// Default value is today
   @DateConverterNullable()
   Date? get endDate => throw _privateConstructorUsedError;
 
@@ -244,20 +248,12 @@ class _$_ApodRequestDto extends _ApodRequestDto {
       this.thumbs = false,
       this.apiKey = 'DEMO_KEY'})
       : assert(
-            date != null ||
-                (startDate != null && endDate != null) ||
-                count != null,
-            'At least one of the fields (date or [startDate & endDate] or count) must not be null'),
-        assert(
             (date == null) ||
                 (startDate == null && endDate == null && count == null),
             'date cannot be used with count or startDate and endDate.'),
         assert(
             (startDate == null && endDate == null) ||
-                (startDate != null &&
-                    endDate != null &&
-                    date == null &&
-                    count == null),
+                (startDate != null && date == null && count == null),
             'startDate and endDate cannot be used with date or count.'),
         assert(
             (count == null) ||
@@ -271,6 +267,8 @@ class _$_ApodRequestDto extends _ApodRequestDto {
   /// The date of the APOD image to retrieve.
   ///
   /// Cannot be used with count or startDate and endDate.
+  ///
+  /// Default value is today
   @override
   @DateConverterNullable()
   final Date? date;
@@ -285,6 +283,8 @@ class _$_ApodRequestDto extends _ApodRequestDto {
   /// The end of the date range, when used with startDate.
   ///
   /// Cannot be used with date or count.
+  ///
+  /// Default value is today
   @override
   @DateConverterNullable()
   final Date? endDate;
@@ -363,6 +363,8 @@ abstract class _ApodRequestDto extends ApodRequestDto {
   /// The date of the APOD image to retrieve.
   ///
   /// Cannot be used with count or startDate and endDate.
+  ///
+  /// Default value is today
   @DateConverterNullable()
   Date? get date;
   @override
@@ -377,6 +379,8 @@ abstract class _ApodRequestDto extends ApodRequestDto {
   /// The end of the date range, when used with startDate.
   ///
   /// Cannot be used with date or count.
+  ///
+  /// Default value is today
   @DateConverterNullable()
   Date? get endDate;
   @override

@@ -1,12 +1,15 @@
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:timezone/timezone.dart' as timezone;
 
 abstract interface class DailyMediaRepository {
   const DailyMediaRepository();
 
   Future<List<Media>> getDailyMedia({
-    required int page,
+    required Date endDate,
+    required int count,
+  });
+
+  Future<List<Media>> getLatestMedia({
     required int count,
   });
 
@@ -25,14 +28,25 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
   final LocalDailyMediaDataSource _localDailyMediaDataSource;
   final RemoteDailyMediaDataSource _remoteDailyMediaDataSource;
 
-  /// The page number starts with 0
   @override
-  Future<List<Media>> getDailyMedia({
-    required int page,
+  Future<List<Media>> getLatestMedia({
     required int count,
   }) async {
-    final startDate = _calculateStartDate(page, count);
-    final endDate = startDate.add(Duration(days: count));
+    final todayMedia = await _remoteDailyMediaDataSource.getTodayMedia();
+
+    await _localDailyMediaDataSource.cacheDailyMedia(
+      dailyMedia: [todayMedia],
+    );
+
+    return getDailyMedia(endDate: todayMedia.date, count: count);
+  }
+
+  @override
+  Future<List<Media>> getDailyMedia({
+    required Date endDate,
+    required int count,
+  }) async {
+    final startDate = endDate.subtract(Duration(days: count - 1));
 
     final cachedMedia = await _localDailyMediaDataSource.getDailyMedia(
       startDate: startDate,
@@ -69,26 +83,6 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
     );
 
     return updatedMedia;
-  }
-
-  Date _calculateStartDate(int page, int count) {
-    // https://github.com/nasa/apod-api/issues/26
-    // 00:00 UTC-4 (Eastern Time)
-
-    // TODO(ilia-korolev): a new image isn't created at 00:00
-    // But a little bit later
-    // There is a but with hasReachedMax = true
-    // after 00:00 but before a new image is created
-    // Find a way to fix this bug
-
-    final usEasternTime = timezone.getLocation('US/Eastern');
-    final today = timezone.TZDateTime.now(usEasternTime);
-
-    final startDateTime =
-        today.subtract(Duration(days: (page + 1) * count - 1));
-
-    final startDate = Date.fromDateTime(dateTime: startDateTime);
-    return startDate;
   }
 
   Future<List<Media>> _getUncachedMedia({
