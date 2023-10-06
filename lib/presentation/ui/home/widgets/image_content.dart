@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_astronomy/presentation/_export.dart';
 
 class ImageContent extends StatelessWidget {
   const ImageContent({
@@ -11,13 +12,15 @@ class ImageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return CachedNetworkImage(
       imageUrl: uri,
       fit: BoxFit.cover,
       progressIndicatorBuilder: (context, url, downloadProgress) {
-        return Center(
-          child: CircularProgressIndicator(
-            value: downloadProgress.progress,
+        return PrimaryShimmer(
+          child: ColoredBox(
+            color: theme.primaryColor,
           ),
         );
       },
