@@ -3,7 +3,7 @@ import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 
-abstract class RemoteDailyMediaDataSource {
+abstract interface class RemoteDailyMediaDataSource {
   const RemoteDailyMediaDataSource();
 
   Future<Media> getTodayMedia();
@@ -14,14 +14,14 @@ abstract class RemoteDailyMediaDataSource {
   });
 }
 
-class NasaApodDataSource extends RemoteDailyMediaDataSource {
+class NasaApodDataSource implements RemoteDailyMediaDataSource {
   const NasaApodDataSource({
-    required Dio dio,
+    required HttpService httpService,
     String apiKey = 'DEMO_KEY',
-  })  : _dio = dio,
+  })  : _dio = httpService,
         _apiKey = apiKey;
 
-  final Dio _dio;
+  final HttpService _dio;
   final String _apiKey;
 
   @override

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class LocalAppSettingsDataSource {
+abstract interface class LocalAppSettingsDataSource {
   const LocalAppSettingsDataSource();
 
   AppSettings readSettings();

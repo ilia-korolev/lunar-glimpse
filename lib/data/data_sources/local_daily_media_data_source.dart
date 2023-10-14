@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 
-abstract class LocalDailyMediaDataSource {
+abstract interface class LocalDailyMediaDataSource {
   const LocalDailyMediaDataSource();
 
   Future<void> cacheDailyMedia({

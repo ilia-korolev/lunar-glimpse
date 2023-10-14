@@ -12,6 +12,7 @@
         "lerp",
         "mocktail",
         "rxdart",
-        "vsync"
+        "vsync",
+        "writeln"
     ]
 }

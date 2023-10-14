@@ -1,9 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:get_it/get_it.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _getIt = GetIt.instance;
@@ -28,8 +29,28 @@ Future<void> _registerServices() async {
         return AppDatabase(connection);
       },
     )
-    ..registerLazySingleton<Dio>(
-      Dio.new,
+    ..registerLazySingleton<Logger>(
+      () => Logger(
+        printer: PrettyPrinter(
+          methodCount: 0,
+          printEmojis: false,
+        ),
+        output: DeveloperLogOutput(),
+      ),
+    )
+    ..registerLazySingleton<AppBlocObserver>(
+      () => AppBlocObserver(
+        logger: _getIt(),
+      ),
+    )
+    ..registerLazySingleton<HttpService>(
+      () => HttpServiceImpl(
+        interceptors: [
+          DioLoggingInterceptor(
+            logger: _getIt(),
+          ),
+        ],
+      ),
     )
     ..registerLazySingleton<Theming>(
       () => Theming(
@@ -55,7 +76,7 @@ Future<void> _registerDataSources() async {
       ],
     )
     ..registerLazySingleton<RemoteDailyMediaDataSource>(
-      () => NasaApodDataSource(dio: _getIt()),
+      () => NasaApodDataSource(httpService: _getIt()),
     );
 }
 
