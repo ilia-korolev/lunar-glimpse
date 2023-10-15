@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '_export.dart';
 
@@ -81,11 +82,11 @@ class _HomeNavigationBarState extends State<HomeNavigationBar>
       },
       destinations: [
         NavigationDestination(
-          icon: const Icon(Icons.rocket_launch_sharp),
+          icon: const FaIcon(FontAwesomeIcons.rocket),
           label: HomePageTab.dailyMedia.title(l10n),
         ),
         NavigationDestination(
-          icon: const Icon(Icons.newspaper),
+          icon: const FaIcon(FontAwesomeIcons.newspaper),
           label: HomePageTab.news.title(l10n),
         ),
         NavigationDestination(

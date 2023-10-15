@@ -3,6 +3,7 @@ import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/models/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../widgets/_export.dart';
@@ -37,7 +38,7 @@ class _Body extends StatelessWidget {
             },
             builder: (context, settings) {
               return SettingButton(
-                icon: Icons.dark_mode,
+                icon: FontAwesomeIcons.solidMoon,
                 title: l10n.themeSettingsTitle,
                 subtitle: settings.themeMode.getTitle(l10n),
                 onPressed: () async {
@@ -50,7 +51,7 @@ class _Body extends StatelessWidget {
             },
           ),
           SettingButton(
-            icon: Icons.info,
+            icon: FontAwesomeIcons.circleInfo,
             title: l10n.aboutSettingsTitle,
             subtitle: l10n.aboutSettingsDescription,
             onPressed: () async {

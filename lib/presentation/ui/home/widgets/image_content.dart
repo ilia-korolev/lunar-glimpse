@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ImageContent extends StatelessWidget {
   const ImageContent({
@@ -25,7 +26,8 @@ class ImageContent extends StatelessWidget {
         );
       },
       errorWidget: (context, url, error) {
-        return const Icon(Icons.error);
+        // TODO(ilia-korolev): change this to something more suitable
+        return const FaIcon(FontAwesomeIcons.circleExclamation);
       },
     );
   }

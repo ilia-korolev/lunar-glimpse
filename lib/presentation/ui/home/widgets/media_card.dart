@@ -3,6 +3,7 @@ import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -194,16 +195,18 @@ class _FavoriteButton extends StatelessWidget {
         onTap: onPressed,
         child: Padding(
           padding: EdgeInsets.all(theme.spacing.medium),
-          child: Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_outline,
+          child: FaIcon(
+            isFavorite ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart,
             color: iconColor,
             size: theme.sizes.largeIconSize,
-            shadows: [
-              Shadow(
-                color: iconColor.withOpacity(.5),
-                blurRadius: theme.sizes.largeIconSize,
-              ),
-            ],
+            // TODO(ilia-korolev): fix the shadow when it's ready
+            // https://github.com/fluttercommunity/font_awesome_flutter/pull/247
+            // shadows: [
+            //   Shadow(
+            //     color: iconColor.withOpacity(.5),
+            //     blurRadius: theme.sizes.largeIconSize,
+            //   ),
+            // ],
           ),
         ),
       ),

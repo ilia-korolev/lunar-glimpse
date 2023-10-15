@@ -10,17 +10,6 @@ enum HomePageTab {
   news,
   settings;
 
-  IconData get icon {
-    switch (this) {
-      case HomePageTab.dailyMedia:
-        return Icons.rocket_launch_sharp;
-      case HomePageTab.news:
-        return Icons.newspaper;
-      case HomePageTab.settings:
-        return Icons.settings;
-    }
-  }
-
   String title(AppLocalizations l10n) {
     switch (this) {
       case HomePageTab.dailyMedia:
