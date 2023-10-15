@@ -166,11 +166,11 @@ class _$ApodRequestDtoCopyWithImpl<$Res, $Val extends ApodRequestDto>
 }
 
 /// @nodoc
-abstract class _$$_ApodRequestDtoCopyWith<$Res>
+abstract class _$$ApodRequestDtoImplCopyWith<$Res>
     implements $ApodRequestDtoCopyWith<$Res> {
-  factory _$$_ApodRequestDtoCopyWith(
-          _$_ApodRequestDto value, $Res Function(_$_ApodRequestDto) then) =
-      __$$_ApodRequestDtoCopyWithImpl<$Res>;
+  factory _$$ApodRequestDtoImplCopyWith(_$ApodRequestDtoImpl value,
+          $Res Function(_$ApodRequestDtoImpl) then) =
+      __$$ApodRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -190,11 +190,11 @@ abstract class _$$_ApodRequestDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApodRequestDtoCopyWithImpl<$Res>
-    extends _$ApodRequestDtoCopyWithImpl<$Res, _$_ApodRequestDto>
-    implements _$$_ApodRequestDtoCopyWith<$Res> {
-  __$$_ApodRequestDtoCopyWithImpl(
-      _$_ApodRequestDto _value, $Res Function(_$_ApodRequestDto) _then)
+class __$$ApodRequestDtoImplCopyWithImpl<$Res>
+    extends _$ApodRequestDtoCopyWithImpl<$Res, _$ApodRequestDtoImpl>
+    implements _$$ApodRequestDtoImplCopyWith<$Res> {
+  __$$ApodRequestDtoImplCopyWithImpl(
+      _$ApodRequestDtoImpl _value, $Res Function(_$ApodRequestDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -207,7 +207,7 @@ class __$$_ApodRequestDtoCopyWithImpl<$Res>
     Object? thumbs = null,
     Object? apiKey = null,
   }) {
-    return _then(_$_ApodRequestDto(
+    return _then(_$ApodRequestDtoImpl(
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -239,8 +239,8 @@ class __$$_ApodRequestDtoCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
-class _$_ApodRequestDto extends _ApodRequestDto {
-  const _$_ApodRequestDto(
+class _$ApodRequestDtoImpl extends _ApodRequestDto {
+  const _$ApodRequestDtoImpl(
       {@DateConverterNullable() this.date,
       @DateConverterNullable() this.startDate,
       @DateConverterNullable() this.endDate,
@@ -261,8 +261,8 @@ class _$_ApodRequestDto extends _ApodRequestDto {
             'count cannot be used with date or startDate and endDate.'),
         super._();
 
-  factory _$_ApodRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ApodRequestDtoFromJson(json);
+  factory _$ApodRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApodRequestDtoImplFromJson(json);
 
   /// The date of the APOD image to retrieve.
   ///
@@ -316,7 +316,7 @@ class _$_ApodRequestDto extends _ApodRequestDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApodRequestDto &&
+            other is _$ApodRequestDtoImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
@@ -334,12 +334,13 @@ class _$_ApodRequestDto extends _ApodRequestDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApodRequestDtoCopyWith<_$_ApodRequestDto> get copyWith =>
-      __$$_ApodRequestDtoCopyWithImpl<_$_ApodRequestDto>(this, _$identity);
+  _$$ApodRequestDtoImplCopyWith<_$ApodRequestDtoImpl> get copyWith =>
+      __$$ApodRequestDtoImplCopyWithImpl<_$ApodRequestDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApodRequestDtoToJson(
+    return _$$ApodRequestDtoImplToJson(
       this,
     );
   }
@@ -352,11 +353,11 @@ abstract class _ApodRequestDto extends ApodRequestDto {
       @DateConverterNullable() final Date? endDate,
       final int? count,
       final bool thumbs,
-      final String apiKey}) = _$_ApodRequestDto;
+      final String apiKey}) = _$ApodRequestDtoImpl;
   const _ApodRequestDto._() : super._();
 
   factory _ApodRequestDto.fromJson(Map<String, dynamic> json) =
-      _$_ApodRequestDto.fromJson;
+      _$ApodRequestDtoImpl.fromJson;
 
   @override
 
@@ -401,6 +402,6 @@ abstract class _ApodRequestDto extends ApodRequestDto {
   String get apiKey;
   @override
   @JsonKey(ignore: true)
-  _$$_ApodRequestDtoCopyWith<_$_ApodRequestDto> get copyWith =>
+  _$$ApodRequestDtoImplCopyWith<_$ApodRequestDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

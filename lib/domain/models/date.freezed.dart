@@ -67,18 +67,20 @@ class _$DateCopyWithImpl<$Res, $Val extends Date>
 }
 
 /// @nodoc
-abstract class _$$_DateCopyWith<$Res> implements $DateCopyWith<$Res> {
-  factory _$$_DateCopyWith(_$_Date value, $Res Function(_$_Date) then) =
-      __$$_DateCopyWithImpl<$Res>;
+abstract class _$$DateImplCopyWith<$Res> implements $DateCopyWith<$Res> {
+  factory _$$DateImplCopyWith(
+          _$DateImpl value, $Res Function(_$DateImpl) then) =
+      __$$DateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int year, int month, int day});
 }
 
 /// @nodoc
-class __$$_DateCopyWithImpl<$Res> extends _$DateCopyWithImpl<$Res, _$_Date>
-    implements _$$_DateCopyWith<$Res> {
-  __$$_DateCopyWithImpl(_$_Date _value, $Res Function(_$_Date) _then)
+class __$$DateImplCopyWithImpl<$Res>
+    extends _$DateCopyWithImpl<$Res, _$DateImpl>
+    implements _$$DateImplCopyWith<$Res> {
+  __$$DateImplCopyWithImpl(_$DateImpl _value, $Res Function(_$DateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_DateCopyWithImpl<$Res> extends _$DateCopyWithImpl<$Res, _$_Date>
     Object? month = null,
     Object? day = null,
   }) {
-    return _then(_$_Date(
+    return _then(_$DateImpl(
       year: null == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
@@ -107,8 +109,8 @@ class __$$_DateCopyWithImpl<$Res> extends _$DateCopyWithImpl<$Res, _$_Date>
 
 /// @nodoc
 
-class _$_Date extends _Date {
-  const _$_Date({required this.year, required this.month, required this.day})
+class _$DateImpl extends _Date {
+  const _$DateImpl({required this.year, required this.month, required this.day})
       : assert(year > 0, 'The year must be more than 0'),
         assert(month > 0, 'The month must be more than 0'),
         assert(day > 0, 'The day must be more than 0'),
@@ -132,7 +134,7 @@ class _$_Date extends _Date {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Date &&
+            other is _$DateImpl &&
             (identical(other.year, year) || other.year == year) &&
             (identical(other.month, month) || other.month == month) &&
             (identical(other.day, day) || other.day == day));
@@ -144,15 +146,15 @@ class _$_Date extends _Date {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DateCopyWith<_$_Date> get copyWith =>
-      __$$_DateCopyWithImpl<_$_Date>(this, _$identity);
+  _$$DateImplCopyWith<_$DateImpl> get copyWith =>
+      __$$DateImplCopyWithImpl<_$DateImpl>(this, _$identity);
 }
 
 abstract class _Date extends Date {
   const factory _Date(
       {required final int year,
       required final int month,
-      required final int day}) = _$_Date;
+      required final int day}) = _$DateImpl;
   const _Date._() : super._();
 
   @override
@@ -163,5 +165,6 @@ abstract class _Date extends Date {
   int get day;
   @override
   @JsonKey(ignore: true)
-  _$$_DateCopyWith<_$_Date> get copyWith => throw _privateConstructorUsedError;
+  _$$DateImplCopyWith<_$DateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

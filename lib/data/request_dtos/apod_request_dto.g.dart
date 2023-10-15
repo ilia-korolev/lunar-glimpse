@@ -8,8 +8,8 @@ part of 'apod_request_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ApodRequestDto _$$_ApodRequestDtoFromJson(Map<String, dynamic> json) =>
-    _$_ApodRequestDto(
+_$ApodRequestDtoImpl _$$ApodRequestDtoImplFromJson(Map<String, dynamic> json) =>
+    _$ApodRequestDtoImpl(
       date: const DateConverterNullable().fromJson(json['date'] as String?),
       startDate:
           const DateConverterNullable().fromJson(json['start_date'] as String?),
@@ -20,7 +20,8 @@ _$_ApodRequestDto _$$_ApodRequestDtoFromJson(Map<String, dynamic> json) =>
       apiKey: json['api_key'] as String? ?? 'DEMO_KEY',
     );
 
-Map<String, dynamic> _$$_ApodRequestDtoToJson(_$_ApodRequestDto instance) {
+Map<String, dynamic> _$$ApodRequestDtoImplToJson(
+    _$ApodRequestDtoImpl instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

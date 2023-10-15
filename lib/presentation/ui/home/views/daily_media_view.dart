@@ -226,7 +226,9 @@ class _FailureView extends StatelessWidget {
               SizedBox(height: theme.spacing.small),
               ElevatedButton(
                 onPressed: () {
-                  // TODO(ilia-korolev): add a body
+                  context
+                      .read<DailyMediaBloc>()
+                      .add(const DailyMediaEvent.triedAgain());
                 },
                 child: Text(l10n.tryAgainButton),
               ),

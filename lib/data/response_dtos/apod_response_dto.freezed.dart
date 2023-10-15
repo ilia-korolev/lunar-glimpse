@@ -118,11 +118,11 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
 }
 
 /// @nodoc
-abstract class _$$_ApodResponseDtoCopyWith<$Res>
+abstract class _$$ApodResponseDtoImplCopyWith<$Res>
     implements $ApodResponseDtoCopyWith<$Res> {
-  factory _$$_ApodResponseDtoCopyWith(
-          _$_ApodResponseDto value, $Res Function(_$_ApodResponseDto) then) =
-      __$$_ApodResponseDtoCopyWithImpl<$Res>;
+  factory _$$ApodResponseDtoImplCopyWith(_$ApodResponseDtoImpl value,
+          $Res Function(_$ApodResponseDtoImpl) then) =
+      __$$ApodResponseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -139,11 +139,11 @@ abstract class _$$_ApodResponseDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApodResponseDtoCopyWithImpl<$Res>
-    extends _$ApodResponseDtoCopyWithImpl<$Res, _$_ApodResponseDto>
-    implements _$$_ApodResponseDtoCopyWith<$Res> {
-  __$$_ApodResponseDtoCopyWithImpl(
-      _$_ApodResponseDto _value, $Res Function(_$_ApodResponseDto) _then)
+class __$$ApodResponseDtoImplCopyWithImpl<$Res>
+    extends _$ApodResponseDtoCopyWithImpl<$Res, _$ApodResponseDtoImpl>
+    implements _$$ApodResponseDtoImplCopyWith<$Res> {
+  __$$ApodResponseDtoImplCopyWithImpl(
+      _$ApodResponseDtoImpl _value, $Res Function(_$ApodResponseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -157,7 +157,7 @@ class __$$_ApodResponseDtoCopyWithImpl<$Res>
     Object? copyright = freezed,
     Object? hdUrl = freezed,
   }) {
-    return _then(_$_ApodResponseDto(
+    return _then(_$ApodResponseDtoImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -193,8 +193,8 @@ class __$$_ApodResponseDtoCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_ApodResponseDto extends _ApodResponseDto {
-  const _$_ApodResponseDto(
+class _$ApodResponseDtoImpl extends _ApodResponseDto {
+  const _$ApodResponseDtoImpl(
       {@DateConverter() required this.date,
       required this.explanation,
       required this.title,
@@ -204,8 +204,8 @@ class _$_ApodResponseDto extends _ApodResponseDto {
       @JsonKey(name: 'hdurl') this.hdUrl})
       : super._();
 
-  factory _$_ApodResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ApodResponseDtoFromJson(json);
+  factory _$ApodResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApodResponseDtoImplFromJson(json);
 
   @override
   @DateConverter()
@@ -234,7 +234,7 @@ class _$_ApodResponseDto extends _ApodResponseDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApodResponseDto &&
+            other is _$ApodResponseDtoImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.explanation, explanation) ||
                 other.explanation == explanation) &&
@@ -255,12 +255,13 @@ class _$_ApodResponseDto extends _ApodResponseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApodResponseDtoCopyWith<_$_ApodResponseDto> get copyWith =>
-      __$$_ApodResponseDtoCopyWithImpl<_$_ApodResponseDto>(this, _$identity);
+  _$$ApodResponseDtoImplCopyWith<_$ApodResponseDtoImpl> get copyWith =>
+      __$$ApodResponseDtoImplCopyWithImpl<_$ApodResponseDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApodResponseDtoToJson(
+    return _$$ApodResponseDtoImplToJson(
       this,
     );
   }
@@ -274,11 +275,11 @@ abstract class _ApodResponseDto extends ApodResponseDto {
       required final String url,
       @JsonKey(name: 'media_type') required final MediaType mediaType,
       final String? copyright,
-      @JsonKey(name: 'hdurl') final String? hdUrl}) = _$_ApodResponseDto;
+      @JsonKey(name: 'hdurl') final String? hdUrl}) = _$ApodResponseDtoImpl;
   const _ApodResponseDto._() : super._();
 
   factory _ApodResponseDto.fromJson(Map<String, dynamic> json) =
-      _$_ApodResponseDto.fromJson;
+      _$ApodResponseDtoImpl.fromJson;
 
   @override
   @DateConverter()
@@ -299,6 +300,6 @@ abstract class _ApodResponseDto extends ApodResponseDto {
   String? get hdUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_ApodResponseDtoCopyWith<_$_ApodResponseDto> get copyWith =>
+  _$$ApodResponseDtoImplCopyWith<_$ApodResponseDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

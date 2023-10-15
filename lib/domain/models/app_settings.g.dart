@@ -8,12 +8,12 @@ part of 'app_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AppSettings _$$_AppSettingsFromJson(Map<String, dynamic> json) =>
-    _$_AppSettings(
+_$AppSettingsImpl _$$AppSettingsImplFromJson(Map<String, dynamic> json) =>
+    _$AppSettingsImpl(
       themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
     );
 
-Map<String, dynamic> _$$_AppSettingsToJson(_$_AppSettings instance) =>
+Map<String, dynamic> _$$AppSettingsImplToJson(_$AppSettingsImpl instance) =>
     <String, dynamic>{
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
     };

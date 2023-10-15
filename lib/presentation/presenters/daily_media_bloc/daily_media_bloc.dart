@@ -20,20 +20,51 @@ class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
             status: DailyMediaStatus.initial,
           ),
         ) {
-    on<DailyMediaEvent>(
-      (event, emit) async {
-        await event.when(
-          fetched: () async => _fetched(emit),
-          refreshed: () async => _refreshed(emit),
-          favoriteToggled: (media) async => _favoriteToggled(emit, media),
-        );
-      },
+    on<DailyMediaFetched>(
+      (event, emit) async => _fetched(emit),
+      transformer: throttleDroppableTransformer(_throttleDuration),
+    );
+
+    on<DailyMediaRefreshed>(
+      (event, emit) async => _refreshed(emit),
+      transformer: throttleDroppableTransformer(_throttleDuration),
+    );
+
+    on<DailyMediaFavoriteToggled>(
+      (event, emit) async => _favoriteToggled(emit, event.media),
+      transformer: throttleDroppableTransformer(_throttleDuration),
+    );
+
+    on<DailyMediaTriedAgain>(
+      (event, emit) async => _triedAgain(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
   }
 
   final DailyMediaRepository _repository;
   final int pageSize;
+
+  DailyMediaEvent? _previousEvent;
+
+  @override
+  void onEvent(DailyMediaEvent event) {
+    _storeEvent(event);
+
+    super.onEvent(event);
+  }
+
+  void _storeEvent(DailyMediaEvent event) {
+    final shouldStore = event.maybeWhen<bool>(
+      triedAgain: () => false,
+      orElse: () => true,
+    );
+
+    if (!shouldStore) {
+      return;
+    }
+
+    _previousEvent = event;
+  }
 
   Future<void> _fetched(Emitter<DailyMediaState> emit) async {
     try {
@@ -122,5 +153,15 @@ class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
     } on Exception catch (_) {
       emit(state.copyWith(status: DailyMediaStatus.failure));
     }
+  }
+
+  Future<void> _triedAgain(
+    Emitter<DailyMediaState> emit,
+  ) async {
+    if (_previousEvent == null) {
+      return;
+    }
+
+    add(_previousEvent!);
   }
 }

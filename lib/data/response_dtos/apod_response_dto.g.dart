@@ -8,8 +8,9 @@ part of 'apod_response_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ApodResponseDto _$$_ApodResponseDtoFromJson(Map<String, dynamic> json) =>
-    _$_ApodResponseDto(
+_$ApodResponseDtoImpl _$$ApodResponseDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ApodResponseDtoImpl(
       date: const DateConverter().fromJson(json['date'] as String),
       explanation: json['explanation'] as String,
       title: json['title'] as String,
@@ -19,7 +20,8 @@ _$_ApodResponseDto _$$_ApodResponseDtoFromJson(Map<String, dynamic> json) =>
       hdUrl: json['hdurl'] as String?,
     );
 
-Map<String, dynamic> _$$_ApodResponseDtoToJson(_$_ApodResponseDto instance) {
+Map<String, dynamic> _$$ApodResponseDtoImplToJson(
+    _$ApodResponseDtoImpl instance) {
   final val = <String, dynamic>{
     'date': const DateConverter().toJson(instance.date),
     'explanation': instance.explanation,

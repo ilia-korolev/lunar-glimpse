@@ -21,6 +21,7 @@ mixin _$DailyMediaEvent {
     required TResult Function() fetched,
     required TResult Function() refreshed,
     required TResult Function(Media media) favoriteToggled,
+    required TResult Function() triedAgain,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$DailyMediaEvent {
     TResult? Function()? fetched,
     TResult? Function()? refreshed,
     TResult? Function(Media media)? favoriteToggled,
+    TResult? Function()? triedAgain,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,28 +37,32 @@ mixin _$DailyMediaEvent {
     TResult Function()? fetched,
     TResult Function()? refreshed,
     TResult Function(Media media)? favoriteToggled,
+    TResult Function()? triedAgain,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Fetched value) fetched,
-    required TResult Function(_Refreshed value) refreshed,
-    required TResult Function(_FavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaFetched value) fetched,
+    required TResult Function(DailyMediaRefreshed value) refreshed,
+    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaTriedAgain value) triedAgain,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Fetched value)? fetched,
-    TResult? Function(_Refreshed value)? refreshed,
-    TResult? Function(_FavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaFetched value)? fetched,
+    TResult? Function(DailyMediaRefreshed value)? refreshed,
+    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Fetched value)? fetched,
-    TResult Function(_Refreshed value)? refreshed,
-    TResult Function(_FavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaFetched value)? fetched,
+    TResult Function(DailyMediaRefreshed value)? refreshed,
+    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaTriedAgain value)? triedAgain,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,24 +87,27 @@ class _$DailyMediaEventCopyWithImpl<$Res, $Val extends DailyMediaEvent>
 }
 
 /// @nodoc
-abstract class _$$_FetchedCopyWith<$Res> {
-  factory _$$_FetchedCopyWith(
-          _$_Fetched value, $Res Function(_$_Fetched) then) =
-      __$$_FetchedCopyWithImpl<$Res>;
+abstract class _$$DailyMediaFetchedImplCopyWith<$Res> {
+  factory _$$DailyMediaFetchedImplCopyWith(_$DailyMediaFetchedImpl value,
+          $Res Function(_$DailyMediaFetchedImpl) then) =
+      __$$DailyMediaFetchedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchedCopyWithImpl<$Res>
-    extends _$DailyMediaEventCopyWithImpl<$Res, _$_Fetched>
-    implements _$$_FetchedCopyWith<$Res> {
-  __$$_FetchedCopyWithImpl(_$_Fetched _value, $Res Function(_$_Fetched) _then)
+class __$$DailyMediaFetchedImplCopyWithImpl<$Res>
+    extends _$DailyMediaEventCopyWithImpl<$Res, _$DailyMediaFetchedImpl>
+    implements _$$DailyMediaFetchedImplCopyWith<$Res> {
+  __$$DailyMediaFetchedImplCopyWithImpl(_$DailyMediaFetchedImpl _value,
+      $Res Function(_$DailyMediaFetchedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
-  const _$_Fetched();
+class _$DailyMediaFetchedImpl
+    with DiagnosticableTreeMixin
+    implements DailyMediaFetched {
+  const _$DailyMediaFetchedImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -114,7 +123,7 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetched);
+        (other.runtimeType == runtimeType && other is _$DailyMediaFetchedImpl);
   }
 
   @override
@@ -126,6 +135,7 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
     required TResult Function() fetched,
     required TResult Function() refreshed,
     required TResult Function(Media media) favoriteToggled,
+    required TResult Function() triedAgain,
   }) {
     return fetched();
   }
@@ -136,6 +146,7 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
     TResult? Function()? fetched,
     TResult? Function()? refreshed,
     TResult? Function(Media media)? favoriteToggled,
+    TResult? Function()? triedAgain,
   }) {
     return fetched?.call();
   }
@@ -146,6 +157,7 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
     TResult Function()? fetched,
     TResult Function()? refreshed,
     TResult Function(Media media)? favoriteToggled,
+    TResult Function()? triedAgain,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -157,9 +169,10 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Fetched value) fetched,
-    required TResult Function(_Refreshed value) refreshed,
-    required TResult Function(_FavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaFetched value) fetched,
+    required TResult Function(DailyMediaRefreshed value) refreshed,
+    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaTriedAgain value) triedAgain,
   }) {
     return fetched(this);
   }
@@ -167,9 +180,10 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Fetched value)? fetched,
-    TResult? Function(_Refreshed value)? refreshed,
-    TResult? Function(_FavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaFetched value)? fetched,
+    TResult? Function(DailyMediaRefreshed value)? refreshed,
+    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
   }) {
     return fetched?.call(this);
   }
@@ -177,9 +191,10 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Fetched value)? fetched,
-    TResult Function(_Refreshed value)? refreshed,
-    TResult Function(_FavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaFetched value)? fetched,
+    TResult Function(DailyMediaRefreshed value)? refreshed,
+    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaTriedAgain value)? triedAgain,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -189,30 +204,32 @@ class _$_Fetched with DiagnosticableTreeMixin implements _Fetched {
   }
 }
 
-abstract class _Fetched implements DailyMediaEvent {
-  const factory _Fetched() = _$_Fetched;
+abstract class DailyMediaFetched implements DailyMediaEvent {
+  const factory DailyMediaFetched() = _$DailyMediaFetchedImpl;
 }
 
 /// @nodoc
-abstract class _$$_RefreshedCopyWith<$Res> {
-  factory _$$_RefreshedCopyWith(
-          _$_Refreshed value, $Res Function(_$_Refreshed) then) =
-      __$$_RefreshedCopyWithImpl<$Res>;
+abstract class _$$DailyMediaRefreshedImplCopyWith<$Res> {
+  factory _$$DailyMediaRefreshedImplCopyWith(_$DailyMediaRefreshedImpl value,
+          $Res Function(_$DailyMediaRefreshedImpl) then) =
+      __$$DailyMediaRefreshedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RefreshedCopyWithImpl<$Res>
-    extends _$DailyMediaEventCopyWithImpl<$Res, _$_Refreshed>
-    implements _$$_RefreshedCopyWith<$Res> {
-  __$$_RefreshedCopyWithImpl(
-      _$_Refreshed _value, $Res Function(_$_Refreshed) _then)
+class __$$DailyMediaRefreshedImplCopyWithImpl<$Res>
+    extends _$DailyMediaEventCopyWithImpl<$Res, _$DailyMediaRefreshedImpl>
+    implements _$$DailyMediaRefreshedImplCopyWith<$Res> {
+  __$$DailyMediaRefreshedImplCopyWithImpl(_$DailyMediaRefreshedImpl _value,
+      $Res Function(_$DailyMediaRefreshedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
-  const _$_Refreshed();
+class _$DailyMediaRefreshedImpl
+    with DiagnosticableTreeMixin
+    implements DailyMediaRefreshed {
+  const _$DailyMediaRefreshedImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -228,7 +245,8 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Refreshed);
+        (other.runtimeType == runtimeType &&
+            other is _$DailyMediaRefreshedImpl);
   }
 
   @override
@@ -240,6 +258,7 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
     required TResult Function() fetched,
     required TResult Function() refreshed,
     required TResult Function(Media media) favoriteToggled,
+    required TResult Function() triedAgain,
   }) {
     return refreshed();
   }
@@ -250,6 +269,7 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
     TResult? Function()? fetched,
     TResult? Function()? refreshed,
     TResult? Function(Media media)? favoriteToggled,
+    TResult? Function()? triedAgain,
   }) {
     return refreshed?.call();
   }
@@ -260,6 +280,7 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
     TResult Function()? fetched,
     TResult Function()? refreshed,
     TResult Function(Media media)? favoriteToggled,
+    TResult Function()? triedAgain,
     required TResult orElse(),
   }) {
     if (refreshed != null) {
@@ -271,9 +292,10 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Fetched value) fetched,
-    required TResult Function(_Refreshed value) refreshed,
-    required TResult Function(_FavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaFetched value) fetched,
+    required TResult Function(DailyMediaRefreshed value) refreshed,
+    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaTriedAgain value) triedAgain,
   }) {
     return refreshed(this);
   }
@@ -281,9 +303,10 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Fetched value)? fetched,
-    TResult? Function(_Refreshed value)? refreshed,
-    TResult? Function(_FavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaFetched value)? fetched,
+    TResult? Function(DailyMediaRefreshed value)? refreshed,
+    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
   }) {
     return refreshed?.call(this);
   }
@@ -291,9 +314,10 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Fetched value)? fetched,
-    TResult Function(_Refreshed value)? refreshed,
-    TResult Function(_FavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaFetched value)? fetched,
+    TResult Function(DailyMediaRefreshed value)? refreshed,
+    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaTriedAgain value)? triedAgain,
     required TResult orElse(),
   }) {
     if (refreshed != null) {
@@ -303,15 +327,16 @@ class _$_Refreshed with DiagnosticableTreeMixin implements _Refreshed {
   }
 }
 
-abstract class _Refreshed implements DailyMediaEvent {
-  const factory _Refreshed() = _$_Refreshed;
+abstract class DailyMediaRefreshed implements DailyMediaEvent {
+  const factory DailyMediaRefreshed() = _$DailyMediaRefreshedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FavoriteToggledCopyWith<$Res> {
-  factory _$$_FavoriteToggledCopyWith(
-          _$_FavoriteToggled value, $Res Function(_$_FavoriteToggled) then) =
-      __$$_FavoriteToggledCopyWithImpl<$Res>;
+abstract class _$$DailyMediaFavoriteToggledImplCopyWith<$Res> {
+  factory _$$DailyMediaFavoriteToggledImplCopyWith(
+          _$DailyMediaFavoriteToggledImpl value,
+          $Res Function(_$DailyMediaFavoriteToggledImpl) then) =
+      __$$DailyMediaFavoriteToggledImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Media media});
 
@@ -319,11 +344,12 @@ abstract class _$$_FavoriteToggledCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FavoriteToggledCopyWithImpl<$Res>
-    extends _$DailyMediaEventCopyWithImpl<$Res, _$_FavoriteToggled>
-    implements _$$_FavoriteToggledCopyWith<$Res> {
-  __$$_FavoriteToggledCopyWithImpl(
-      _$_FavoriteToggled _value, $Res Function(_$_FavoriteToggled) _then)
+class __$$DailyMediaFavoriteToggledImplCopyWithImpl<$Res>
+    extends _$DailyMediaEventCopyWithImpl<$Res, _$DailyMediaFavoriteToggledImpl>
+    implements _$$DailyMediaFavoriteToggledImplCopyWith<$Res> {
+  __$$DailyMediaFavoriteToggledImplCopyWithImpl(
+      _$DailyMediaFavoriteToggledImpl _value,
+      $Res Function(_$DailyMediaFavoriteToggledImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -331,7 +357,7 @@ class __$$_FavoriteToggledCopyWithImpl<$Res>
   $Res call({
     Object? media = null,
   }) {
-    return _then(_$_FavoriteToggled(
+    return _then(_$DailyMediaFavoriteToggledImpl(
       null == media
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
@@ -350,10 +376,10 @@ class __$$_FavoriteToggledCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FavoriteToggled
+class _$DailyMediaFavoriteToggledImpl
     with DiagnosticableTreeMixin
-    implements _FavoriteToggled {
-  const _$_FavoriteToggled(this.media);
+    implements DailyMediaFavoriteToggled {
+  const _$DailyMediaFavoriteToggledImpl(this.media);
 
   @override
   final Media media;
@@ -375,7 +401,7 @@ class _$_FavoriteToggled
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavoriteToggled &&
+            other is _$DailyMediaFavoriteToggledImpl &&
             (identical(other.media, media) || other.media == media));
   }
 
@@ -385,8 +411,9 @@ class _$_FavoriteToggled
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavoriteToggledCopyWith<_$_FavoriteToggled> get copyWith =>
-      __$$_FavoriteToggledCopyWithImpl<_$_FavoriteToggled>(this, _$identity);
+  _$$DailyMediaFavoriteToggledImplCopyWith<_$DailyMediaFavoriteToggledImpl>
+      get copyWith => __$$DailyMediaFavoriteToggledImplCopyWithImpl<
+          _$DailyMediaFavoriteToggledImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -394,6 +421,7 @@ class _$_FavoriteToggled
     required TResult Function() fetched,
     required TResult Function() refreshed,
     required TResult Function(Media media) favoriteToggled,
+    required TResult Function() triedAgain,
   }) {
     return favoriteToggled(media);
   }
@@ -404,6 +432,7 @@ class _$_FavoriteToggled
     TResult? Function()? fetched,
     TResult? Function()? refreshed,
     TResult? Function(Media media)? favoriteToggled,
+    TResult? Function()? triedAgain,
   }) {
     return favoriteToggled?.call(media);
   }
@@ -414,6 +443,7 @@ class _$_FavoriteToggled
     TResult Function()? fetched,
     TResult Function()? refreshed,
     TResult Function(Media media)? favoriteToggled,
+    TResult Function()? triedAgain,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -425,9 +455,10 @@ class _$_FavoriteToggled
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Fetched value) fetched,
-    required TResult Function(_Refreshed value) refreshed,
-    required TResult Function(_FavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaFetched value) fetched,
+    required TResult Function(DailyMediaRefreshed value) refreshed,
+    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaTriedAgain value) triedAgain,
   }) {
     return favoriteToggled(this);
   }
@@ -435,9 +466,10 @@ class _$_FavoriteToggled
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Fetched value)? fetched,
-    TResult? Function(_Refreshed value)? refreshed,
-    TResult? Function(_FavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaFetched value)? fetched,
+    TResult? Function(DailyMediaRefreshed value)? refreshed,
+    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
   }) {
     return favoriteToggled?.call(this);
   }
@@ -445,9 +477,10 @@ class _$_FavoriteToggled
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Fetched value)? fetched,
-    TResult Function(_Refreshed value)? refreshed,
-    TResult Function(_FavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaFetched value)? fetched,
+    TResult Function(DailyMediaRefreshed value)? refreshed,
+    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaTriedAgain value)? triedAgain,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -457,13 +490,137 @@ class _$_FavoriteToggled
   }
 }
 
-abstract class _FavoriteToggled implements DailyMediaEvent {
-  const factory _FavoriteToggled(final Media media) = _$_FavoriteToggled;
+abstract class DailyMediaFavoriteToggled implements DailyMediaEvent {
+  const factory DailyMediaFavoriteToggled(final Media media) =
+      _$DailyMediaFavoriteToggledImpl;
 
   Media get media;
   @JsonKey(ignore: true)
-  _$$_FavoriteToggledCopyWith<_$_FavoriteToggled> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DailyMediaFavoriteToggledImplCopyWith<_$DailyMediaFavoriteToggledImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DailyMediaTriedAgainImplCopyWith<$Res> {
+  factory _$$DailyMediaTriedAgainImplCopyWith(_$DailyMediaTriedAgainImpl value,
+          $Res Function(_$DailyMediaTriedAgainImpl) then) =
+      __$$DailyMediaTriedAgainImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DailyMediaTriedAgainImplCopyWithImpl<$Res>
+    extends _$DailyMediaEventCopyWithImpl<$Res, _$DailyMediaTriedAgainImpl>
+    implements _$$DailyMediaTriedAgainImplCopyWith<$Res> {
+  __$$DailyMediaTriedAgainImplCopyWithImpl(_$DailyMediaTriedAgainImpl _value,
+      $Res Function(_$DailyMediaTriedAgainImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DailyMediaTriedAgainImpl
+    with DiagnosticableTreeMixin
+    implements DailyMediaTriedAgain {
+  const _$DailyMediaTriedAgainImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DailyMediaEvent.triedAgain()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DailyMediaEvent.triedAgain'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DailyMediaTriedAgainImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetched,
+    required TResult Function() refreshed,
+    required TResult Function(Media media) favoriteToggled,
+    required TResult Function() triedAgain,
+  }) {
+    return triedAgain();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetched,
+    TResult? Function()? refreshed,
+    TResult? Function(Media media)? favoriteToggled,
+    TResult? Function()? triedAgain,
+  }) {
+    return triedAgain?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetched,
+    TResult Function()? refreshed,
+    TResult Function(Media media)? favoriteToggled,
+    TResult Function()? triedAgain,
+    required TResult orElse(),
+  }) {
+    if (triedAgain != null) {
+      return triedAgain();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DailyMediaFetched value) fetched,
+    required TResult Function(DailyMediaRefreshed value) refreshed,
+    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaTriedAgain value) triedAgain,
+  }) {
+    return triedAgain(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DailyMediaFetched value)? fetched,
+    TResult? Function(DailyMediaRefreshed value)? refreshed,
+    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
+  }) {
+    return triedAgain?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DailyMediaFetched value)? fetched,
+    TResult Function(DailyMediaRefreshed value)? refreshed,
+    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaTriedAgain value)? triedAgain,
+    required TResult orElse(),
+  }) {
+    if (triedAgain != null) {
+      return triedAgain(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DailyMediaTriedAgain implements DailyMediaEvent {
+  const factory DailyMediaTriedAgain() = _$DailyMediaTriedAgainImpl;
 }
 
 /// @nodoc
@@ -522,11 +679,11 @@ class _$DailyMediaStateCopyWithImpl<$Res, $Val extends DailyMediaState>
 }
 
 /// @nodoc
-abstract class _$$_DailyMediaStateCopyWith<$Res>
+abstract class _$$DailyMediaStateImplCopyWith<$Res>
     implements $DailyMediaStateCopyWith<$Res> {
-  factory _$$_DailyMediaStateCopyWith(
-          _$_DailyMediaState value, $Res Function(_$_DailyMediaState) then) =
-      __$$_DailyMediaStateCopyWithImpl<$Res>;
+  factory _$$DailyMediaStateImplCopyWith(_$DailyMediaStateImpl value,
+          $Res Function(_$DailyMediaStateImpl) then) =
+      __$$DailyMediaStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -534,11 +691,11 @@ abstract class _$$_DailyMediaStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DailyMediaStateCopyWithImpl<$Res>
-    extends _$DailyMediaStateCopyWithImpl<$Res, _$_DailyMediaState>
-    implements _$$_DailyMediaStateCopyWith<$Res> {
-  __$$_DailyMediaStateCopyWithImpl(
-      _$_DailyMediaState _value, $Res Function(_$_DailyMediaState) _then)
+class __$$DailyMediaStateImplCopyWithImpl<$Res>
+    extends _$DailyMediaStateCopyWithImpl<$Res, _$DailyMediaStateImpl>
+    implements _$$DailyMediaStateImplCopyWith<$Res> {
+  __$$DailyMediaStateImplCopyWithImpl(
+      _$DailyMediaStateImpl _value, $Res Function(_$DailyMediaStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -548,7 +705,7 @@ class __$$_DailyMediaStateCopyWithImpl<$Res>
     Object? mediaList = null,
     Object? hasReachedMax = null,
   }) {
-    return _then(_$_DailyMediaState(
+    return _then(_$DailyMediaStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -567,8 +724,8 @@ class __$$_DailyMediaStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DailyMediaState extends _DailyMediaState {
-  const _$_DailyMediaState(
+class _$DailyMediaStateImpl extends _DailyMediaState {
+  const _$DailyMediaStateImpl(
       {required this.status,
       final List<Media> mediaList = const [],
       this.hasReachedMax = false})
@@ -594,7 +751,7 @@ class _$_DailyMediaState extends _DailyMediaState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DailyMediaState &&
+            other is _$DailyMediaStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality()
                 .equals(other._mediaList, _mediaList) &&
@@ -609,15 +766,16 @@ class _$_DailyMediaState extends _DailyMediaState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DailyMediaStateCopyWith<_$_DailyMediaState> get copyWith =>
-      __$$_DailyMediaStateCopyWithImpl<_$_DailyMediaState>(this, _$identity);
+  _$$DailyMediaStateImplCopyWith<_$DailyMediaStateImpl> get copyWith =>
+      __$$DailyMediaStateImplCopyWithImpl<_$DailyMediaStateImpl>(
+          this, _$identity);
 }
 
 abstract class _DailyMediaState extends DailyMediaState {
   const factory _DailyMediaState(
       {required final DailyMediaStatus status,
       final List<Media> mediaList,
-      final bool hasReachedMax}) = _$_DailyMediaState;
+      final bool hasReachedMax}) = _$DailyMediaStateImpl;
   const _DailyMediaState._() : super._();
 
   @override
@@ -628,6 +786,6 @@ abstract class _DailyMediaState extends DailyMediaState {
   bool get hasReachedMax;
   @override
   @JsonKey(ignore: true)
-  _$$_DailyMediaStateCopyWith<_$_DailyMediaState> get copyWith =>
+  _$$DailyMediaStateImplCopyWith<_$DailyMediaStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
