@@ -7,9 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 
 class App extends StatelessWidget {
-  App({super.key});
-
-  final _appRouter = AppRouter();
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class App extends StatelessWidget {
             child: BlocBuilder<AppSettingsCubit, AppSettings>(
               builder: (context, settings) {
                 return MaterialApp.router(
-                  routerConfig: _appRouter,
+                  routerConfig: Routing.appRouter,
                   // TODO(ilia-korolev): change the title
                   title: 'Flutter Demo',
                   theme: GetIt.instance<Theming>().light,
