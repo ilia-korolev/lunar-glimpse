@@ -99,8 +99,8 @@ Future<void> _registerRepositories() async {
 }
 
 Future<void> _registerBlocs() async {
-  _getIt.registerLazySingleton<DailyMediaBloc>(
-    () => DailyMediaBloc(
+  _getIt.registerLazySingleton<DailyMediaListBloc>(
+    () => DailyMediaListBloc(
       repository: _getIt(),
     ),
   );

@@ -11,5 +11,14 @@
     "aboutSettingsDescription": "All the stuff you need to know",
     "responseErrorTitle": "Oops!",
     "responseErrorText": "Something went wrong",
-    "tryAgainButton": "Try again"
+    "tryAgainButton": "Try again",
+    "copyrightLabel": "Copyright: {copyright}",
+    "@copyrightLabel": {
+        "placeholders": {
+          "copyright": {
+            "type": "String",
+            "example": "Bob"
+          }
+        }
+      }
 }

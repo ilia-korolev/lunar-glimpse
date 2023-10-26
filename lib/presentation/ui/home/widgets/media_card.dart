@@ -3,11 +3,7 @@ import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-
-import '_export.dart';
 
 const _imageAspectRatio = 4 / 3;
 
@@ -80,12 +76,12 @@ class MediaCard extends StatelessWidget {
                 top: constraints.maxWidth / _imageAspectRatio - buttonSize / 2,
                 child: Padding(
                   padding: EdgeInsets.all(theme.spacing.small),
-                  child: _FavoriteButton(
+                  child: FavoriteButton(
                     isFavorite: media.isFavorite,
                     onPressed: () {
                       context
-                          .read<DailyMediaBloc>()
-                          .add(DailyMediaEvent.favoriteToggled(media));
+                          .read<DailyMediaListBloc>()
+                          .add(DailyMediaListEvent.favoriteToggled(media));
                     },
                   ),
                 ),
@@ -117,10 +113,7 @@ class _CardContent extends StatelessWidget {
           borderRadius: BorderRadius.all(theme.radiuses.large),
         ),
         child: media.type == MediaType.image
-            ? Hero(
-                tag: media,
-                child: ImageContent(uri: media.uri.toString()),
-              )
+            ? ImageContent(uri: media.uri.toString())
             : throw UnimplementedError(
                 'A video player has not been implemented yet',
               ),
@@ -164,51 +157,6 @@ class _CardInfo extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _FavoriteButton extends StatelessWidget {
-  const _FavoriteButton({
-    required this.isFavorite,
-    required this.onPressed,
-  });
-
-  final bool isFavorite;
-  final void Function()? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final iconColor =
-        GetIt.instance<Theming>().dark.colorScheme.onSecondaryContainer;
-
-    return Material(
-      type: MaterialType.circle,
-      color: theme.customColors.tomato,
-      shadowColor: theme.customColors.tomato,
-      elevation: 7,
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        onTap: onPressed,
-        child: Padding(
-          padding: EdgeInsets.all(theme.spacing.medium),
-          child: FaIcon(
-            isFavorite ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart,
-            color: iconColor,
-            size: theme.sizes.largeIconSize,
-            // TODO(ilia-korolev): fix the shadow when it's ready
-            // https://github.com/fluttercommunity/font_awesome_flutter/pull/247
-            // shadows: [
-            //   Shadow(
-            //     color: iconColor.withOpacity(.5),
-            //     blurRadius: theme.sizes.largeIconSize,
-            //   ),
-            // ],
-          ),
-        ),
       ),
     );
   }

@@ -374,6 +374,7 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
     final map = <String, Expression>{};
     if (date.present) {
       final converter = $DailyMediaEntitiesTable.$converterdate;
+
       map['date'] = Variable<int>(converter.toSql(date.value));
     }
     if (title.present) {
@@ -384,10 +385,12 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
     }
     if (uri.present) {
       final converter = $DailyMediaEntitiesTable.$converteruri;
+
       map['uri'] = Variable<String>(converter.toSql(uri.value));
     }
     if (hdUri.present) {
       final converter = $DailyMediaEntitiesTable.$converterhdUri;
+
       map['hd_uri'] = Variable<String>(converter.toSql(hdUri.value));
     }
     if (copyright.present) {
@@ -395,6 +398,7 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
     }
     if (type.present) {
       final converter = $DailyMediaEntitiesTable.$convertertype;
+
       map['type'] = Variable<int>(converter.toSql(type.value));
     }
     if (isFavorite.present) {

@@ -1,35 +1,43 @@
 part of 'daily_media_bloc.dart';
 
-enum DailyMediaStatus {
-  initial,
-  loading,
-  success,
-  failure;
-
-  bool get isInitial => this == DailyMediaStatus.initial;
-  bool get isLoading => this == DailyMediaStatus.loading;
-  bool get isSuccess => this == DailyMediaStatus.success;
-  bool get isFailure => this == DailyMediaStatus.failure;
-}
-
 @freezed
 class DailyMediaState with _$DailyMediaState {
-  const factory DailyMediaState({
-    required DailyMediaStatus status,
-    @Default([]) List<Media> mediaList,
-    @Default(false) bool hasReachedMax,
-  }) = _DailyMediaState;
+  const factory DailyMediaState.initial() = _Initial;
+
+  const factory DailyMediaState.loading() = _Loading;
+
+  const factory DailyMediaState.success({
+    required Media media,
+  }) = _Success;
+
+  const factory DailyMediaState.failure({
+    required String message,
+  }) = _Failure;
 
   const DailyMediaState._();
 
   @override
   String toString() {
-    return '''
-DailyMediaState(
-  status: ${status.name},
-  mediaList.length: ${mediaList.length},
-  hasReachedMax: $hasReachedMax,
-)
-''';
+    return when(
+      initial: () {
+        return 'DailyMediaState.initial()';
+      },
+      loading: () {
+        return 'DailyMediaState.loading()';
+      },
+      success: (Media media) {
+        return '''
+DailyMediaState.success(
+    date: ${media.date},
+    title: ${media.title},
+  )''';
+      },
+      failure: (String message) {
+        return '''
+DailyMediaState.failure(
+    message: $message,
+  )''';
+      },
+    );
   }
 }

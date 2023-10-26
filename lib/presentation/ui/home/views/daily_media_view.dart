@@ -18,14 +18,14 @@ class DailyMediaView extends StatefulWidget {
 }
 
 class _DailyMediaViewState extends State<DailyMediaView> {
-  final DailyMediaBloc _bloc = GetIt.instance();
+  final DailyMediaListBloc _bloc = GetIt.instance();
   final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
 
-    _bloc.add(const DailyMediaEvent.fetched());
+    _bloc.add(const DailyMediaListEvent.fetched());
     _scrollController.addListener(_onScroll);
   }
 
@@ -51,7 +51,7 @@ class _DailyMediaViewState extends State<DailyMediaView> {
         backgroundColor: theme.colorScheme.secondaryContainer,
         color: theme.colorScheme.onSecondaryContainer,
         onRefresh: () async {
-          _bloc.add(const DailyMediaEvent.refreshed());
+          _bloc.add(const DailyMediaListEvent.refreshed());
 
           await _bloc.stream.firstWhere(
             (state) => !state.status.isLoading,
@@ -74,7 +74,7 @@ class _DailyMediaViewState extends State<DailyMediaView> {
     }
 
     if (_isBottom) {
-      _bloc.add(const DailyMediaEvent.fetched());
+      _bloc.add(const DailyMediaListEvent.fetched());
     }
   }
 
@@ -99,13 +99,13 @@ class _MediaList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DailyMediaBloc, DailyMediaState>(
+    return BlocBuilder<DailyMediaListBloc, DailyMediaListState>(
       builder: (context, state) {
         switch (state.status) {
-          case DailyMediaStatus.initial:
+          case BlocStatus.initial:
             return const _InitialView();
 
-          case DailyMediaStatus.loading:
+          case BlocStatus.loading:
             return state.mediaList.isEmpty
                 ? const _LoadingView()
                 : _SuccessView(
@@ -113,13 +113,13 @@ class _MediaList extends StatelessWidget {
                     hasReachedMax: state.hasReachedMax,
                   );
 
-          case DailyMediaStatus.success:
+          case BlocStatus.success:
             return _SuccessView(
               mediaList: state.mediaList,
               hasReachedMax: state.hasReachedMax,
             );
 
-          case DailyMediaStatus.failure:
+          case BlocStatus.failure:
             return const _FailureView();
         }
       },
@@ -227,8 +227,8 @@ class _FailureView extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   context
-                      .read<DailyMediaBloc>()
-                      .add(const DailyMediaEvent.triedAgain());
+                      .read<DailyMediaListBloc>()
+                      .add(const DailyMediaListEvent.triedAgain());
                 },
                 child: Text(l10n.tryAgainButton),
               ),

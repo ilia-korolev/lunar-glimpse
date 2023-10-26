@@ -12,7 +12,12 @@ class AppBlocObserver extends BlocObserver {
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
 
-    _logger.i('onChange(${bloc.runtimeType}, $change)');
+    _logger.i('''
+Bloc.onChange(
+  name: ${bloc.runtimeType},
+  currentState: ${change.currentState},
+  nextState: ${change.nextState},
+)''');
   }
 
   @override
@@ -20,7 +25,7 @@ class AppBlocObserver extends BlocObserver {
     super.onError(bloc, error, stackTrace);
 
     _logger.e(
-      'onError(${bloc.runtimeType})',
+      'Bloc.onError(${bloc.runtimeType})',
       error: error,
     );
   }

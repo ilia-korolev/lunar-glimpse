@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_astronomy/core/_export.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -8,43 +9,46 @@ part 'daily_media_bloc.freezed.dart';
 part 'daily_media_event.dart';
 part 'daily_media_state.dart';
 
-const _throttleDuration = Duration(milliseconds: 100);
-
 class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
   DailyMediaBloc({
     required DailyMediaRepository repository,
-    this.pageSize = 25,
   })  : _repository = repository,
-        super(
-          const DailyMediaState(
-            status: DailyMediaStatus.initial,
-          ),
-        ) {
+        super(const DailyMediaState.initial()) {
     on<DailyMediaFetched>(
-      (event, emit) async => _fetched(emit),
-      transformer: throttleDroppableTransformer(_throttleDuration),
-    );
-
-    on<DailyMediaRefreshed>(
-      (event, emit) async => _refreshed(emit),
-      transformer: throttleDroppableTransformer(_throttleDuration),
+      (event, emit) async => _fetched(emit, event.date),
     );
 
     on<DailyMediaFavoriteToggled>(
-      (event, emit) async => _favoriteToggled(emit, event.media),
-      transformer: throttleDroppableTransformer(_throttleDuration),
+      (event, emit) async => _favoriteToggled(emit),
     );
 
     on<DailyMediaTriedAgain>(
       (event, emit) async => _triedAgain(emit),
-      transformer: throttleDroppableTransformer(_throttleDuration),
+    );
+
+    on<DailyMediaMediaChanged>(
+      (event, emit) async => _mediaChanged(emit, event.media),
+    );
+
+    _mediaChangesListener = _repository.changes.listen(
+      (mediaList) {
+        add(DailyMediaEvent.mediaChanged(mediaList));
+      },
     );
   }
 
   final DailyMediaRepository _repository;
-  final int pageSize;
+
+  late final StreamSubscription<List<Media>> _mediaChangesListener;
 
   DailyMediaEvent? _previousEvent;
+
+  @override
+  Future<void> close() async {
+    await _mediaChangesListener.cancel();
+
+    return super.close();
+  }
 
   @override
   void onEvent(DailyMediaEvent event) {
@@ -66,92 +70,34 @@ class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
     _previousEvent = event;
   }
 
-  Future<void> _fetched(Emitter<DailyMediaState> emit) async {
+  Future<void> _fetched(Emitter<DailyMediaState> emit, Date date) async {
+    emit(const DailyMediaState.loading());
+
     try {
-      if (state.hasReachedMax) {
-        return;
-      }
+      final media = await _repository.getDailyMedia(date: date);
 
-      emit(
-        state.copyWith(
-          status: DailyMediaStatus.loading,
-        ),
-      );
-
-      final response = state.mediaList.isEmpty
-          ? await _repository.getLatestMedia(count: pageSize)
-          : await _repository.getDailyMedia(
-              endDate: state.mediaList.last.date.yesterday,
-              count: pageSize,
-            );
-
-      final mediaList = [
-        ...state.mediaList,
-        ...response,
-      ] // TODO(ilia-korolev): implement a video player
-          .where((m) => m.type == MediaType.image)
-          .toList();
-
-      emit(
-        state.copyWith(
-          status: DailyMediaStatus.success,
-          mediaList: mediaList,
-          hasReachedMax: response.length < pageSize,
-        ),
-      );
-    } on Exception catch (_) {
-      emit(
-        state.copyWith(
-          status: DailyMediaStatus.failure,
-        ),
-      );
+      emit(DailyMediaState.success(media: media));
+    } on Exception catch (e) {
+      emit(DailyMediaState.failure(message: e.toString()));
     }
-  }
-
-  Future<void> _refreshed(Emitter<DailyMediaState> emit) async {
-    emit(
-      state.copyWith(
-        status: DailyMediaStatus.loading,
-        mediaList: [],
-        hasReachedMax: false,
-      ),
-    );
-
-    await _fetched(emit);
   }
 
   Future<void> _favoriteToggled(
     Emitter<DailyMediaState> emit,
-    Media media,
   ) async {
     try {
-      emit(
-        state.copyWith(
-          status: DailyMediaStatus.loading,
+      final media = state.maybeWhen(
+        success: (media) => media,
+        orElse: () => throw UnsupportedError(
+          'Only a success state is supported to perform this operation',
         ),
       );
 
-      final indexOfMedia = state.mediaList.indexOf(media);
-
-      if (indexOfMedia == -1) {
-        throw ArgumentError('The media is not on the list: $media', 'media');
-      }
-
-      final updatedMedia = await _repository.toggleFavorite(
+      await _repository.toggleFavorite(
         media: media,
       );
-
-      final updatedMediaList = List.of(state.mediaList)
-        ..[indexOfMedia] = updatedMedia;
-
-      emit(
-        state.copyWith(
-          status: DailyMediaStatus.success,
-          mediaList: updatedMediaList,
-        ),
-      );
-    } on Exception catch (_) {
-      emit(state.copyWith(status: DailyMediaStatus.failure));
+    } on Exception catch (e) {
+      emit(DailyMediaState.failure(message: e.toString()));
     }
   }
 
@@ -163,5 +109,28 @@ class DailyMediaBloc extends Bloc<DailyMediaEvent, DailyMediaState> {
     }
 
     add(_previousEvent!);
+  }
+
+  Future<void> _mediaChanged(
+    Emitter<DailyMediaState> emit,
+    List<Media> mediaList,
+  ) async {
+    state.whenOrNull(
+      success: (media) {
+        final changedMedia = mediaList.firstWhereOrNull(
+          (m) => media.date == m.date,
+        );
+
+        if (changedMedia == null) {
+          return;
+        }
+
+        emit(
+          DailyMediaState.success(
+            media: changedMedia,
+          ),
+        );
+      },
+    );
   }
 }

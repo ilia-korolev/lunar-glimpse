@@ -18,51 +18,51 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DailyMediaEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetched,
-    required TResult Function() refreshed,
-    required TResult Function(Media media) favoriteToggled,
+    required TResult Function(Date date) fetched,
+    required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
+    required TResult Function(List<Media> media) mediaChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetched,
-    TResult? Function()? refreshed,
-    TResult? Function(Media media)? favoriteToggled,
+    TResult? Function(Date date)? fetched,
+    TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
+    TResult? Function(List<Media> media)? mediaChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetched,
-    TResult Function()? refreshed,
-    TResult Function(Media media)? favoriteToggled,
+    TResult Function(Date date)? fetched,
+    TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
+    TResult Function(List<Media> media)? mediaChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DailyMediaFetched value) fetched,
-    required TResult Function(DailyMediaRefreshed value) refreshed,
     required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
     required TResult Function(DailyMediaTriedAgain value) triedAgain,
+    required TResult Function(DailyMediaMediaChanged value) mediaChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DailyMediaFetched value)? fetched,
-    TResult? Function(DailyMediaRefreshed value)? refreshed,
     TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult? Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult? Function(DailyMediaMediaChanged value)? mediaChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DailyMediaFetched value)? fetched,
-    TResult Function(DailyMediaRefreshed value)? refreshed,
     TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult Function(DailyMediaMediaChanged value)? mediaChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,6 +91,10 @@ abstract class _$$DailyMediaFetchedImplCopyWith<$Res> {
   factory _$$DailyMediaFetchedImplCopyWith(_$DailyMediaFetchedImpl value,
           $Res Function(_$DailyMediaFetchedImpl) then) =
       __$$DailyMediaFetchedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Date date});
+
+  $DateCopyWith<$Res> get date;
 }
 
 /// @nodoc
@@ -100,68 +104,93 @@ class __$$DailyMediaFetchedImplCopyWithImpl<$Res>
   __$$DailyMediaFetchedImplCopyWithImpl(_$DailyMediaFetchedImpl _value,
       $Res Function(_$DailyMediaFetchedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$DailyMediaFetchedImpl(
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as Date,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DateCopyWith<$Res> get date {
+    return $DateCopyWith<$Res>(_value.date, (value) {
+      return _then(_value.copyWith(date: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$DailyMediaFetchedImpl
-    with DiagnosticableTreeMixin
-    implements DailyMediaFetched {
-  const _$DailyMediaFetchedImpl();
+class _$DailyMediaFetchedImpl implements DailyMediaFetched {
+  const _$DailyMediaFetchedImpl({required this.date});
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyMediaEvent.fetched()';
-  }
+  final Date date;
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'DailyMediaEvent.fetched'));
+  String toString() {
+    return 'DailyMediaEvent.fetched(date: $date)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DailyMediaFetchedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DailyMediaFetchedImpl &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DailyMediaFetchedImplCopyWith<_$DailyMediaFetchedImpl> get copyWith =>
+      __$$DailyMediaFetchedImplCopyWithImpl<_$DailyMediaFetchedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetched,
-    required TResult Function() refreshed,
-    required TResult Function(Media media) favoriteToggled,
+    required TResult Function(Date date) fetched,
+    required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
+    required TResult Function(List<Media> media) mediaChanged,
   }) {
-    return fetched();
+    return fetched(date);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetched,
-    TResult? Function()? refreshed,
-    TResult? Function(Media media)? favoriteToggled,
+    TResult? Function(Date date)? fetched,
+    TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
+    TResult? Function(List<Media> media)? mediaChanged,
   }) {
-    return fetched?.call();
+    return fetched?.call(date);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetched,
-    TResult Function()? refreshed,
-    TResult Function(Media media)? favoriteToggled,
+    TResult Function(Date date)? fetched,
+    TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
+    TResult Function(List<Media> media)? mediaChanged,
     required TResult orElse(),
   }) {
     if (fetched != null) {
-      return fetched();
+      return fetched(date);
     }
     return orElse();
   }
@@ -170,9 +199,9 @@ class _$DailyMediaFetchedImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DailyMediaFetched value) fetched,
-    required TResult Function(DailyMediaRefreshed value) refreshed,
     required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
     required TResult Function(DailyMediaTriedAgain value) triedAgain,
+    required TResult Function(DailyMediaMediaChanged value) mediaChanged,
   }) {
     return fetched(this);
   }
@@ -181,9 +210,9 @@ class _$DailyMediaFetchedImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DailyMediaFetched value)? fetched,
-    TResult? Function(DailyMediaRefreshed value)? refreshed,
     TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult? Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult? Function(DailyMediaMediaChanged value)? mediaChanged,
   }) {
     return fetched?.call(this);
   }
@@ -192,9 +221,9 @@ class _$DailyMediaFetchedImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DailyMediaFetched value)? fetched,
-    TResult Function(DailyMediaRefreshed value)? refreshed,
     TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult Function(DailyMediaMediaChanged value)? mediaChanged,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -205,130 +234,13 @@ class _$DailyMediaFetchedImpl
 }
 
 abstract class DailyMediaFetched implements DailyMediaEvent {
-  const factory DailyMediaFetched() = _$DailyMediaFetchedImpl;
-}
+  const factory DailyMediaFetched({required final Date date}) =
+      _$DailyMediaFetchedImpl;
 
-/// @nodoc
-abstract class _$$DailyMediaRefreshedImplCopyWith<$Res> {
-  factory _$$DailyMediaRefreshedImplCopyWith(_$DailyMediaRefreshedImpl value,
-          $Res Function(_$DailyMediaRefreshedImpl) then) =
-      __$$DailyMediaRefreshedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DailyMediaRefreshedImplCopyWithImpl<$Res>
-    extends _$DailyMediaEventCopyWithImpl<$Res, _$DailyMediaRefreshedImpl>
-    implements _$$DailyMediaRefreshedImplCopyWith<$Res> {
-  __$$DailyMediaRefreshedImplCopyWithImpl(_$DailyMediaRefreshedImpl _value,
-      $Res Function(_$DailyMediaRefreshedImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$DailyMediaRefreshedImpl
-    with DiagnosticableTreeMixin
-    implements DailyMediaRefreshed {
-  const _$DailyMediaRefreshedImpl();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyMediaEvent.refreshed()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'DailyMediaEvent.refreshed'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DailyMediaRefreshedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetched,
-    required TResult Function() refreshed,
-    required TResult Function(Media media) favoriteToggled,
-    required TResult Function() triedAgain,
-  }) {
-    return refreshed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetched,
-    TResult? Function()? refreshed,
-    TResult? Function(Media media)? favoriteToggled,
-    TResult? Function()? triedAgain,
-  }) {
-    return refreshed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetched,
-    TResult Function()? refreshed,
-    TResult Function(Media media)? favoriteToggled,
-    TResult Function()? triedAgain,
-    required TResult orElse(),
-  }) {
-    if (refreshed != null) {
-      return refreshed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DailyMediaFetched value) fetched,
-    required TResult Function(DailyMediaRefreshed value) refreshed,
-    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
-    required TResult Function(DailyMediaTriedAgain value) triedAgain,
-  }) {
-    return refreshed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DailyMediaFetched value)? fetched,
-    TResult? Function(DailyMediaRefreshed value)? refreshed,
-    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
-    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
-  }) {
-    return refreshed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DailyMediaFetched value)? fetched,
-    TResult Function(DailyMediaRefreshed value)? refreshed,
-    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
-    TResult Function(DailyMediaTriedAgain value)? triedAgain,
-    required TResult orElse(),
-  }) {
-    if (refreshed != null) {
-      return refreshed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DailyMediaRefreshed implements DailyMediaEvent {
-  const factory DailyMediaRefreshed() = _$DailyMediaRefreshedImpl;
+  Date get date;
+  @JsonKey(ignore: true)
+  _$$DailyMediaFetchedImplCopyWith<_$DailyMediaFetchedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -337,10 +249,6 @@ abstract class _$$DailyMediaFavoriteToggledImplCopyWith<$Res> {
           _$DailyMediaFavoriteToggledImpl value,
           $Res Function(_$DailyMediaFavoriteToggledImpl) then) =
       __$$DailyMediaFavoriteToggledImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Media media});
-
-  $MediaCopyWith<$Res> get media;
 }
 
 /// @nodoc
@@ -351,103 +259,61 @@ class __$$DailyMediaFavoriteToggledImplCopyWithImpl<$Res>
       _$DailyMediaFavoriteToggledImpl _value,
       $Res Function(_$DailyMediaFavoriteToggledImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? media = null,
-  }) {
-    return _then(_$DailyMediaFavoriteToggledImpl(
-      null == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
-              as Media,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MediaCopyWith<$Res> get media {
-    return $MediaCopyWith<$Res>(_value.media, (value) {
-      return _then(_value.copyWith(media: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$DailyMediaFavoriteToggledImpl
-    with DiagnosticableTreeMixin
-    implements DailyMediaFavoriteToggled {
-  const _$DailyMediaFavoriteToggledImpl(this.media);
+class _$DailyMediaFavoriteToggledImpl implements DailyMediaFavoriteToggled {
+  const _$DailyMediaFavoriteToggledImpl();
 
   @override
-  final Media media;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DailyMediaEvent.favoriteToggled(media: $media)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'DailyMediaEvent.favoriteToggled'))
-      ..add(DiagnosticsProperty('media', media));
+  String toString() {
+    return 'DailyMediaEvent.favoriteToggled()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DailyMediaFavoriteToggledImpl &&
-            (identical(other.media, media) || other.media == media));
+            other is _$DailyMediaFavoriteToggledImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, media);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DailyMediaFavoriteToggledImplCopyWith<_$DailyMediaFavoriteToggledImpl>
-      get copyWith => __$$DailyMediaFavoriteToggledImplCopyWithImpl<
-          _$DailyMediaFavoriteToggledImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetched,
-    required TResult Function() refreshed,
-    required TResult Function(Media media) favoriteToggled,
+    required TResult Function(Date date) fetched,
+    required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
+    required TResult Function(List<Media> media) mediaChanged,
   }) {
-    return favoriteToggled(media);
+    return favoriteToggled();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetched,
-    TResult? Function()? refreshed,
-    TResult? Function(Media media)? favoriteToggled,
+    TResult? Function(Date date)? fetched,
+    TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
+    TResult? Function(List<Media> media)? mediaChanged,
   }) {
-    return favoriteToggled?.call(media);
+    return favoriteToggled?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetched,
-    TResult Function()? refreshed,
-    TResult Function(Media media)? favoriteToggled,
+    TResult Function(Date date)? fetched,
+    TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
+    TResult Function(List<Media> media)? mediaChanged,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
-      return favoriteToggled(media);
+      return favoriteToggled();
     }
     return orElse();
   }
@@ -456,9 +322,9 @@ class _$DailyMediaFavoriteToggledImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DailyMediaFetched value) fetched,
-    required TResult Function(DailyMediaRefreshed value) refreshed,
     required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
     required TResult Function(DailyMediaTriedAgain value) triedAgain,
+    required TResult Function(DailyMediaMediaChanged value) mediaChanged,
   }) {
     return favoriteToggled(this);
   }
@@ -467,9 +333,9 @@ class _$DailyMediaFavoriteToggledImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DailyMediaFetched value)? fetched,
-    TResult? Function(DailyMediaRefreshed value)? refreshed,
     TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult? Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult? Function(DailyMediaMediaChanged value)? mediaChanged,
   }) {
     return favoriteToggled?.call(this);
   }
@@ -478,9 +344,9 @@ class _$DailyMediaFavoriteToggledImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DailyMediaFetched value)? fetched,
-    TResult Function(DailyMediaRefreshed value)? refreshed,
     TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult Function(DailyMediaMediaChanged value)? mediaChanged,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -491,13 +357,7 @@ class _$DailyMediaFavoriteToggledImpl
 }
 
 abstract class DailyMediaFavoriteToggled implements DailyMediaEvent {
-  const factory DailyMediaFavoriteToggled(final Media media) =
-      _$DailyMediaFavoriteToggledImpl;
-
-  Media get media;
-  @JsonKey(ignore: true)
-  _$$DailyMediaFavoriteToggledImplCopyWith<_$DailyMediaFavoriteToggledImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory DailyMediaFavoriteToggled() = _$DailyMediaFavoriteToggledImpl;
 }
 
 /// @nodoc
@@ -518,20 +378,12 @@ class __$$DailyMediaTriedAgainImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DailyMediaTriedAgainImpl
-    with DiagnosticableTreeMixin
-    implements DailyMediaTriedAgain {
+class _$DailyMediaTriedAgainImpl implements DailyMediaTriedAgain {
   const _$DailyMediaTriedAgainImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'DailyMediaEvent.triedAgain()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'DailyMediaEvent.triedAgain'));
   }
 
   @override
@@ -547,10 +399,10 @@ class _$DailyMediaTriedAgainImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetched,
-    required TResult Function() refreshed,
-    required TResult Function(Media media) favoriteToggled,
+    required TResult Function(Date date) fetched,
+    required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
+    required TResult Function(List<Media> media) mediaChanged,
   }) {
     return triedAgain();
   }
@@ -558,10 +410,10 @@ class _$DailyMediaTriedAgainImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetched,
-    TResult? Function()? refreshed,
-    TResult? Function(Media media)? favoriteToggled,
+    TResult? Function(Date date)? fetched,
+    TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
+    TResult? Function(List<Media> media)? mediaChanged,
   }) {
     return triedAgain?.call();
   }
@@ -569,10 +421,10 @@ class _$DailyMediaTriedAgainImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetched,
-    TResult Function()? refreshed,
-    TResult Function(Media media)? favoriteToggled,
+    TResult Function(Date date)? fetched,
+    TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
+    TResult Function(List<Media> media)? mediaChanged,
     required TResult orElse(),
   }) {
     if (triedAgain != null) {
@@ -585,9 +437,9 @@ class _$DailyMediaTriedAgainImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DailyMediaFetched value) fetched,
-    required TResult Function(DailyMediaRefreshed value) refreshed,
     required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
     required TResult Function(DailyMediaTriedAgain value) triedAgain,
+    required TResult Function(DailyMediaMediaChanged value) mediaChanged,
   }) {
     return triedAgain(this);
   }
@@ -596,9 +448,9 @@ class _$DailyMediaTriedAgainImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DailyMediaFetched value)? fetched,
-    TResult? Function(DailyMediaRefreshed value)? refreshed,
     TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult? Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult? Function(DailyMediaMediaChanged value)? mediaChanged,
   }) {
     return triedAgain?.call(this);
   }
@@ -607,9 +459,9 @@ class _$DailyMediaTriedAgainImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DailyMediaFetched value)? fetched,
-    TResult Function(DailyMediaRefreshed value)? refreshed,
     TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
     TResult Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult Function(DailyMediaMediaChanged value)? mediaChanged,
     required TResult orElse(),
   }) {
     if (triedAgain != null) {
@@ -624,13 +476,211 @@ abstract class DailyMediaTriedAgain implements DailyMediaEvent {
 }
 
 /// @nodoc
-mixin _$DailyMediaState {
-  DailyMediaStatus get status => throw _privateConstructorUsedError;
-  List<Media> get mediaList => throw _privateConstructorUsedError;
-  bool get hasReachedMax => throw _privateConstructorUsedError;
+abstract class _$$DailyMediaMediaChangedImplCopyWith<$Res> {
+  factory _$$DailyMediaMediaChangedImplCopyWith(
+          _$DailyMediaMediaChangedImpl value,
+          $Res Function(_$DailyMediaMediaChangedImpl) then) =
+      __$$DailyMediaMediaChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Media> media});
+}
+
+/// @nodoc
+class __$$DailyMediaMediaChangedImplCopyWithImpl<$Res>
+    extends _$DailyMediaEventCopyWithImpl<$Res, _$DailyMediaMediaChangedImpl>
+    implements _$$DailyMediaMediaChangedImplCopyWith<$Res> {
+  __$$DailyMediaMediaChangedImplCopyWithImpl(
+      _$DailyMediaMediaChangedImpl _value,
+      $Res Function(_$DailyMediaMediaChangedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? media = null,
+  }) {
+    return _then(_$DailyMediaMediaChangedImpl(
+      null == media
+          ? _value._media
+          : media // ignore: cast_nullable_to_non_nullable
+              as List<Media>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DailyMediaMediaChangedImpl implements DailyMediaMediaChanged {
+  const _$DailyMediaMediaChangedImpl(final List<Media> media) : _media = media;
+
+  final List<Media> _media;
+  @override
+  List<Media> get media {
+    if (_media is EqualUnmodifiableListView) return _media;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_media);
+  }
+
+  @override
+  String toString() {
+    return 'DailyMediaEvent.mediaChanged(media: $media)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DailyMediaMediaChangedImpl &&
+            const DeepCollectionEquality().equals(other._media, _media));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_media));
 
   @JsonKey(ignore: true)
-  $DailyMediaStateCopyWith<DailyMediaState> get copyWith =>
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DailyMediaMediaChangedImplCopyWith<_$DailyMediaMediaChangedImpl>
+      get copyWith => __$$DailyMediaMediaChangedImplCopyWithImpl<
+          _$DailyMediaMediaChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Date date) fetched,
+    required TResult Function() favoriteToggled,
+    required TResult Function() triedAgain,
+    required TResult Function(List<Media> media) mediaChanged,
+  }) {
+    return mediaChanged(media);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Date date)? fetched,
+    TResult? Function()? favoriteToggled,
+    TResult? Function()? triedAgain,
+    TResult? Function(List<Media> media)? mediaChanged,
+  }) {
+    return mediaChanged?.call(media);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Date date)? fetched,
+    TResult Function()? favoriteToggled,
+    TResult Function()? triedAgain,
+    TResult Function(List<Media> media)? mediaChanged,
+    required TResult orElse(),
+  }) {
+    if (mediaChanged != null) {
+      return mediaChanged(media);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DailyMediaFetched value) fetched,
+    required TResult Function(DailyMediaFavoriteToggled value) favoriteToggled,
+    required TResult Function(DailyMediaTriedAgain value) triedAgain,
+    required TResult Function(DailyMediaMediaChanged value) mediaChanged,
+  }) {
+    return mediaChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DailyMediaFetched value)? fetched,
+    TResult? Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult? Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult? Function(DailyMediaMediaChanged value)? mediaChanged,
+  }) {
+    return mediaChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DailyMediaFetched value)? fetched,
+    TResult Function(DailyMediaFavoriteToggled value)? favoriteToggled,
+    TResult Function(DailyMediaTriedAgain value)? triedAgain,
+    TResult Function(DailyMediaMediaChanged value)? mediaChanged,
+    required TResult orElse(),
+  }) {
+    if (mediaChanged != null) {
+      return mediaChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DailyMediaMediaChanged implements DailyMediaEvent {
+  const factory DailyMediaMediaChanged(final List<Media> media) =
+      _$DailyMediaMediaChangedImpl;
+
+  List<Media> get media;
+  @JsonKey(ignore: true)
+  _$$DailyMediaMediaChangedImplCopyWith<_$DailyMediaMediaChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$DailyMediaState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Media media) success,
+    required TResult Function(String message) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Media media)? success,
+    TResult? Function(String message)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Media media)? success,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -639,9 +689,6 @@ abstract class $DailyMediaStateCopyWith<$Res> {
   factory $DailyMediaStateCopyWith(
           DailyMediaState value, $Res Function(DailyMediaState) then) =
       _$DailyMediaStateCopyWithImpl<$Res, DailyMediaState>;
-  @useResult
-  $Res call(
-      {DailyMediaStatus status, List<Media> mediaList, bool hasReachedMax});
 }
 
 /// @nodoc
@@ -653,139 +700,516 @@ class _$DailyMediaStateCopyWithImpl<$Res, $Val extends DailyMediaState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
 
-  @pragma('vm:prefer-inline')
+/// @nodoc
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$DailyMediaStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InitialImpl extends _Initial {
+  const _$InitialImpl() : super._();
+
   @override
-  $Res call({
-    Object? status = null,
-    Object? mediaList = null,
-    Object? hasReachedMax = null,
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Media media) success,
+    required TResult Function(String message) failure,
   }) {
-    return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as DailyMediaStatus,
-      mediaList: null == mediaList
-          ? _value.mediaList
-          : mediaList // ignore: cast_nullable_to_non_nullable
-              as List<Media>,
-      hasReachedMax: null == hasReachedMax
-          ? _value.hasReachedMax
-          : hasReachedMax // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Media media)? success,
+    TResult? Function(String message)? failure,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Media media)? success,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
   }
 }
 
-/// @nodoc
-abstract class _$$DailyMediaStateImplCopyWith<$Res>
-    implements $DailyMediaStateCopyWith<$Res> {
-  factory _$$DailyMediaStateImplCopyWith(_$DailyMediaStateImpl value,
-          $Res Function(_$DailyMediaStateImpl) then) =
-      __$$DailyMediaStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {DailyMediaStatus status, List<Media> mediaList, bool hasReachedMax});
+abstract class _Initial extends DailyMediaState {
+  const factory _Initial() = _$InitialImpl;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
-class __$$DailyMediaStateImplCopyWithImpl<$Res>
-    extends _$DailyMediaStateCopyWithImpl<$Res, _$DailyMediaStateImpl>
-    implements _$$DailyMediaStateImplCopyWith<$Res> {
-  __$$DailyMediaStateImplCopyWithImpl(
-      _$DailyMediaStateImpl _value, $Res Function(_$DailyMediaStateImpl) _then)
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$DailyMediaStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingImpl extends _Loading {
+  const _$LoadingImpl() : super._();
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Media media) success,
+    required TResult Function(String message) failure,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Media media)? success,
+    TResult? Function(String message)? failure,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Media media)? success,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading extends DailyMediaState {
+  const factory _Loading() = _$LoadingImpl;
+  const _Loading._() : super._();
+}
+
+/// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Media media});
+
+  $MediaCopyWith<$Res> get media;
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$DailyMediaStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
-    Object? mediaList = null,
-    Object? hasReachedMax = null,
+    Object? media = null,
   }) {
-    return _then(_$DailyMediaStateImpl(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as DailyMediaStatus,
-      mediaList: null == mediaList
-          ? _value._mediaList
-          : mediaList // ignore: cast_nullable_to_non_nullable
-              as List<Media>,
-      hasReachedMax: null == hasReachedMax
-          ? _value.hasReachedMax
-          : hasReachedMax // ignore: cast_nullable_to_non_nullable
-              as bool,
+    return _then(_$SuccessImpl(
+      media: null == media
+          ? _value.media
+          : media // ignore: cast_nullable_to_non_nullable
+              as Media,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MediaCopyWith<$Res> get media {
+    return $MediaCopyWith<$Res>(_value.media, (value) {
+      return _then(_value.copyWith(media: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$SuccessImpl extends _Success {
+  const _$SuccessImpl({required this.media}) : super._();
+
+  @override
+  final Media media;
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.media, media) || other.media == media));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, media);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Media media) success,
+    required TResult Function(String message) failure,
+  }) {
+    return success(media);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Media media)? success,
+    TResult? Function(String message)? failure,
+  }) {
+    return success?.call(media);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Media media)? success,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(media);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success extends DailyMediaState {
+  const factory _Success({required final Media media}) = _$SuccessImpl;
+  const _Success._() : super._();
+
+  Media get media;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FailureImplCopyWith<$Res> {
+  factory _$$FailureImplCopyWith(
+          _$FailureImpl value, $Res Function(_$FailureImpl) then) =
+      __$$FailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$FailureImplCopyWithImpl<$Res>
+    extends _$DailyMediaStateCopyWithImpl<$Res, _$FailureImpl>
+    implements _$$FailureImplCopyWith<$Res> {
+  __$$FailureImplCopyWithImpl(
+      _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$FailureImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$DailyMediaStateImpl extends _DailyMediaState {
-  const _$DailyMediaStateImpl(
-      {required this.status,
-      final List<Media> mediaList = const [],
-      this.hasReachedMax = false})
-      : _mediaList = mediaList,
-        super._();
+class _$FailureImpl extends _Failure {
+  const _$FailureImpl({required this.message}) : super._();
 
   @override
-  final DailyMediaStatus status;
-  final List<Media> _mediaList;
-  @override
-  @JsonKey()
-  List<Media> get mediaList {
-    if (_mediaList is EqualUnmodifiableListView) return _mediaList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mediaList);
-  }
-
-  @override
-  @JsonKey()
-  final bool hasReachedMax;
+  final String message;
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DailyMediaStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality()
-                .equals(other._mediaList, _mediaList) &&
-            (identical(other.hasReachedMax, hasReachedMax) ||
-                other.hasReachedMax == hasReachedMax));
+            other is _$FailureImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status,
-      const DeepCollectionEquality().hash(_mediaList), hasReachedMax);
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DailyMediaStateImplCopyWith<_$DailyMediaStateImpl> get copyWith =>
-      __$$DailyMediaStateImplCopyWithImpl<_$DailyMediaStateImpl>(
-          this, _$identity);
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      __$$FailureImplCopyWithImpl<_$FailureImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Media media) success,
+    required TResult Function(String message) failure,
+  }) {
+    return failure(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Media media)? success,
+    TResult? Function(String message)? failure,
+  }) {
+    return failure?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Media media)? success,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _DailyMediaState extends DailyMediaState {
-  const factory _DailyMediaState(
-      {required final DailyMediaStatus status,
-      final List<Media> mediaList,
-      final bool hasReachedMax}) = _$DailyMediaStateImpl;
-  const _DailyMediaState._() : super._();
+abstract class _Failure extends DailyMediaState {
+  const factory _Failure({required final String message}) = _$FailureImpl;
+  const _Failure._() : super._();
 
-  @override
-  DailyMediaStatus get status;
-  @override
-  List<Media> get mediaList;
-  @override
-  bool get hasReachedMax;
-  @override
+  String get message;
   @JsonKey(ignore: true)
-  _$$DailyMediaStateImplCopyWith<_$DailyMediaStateImpl> get copyWith =>
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

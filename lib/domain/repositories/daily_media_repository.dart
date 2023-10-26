@@ -1,25 +1,33 @@
+import 'dart:async';
+
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 
 abstract interface class DailyMediaRepository {
   const DailyMediaRepository();
 
-  Future<List<Media>> getDailyMedia({
+  Stream<List<Media>> get changes;
+
+  Future<List<Media>> getDailyMediaList({
     required Date endDate,
     required int count,
+  });
+
+  Future<Media> getDailyMedia({
+    required Date date,
   });
 
   Future<List<Media>> getLatestMedia({
     required int count,
   });
 
-  Future<Media> toggleFavorite({
+  Future<void> toggleFavorite({
     required Media media,
   });
 }
 
 class DailyMediaRepositoryImpl implements DailyMediaRepository {
-  const DailyMediaRepositoryImpl({
+  DailyMediaRepositoryImpl({
     required LocalDailyMediaDataSource localDailyMediaDataSource,
     required RemoteDailyMediaDataSource remoteDailyMediaDataSource,
   })  : _localDailyMediaDataSource = localDailyMediaDataSource,
@@ -27,6 +35,11 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
 
   final LocalDailyMediaDataSource _localDailyMediaDataSource;
   final RemoteDailyMediaDataSource _remoteDailyMediaDataSource;
+
+  final _changesController = StreamController<List<Media>>.broadcast();
+
+  @override
+  Stream<List<Media>> get changes => _changesController.stream;
 
   @override
   Future<List<Media>> getLatestMedia({
@@ -38,11 +51,11 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
       dailyMedia: [todayMedia],
     );
 
-    return getDailyMedia(endDate: todayMedia.date, count: count);
+    return getDailyMediaList(endDate: todayMedia.date, count: count);
   }
 
   @override
-  Future<List<Media>> getDailyMedia({
+  Future<List<Media>> getDailyMediaList({
     required Date endDate,
     required int count,
   }) async {
@@ -72,7 +85,16 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
   }
 
   @override
-  Future<Media> toggleFavorite({
+  Future<Media> getDailyMedia({required Date date}) async {
+    final media = await getDailyMediaList(endDate: date, count: 1);
+
+    return media.single;
+  }
+
+  /// This is an update operation
+  /// Listen changes using the [changes] Stream
+  @override
+  Future<void> toggleFavorite({
     required Media media,
   }) async {
     final updatedMedia = media.copyWith(isFavorite: !media.isFavorite);
@@ -82,7 +104,7 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
       onConflictUpdate: true,
     );
 
-    return updatedMedia;
+    _changesController.add([updatedMedia]);
   }
 
   Future<List<Media>> _getUncachedMedia({
