@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
@@ -60,7 +61,7 @@ class _FailureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
+      appBar: PrimaryAppBar(
         height: Theme.of(context).sizes.smallAppBarHeight,
       ),
       body: FailureView(
@@ -118,27 +119,27 @@ class _MediaAppBar extends StatelessWidget {
 
     return SliverAppBar(
       leading: Padding(
-        padding: EdgeInsets.only(left: theme.spacing.semiSmall),
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: theme.colorScheme.background.withOpacity(0.4),
-          ),
-          child: IconButton(
-            // color:
-            icon: const FaIcon(
-              FontAwesomeIcons.chevronLeft,
-            ),
-            onPressed: () {
-              context.pop();
-            },
-          ),
+        padding: EdgeInsets.only(
+          left: theme.spacing.semiSmall,
+          top: theme.spacing.semiSmall,
+        ),
+        child: PrimaryIconButton(
+          backgroundColor: theme.colorScheme.background.withOpacity(0.4),
+          icon: FontAwesomeIcons.chevronLeft,
+          onPressed: () {
+            context.pop();
+          },
         ),
       ),
       expandedHeight: expandedHeight,
       flexibleSpace: FlexibleSpaceBar(
-        background: ImageContent(
-          uri: media.uri.toString(),
+        background: GestureDetector(
+          onTap: () {
+            _showImageViewerDialog(context);
+          },
+          child: ImageContent(
+            uri: media.uri.toString(),
+          ),
         ),
       ),
       bottom: PreferredSize(
@@ -173,6 +174,69 @@ class _MediaAppBar extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<Dialog?> _showImageViewerDialog(BuildContext context) {
+    return showDialog<Dialog>(
+      context: context,
+      builder: (context) {
+        final theme = Theme.of(context);
+
+        return Dialog(
+          insetPadding: EdgeInsets.zero,
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          child: Stack(
+            children: [
+              InteractiveViewer(
+                maxScale: 10,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pop();
+                        },
+                      ),
+                    ),
+                    CachedNetworkImage(
+                      imageUrl: media.hdUri.toString(),
+                      progressIndicatorBuilder: (_, __, downloadProgress) {
+                        final progress =
+                            downloadProgress.progress?.clamp(0.0, 1.0) ?? 0.0;
+
+                        return Center(
+                          child: CircularProgressIndicator(value: progress),
+                        );
+                      },
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pop();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                right: theme.spacing.semiSmall,
+                top: theme.spacing.semiSmall,
+                child: PrimaryIconButton(
+                  backgroundColor:
+                      theme.colorScheme.background.withOpacity(0.4),
+                  icon: FontAwesomeIcons.xmark,
+                  onPressed: () {
+                    context.pop();
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

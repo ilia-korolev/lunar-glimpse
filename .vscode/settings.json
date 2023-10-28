@@ -13,6 +13,7 @@
         "mocktail",
         "rxdart",
         "vsync",
-        "writeln"
+        "writeln",
+        "xmark"
     ]
 }
