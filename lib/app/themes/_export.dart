@@ -1,5 +1,5 @@
+export 'app_durations.dart';
 export 'custom_colors.dart';
-export 'durations.dart';
 export 'radiuses.dart';
 export 'sizes.dart';
 export 'spacing.dart';

@@ -20,7 +20,7 @@ class RegularThemeBuilder implements ThemeBuilder {
       colorSchemeSeed: mainColor,
       extensions: [
         CustomColors.harmonized(mainColor),
-        const Durations.regular(),
+        const AppDurations.regular(),
         const Radiuses.regular(),
         const Sizes.regular(),
         const Spacing.regular(),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Durations extends ThemeExtension<Durations> {
-  const Durations({
+class AppDurations extends ThemeExtension<AppDurations> {
+  const AppDurations({
     required this.short,
     required this.medium,
     required this.long,
   });
 
-  const Durations.regular()
+  const AppDurations.regular()
       : this(
           short: const Duration(milliseconds: 100),
           medium: const Duration(milliseconds: 250),
@@ -19,12 +19,12 @@ class Durations extends ThemeExtension<Durations> {
   final Duration long;
 
   @override
-  Durations copyWith({
+  AppDurations copyWith({
     Duration? short,
     Duration? medium,
     Duration? long,
   }) {
-    return Durations(
+    return AppDurations(
       short: short ?? this.short,
       medium: medium ?? this.medium,
       long: long ?? this.long,
@@ -32,11 +32,11 @@ class Durations extends ThemeExtension<Durations> {
   }
 
   @override
-  ThemeExtension<Durations> lerp(
-    ThemeExtension<Durations>? other,
+  ThemeExtension<AppDurations> lerp(
+    ThemeExtension<AppDurations>? other,
     double t,
   ) {
-    // We don't need a lerp here
+    // We don't need to lerp here
     // because durations are usually used for animations
     return this;
   }
