@@ -45,6 +45,14 @@ class Routing {
             ),
           );
         },
+        routes: [
+          GoRoute(
+            path: 'github-info',
+            builder: (context, state) {
+              return const GithubInfoPage();
+            },
+          ),
+        ],
       ),
     ],
   );

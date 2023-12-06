@@ -4,6 +4,7 @@ import 'package:flutter_astronomy/domain/models/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../widgets/_export.dart';
@@ -66,7 +67,14 @@ class _Body extends StatelessWidget {
               );
             },
           ),
-          // TODO(ilia-korolev): add a git repo button
+          SettingButton(
+            icon: FontAwesomeIcons.github,
+            title: l10n.gitHubSettingsTitle,
+            subtitle: l10n.gitHubSettingsDescription,
+            onPressed: () async {
+              context.go('/settings/github-info');
+            },
+          ),
         ],
       ),
     );

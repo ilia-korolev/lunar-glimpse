@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PrimaryAppBar({
     required this.height,
+    this.title,
     super.key,
   });
 
   final double height;
+  final Widget? title;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           context.pop();
         },
       ),
+      title: title,
     );
   }
 
