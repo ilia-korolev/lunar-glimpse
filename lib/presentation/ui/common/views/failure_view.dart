@@ -34,7 +34,7 @@ class FailureView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Lottie.asset(AssetNames.animations.astronautOnPlanet),
+            Lottie.asset(AssetNames.animations.astronautAndRocket),
             Text(
               l10n.responseErrorTitle,
               style: theme.textTheme.titleLarge,

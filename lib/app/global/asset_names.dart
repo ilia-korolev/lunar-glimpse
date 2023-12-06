@@ -9,6 +9,6 @@ class _Animations {
 
   static const _animationsPath = '$_basePath/animations';
 
-  String get astronautOnPlanet => '$_animationsPath/astronaut_on_planet.json';
   String get astronautDeveloper => '$_animationsPath/astronaut_developer.json';
+  String get astronautAndRocket => '$_animationsPath/astronaut_and_rocket.json';
 }
