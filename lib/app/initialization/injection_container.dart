@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/data/_export.dart';
@@ -56,6 +57,9 @@ Future<void> _registerServices() async {
       () => Theming(
         builder: const RegularThemeBuilder(),
       ),
+    )
+    ..registerLazySingleton<GlobalKey<ScaffoldMessengerState>>(
+      GlobalKey<ScaffoldMessengerState>.new,
     );
 }
 

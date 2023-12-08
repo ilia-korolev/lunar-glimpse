@@ -14,6 +14,8 @@ abstract interface class LocalDailyMediaDataSource {
     required Date startDate,
     required Date endDate,
   });
+
+  Future<List<Media>> getFavoriteMediaList();
 }
 
 class DriftDailyMediaDataSource implements LocalDailyMediaDataSource {
@@ -63,6 +65,31 @@ class DriftDailyMediaDataSource implements LocalDailyMediaDataSource {
 
     final dbEntities = await (_database.select(_database.dailyMediaEntities)
           ..where((m) => m.date.isBetweenValues(startDateInt, endDateInt))
+          ..orderBy([(t) => OrderingTerm.desc(t.date)]))
+        .get();
+
+    final models = dbEntities
+        .map(
+          (e) => Media(
+            uri: e.uri,
+            hdUri: e.hdUri,
+            date: e.date,
+            title: e.title,
+            explanation: e.explanation,
+            copyright: e.copyright,
+            type: e.type,
+            isFavorite: e.isFavorite,
+          ),
+        )
+        .toList();
+
+    return models;
+  }
+
+  @override
+  Future<List<Media>> getFavoriteMediaList() async {
+    final dbEntities = await (_database.select(_database.dailyMediaEntities)
+          ..where((m) => m.isFavorite)
           ..orderBy([(t) => OrderingTerm.desc(t.date)]))
         .get();
 

@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 const _imageAspectRatio = 4 / 3;
 
 class MediaCard extends StatelessWidget {
   const MediaCard({
     required this.media,
+    required this.onFavoritePressed,
+    required this.onMediaPressed,
     super.key,
   });
 
   final Media media;
+  final void Function(Media media) onFavoritePressed;
+  final void Function(Media media) onMediaPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +67,7 @@ class MediaCard extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      context.go('/daily-media/${media.date.toInt()}');
-                    },
+                    onTap: () => onMediaPressed(media),
                   ),
                 ),
               ),
@@ -78,11 +78,7 @@ class MediaCard extends StatelessWidget {
                   padding: EdgeInsets.all(theme.spacing.small),
                   child: FavoriteButton(
                     isFavorite: media.isFavorite,
-                    onPressed: () {
-                      context
-                          .read<DailyMediaListBloc>()
-                          .add(DailyMediaListEvent.favoriteToggled(media));
-                    },
+                    onPressed: () => onFavoritePressed(media),
                   ),
                 ),
               ),

@@ -17,13 +17,15 @@ class Routing {
         },
         routes: [
           GoRoute(
-            path: ':date',
+            path: 'favorites',
             builder: (context, state) {
-              final date = _parseMediaDate(state.pathParameters['date']);
-
-              return DailyMediaPage(date: date);
+              return const FavoriteMediaPage();
             },
+            routes: [
+              _dailyMediaRoute,
+            ],
           ),
+          _dailyMediaRoute,
         ],
       ),
       GoRoute(
@@ -56,6 +58,17 @@ class Routing {
       ),
     ],
   );
+
+  static GoRoute get _dailyMediaRoute {
+    return GoRoute(
+      path: ':date',
+      builder: (context, state) {
+        final date = _parseMediaDate(state.pathParameters['date']);
+
+        return DailyMediaPage(date: date);
+      },
+    );
+  }
 
   static Date _parseMediaDate(String? date) {
     if (date == null) {

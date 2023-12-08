@@ -3,7 +3,9 @@ import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/_export.dart';
 
@@ -59,7 +61,15 @@ class _DailyMediaViewState extends State<DailyMediaView> {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            HomeAppBar(title: context.l10n.dailyMediaTitle),
+            HomeAppBar(
+              title: context.l10n.dailyMediaTitle,
+              trailing: PrimaryIconButton(
+                onPressed: () {
+                  context.go('/daily-media/favorites');
+                },
+                icon: FontAwesomeIcons.solidStar,
+              ),
+            ),
             const _MediaList(),
           ],
         ),
@@ -168,7 +178,17 @@ class _SuccessView extends StatelessWidget {
             return const LoadingMediaCard();
           }
 
-          return MediaCard(media: mediaList[index]);
+          return MediaCard(
+            media: mediaList[index],
+            onFavoritePressed: (Media media) {
+              context
+                  .read<DailyMediaListBloc>()
+                  .add(DailyMediaListEvent.favoriteToggled(media));
+            },
+            onMediaPressed: (Media media) {
+              context.go('/daily-media/${media.date.toInt()}');
+            },
+          );
         },
         separatorBuilder: (context, index) {
           return SizedBox(height: theme.spacing.semiLarge);

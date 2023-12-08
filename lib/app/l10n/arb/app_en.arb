@@ -25,5 +25,10 @@
             "example": "Bob"
           }
         }
-      }
+    },
+    "favoritesPageTitle": "Favorites",
+    "favoritesPageNoFavoritesText": "You will see media you add to Favorites here",
+    "removedFromFavoritesSnackBarText": "Removed from Favorites",
+    "removedFromFavoritesSnackBarButton": "Undo",
+    "favoriteRestoredSnackBarButton": "Restored"
 }

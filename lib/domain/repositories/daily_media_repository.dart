@@ -24,6 +24,8 @@ abstract interface class DailyMediaRepository {
   Future<void> toggleFavorite({
     required Media media,
   });
+
+  Future<List<Media>> getFavoriteMediaList();
 }
 
 class DailyMediaRepositoryImpl implements DailyMediaRepository {
@@ -105,6 +107,11 @@ class DailyMediaRepositoryImpl implements DailyMediaRepository {
     );
 
     _changesController.add([updatedMedia]);
+  }
+
+  @override
+  Future<List<Media>> getFavoriteMediaList() {
+    return _localDailyMediaDataSource.getFavoriteMediaList();
   }
 
   Future<List<Media>> _getUncachedMedia({

@@ -34,6 +34,7 @@ class App extends StatelessWidget {
             child: BlocBuilder<AppSettingsCubit, AppSettings>(
               builder: (context, settings) {
                 return MaterialApp.router(
+                  scaffoldMessengerKey: GetIt.instance(),
                   routerConfig: Routing.appRouter,
                   // TODO(ilia-korolev): change the title
                   title: 'Flutter Demo',
