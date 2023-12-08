@@ -28,20 +28,20 @@ class FavoriteButton extends StatelessWidget {
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onPressed,
-        child: Padding(
-          padding: EdgeInsets.all(theme.spacing.medium),
+        child: Container(
+          height: theme.sizes.largeIconSize + 2 * theme.spacing.medium,
+          width: theme.sizes.largeIconSize + 2 * theme.spacing.medium,
+          alignment: const Alignment(0, -0.1),
           child: FaIcon(
-            isFavorite ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart,
+            isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
             color: iconColor,
             size: theme.sizes.largeIconSize,
-            // TODO(ilia-korolev): fix the shadow when it's ready
-            // https://github.com/fluttercommunity/font_awesome_flutter/pull/247
-            // shadows: [
-            //   Shadow(
-            //     color: iconColor.withOpacity(.5),
-            //     blurRadius: theme.sizes.largeIconSize,
-            //   ),
-            // ],
+            shadows: [
+              Shadow(
+                color: iconColor.withOpacity(.5),
+                blurRadius: theme.sizes.largeIconSize,
+              ),
+            ],
           ),
         ),
       ),
