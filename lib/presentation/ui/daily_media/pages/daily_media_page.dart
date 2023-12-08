@@ -143,7 +143,12 @@ class _MediaAppBar extends StatelessWidget {
         ),
       ),
       bottom: PreferredSize(
-        preferredSize: Size.zero,
+        preferredSize: Size.fromHeight(
+          theme.spacing.semiLarge +
+              theme.spacing.semiSmall +
+              theme.sizes.largeIconSize +
+              2 * theme.spacing.medium,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
