@@ -103,9 +103,15 @@ Future<void> _registerRepositories() async {
 }
 
 Future<void> _registerBlocs() async {
-  _getIt.registerLazySingleton<DailyMediaListBloc>(
-    () => DailyMediaListBloc(
-      repository: _getIt(),
-    ),
-  );
+  _getIt
+    ..registerLazySingleton<DailyMediaListBloc>(
+      () => DailyMediaListBloc(
+        repository: _getIt(),
+      ),
+    )
+    ..registerLazySingleton<AppSettingsCubit>(
+      () => AppSettingsCubit(
+        appSettingsRepository: GetIt.instance(),
+      ),
+    );
 }

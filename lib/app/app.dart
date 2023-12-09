@@ -22,35 +22,26 @@ class App extends StatelessWidget {
           );
         }
 
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (_) => AppSettingsCubit(
-                appSettingsRepository: GetIt.instance(),
-              ),
-            ),
-          ],
-          child: SystemNavBarUpdater(
-            child: BlocBuilder<AppSettingsCubit, AppSettings>(
-              builder: (context, settings) {
-                return MaterialApp.router(
-                  scaffoldMessengerKey: GetIt.instance(),
-                  routerConfig: Routing.appRouter,
-                  // TODO(ilia-korolev): change the title
-                  title: 'Flutter Demo',
-                  theme: GetIt.instance<Theming>().light,
-                  darkTheme: GetIt.instance<Theming>().dark,
-                  themeMode: settings.themeMode,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                  ],
-                  supportedLocales: AppLocalizations.supportedLocales,
-                );
-              },
-            ),
+        return SystemNavBarUpdater(
+          child: BlocBuilder<AppSettingsCubit, AppSettings>(
+            builder: (context, settings) {
+              return MaterialApp.router(
+                scaffoldMessengerKey: GetIt.instance(),
+                routerConfig: Routing.appRouter,
+                // TODO(ilia-korolev): change the title
+                title: 'Flutter Demo',
+                theme: GetIt.instance<Theming>().light,
+                darkTheme: GetIt.instance<Theming>().dark,
+                themeMode: settings.themeMode,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+              );
+            },
           ),
         );
       },

@@ -23,15 +23,14 @@ class SystemNavBarUpdater extends StatefulWidget {
 
 class _SystemNavBarUpdaterState extends State<SystemNavBarUpdater>
     with WidgetsBindingObserver {
+  final _appSettingsCubit = GetIt.instance<AppSettingsCubit>();
+
   @override
   void initState() {
+    final themeMode = _appSettingsCubit.state.themeMode;
+    _updateNavBarByThemeMode(themeMode);
+
     WidgetsBinding.instance.addObserver(this);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final themeMode = context.read<AppSettingsCubit>().state.themeMode;
-
-      _updateNavBarByThemeMode(themeMode);
-    });
 
     super.initState();
   }
@@ -52,14 +51,17 @@ class _SystemNavBarUpdaterState extends State<SystemNavBarUpdater>
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppSettingsCubit, AppSettings>(
-      listenWhen: (previous, current) {
-        return previous.themeMode != current.themeMode;
-      },
-      listener: (context, settings) {
-        _updateNavBarByThemeMode(settings.themeMode);
-      },
-      child: widget.child,
+    return BlocProvider<AppSettingsCubit>.value(
+      value: _appSettingsCubit,
+      child: BlocListener<AppSettingsCubit, AppSettings>(
+        listenWhen: (previous, current) {
+          return previous.themeMode != current.themeMode;
+        },
+        listener: (context, settings) {
+          _updateNavBarByThemeMode(settings.themeMode);
+        },
+        child: widget.child,
+      ),
     );
   }
 
@@ -74,6 +76,7 @@ class _SystemNavBarUpdaterState extends State<SystemNavBarUpdater>
   void _updateNavBarByThemeMode(ThemeMode mode) {
     final theming = GetIt.instance<Theming>();
     final theme = theming.resolveMode(mode);
+
     _updateNavBar(theme);
   }
 
