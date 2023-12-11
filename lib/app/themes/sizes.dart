@@ -7,6 +7,7 @@ class Sizes extends ThemeExtension<Sizes> {
     required this.smallAppBarHeight,
     required this.mediumAppBarHeight,
     required this.navBarHeight,
+    required this.smallIconSize,
     required this.mediumIconSize,
     required this.largeIconSize,
     required this.avatarSize,
@@ -17,6 +18,7 @@ class Sizes extends ThemeExtension<Sizes> {
           smallAppBarHeight: 52,
           mediumAppBarHeight: 66,
           navBarHeight: 64,
+          smallIconSize: 16,
           mediumIconSize: 24,
           largeIconSize: 36,
           avatarSize: 90,
@@ -25,6 +27,7 @@ class Sizes extends ThemeExtension<Sizes> {
   final double smallAppBarHeight;
   final double mediumAppBarHeight;
   final double navBarHeight;
+  final double smallIconSize;
   final double mediumIconSize;
   final double largeIconSize;
   final double avatarSize;
@@ -34,6 +37,7 @@ class Sizes extends ThemeExtension<Sizes> {
     double? smallAppBarHeight,
     double? mediumAppBarHeight,
     double? navBarHeight,
+    double? smallIconSize,
     double? mediumIconSize,
     double? largeIconSize,
     double? avatarSize,
@@ -42,6 +46,7 @@ class Sizes extends ThemeExtension<Sizes> {
       smallAppBarHeight: smallAppBarHeight ?? this.smallAppBarHeight,
       mediumAppBarHeight: mediumAppBarHeight ?? this.mediumAppBarHeight,
       navBarHeight: navBarHeight ?? this.navBarHeight,
+      smallIconSize: smallIconSize ?? this.smallIconSize,
       mediumIconSize: mediumIconSize ?? this.mediumIconSize,
       largeIconSize: largeIconSize ?? this.largeIconSize,
       avatarSize: avatarSize ?? this.avatarSize,
@@ -71,6 +76,11 @@ class Sizes extends ThemeExtension<Sizes> {
       navBarHeight: lerpDouble(
         navBarHeight,
         other.navBarHeight,
+        t,
+      )!,
+      smallIconSize: lerpDouble(
+        smallIconSize,
+        other.smallIconSize,
         t,
       )!,
       mediumIconSize: lerpDouble(

@@ -60,6 +60,9 @@ Future<void> _registerServices() async {
     )
     ..registerLazySingleton<GlobalKey<ScaffoldMessengerState>>(
       GlobalKey<ScaffoldMessengerState>.new,
+    )
+    ..registerLazySingleton<WebFeedParser>(
+      WebFeedParserImpl.new,
     );
 }
 
@@ -79,8 +82,19 @@ Future<void> _registerDataSources() async {
         AppDatabase,
       ],
     )
+    ..registerLazySingleton<LocalWebFeedDataSource>(
+      () => DriftWebFeedDataSource(
+        database: _getIt(),
+      ),
+    )
     ..registerLazySingleton<RemoteDailyMediaDataSource>(
       () => NasaApodDataSource(httpService: _getIt()),
+    )
+    ..registerLazySingleton<RemoteNewsDataSource>(
+      () => RssNewsDataSource(
+        httpService: _getIt(),
+        webFeedParser: _getIt(),
+      ),
     );
 }
 
@@ -99,19 +113,35 @@ Future<void> _registerRepositories() async {
         localDailyMediaDataSource: _getIt(),
         remoteDailyMediaDataSource: _getIt(),
       ),
+    )
+    ..registerLazySingleton<NewsRepository>(
+      () => NewsRepositoryImpl(
+        remoteNewsDataSource: _getIt(),
+      ),
+    )
+    ..registerLazySingleton<WebFeedRepository>(
+      () => WebFeedRepositoryImpl(
+        localWebFeedDataSource: _getIt(),
+      ),
     );
 }
 
 Future<void> _registerBlocs() async {
   _getIt
+    ..registerLazySingleton<AppSettingsCubit>(
+      () => AppSettingsCubit(
+        appSettingsRepository: GetIt.instance(),
+      ),
+    )
     ..registerLazySingleton<DailyMediaListBloc>(
       () => DailyMediaListBloc(
         repository: _getIt(),
       ),
     )
-    ..registerLazySingleton<AppSettingsCubit>(
-      () => AppSettingsCubit(
-        appSettingsRepository: GetIt.instance(),
+    ..registerLazySingleton<NewsBloc>(
+      () => NewsBloc(
+        newsRepository: _getIt(),
+        webFeedRepository: _getIt(),
       ),
     );
 }

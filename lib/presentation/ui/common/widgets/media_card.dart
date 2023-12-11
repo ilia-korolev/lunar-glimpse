@@ -9,13 +9,13 @@ class MediaCard extends StatelessWidget {
   const MediaCard({
     required this.media,
     required this.onFavoritePressed,
-    required this.onMediaPressed,
+    required this.onCardPressed,
     super.key,
   });
 
   final Media media;
   final void Function(Media media) onFavoritePressed;
-  final void Function(Media media) onMediaPressed;
+  final void Function(Media media) onCardPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +31,7 @@ class MediaCard extends StatelessWidget {
       3,
     );
 
-    final radius = theme.radiuses.large;
-
-    return Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.all(radius),
-      ),
-      margin: EdgeInsets.symmetric(horizontal: theme.spacing.semiLarge),
+    return CardBase(
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Stack(
@@ -67,7 +59,7 @@ class MediaCard extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => onMediaPressed(media),
+                    onTap: () => onCardPressed(media),
                   ),
                 ),
               ),

@@ -41,16 +41,9 @@ class _DailyMediaViewState extends State<DailyMediaView> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final statusBarHeight = MediaQuery.of(context).viewPadding.top;
-
     return BlocProvider.value(
       value: _bloc,
-      child: RefreshIndicator(
-        edgeOffset: statusBarHeight,
-        backgroundColor: theme.colorScheme.secondaryContainer,
-        color: theme.colorScheme.onSecondaryContainer,
+      child: PrimaryRefreshIndicator(
         onRefresh: () async {
           _bloc.add(const DailyMediaListEvent.refreshed());
 
@@ -185,7 +178,7 @@ class _SuccessView extends StatelessWidget {
                   .read<DailyMediaListBloc>()
                   .add(DailyMediaListEvent.favoriteToggled(media));
             },
-            onMediaPressed: (Media media) {
+            onCardPressed: (Media media) {
               context.go('/daily-media/${media.date.toInt()}');
             },
           );

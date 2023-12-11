@@ -175,7 +175,7 @@ class _SuccessView extends StatelessWidget {
                   .add(FavoriteMediaListEvent.favoriteRemoved(media));
             }
           },
-          onMediaPressed: (Media media) {
+          onCardPressed: (Media media) {
             context.go('/daily-media/favorites/${media.date.toInt()}');
           },
         );
