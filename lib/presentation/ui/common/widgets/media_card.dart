@@ -3,7 +3,7 @@ import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 
-const _imageAspectRatio = 4 / 3;
+const _imageAspectRatio = 16 / 9;
 
 class MediaCard extends StatelessWidget {
   const MediaCard({
