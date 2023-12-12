@@ -84,6 +84,7 @@ class _CardInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -98,7 +99,10 @@ class _CardInfo extends StatelessWidget {
           Row(
             children: [
               Text(
-                DateFormat.yMd().format(article.date),
+                _formatDate(
+                  date: article.date,
+                  l10n: l10n,
+                ),
                 style: theme.textTheme.labelLarge!.copyWith(
                   color: theme.colorScheme.outline,
                 ),
@@ -145,5 +149,23 @@ class _CardInfo extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _formatDate({
+    required DateTime date,
+    required AppLocalizations l10n,
+  }) {
+    final now = DateTime.now().toUtc();
+    final difference = now.difference(date);
+
+    if (difference.inDays < 1 && difference.inHours >= 1) {
+      return l10n.hoursAgo(difference.inHours);
+    }
+
+    if (difference.inHours < 1) {
+      return l10n.minutesAgo(difference.inMinutes);
+    }
+
+    return DateFormat.yMd().format(article.date);
   }
 }

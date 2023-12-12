@@ -1,35 +1,54 @@
 {
-    "@@locale": "en",
-    "dailyMediaTitle": "Daily Media",
-    "newsTitle": "News",
-    "settingsTitle": "Settings",
-    "themeSettingsTitle": "Theme",
-    "systemThemeModeTitle": "System default",
-    "lightThemeModeTitle": "Light",
-    "darkThemeModeTitle": "Dark",
-    "aboutSettingsTitle": "About",
-    "aboutSettingsDescription": "All the stuff you need to know",
-    "gitHubSettingsTitle": "GitHub Page",
-    "gitHubSettingsDescription": "Application GitHub page",
-    "gitHubInfoPageTitle": "Application GitHub page",
-    "gitHubInfoPageText": "Here you can find the source code, submit a bug report, or make a feature request",
-    "gitHubInfoPageButton": "Go to GitHub",
-    "responseErrorTitle": "Oops!",
-    "responseErrorText": "Something went wrong",
-    "tryAgainButton": "Try again",
-    "copyrightLabel": "Copyright: {copyright}",
-    "@copyrightLabel": {
-        "placeholders": {
-          "copyright": {
-            "type": "String",
-            "example": "Bob"
-          }
-        }
-    },
-    "favoritesPageTitle": "Favorites",
-    "favoritesPageNoFavoritesText": "You will see media you add to Favorites here",
-    "removedFromFavoritesSnackBarText": "Removed from Favorites",
-    "removedFromFavoritesSnackBarButton": "Undo",
-    "favoriteRestoredSnackBarButton": "Restored",
-    "mediaLoadError": "Failed to load"
+  "@@locale": "en",
+  "dailyMediaTitle": "Daily Media",
+  "newsTitle": "News",
+  "settingsTitle": "Settings",
+  "themeSettingsTitle": "Theme",
+  "systemThemeModeTitle": "System default",
+  "lightThemeModeTitle": "Light",
+  "darkThemeModeTitle": "Dark",
+  "aboutSettingsTitle": "About",
+  "aboutSettingsDescription": "All the stuff you need to know",
+  "gitHubSettingsTitle": "GitHub Page",
+  "gitHubSettingsDescription": "Application GitHub page",
+  "gitHubInfoPageTitle": "Application GitHub page",
+  "gitHubInfoPageText": "Here you can find the source code, submit a bug report, or make a feature request",
+  "gitHubInfoPageButton": "Go to GitHub",
+  "responseErrorTitle": "Oops!",
+  "responseErrorText": "Something went wrong",
+  "tryAgainButton": "Try again",
+  "copyrightLabel": "Copyright: {copyright}",
+  "@copyrightLabel": {
+    "placeholders": {
+      "copyright": {
+        "type": "String",
+        "example": "Bob"
+      }
+    }
+  },
+  "favoritesPageTitle": "Favorites",
+  "favoritesPageNoFavoritesText": "You will see media you add to Favorites here",
+  "removedFromFavoritesSnackBarText": "Removed from Favorites",
+  "removedFromFavoritesSnackBarButton": "Undo",
+  "favoriteRestoredSnackBarButton": "Restored",
+  "mediaLoadError": "Failed to load",
+  "minutesAgo": "{minutes, plural, =0{{minutes} minutes ago} =1{{minutes} minute ago} other{{minutes} minutes ago}}",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "example": "59"
+      }
+    }
+  },
+  "hoursAgo": "{hours, plural, =0{{hours} hours ago} =1{{hours} hour ago} other{{hours} hours ago}}",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "num",
+        "example": "23"
+      }
+    }
+  }
 }
+
