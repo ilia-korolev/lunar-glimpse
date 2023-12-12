@@ -112,22 +112,25 @@ class _SuccessView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return SliverList(
-      delegate: SliverSeparatedChildBuilderDelegate(
-        itemBuilder: (context, index) {
-          final article = articles[index];
+    return SliverPadding(
+      padding: EdgeInsets.only(bottom: theme.spacing.semiLarge),
+      sliver: SliverList(
+        delegate: SliverSeparatedChildBuilderDelegate(
+          itemBuilder: (context, index) {
+            final article = articles[index];
 
-          return ArticleCard(
-            article: article,
-            onCardPressed: (article) {
-              url_launcher.launchUrl(article.uri);
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(height: theme.spacing.semiLarge);
-        },
-        childCount: articles.length,
+            return ArticleCard(
+              article: article,
+              onCardPressed: (article) {
+                url_launcher.launchUrl(article.uri);
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(height: theme.spacing.semiLarge);
+          },
+          childCount: articles.length,
+        ),
       ),
     );
   }

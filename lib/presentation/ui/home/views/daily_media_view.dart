@@ -165,31 +165,34 @@ class _SuccessView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return SliverList(
-      delegate: SliverSeparatedChildBuilderDelegate(
-        itemBuilder: (context, index) {
-          if (index >= mediaList.length) {
-            return const LoadingMediaCard();
-          }
+    return SliverPadding(
+      padding: EdgeInsets.only(bottom: theme.spacing.semiLarge),
+      sliver: SliverList(
+        delegate: SliverSeparatedChildBuilderDelegate(
+          itemBuilder: (context, index) {
+            if (index >= mediaList.length) {
+              return const LoadingMediaCard();
+            }
 
-          return MediaCard(
-            media: mediaList[index],
-            onFavoritePressed: (Media media) {
-              context
-                  .read<DailyMediaListBloc>()
-                  .add(DailyMediaListEvent.favoriteToggled(media));
-            },
-            onCardPressed: (Media media) {
-              context.go('/daily-media/${media.date.toInt()}');
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(height: theme.spacing.semiLarge);
-        },
-        childCount: hasReachedMax
-            ? mediaList.length
-            : mediaList.length + _loadingTileCount,
+            return MediaCard(
+              media: mediaList[index],
+              onFavoritePressed: (Media media) {
+                context
+                    .read<DailyMediaListBloc>()
+                    .add(DailyMediaListEvent.favoriteToggled(media));
+              },
+              onCardPressed: (Media media) {
+                context.go('/daily-media/${media.date.toInt()}');
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(height: theme.spacing.semiLarge);
+          },
+          childCount: hasReachedMax
+              ? mediaList.length
+              : mediaList.length + _loadingTileCount,
+        ),
       ),
     );
   }
