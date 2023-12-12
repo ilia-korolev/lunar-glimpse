@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:intl/intl.dart';
 import 'package:xml/xml.dart';
 
 abstract interface class WebFeedParser {
@@ -24,13 +23,11 @@ class WebFeedParserImpl implements WebFeedParser {
 
     final articles = channelElement.findElements('item').map(
       (i) {
-        final format = DateFormat('EEE, d MMM yyyy HH:mm:ss Z');
-
         return Article(
           title: i.findAllElements('title').first.innerText.trim(),
           description: i.findAllElements('description').first.innerText.trim(),
           uri: Uri.parse(i.findAllElements('link').first.innerText),
-          date: format.parse(i.findAllElements('pubDate').first.innerText),
+          date: _parseRfc822Date(i.findAllElements('pubDate').first.innerText),
           author: _parseAuthor(i),
           thumbnail: _parseThumbnail(i),
           source: source,
@@ -39,6 +36,23 @@ class WebFeedParserImpl implements WebFeedParser {
     ).toList();
 
     return articles;
+  }
+
+  // TODO(ilia-korolev): intl has no implementation for parsing time zones
+  // this is a workaround for parsing RFC822 date format
+  // remove it when intl get an implementation for parsing time zones
+  // https://pub.dev/documentation/intl/latest/intl/DateFormat-class.html
+  DateTime _parseRfc822Date(String source) {
+    const monthNames = 'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
+    const rfc822Pattern = '(\\d+) ($monthNames) (\\d+) (.*)';
+
+    final match = RegExp(rfc822Pattern).firstMatch(source)!;
+    final month = '${monthNames.indexOf(match[2]!) ~/ 4 + 1}'.padLeft(2, '0');
+    final year = match[3];
+    final day = match[1];
+    final time = match[4];
+
+    return DateTime.parse('$year-$month-${day}T$time');
   }
 
   String? _parseAuthor(XmlElement item) {
