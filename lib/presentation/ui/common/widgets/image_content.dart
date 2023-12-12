@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ImageContent extends StatelessWidget {
@@ -21,12 +20,14 @@ class ImageContent extends StatelessWidget {
       imageUrl: uri,
       fit: BoxFit.cover,
       progressIndicatorBuilder: (context, url, downloadProgress) {
-        return PrimaryShimmer(
-          child: ColoredBox(
-            color: theme.primaryColor,
+        return Center(
+          child: CircularProgressIndicator.adaptive(
+            value: downloadProgress.progress,
           ),
         );
       },
+      fadeInDuration: theme.durations.medium,
+      fadeOutDuration: theme.durations.medium,
       errorWidget: (context, url, error) {
         return ColoredBox(
           color: theme.colorScheme.secondaryContainer,
