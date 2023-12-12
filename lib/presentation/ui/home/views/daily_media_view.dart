@@ -53,6 +53,7 @@ class _DailyMediaViewState extends State<DailyMediaView> {
         },
         child: CustomScrollView(
           controller: _scrollController,
+          cacheExtent: 2000,
           slivers: [
             HomeAppBar(
               title: context.l10n.dailyMediaTitle,
