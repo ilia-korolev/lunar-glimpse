@@ -18,7 +18,7 @@ class LoadingMediaCard extends StatelessWidget {
           borderRadius: BorderRadius.all(theme.radiuses.large),
         ),
         margin: EdgeInsets.symmetric(horizontal: theme.spacing.semiLarge),
-        child: const AspectRatio(aspectRatio: 1),
+        child: const AspectRatio(aspectRatio: 4 / 3),
       ),
     );
   }
