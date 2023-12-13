@@ -117,6 +117,8 @@ class _MediaAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    final buttonSize = theme.sizes.largeIconSize + 2 * theme.spacing.medium;
+
     return SliverAppBar(
       leading: Padding(
         padding: EdgeInsets.only(
@@ -144,30 +146,13 @@ class _MediaAppBar extends StatelessWidget {
       ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(
-          theme.spacing.semiLarge +
-              theme.spacing.semiSmall +
-              theme.sizes.largeIconSize +
-              2 * theme.spacing.medium,
+          buttonSize,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+        child: Stack(
+          alignment: AlignmentDirectional.bottomEnd,
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                right: theme.spacing.semiSmall,
-                bottom: theme.spacing.semiSmall,
-              ),
-              child: FavoriteButton(
-                isFavorite: media.isFavorite,
-                onPressed: () {
-                  context
-                      .read<DailyMediaBloc>()
-                      .add(const DailyMediaEvent.favoriteToggled());
-                },
-              ),
-            ),
             Container(
-              height: theme.spacing.semiLarge,
+              height: buttonSize / 2,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(
@@ -175,6 +160,20 @@ class _MediaAppBar extends StatelessWidget {
                 ),
                 color: theme.colorScheme.background,
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FavoriteButton(
+                  isFavorite: media.isFavorite,
+                  onPressed: () {
+                    context
+                        .read<DailyMediaBloc>()
+                        .add(const DailyMediaEvent.favoriteToggled());
+                  },
+                ),
+                SizedBox(width: theme.spacing.semiLarge),
+              ],
             ),
           ],
         ),
@@ -260,6 +259,7 @@ class _MediaDescription extends StatelessWidget {
 
     return SliverPadding(
       padding: EdgeInsets.only(
+        top: theme.spacing.semiSmall,
         left: theme.spacing.semiLarge,
         right: theme.spacing.semiLarge,
         bottom: theme.spacing.medium + bottomPadding,
