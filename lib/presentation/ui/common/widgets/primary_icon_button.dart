@@ -7,12 +7,14 @@ class PrimaryIconButton extends StatelessWidget {
     required this.onPressed,
     required this.icon,
     this.backgroundColor = Colors.transparent,
+    this.iconColor,
     super.key,
   });
 
   final void Function() onPressed;
   final IconData icon;
   final Color backgroundColor;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class PrimaryIconButton extends StatelessWidget {
           child: FaIcon(
             icon,
             size: theme.sizes.mediumIconSize,
+            color: iconColor,
           ),
         ),
       ),
