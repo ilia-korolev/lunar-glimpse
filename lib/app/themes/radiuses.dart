@@ -9,9 +9,9 @@ class Radiuses extends ThemeExtension<Radiuses> {
 
   const Radiuses.regular()
       : this(
-          small: const Radius.circular(6),
-          medium: const Radius.circular(12),
-          large: const Radius.circular(18),
+          small: const Radius.circular(12),
+          medium: const Radius.circular(18),
+          large: const Radius.circular(24),
         );
 
   final Radius small;
