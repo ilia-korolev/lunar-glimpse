@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DailyMediaPage extends StatelessWidget {
   const DailyMediaPage({
@@ -164,6 +165,18 @@ class _MediaAppBar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                IconButtonBase(
+                  icon: FontAwesomeIcons.shareNodes,
+                  iconColor: theme.colorScheme.onPrimaryContainer,
+                  iconSize: theme.sizes.largeIconSize,
+                  padding: theme.spacing.medium,
+                  backgroundColor: theme.colorScheme.background,
+                  elevation: 7,
+                  onPressed: () async {
+                    await Share.shareUri(media.uri);
+                  },
+                ),
+                SizedBox(width: theme.spacing.semiLarge),
                 FavoriteButton(
                   isFavorite: media.isFavorite,
                   onPressed: () {
@@ -172,7 +185,7 @@ class _MediaAppBar extends StatelessWidget {
                         .add(const DailyMediaEvent.favoriteToggled());
                   },
                 ),
-                SizedBox(width: theme.spacing.semiLarge),
+                SizedBox(width: theme.spacing.large),
               ],
             ),
           ],

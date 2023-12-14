@@ -3,6 +3,7 @@ import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 
 const _imageAspectRatio = 16 / 9;
 
@@ -48,6 +49,17 @@ class MediaCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    Row(
+                      children: [
+                        PrimaryIconButton(
+                          icon: FontAwesomeIcons.shareNodes,
+                          iconColor: theme.colorScheme.onPrimaryContainer,
+                          onPressed: () async {
+                            await Share.shareUri(media.uri);
+                          },
+                        ),
+                      ],
+                    ),
                     PrimaryIconButton(
                       onPressed: () => onFavoritePressed(media),
                       icon: media.isFavorite
