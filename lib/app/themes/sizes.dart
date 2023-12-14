@@ -20,7 +20,7 @@ class Sizes extends ThemeExtension<Sizes> {
           navBarHeight: 64,
           smallIconSize: 16,
           mediumIconSize: 24,
-          largeIconSize: 36,
+          largeIconSize: 32,
           avatarSize: 90,
         );
 
