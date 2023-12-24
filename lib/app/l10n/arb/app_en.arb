@@ -49,6 +49,8 @@
         "example": "23"
       }
     }
-  }
+  },
+  "saveImageSuccessSnackBarText": "The image saved to: ",
+  "saveImageFailedSnackBarText": "Unable to save the image"
 }
 

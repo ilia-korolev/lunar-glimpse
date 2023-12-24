@@ -171,25 +171,25 @@ class DailyMediaEntity extends DataClass
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     {
-      final converter = $DailyMediaEntitiesTable.$converterdate;
-      map['date'] = Variable<int>(converter.toSql(date));
+      map['date'] =
+          Variable<int>($DailyMediaEntitiesTable.$converterdate.toSql(date));
     }
     map['title'] = Variable<String>(title);
     map['explanation'] = Variable<String>(explanation);
     {
-      final converter = $DailyMediaEntitiesTable.$converteruri;
-      map['uri'] = Variable<String>(converter.toSql(uri));
+      map['uri'] =
+          Variable<String>($DailyMediaEntitiesTable.$converteruri.toSql(uri));
     }
     {
-      final converter = $DailyMediaEntitiesTable.$converterhdUri;
-      map['hd_uri'] = Variable<String>(converter.toSql(hdUri));
+      map['hd_uri'] = Variable<String>(
+          $DailyMediaEntitiesTable.$converterhdUri.toSql(hdUri));
     }
     if (!nullToAbsent || copyright != null) {
       map['copyright'] = Variable<String>(copyright);
     }
     {
-      final converter = $DailyMediaEntitiesTable.$convertertype;
-      map['type'] = Variable<int>(converter.toSql(type));
+      map['type'] =
+          Variable<int>($DailyMediaEntitiesTable.$convertertype.toSql(type));
     }
     map['is_favorite'] = Variable<bool>(isFavorite);
     return map;
@@ -373,9 +373,8 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (date.present) {
-      final converter = $DailyMediaEntitiesTable.$converterdate;
-
-      map['date'] = Variable<int>(converter.toSql(date.value));
+      map['date'] = Variable<int>(
+          $DailyMediaEntitiesTable.$converterdate.toSql(date.value));
     }
     if (title.present) {
       map['title'] = Variable<String>(title.value);
@@ -384,22 +383,19 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
       map['explanation'] = Variable<String>(explanation.value);
     }
     if (uri.present) {
-      final converter = $DailyMediaEntitiesTable.$converteruri;
-
-      map['uri'] = Variable<String>(converter.toSql(uri.value));
+      map['uri'] = Variable<String>(
+          $DailyMediaEntitiesTable.$converteruri.toSql(uri.value));
     }
     if (hdUri.present) {
-      final converter = $DailyMediaEntitiesTable.$converterhdUri;
-
-      map['hd_uri'] = Variable<String>(converter.toSql(hdUri.value));
+      map['hd_uri'] = Variable<String>(
+          $DailyMediaEntitiesTable.$converterhdUri.toSql(hdUri.value));
     }
     if (copyright.present) {
       map['copyright'] = Variable<String>(copyright.value);
     }
     if (type.present) {
-      final converter = $DailyMediaEntitiesTable.$convertertype;
-
-      map['type'] = Variable<int>(converter.toSql(type.value));
+      map['type'] = Variable<int>(
+          $DailyMediaEntitiesTable.$convertertype.toSql(type.value));
     }
     if (isFavorite.present) {
       map['is_favorite'] = Variable<bool>(isFavorite.value);
@@ -526,16 +522,16 @@ class WebFeedEntity extends DataClass implements Insertable<WebFeedEntity> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     {
-      final converter = $WebFeedEntitiesTable.$converteruri;
-      map['uri'] = Variable<String>(converter.toSql(uri));
+      map['uri'] =
+          Variable<String>($WebFeedEntitiesTable.$converteruri.toSql(uri));
     }
     {
-      final converter = $WebFeedEntitiesTable.$converterfavicon;
-      map['favicon'] = Variable<String>(converter.toSql(favicon));
+      map['favicon'] = Variable<String>(
+          $WebFeedEntitiesTable.$converterfavicon.toSql(favicon));
     }
     {
-      final converter = $WebFeedEntitiesTable.$converterlocale;
-      map['locale'] = Variable<String>(converter.toSql(locale));
+      map['locale'] = Variable<String>(
+          $WebFeedEntitiesTable.$converterlocale.toSql(locale));
     }
     map['is_hidden'] = Variable<bool>(isHidden);
     return map;
@@ -660,19 +656,16 @@ class WebFeedEntitiesCompanion extends UpdateCompanion<WebFeedEntity> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (uri.present) {
-      final converter = $WebFeedEntitiesTable.$converteruri;
-
-      map['uri'] = Variable<String>(converter.toSql(uri.value));
+      map['uri'] = Variable<String>(
+          $WebFeedEntitiesTable.$converteruri.toSql(uri.value));
     }
     if (favicon.present) {
-      final converter = $WebFeedEntitiesTable.$converterfavicon;
-
-      map['favicon'] = Variable<String>(converter.toSql(favicon.value));
+      map['favicon'] = Variable<String>(
+          $WebFeedEntitiesTable.$converterfavicon.toSql(favicon.value));
     }
     if (locale.present) {
-      final converter = $WebFeedEntitiesTable.$converterlocale;
-
-      map['locale'] = Variable<String>(converter.toSql(locale.value));
+      map['locale'] = Variable<String>(
+          $WebFeedEntitiesTable.$converterlocale.toSql(locale.value));
     }
     if (isHidden.present) {
       map['is_hidden'] = Variable<bool>(isHidden.value);

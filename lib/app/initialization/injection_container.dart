@@ -1,3 +1,4 @@
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/core/_export.dart';
@@ -63,6 +64,9 @@ Future<void> _registerServices() async {
     )
     ..registerLazySingleton<WebFeedParser>(
       WebFeedParserImpl.new,
+    )
+    ..registerLazySingleton<FileSaver>(
+      FileSaver.new,
     );
 }
 
@@ -95,6 +99,11 @@ Future<void> _registerDataSources() async {
         httpService: _getIt(),
         webFeedParser: _getIt(),
       ),
+    )
+    ..registerLazySingleton<RemoteDownloadFileDataSource>(
+      () => HttpDownloadFileDataSource(
+        httpService: _getIt(),
+      ),
     );
 }
 
@@ -122,6 +131,12 @@ Future<void> _registerRepositories() async {
     ..registerLazySingleton<WebFeedRepository>(
       () => WebFeedRepositoryImpl(
         localWebFeedDataSource: _getIt(),
+      ),
+    )
+    ..registerLazySingleton<SaveFileRepository>(
+      () => SaveFileRepositoryImpl(
+        remoteDownloadFileDataSource: _getIt(),
+        fileSaver: _getIt(),
       ),
     );
 }

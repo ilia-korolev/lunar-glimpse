@@ -5,5 +5,6 @@ export 'image_content.dart';
 export 'primary_app_bar.dart';
 export 'primary_refresh_indicator.dart';
 export 'primary_shimmer.dart';
+export 'save_file_button.dart';
 export 'sliver_separated_child_builder_delegate.dart';
 export 'stream_listener.dart';
