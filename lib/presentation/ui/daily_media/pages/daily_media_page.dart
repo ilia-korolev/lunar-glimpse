@@ -328,6 +328,9 @@ class _MediaAppBar extends StatelessWidget {
                           child: CircularProgressIndicator(value: progress),
                         );
                       },
+                      errorWidget: (context, url, error) {
+                        return const ImageError();
+                      },
                     ),
                     Expanded(
                       child: GestureDetector(
