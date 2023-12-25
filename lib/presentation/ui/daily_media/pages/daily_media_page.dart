@@ -51,7 +51,7 @@ class DailyMediaPage extends StatelessWidget {
               stream: saveFileBloc.saveFailureStream,
               onData: (message) {
                 _showFailureSnackBar(
-                  message: l10n.saveImageSuccessSnackBarText,
+                  message: l10n.saveImageFailedSnackBarText,
                   theme: theme,
                 );
               },
