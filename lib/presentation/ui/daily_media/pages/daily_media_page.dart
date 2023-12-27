@@ -439,11 +439,11 @@ class _MediaDescription extends StatelessWidget {
             media.explanation,
             style: theme.textTheme.bodyMedium,
           ),
-          if (media.copyright != null) ...[
+          if (media.copyright case final copyright?) ...[
             SizedBox(height: theme.spacing.medium),
             Text(
               context.l10n.copyrightLabel(
-                media.copyright!.trim().replaceAll('\n', ''),
+                copyright.trim().replaceAll('\n', ''),
               ),
               style: theme.textTheme.labelSmall,
             ),
