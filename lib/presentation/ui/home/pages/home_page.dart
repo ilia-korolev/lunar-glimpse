@@ -57,7 +57,6 @@ class HomePage extends StatelessWidget {
       ),
       bottomNavigationBar: HomeNavigationBar(
         activeTab: HomePageTab.values[tab.index],
-        animationDuration: theme.durations.long,
         onTabSelected: (tab) {
           context.go(tab.path);
         },
