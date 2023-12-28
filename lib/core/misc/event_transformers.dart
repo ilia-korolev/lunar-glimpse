@@ -10,3 +10,9 @@ EventTransformer<E> throttleDroppableTransformer<E>(Duration duration) {
     );
   };
 }
+
+EventTransformer<Event> debounceTransformer<Event>(Duration duration) {
+  return (events, mapper) {
+    return events.debounceTime(duration).switchMap(mapper);
+  };
+}
