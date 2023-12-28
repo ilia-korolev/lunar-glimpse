@@ -40,15 +40,15 @@ Future<void> _registerServices() async {
         output: DeveloperLogOutput(),
       ),
     )
-    ..registerLazySingleton<AppBlocObserver>(
-      () => AppBlocObserver(
+    ..registerLazySingleton<LoggingBlocObserver>(
+      () => LoggingBlocObserver(
         logger: _getIt(),
       ),
     )
     ..registerLazySingleton<HttpService>(
       () => HttpServiceImpl(
         interceptors: [
-          DioLoggingInterceptor(
+          LoggingDioInterceptor(
             logger: _getIt(),
           ),
         ],

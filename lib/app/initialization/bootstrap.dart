@@ -16,7 +16,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await configureDependencies();
-      Bloc.observer = GetIt.instance<AppBlocObserver>();
+      Bloc.observer = GetIt.instance<LoggingBlocObserver>();
 
       runApp(await builder());
     },
