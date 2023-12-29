@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_astronomy/app/_export.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PrimaryShimmer extends StatelessWidget {
@@ -13,14 +14,8 @@ class PrimaryShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final backgroundColor = ElevationOverlay.applySurfaceTint(
-      theme.colorScheme.surface,
-      theme.colorScheme.surfaceTint,
-      3,
-    );
-
     return Shimmer.fromColors(
-      baseColor: backgroundColor,
+      baseColor: theme.surfaceColors.surfaceContainer,
       highlightColor: theme.colorScheme.secondaryContainer,
       child: child,
     );

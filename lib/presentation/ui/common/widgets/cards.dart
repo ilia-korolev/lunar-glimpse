@@ -52,7 +52,7 @@ class ArticleCard extends StatelessWidget {
               Text(
                 article.source.name,
                 style: theme.textTheme.labelLarge!.copyWith(
-                  color: theme.colorScheme.onPrimaryContainer,
+                  color: theme.colorScheme.onSurface,
                   overflow: TextOverflow.ellipsis,
                 ),
                 maxLines: 1,
@@ -73,7 +73,7 @@ class ArticleCard extends StatelessWidget {
       actions: [
         PrimaryIconButton(
           icon: FontAwesomeIcons.shareNodes,
-          iconColor: theme.colorScheme.onPrimaryContainer,
+          iconColor: theme.colorScheme.onSurface,
           onPressed: () async {
             await Share.shareUri(article.uri);
           },
@@ -124,13 +124,13 @@ class MediaCard extends StatelessWidget {
       info: Text(
         media.date.format('yMd'),
         style: theme.textTheme.bodyLarge!.copyWith(
-          color: theme.colorScheme.onPrimaryContainer,
+          color: theme.colorScheme.onSurface,
         ),
       ),
       actions: [
         PrimaryIconButton(
           icon: FontAwesomeIcons.shareNodes,
-          iconColor: theme.colorScheme.onPrimaryContainer,
+          iconColor: theme.colorScheme.onSurface,
           onPressed: () async {
             await Share.shareUri(media.uri);
           },
@@ -142,7 +142,7 @@ class MediaCard extends StatelessWidget {
               : FontAwesomeIcons.star,
           iconColor: media.isFavorite
               ? theme.customColors.blueberry
-              : theme.colorScheme.onPrimaryContainer,
+              : theme.colorScheme.onSurface,
         ),
       ],
     );
@@ -170,16 +170,10 @@ class CardBase extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final backgroundColor = ElevationOverlay.applySurfaceTint(
-      theme.colorScheme.surface,
-      theme.colorScheme.surfaceTint,
-      3,
-    );
-
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: theme.surfaceColors.surfaceContainer,
         borderRadius: BorderRadius.all(theme.radiuses.large),
       ),
       margin: EdgeInsets.symmetric(horizontal: theme.spacing.semiLarge),
@@ -266,7 +260,7 @@ class _Info extends StatelessWidget {
           Text(
             title,
             style: theme.textTheme.titleLarge!.copyWith(
-              color: theme.colorScheme.onPrimaryContainer,
+              color: theme.colorScheme.onSurface,
             ),
           ),
           SizedBox(height: theme.spacing.semiSmall),

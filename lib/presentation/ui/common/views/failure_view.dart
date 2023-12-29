@@ -15,19 +15,13 @@ class FailureView extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    final backgroundColor = ElevationOverlay.applySurfaceTint(
-      theme.colorScheme.surface,
-      theme.colorScheme.surfaceTint,
-      3,
-    );
-
     return Center(
       child: Container(
         margin: EdgeInsets.all(theme.spacing.medium),
         padding: EdgeInsets.all(theme.spacing.medium),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(theme.radiuses.medium),
-          color: backgroundColor,
+          color: theme.surfaceColors.surfaceContainer,
         ),
         clipBehavior: Clip.hardEdge,
         child: Column(
@@ -47,7 +41,7 @@ class FailureView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: theme.spacing.small),
-            ElevatedButton(
+            FilledButton(
               onPressed: onPressed,
               child: Text(l10n.tryAgainButton),
             ),

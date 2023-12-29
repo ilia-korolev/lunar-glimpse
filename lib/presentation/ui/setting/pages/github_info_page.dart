@@ -12,12 +12,6 @@ class GithubInfoPage extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    final backgroundColor = ElevationOverlay.applySurfaceTint(
-      theme.colorScheme.surface,
-      theme.colorScheme.surfaceTint,
-      3,
-    );
-
     return Scaffold(
       appBar: PrimaryAppBar(
         height: theme.sizes.smallAppBarHeight,
@@ -29,7 +23,7 @@ class GithubInfoPage extends StatelessWidget {
           padding: EdgeInsets.all(theme.spacing.medium),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(theme.radiuses.medium),
-            color: backgroundColor,
+            color: theme.surfaceColors.surfaceContainer,
           ),
           clipBehavior: Clip.hardEdge,
           child: Column(
@@ -51,7 +45,7 @@ class GithubInfoPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: theme.spacing.medium),
-              ElevatedButton(
+              FilledButton(
                 onPressed: () {
                   url_launcher.launchUrl(
                     Uri.parse(
