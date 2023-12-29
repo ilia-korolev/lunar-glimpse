@@ -21,6 +21,10 @@ class RegularThemeBuilder implements ThemeBuilder {
       brightness: brightness,
     );
 
+    final surfaceColors = brightness == Brightness.light
+        ? SurfaceColors.light(colorSeed: mainColor)
+        : SurfaceColors.dark(colorSeed: mainColor);
+
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
@@ -31,6 +35,7 @@ class RegularThemeBuilder implements ThemeBuilder {
         const Radiuses.regular(),
         const Sizes.regular(),
         const Spacing.regular(),
+        surfaceColors,
       ],
     );
   }
