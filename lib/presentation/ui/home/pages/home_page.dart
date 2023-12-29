@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/_export.dart';
 import 'package:go_router/go_router.dart';
 
 import '../views/_export.dart';
@@ -44,23 +45,47 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final activeBreakpoint = Breakpoint.getActive(context);
 
-    return Scaffold(
-      body: PageSwitcher(
-        duration: theme.durations.medium,
-        index: tab.index,
-        children: const [
-          DailyMediaView(),
-          NewsView(),
-          SettingsView(),
-        ],
-      ),
-      bottomNavigationBar: HomeNavigationBar(
-        activeTab: HomePageTab.values[tab.index],
-        onTabSelected: (tab) {
-          context.go(tab.path);
-        },
-      ),
-    );
+    switch (activeBreakpoint) {
+      case Breakpoint.compact:
+        return Scaffold(
+          body: PageSwitcher(
+            duration: theme.durations.medium,
+            index: tab.index,
+            children: const [
+              DailyMediaView(),
+              NewsView(),
+              SettingsView(),
+            ],
+          ),
+          bottomNavigationBar: HomeNavigationBar(
+            activeTab: HomePageTab.values[tab.index],
+            onTabSelected: (tab) {
+              context.go(tab.path);
+            },
+          ),
+        );
+
+      case Breakpoint.medium:
+      case Breakpoint.expanded:
+        return Scaffold(
+          body: HomeNavigationRail(
+            activeTab: tab,
+            onTabSelected: (tab) {
+              context.go(tab.path);
+            },
+            body: PageSwitcher(
+              duration: theme.durations.medium,
+              index: tab.index,
+              children: const [
+                DailyMediaView(),
+                NewsView(),
+                SettingsView(),
+              ],
+            ),
+          ),
+        );
+    }
   }
 }
