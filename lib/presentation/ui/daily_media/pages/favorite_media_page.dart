@@ -1,11 +1,16 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/models/media.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:share_plus/share_plus.dart';
 
 class FavoriteMediaPage extends StatefulWidget {
   const FavoriteMediaPage({super.key});
@@ -162,28 +167,47 @@ class _SuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final activeBreakpoint = Breakpoint.getActive(context);
+    final padding =
+        activeBreakpoint.isCompact ? theme.spacing.medium : theme.spacing.large;
 
-    return ListView.separated(
-      padding: EdgeInsets.only(bottom: theme.spacing.semiLarge),
-      itemBuilder: (context, index) {
-        return MediaCard(
-          media: mediaList[index],
-          onFavoritePressed: (Media media) async {
-            if (media.isFavorite) {
-              context
-                  .read<FavoriteMediaListBloc>()
-                  .add(FavoriteMediaListEvent.favoriteRemoved(media));
-            }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final crossAxisCount = math.max(
+          constraints.maxWidth ~/ theme.sizes.mediaCardMinWidth,
+          1,
+        );
+
+        return AlignedGridView.count(
+          padding: EdgeInsets.only(
+            bottom: padding,
+            left: padding,
+            right: padding,
+          ),
+          crossAxisCount: crossAxisCount,
+          mainAxisSpacing: padding,
+          crossAxisSpacing: padding,
+          itemBuilder: (context, index) {
+            return MediaCard(
+              media: mediaList[index],
+              onCardPressed: (Media media) {
+                context.go('/daily-media/favorites/${media.date.toInt()}');
+              },
+              onFavoritePressed: (Media media) async {
+                if (media.isFavorite) {
+                  context
+                      .read<FavoriteMediaListBloc>()
+                      .add(FavoriteMediaListEvent.favoriteRemoved(media));
+                }
+              },
+              onSharePressed: (media) async {
+                await Share.shareUri(media.uri);
+              },
+            );
           },
-          onCardPressed: (Media media) {
-            context.go('/daily-media/favorites/${media.date.toInt()}');
-          },
+          itemCount: mediaList.length,
         );
       },
-      separatorBuilder: (context, index) {
-        return SizedBox(height: theme.spacing.semiLarge);
-      },
-      itemCount: mediaList.length,
     );
   }
 }

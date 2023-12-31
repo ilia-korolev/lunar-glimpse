@@ -1,11 +1,16 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../widgets/_export.dart';
 
@@ -164,35 +169,54 @@ class _SuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final activeBreakpoint = Breakpoint.getActive(context);
+    final padding =
+        activeBreakpoint.isCompact ? theme.spacing.medium : theme.spacing.large;
 
     return SliverPadding(
-      padding: EdgeInsets.only(bottom: theme.spacing.semiLarge),
-      sliver: SliverList(
-        delegate: SliverSeparatedChildBuilderDelegate(
-          itemBuilder: (context, index) {
-            if (index >= mediaList.length) {
-              return const LoadingMediaCard();
-            }
+      padding: EdgeInsets.only(
+        bottom: padding,
+        left: padding,
+        right: padding,
+      ),
+      sliver: SliverLayoutBuilder(
+        builder: (context, constraints) {
+          final crossAxisCount = math.max(
+            constraints.crossAxisExtent ~/ theme.sizes.mediaCardMinWidth,
+            1,
+          );
 
-            return MediaCard(
-              media: mediaList[index],
-              onFavoritePressed: (Media media) {
-                context
-                    .read<DailyMediaListBloc>()
-                    .add(DailyMediaListEvent.favoriteToggled(media));
-              },
-              onCardPressed: (Media media) {
-                context.go('/daily-media/${media.date.toInt()}');
-              },
-            );
-          },
-          separatorBuilder: (context, index) {
-            return SizedBox(height: theme.spacing.semiLarge);
-          },
-          childCount: hasReachedMax
-              ? mediaList.length
-              : mediaList.length + _loadingTileCount,
-        ),
+          return SliverAlignedGrid(
+            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+            ),
+            mainAxisSpacing: padding,
+            crossAxisSpacing: padding,
+            itemBuilder: (context, index) {
+              if (index >= mediaList.length) {
+                return const LoadingMediaCard();
+              }
+
+              return MediaCard(
+                media: mediaList[index],
+                onCardPressed: (Media media) {
+                  context.go('/daily-media/${media.date.toInt()}');
+                },
+                onFavoritePressed: (Media media) {
+                  context
+                      .read<DailyMediaListBloc>()
+                      .add(DailyMediaListEvent.favoriteToggled(media));
+                },
+                onSharePressed: (media) async {
+                  await Share.shareUri(media.uri);
+                },
+              );
+            },
+            itemCount: hasReachedMax
+                ? mediaList.length
+                : mediaList.length + _loadingTileCount,
+          );
+        },
       ),
     );
   }

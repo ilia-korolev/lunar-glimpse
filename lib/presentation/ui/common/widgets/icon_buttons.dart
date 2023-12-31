@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 
 class IconButtonBase extends StatelessWidget {
   const IconButtonBase({
@@ -48,6 +49,31 @@ class IconButtonBase extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CardIconButton extends StatelessWidget {
+  const CardIconButton({
+    required this.onPressed,
+    required this.icon,
+    super.key,
+  });
+
+  final void Function() onPressed;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final lightTheme = GetIt.instance<Theming>().light;
+
+    return IconButtonBase(
+      icon: icon,
+      onPressed: onPressed,
+      iconColor: lightTheme.colorScheme.onSurface,
+      backgroundColor: lightTheme.colorScheme.surface,
+      iconSize: lightTheme.sizes.smallIconSize,
+      padding: lightTheme.spacing.semiSmall,
     );
   }
 }

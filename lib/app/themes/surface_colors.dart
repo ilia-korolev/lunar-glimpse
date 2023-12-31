@@ -91,7 +91,10 @@ class SurfaceColors extends ThemeExtension<SurfaceColors> {
       surfaceContainerHigh:
           Color.lerp(surfaceContainerHigh, other.surfaceContainerHigh, t)!,
       surfaceContainerHighest: Color.lerp(
-          surfaceContainerHighest, other.surfaceContainerHighest, t)!,
+        surfaceContainerHighest,
+        other.surfaceContainerHighest,
+        t,
+      )!,
     );
   }
 }

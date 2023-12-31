@@ -97,52 +97,108 @@ class ArticleCard extends StatelessWidget {
       return l10n.minutesAgo(difference.inMinutes);
     }
 
-    return DateFormat.yMd().format(article.date);
+    return DateFormat.yMd().format(date);
   }
 }
 
-class MediaCard extends StatelessWidget {
+class MediaCard extends StatefulWidget {
   const MediaCard({
     required this.media,
-    required this.onFavoritePressed,
     required this.onCardPressed,
+    required this.onSharePressed,
+    required this.onFavoritePressed,
     super.key,
   });
 
   final Media media;
-  final void Function(Media media) onFavoritePressed;
   final void Function(Media media) onCardPressed;
+  final void Function(Media media) onSharePressed;
+  final void Function(Media media) onFavoritePressed;
+
+  @override
+  State<MediaCard> createState() => _MediaCardState();
+}
+
+class _MediaCardState extends State<MediaCard> {
+  bool _isHovered = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return CardBase(
-      onCardPressed: () => onCardPressed(media),
-      thumbnailUri: media.uri,
-      title: media.title,
-      info: Text(
-        media.date.format('yMd'),
-        style: theme.textTheme.bodyLarge!.copyWith(
-          color: theme.colorScheme.onSurface,
+    return Column(
+      children: [
+        Stack(
+          children: [
+            _Thumbnail(thumbnailUri: widget.media.uri),
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.all(theme.radiuses.large),
+                  onTap: () => widget.onCardPressed(widget.media),
+                ),
+              ),
+            ),
+            if (_isHovered)
+              Positioned(
+                right: theme.spacing.semiSmall,
+                bottom: theme.spacing.semiSmall,
+                child: Row(
+                  children: [
+                    CardIconButton(
+                      icon: FontAwesomeIcons.shareNodes,
+                      onPressed: () async {
+                        await Share.shareUri(widget.media.uri);
+                      },
+                    ),
+                    SizedBox(width: theme.spacing.semiSmall),
+                    CardIconButton(
+                      onPressed: () => widget.onFavoritePressed(widget.media),
+                      icon: widget.media.isFavorite
+                          ? FontAwesomeIcons.solidStar
+                          : FontAwesomeIcons.star,
+                    ),
+                  ],
+                ),
+              ),
+            Positioned.fill(
+              child: MouseRegion(
+                hitTestBehavior: HitTestBehavior.translucent,
+                onEnter: (event) {
+                  setState(() {
+                    _isHovered = true;
+                  });
+                },
+                onExit: (event) {
+                  setState(() {
+                    _isHovered = false;
+                  });
+                },
+              ),
+            ),
+          ],
         ),
-      ),
-      actions: [
-        PrimaryIconButton(
-          icon: FontAwesomeIcons.shareNodes,
-          iconColor: theme.colorScheme.onSurface,
-          onPressed: () async {
-            await Share.shareUri(media.uri);
-          },
-        ),
-        PrimaryIconButton(
-          onPressed: () => onFavoritePressed(media),
-          icon: media.isFavorite
-              ? FontAwesomeIcons.solidStar
-              : FontAwesomeIcons.star,
-          iconColor: media.isFavorite
-              ? theme.customColors.blueberry
-              : theme.colorScheme.onSurface,
+        SizedBox(height: theme.spacing.small),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                widget.media.title,
+                style: theme.textTheme.titleSmall!.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              widget.media.date.format('yMd'),
+              style: theme.textTheme.labelSmall!.copyWith(
+                color: theme.colorScheme.outline,
+              ),
+            ),
+          ],
         ),
       ],
     );
