@@ -19,8 +19,8 @@ class GithubInfoPage extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          margin: EdgeInsets.all(theme.spacing.medium),
-          padding: EdgeInsets.all(theme.spacing.medium),
+          margin: EdgeInsets.all(theme.spacing.semiSmall),
+          padding: EdgeInsets.all(theme.spacing.semiSmall),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(theme.radiuses.medium),
             color: theme.surfaceColors.surfaceContainer,
@@ -38,13 +38,13 @@ class GithubInfoPage extends StatelessWidget {
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: theme.spacing.medium),
+              SizedBox(height: theme.spacing.semiSmall),
               Text(
                 l10n.gitHubInfoPageText,
                 style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: theme.spacing.medium),
+              SizedBox(height: theme.spacing.semiSmall),
               FilledButton(
                 onPressed: () {
                   url_launcher.launchUrl(

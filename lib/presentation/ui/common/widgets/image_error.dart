@@ -18,7 +18,7 @@ class ImageError extends StatelessWidget {
           FontAwesomeIcons.meteor,
           size: theme.sizes.largeIconSize,
         ),
-        SizedBox(height: theme.spacing.medium),
+        SizedBox(height: theme.spacing.semiSmall),
         Text(l10n.mediaLoadError),
       ],
     );

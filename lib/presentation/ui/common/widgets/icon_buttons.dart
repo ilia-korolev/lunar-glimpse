@@ -76,7 +76,7 @@ class PrimaryIconButton extends StatelessWidget {
       iconColor: iconColor,
       backgroundColor: backgroundColor,
       iconSize: theme.sizes.mediumIconSize,
-      padding: theme.spacing.medium,
+      padding: theme.spacing.semiSmall,
     );
   }
 }
@@ -102,7 +102,7 @@ class FavoriteButton extends StatelessWidget {
     return IconButtonBase(
       icon: isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
       iconSize: theme.sizes.largeIconSize,
-      padding: theme.spacing.medium,
+      padding: theme.spacing.semiSmall,
       onPressed: onPressed,
       iconColor: iconColor,
       backgroundColor: theme.colorScheme.background,

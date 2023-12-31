@@ -15,7 +15,7 @@ class ThemeModePicker extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: theme.spacing.semiLarge,
-        horizontal: theme.spacing.semiSmall,
+        horizontal: theme.spacing.small,
       ),
       child: Row(
         children: ThemeMode.values

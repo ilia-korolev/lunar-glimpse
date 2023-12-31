@@ -78,9 +78,9 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
       alignment: Alignment.center,
       children: [
         Container(
-          height: theme.sizes.mediumIconSize + 2 * theme.spacing.medium,
-          width: theme.sizes.mediumIconSize + 2 * theme.spacing.medium,
-          padding: EdgeInsets.all(theme.spacing.small),
+          height: theme.sizes.mediumIconSize + 2 * theme.spacing.semiSmall,
+          width: theme.sizes.mediumIconSize + 2 * theme.spacing.semiSmall,
+          padding: EdgeInsets.all(theme.spacing.extraSmall),
           child: TweenAnimationBuilder(
             tween: Tween(
               begin: _previousProgress ?? 0,

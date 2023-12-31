@@ -207,13 +207,13 @@ class _MediaAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final buttonSize = theme.sizes.largeIconSize + 2 * theme.spacing.medium;
+    final buttonSize = theme.sizes.largeIconSize + 2 * theme.spacing.semiSmall;
 
     return SliverAppBar(
       leading: Padding(
         padding: EdgeInsets.only(
-          left: theme.spacing.semiSmall,
-          top: theme.spacing.semiSmall,
+          left: theme.spacing.small,
+          top: theme.spacing.small,
         ),
         child: PrimaryIconButton(
           iconColor: theme.colorScheme.onPrimaryContainer,
@@ -227,8 +227,8 @@ class _MediaAppBar extends StatelessWidget {
       actions: [
         Padding(
           padding: EdgeInsets.only(
-            right: theme.spacing.semiSmall,
-            top: theme.spacing.semiSmall,
+            right: theme.spacing.small,
+            top: theme.spacing.small,
           ),
           child: _SaveImageButton(
             imageUri: media.hdUri,
@@ -270,7 +270,7 @@ class _MediaAppBar extends StatelessWidget {
                   icon: FontAwesomeIcons.shareNodes,
                   iconColor: theme.colorScheme.onPrimaryContainer,
                   iconSize: theme.sizes.largeIconSize,
-                  padding: theme.spacing.medium,
+                  padding: theme.spacing.semiSmall,
                   backgroundColor: theme.colorScheme.background,
                   elevation: 7,
                   onPressed: () async {
@@ -286,7 +286,7 @@ class _MediaAppBar extends StatelessWidget {
                         .add(const DailyMediaEvent.favoriteToggled());
                   },
                 ),
-                SizedBox(width: theme.spacing.large),
+                SizedBox(width: theme.spacing.extraLarge),
               ],
             ),
           ],
@@ -343,8 +343,8 @@ class _MediaAppBar extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: theme.spacing.semiSmall,
-                top: theme.spacing.semiSmall,
+                right: theme.spacing.small,
+                top: theme.spacing.small,
                 child: PrimaryIconButton(
                   backgroundColor:
                       theme.colorScheme.background.withOpacity(0.4),
@@ -418,10 +418,10 @@ class _MediaDescription extends StatelessWidget {
 
     return SliverPadding(
       padding: EdgeInsets.only(
-        top: theme.spacing.semiSmall,
+        top: theme.spacing.small,
         left: theme.spacing.semiLarge,
         right: theme.spacing.semiLarge,
-        bottom: theme.spacing.medium + bottomPadding,
+        bottom: theme.spacing.semiSmall + bottomPadding,
       ),
       sliver: SliverList.list(
         children: [
@@ -429,18 +429,18 @@ class _MediaDescription extends StatelessWidget {
             media.title,
             style: theme.textTheme.headlineSmall,
           ),
-          SizedBox(height: theme.spacing.medium),
+          SizedBox(height: theme.spacing.semiSmall),
           Text(
             media.date.format('yMd'),
             style: theme.textTheme.titleSmall,
           ),
-          SizedBox(height: theme.spacing.medium),
+          SizedBox(height: theme.spacing.semiSmall),
           Text(
             media.explanation,
             style: theme.textTheme.bodyMedium,
           ),
           if (media.copyright case final copyright?) ...[
-            SizedBox(height: theme.spacing.medium),
+            SizedBox(height: theme.spacing.semiSmall),
             Text(
               context.l10n.copyrightLabel(
                 copyright.trim().replaceAll('\n', ''),

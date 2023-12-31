@@ -27,7 +27,7 @@ class HomeAppBar extends StatelessWidget {
               centerTitle: false,
               titlePadding: EdgeInsets.only(
                 left: theme.spacing.semiLarge,
-                bottom: theme.spacing.medium,
+                bottom: theme.spacing.semiSmall,
               ),
               title: Text(
                 title,
@@ -40,7 +40,7 @@ class HomeAppBar extends StatelessWidget {
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.only(
-                    right: theme.spacing.medium,
+                    right: theme.spacing.semiSmall,
                   ),
                   child: trailing,
                 ),

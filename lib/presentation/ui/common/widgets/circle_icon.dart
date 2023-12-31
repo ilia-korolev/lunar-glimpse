@@ -25,7 +25,7 @@ class CircleIcon extends StatelessWidget {
     return Container(
       height: theme.sizes.mediumIconSize + theme.spacing.semiLarge,
       width: theme.sizes.mediumIconSize + theme.spacing.semiLarge,
-      padding: EdgeInsets.all(theme.spacing.semiSmall),
+      padding: EdgeInsets.all(theme.spacing.small),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: backgroundColor,

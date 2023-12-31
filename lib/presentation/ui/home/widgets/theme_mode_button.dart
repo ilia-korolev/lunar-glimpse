@@ -26,7 +26,7 @@ class ThemeModeButton extends StatelessWidget {
         context.read<AppSettingsCubit>().changeThemeMode(themeMode);
       },
       child: Padding(
-        padding: EdgeInsets.all(theme.spacing.semiSmall),
+        padding: EdgeInsets.all(theme.spacing.small),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -36,12 +36,12 @@ class ThemeModeButton extends StatelessWidget {
               secondColor: _getSecondColor(),
               shadowColor: _getShadowColor(),
             ),
-            SizedBox(height: theme.spacing.semiSmall),
+            SizedBox(height: theme.spacing.small),
             Text(
               themeMode.getTitle(l10n),
               style: theme.textTheme.bodyLarge,
             ),
-            SizedBox(height: theme.spacing.semiSmall),
+            SizedBox(height: theme.spacing.small),
             BlocBuilder<AppSettingsCubit, AppSettings>(
               buildWhen: (previous, current) {
                 return previous.themeMode != current.themeMode;

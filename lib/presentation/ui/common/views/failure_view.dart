@@ -17,8 +17,8 @@ class FailureView extends StatelessWidget {
 
     return Center(
       child: Container(
-        margin: EdgeInsets.all(theme.spacing.medium),
-        padding: EdgeInsets.all(theme.spacing.medium),
+        margin: EdgeInsets.all(theme.spacing.semiSmall),
+        padding: EdgeInsets.all(theme.spacing.semiSmall),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(theme.radiuses.medium),
           color: theme.surfaceColors.surfaceContainer,
@@ -34,13 +34,13 @@ class FailureView extends StatelessWidget {
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: theme.spacing.small),
+            SizedBox(height: theme.spacing.extraSmall),
             Text(
               l10n.responseErrorText,
               style: theme.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: theme.spacing.small),
+            SizedBox(height: theme.spacing.extraSmall),
             FilledButton(
               onPressed: onPressed,
               child: Text(l10n.tryAgainButton),
