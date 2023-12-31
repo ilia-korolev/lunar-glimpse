@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/services/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:share_plus/share_plus.dart';
 
 class DailyMediaPage extends StatelessWidget {
   const DailyMediaPage({
@@ -273,8 +273,8 @@ class _MediaAppBar extends StatelessWidget {
                   padding: theme.spacing.semiSmall,
                   backgroundColor: theme.colorScheme.background,
                   elevation: 7,
-                  onPressed: () async {
-                    await Share.shareUri(media.uri);
+                  onPressed: () {
+                    GetIt.instance<ShareService>().shareUri(uri: media.uri);
                   },
                 ),
                 SizedBox(width: theme.spacing.semiLarge),

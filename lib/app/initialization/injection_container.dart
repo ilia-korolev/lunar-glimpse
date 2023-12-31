@@ -67,6 +67,9 @@ Future<void> _registerServices() async {
     )
     ..registerLazySingleton<FileSaver>(
       FileSaver.new,
+    )
+    ..registerLazySingleton<ShareService>(
+      ShareServiceImpl.new,
     );
 }
 

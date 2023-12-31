@@ -10,7 +10,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../widgets/_export.dart';
 
@@ -207,8 +206,8 @@ class _SuccessView extends StatelessWidget {
                       .read<DailyMediaListBloc>()
                       .add(DailyMediaListEvent.favoriteToggled(media));
                 },
-                onSharePressed: (media) async {
-                  await Share.shareUri(media.uri);
+                onSharePressed: (media) {
+                  GetIt.instance<ShareService>().shareUri(uri: media.uri);
                 },
               );
             },

@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/ui/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
-import 'package:share_plus/share_plus.dart';
 
 const _imageAspectRatio = 16 / 9;
 
@@ -74,8 +75,8 @@ class ArticleCard extends StatelessWidget {
         PrimaryIconButton(
           icon: FontAwesomeIcons.shareNodes,
           iconColor: theme.colorScheme.onSurface,
-          onPressed: () async {
-            await Share.shareUri(article.uri);
+          onPressed: () {
+            GetIt.instance<ShareService>().shareUri(uri: article.uri);
           },
         ),
       ],
@@ -148,9 +149,7 @@ class _MediaCardState extends State<MediaCard> {
                   children: [
                     CardIconButton(
                       icon: FontAwesomeIcons.shareNodes,
-                      onPressed: () async {
-                        await Share.shareUri(widget.media.uri);
-                      },
+                      onPressed: () => widget.onSharePressed(widget.media),
                     ),
                     SizedBox(width: theme.spacing.semiSmall),
                     CardIconButton(
