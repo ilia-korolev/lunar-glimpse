@@ -49,22 +49,24 @@ class SurfaceColors extends ThemeExtension<SurfaceColors> {
 
   @override
   ThemeExtension<SurfaceColors> copyWith({
-    Color? dim,
-    Color? bright,
-    Color? containerLowest,
-    Color? containerLow,
-    Color? container,
-    Color? containerHigh,
-    Color? containerHighest,
+    Color? surfaceDim,
+    Color? surfaceBright,
+    Color? surfaceContainerLowest,
+    Color? surfaceContainerLow,
+    Color? surfaceContainer,
+    Color? surfaceContainerHigh,
+    Color? surfaceContainerHighest,
   }) {
     return SurfaceColors._(
-      surfaceDim: dim ?? this.surfaceDim,
-      surfaceBright: bright ?? this.surfaceBright,
-      surfaceContainerLowest: containerLowest ?? this.surfaceContainerLowest,
-      surfaceContainerLow: containerLow ?? this.surfaceContainerLow,
-      surfaceContainer: container ?? this.surfaceContainer,
-      surfaceContainerHigh: containerHigh ?? this.surfaceContainerHigh,
-      surfaceContainerHighest: containerHighest ?? this.surfaceContainerHighest,
+      surfaceDim: surfaceDim ?? this.surfaceDim,
+      surfaceBright: surfaceBright ?? this.surfaceBright,
+      surfaceContainerLowest:
+          surfaceContainerLowest ?? this.surfaceContainerLowest,
+      surfaceContainerLow: surfaceContainerLow ?? this.surfaceContainerLow,
+      surfaceContainer: surfaceContainer ?? this.surfaceContainer,
+      surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
+      surfaceContainerHighest:
+          surfaceContainerHighest ?? this.surfaceContainerHighest,
     );
   }
 
