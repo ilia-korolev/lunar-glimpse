@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lottie/lottie.dart';
 
 class FavoriteMediaPage extends StatefulWidget {
   const FavoriteMediaPage({super.key});
@@ -117,20 +116,12 @@ class _EmptyView extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    return Padding(
-      padding: EdgeInsets.all(theme.spacing.semiLarge),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset(
-            AssetNames.animations.astronautOnPlanet,
-          ),
-          Text(
-            l10n.favoritesPageNoFavoritesText,
-            style: theme.textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-        ],
+    return ImageView(
+      assetName: AssetNames.animations.astronautOnPlanet,
+      child: Text(
+        l10n.favoritesPageNoFavoritesText,
+        style: theme.textTheme.titleLarge,
+        textAlign: TextAlign.center,
       ),
     );
   }

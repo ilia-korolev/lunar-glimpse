@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
-import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class GithubInfoPage extends StatelessWidget {
@@ -17,35 +16,25 @@ class GithubInfoPage extends StatelessWidget {
         height: theme.sizes.smallAppBarHeight,
         title: Text(l10n.gitHubSettingsTitle),
       ),
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.all(theme.spacing.semiSmall),
-          padding: EdgeInsets.all(theme.spacing.semiSmall),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(theme.radiuses.medium),
-            color: theme.surfaceColors.surfaceContainer,
-          ),
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Lottie.asset(
-                AssetNames.animations.astronautDeveloper,
-              ),
-              Text(
-                l10n.gitHubInfoPageTitle,
-                style: theme.textTheme.titleLarge,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: theme.spacing.semiSmall),
-              Text(
-                l10n.gitHubInfoPageText,
-                style: theme.textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: theme.spacing.semiSmall),
-              FilledButton(
+      body: ImageView(
+        assetName: AssetNames.animations.astronautDeveloper,
+        child: Column(
+          children: [
+            Text(
+              l10n.gitHubInfoPageTitle,
+              style: theme.textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: theme.spacing.extraSmall),
+            Text(
+              l10n.gitHubInfoPageText,
+              style: theme.textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: theme.spacing.medium),
+            SizedBox(
+              width: theme.sizes.buttonWidth,
+              child: FilledButton(
                 onPressed: () {
                   url_launcher.launchUrl(
                     Uri.parse(
@@ -55,8 +44,8 @@ class GithubInfoPage extends StatelessWidget {
                 },
                 child: Text(l10n.gitHubInfoPageButton),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
