@@ -309,34 +309,38 @@ class _MediaAppBar extends StatelessWidget {
             children: [
               InteractiveViewer(
                 maxScale: 10,
-                child: Column(
+                child: Stack(
                   children: [
-                    Expanded(
+                    Positioned.fill(
                       child: GestureDetector(
-                        onTap: () {
-                          context.pop();
-                        },
+                        onTap: () => context.pop(),
                       ),
                     ),
-                    CachedNetworkImage(
-                      imageUrl: media.hdUri.toString(),
-                      progressIndicatorBuilder: (_, __, downloadProgress) {
-                        final progress =
-                            downloadProgress.progress?.clamp(0.0, 1.0) ?? 0.0;
+                    Positioned.fill(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.75,
+                        heightFactor: 0.75,
+                        child: Center(
+                          child: CachedNetworkImage(
+                            fit: BoxFit.contain,
+                            imageUrl: media.hdUri.toString(),
+                            progressIndicatorBuilder:
+                                (_, __, downloadProgress) {
+                              final progress =
+                                  downloadProgress.progress?.clamp(0.0, 1.0) ??
+                                      0.0;
 
-                        return Center(
-                          child: CircularProgressIndicator(value: progress),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return const ImageError();
-                      },
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.pop();
-                        },
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: progress,
+                                ),
+                              );
+                            },
+                            errorWidget: (context, url, error) {
+                              return const ImageError();
+                            },
+                          ),
+                        ),
                       ),
                     ),
                   ],
