@@ -126,6 +126,8 @@ class _MediaCardState extends State<MediaCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isMobile = theme.platform == TargetPlatform.android ||
+        theme.platform == TargetPlatform.iOS;
 
     return Column(
       children: [
@@ -141,7 +143,7 @@ class _MediaCardState extends State<MediaCard> {
                 ),
               ),
             ),
-            if (_isHovered)
+            if (isMobile || _isHovered)
               Positioned(
                 right: theme.spacing.semiSmall,
                 bottom: theme.spacing.semiSmall,
