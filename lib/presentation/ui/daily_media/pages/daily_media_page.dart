@@ -215,7 +215,7 @@ class _MediaAppBar extends StatelessWidget {
           left: theme.spacing.small,
           top: theme.spacing.small,
         ),
-        child: PrimaryIconButton(
+        child: MediumIconButton(
           iconColor: theme.colorScheme.onPrimaryContainer,
           backgroundColor: theme.colorScheme.background.withOpacity(0.4),
           icon: FontAwesomeIcons.chevronLeft,
@@ -349,7 +349,7 @@ class _MediaAppBar extends StatelessWidget {
               Positioned(
                 right: theme.spacing.small,
                 top: theme.spacing.small,
-                child: PrimaryIconButton(
+                child: MediumIconButton(
                   backgroundColor:
                       theme.colorScheme.background.withOpacity(0.4),
                   icon: FontAwesomeIcons.xmark,

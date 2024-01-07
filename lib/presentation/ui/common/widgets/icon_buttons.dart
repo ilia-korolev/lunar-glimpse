@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
 
 class IconButtonBase extends StatelessWidget {
   const IconButtonBase({
@@ -53,33 +52,43 @@ class IconButtonBase extends StatelessWidget {
   }
 }
 
-class CardIconButton extends StatelessWidget {
-  const CardIconButton({
+class SmallIconButton extends StatelessWidget {
+  const SmallIconButton({
     required this.onPressed,
     required this.icon,
+    this.backgroundColor = Colors.transparent,
+    this.iconColor,
     super.key,
   });
 
   final void Function() onPressed;
   final IconData icon;
+  final Color backgroundColor;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
-    final lightTheme = GetIt.instance<Theming>().light;
+    final theme = Theme.of(context);
 
     return IconButtonBase(
       icon: icon,
       onPressed: onPressed,
-      iconColor: lightTheme.colorScheme.onSurface,
-      backgroundColor: lightTheme.colorScheme.surface,
-      iconSize: lightTheme.sizes.smallIconSize,
-      padding: lightTheme.spacing.semiSmall,
+      iconColor: iconColor,
+      backgroundColor: backgroundColor,
+      iconSize: theme.sizes.smallIconSize,
+      padding: theme.spacing.semiSmall,
     );
+  }
+
+  static double getSize({required BuildContext context}) {
+    final theme = Theme.of(context);
+
+    return theme.sizes.smallIconSize + 2 * theme.spacing.semiSmall;
   }
 }
 
-class PrimaryIconButton extends StatelessWidget {
-  const PrimaryIconButton({
+class MediumIconButton extends StatelessWidget {
+  const MediumIconButton({
     required this.onPressed,
     required this.icon,
     this.backgroundColor = Colors.transparent,

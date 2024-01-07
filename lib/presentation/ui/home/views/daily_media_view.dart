@@ -61,7 +61,7 @@ class _DailyMediaViewState extends State<DailyMediaView> {
           slivers: [
             HomeAppBar(
               title: context.l10n.dailyMediaTitle,
-              trailing: PrimaryIconButton(
+              trailing: MediumIconButton(
                 onPressed: () {
                   context.go('/daily-media/favorites');
                 },

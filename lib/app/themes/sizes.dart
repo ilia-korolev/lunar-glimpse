@@ -13,6 +13,7 @@ class Sizes extends ThemeExtension<Sizes> {
     required this.mediumIconSize,
     required this.largeIconSize,
     required this.avatarSize,
+    required this.expandedArticleCardSize,
   });
 
   const Sizes.regular()
@@ -26,6 +27,7 @@ class Sizes extends ThemeExtension<Sizes> {
           mediumIconSize: 24,
           largeIconSize: 32,
           avatarSize: 90,
+          expandedArticleCardSize: const Size(900, 175),
         );
 
   final double smallAppBarHeight;
@@ -37,6 +39,7 @@ class Sizes extends ThemeExtension<Sizes> {
   final double mediumIconSize;
   final double largeIconSize;
   final double avatarSize;
+  final Size expandedArticleCardSize;
 
   @override
   Sizes copyWith({
@@ -49,6 +52,7 @@ class Sizes extends ThemeExtension<Sizes> {
     double? mediumIconSize,
     double? largeIconSize,
     double? avatarSize,
+    Size? expandedArticleCardSize,
   }) {
     return Sizes(
       smallAppBarHeight: smallAppBarHeight ?? this.smallAppBarHeight,
@@ -60,6 +64,8 @@ class Sizes extends ThemeExtension<Sizes> {
       mediumIconSize: mediumIconSize ?? this.mediumIconSize,
       largeIconSize: largeIconSize ?? this.largeIconSize,
       avatarSize: avatarSize ?? this.avatarSize,
+      expandedArticleCardSize:
+          expandedArticleCardSize ?? this.expandedArticleCardSize,
     );
   }
 
@@ -116,6 +122,11 @@ class Sizes extends ThemeExtension<Sizes> {
       avatarSize: lerpDouble(
         avatarSize,
         other.avatarSize,
+        t,
+      )!,
+      expandedArticleCardSize: Size.lerp(
+        expandedArticleCardSize,
+        other.expandedArticleCardSize,
         t,
       )!,
     );

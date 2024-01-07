@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,23 +112,48 @@ class _SuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final activeBreakpoint = Breakpoint.getActive(context);
+    final padding =
+        activeBreakpoint.isCompact ? theme.spacing.medium : theme.spacing.large;
 
     return SliverPadding(
-      padding: EdgeInsets.only(bottom: theme.spacing.semiLarge),
+      padding: EdgeInsets.only(
+        bottom: padding,
+        left: padding,
+        right: padding,
+      ),
       sliver: SliverList(
         delegate: SliverSeparatedChildBuilderDelegate(
           itemBuilder: (context, index) {
             final article = articles[index];
 
-            return ArticleCard(
-              article: article,
-              onCardPressed: (article) {
-                url_launcher.launchUrl(article.uri);
-              },
-            );
+            switch (activeBreakpoint) {
+              case Breakpoint.compact:
+              case Breakpoint.medium:
+                return CompactArticleCard(
+                  article: article,
+                  onCardPressed: (article) {
+                    url_launcher.launchUrl(article.uri);
+                  },
+                  onSharePressed: (article) {
+                    GetIt.instance<ShareService>().shareUri(uri: article.uri);
+                  },
+                );
+
+              case Breakpoint.expanded:
+                return ExpandedArticleCard(
+                  article: article,
+                  onCardPressed: (article) {
+                    url_launcher.launchUrl(article.uri);
+                  },
+                  onSharePressed: (article) {
+                    GetIt.instance<ShareService>().shareUri(uri: article.uri);
+                  },
+                );
+            }
           },
           separatorBuilder: (context, index) {
-            return SizedBox(height: theme.spacing.semiLarge);
+            return SizedBox(height: padding);
           },
           childCount: articles.length,
         ),
