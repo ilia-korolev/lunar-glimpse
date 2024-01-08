@@ -75,6 +75,7 @@ class HomePage extends StatelessWidget {
             onTabSelected: (tab) {
               context.go(tab.path);
             },
+            isExtended: activeBreakpoint.isExpanded,
             body: PageSwitcher(
               duration: theme.durations.medium,
               index: tab.index,

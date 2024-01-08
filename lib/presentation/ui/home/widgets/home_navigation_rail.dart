@@ -9,12 +9,14 @@ class HomeNavigationRail extends StatelessWidget {
   const HomeNavigationRail({
     required this.activeTab,
     required this.body,
+    required this.isExtended,
     this.onTabSelected,
     super.key,
   });
 
   final HomePageTab activeTab;
   final Widget body;
+  final bool isExtended;
   final void Function(HomePageTab tab)? onTabSelected;
 
   @override
@@ -31,7 +33,8 @@ class HomeNavigationRail extends StatelessWidget {
     return Row(
       children: [
         NavigationRail(
-          labelType: NavigationRailLabelType.all,
+          extended: isExtended,
+          labelType: isExtended ? null : NavigationRailLabelType.all,
           backgroundColor: backgroundColor,
           selectedIndex: activeTab.index,
           onDestinationSelected: (index) {
