@@ -22,7 +22,7 @@ class Sizes extends ThemeExtension<Sizes> {
           mediumAppBarHeight: 66,
           navBarHeight: 64,
           buttonWidth: 200,
-          mediaCardMinWidth: 350,
+          mediaCardMinWidth: 360,
           smallIconSize: 16,
           mediumIconSize: 24,
           largeIconSize: 32,
