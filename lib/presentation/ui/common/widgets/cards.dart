@@ -67,8 +67,8 @@ class ExpandedArticleCard extends StatelessWidget {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: theme.sizes.expandedArticleCardSize.width,
-          maxHeight: theme.sizes.expandedArticleCardSize.height,
+          maxWidth: theme.sizes.expandedContentWidth,
+          maxHeight: theme.sizes.expandedArticleCardHeight,
         ),
         child: _ArticleCardBase(
           article: article,

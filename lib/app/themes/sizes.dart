@@ -13,7 +13,7 @@ class Sizes extends ThemeExtension<Sizes> {
     required this.mediumIconSize,
     required this.largeIconSize,
     required this.avatarSize,
-    required this.expandedArticleCardSize,
+    required this.expandedArticleCardHeight,
     required this.expandedContentWidth,
   });
 
@@ -28,7 +28,7 @@ class Sizes extends ThemeExtension<Sizes> {
           mediumIconSize: 24,
           largeIconSize: 32,
           avatarSize: 90,
-          expandedArticleCardSize: const Size(900, 175),
+          expandedArticleCardHeight: 175,
           expandedContentWidth: 1024,
         );
 
@@ -41,7 +41,7 @@ class Sizes extends ThemeExtension<Sizes> {
   final double mediumIconSize;
   final double largeIconSize;
   final double avatarSize;
-  final Size expandedArticleCardSize;
+  final double expandedArticleCardHeight;
   final double expandedContentWidth;
 
   @override
@@ -55,7 +55,7 @@ class Sizes extends ThemeExtension<Sizes> {
     double? mediumIconSize,
     double? largeIconSize,
     double? avatarSize,
-    Size? expandedArticleCardSize,
+    double? expandedArticleCardHeight,
     double? expandedContentWidth,
   }) {
     return Sizes(
@@ -68,8 +68,8 @@ class Sizes extends ThemeExtension<Sizes> {
       mediumIconSize: mediumIconSize ?? this.mediumIconSize,
       largeIconSize: largeIconSize ?? this.largeIconSize,
       avatarSize: avatarSize ?? this.avatarSize,
-      expandedArticleCardSize:
-          expandedArticleCardSize ?? this.expandedArticleCardSize,
+      expandedArticleCardHeight:
+          expandedArticleCardHeight ?? this.expandedArticleCardHeight,
       expandedContentWidth: expandedContentWidth ?? this.expandedContentWidth,
     );
   }
@@ -129,9 +129,9 @@ class Sizes extends ThemeExtension<Sizes> {
         other.avatarSize,
         t,
       )!,
-      expandedArticleCardSize: Size.lerp(
-        expandedArticleCardSize,
-        other.expandedArticleCardSize,
+      expandedArticleCardHeight: lerpDouble(
+        expandedArticleCardHeight,
+        other.expandedArticleCardHeight,
         t,
       )!,
       expandedContentWidth: lerpDouble(
