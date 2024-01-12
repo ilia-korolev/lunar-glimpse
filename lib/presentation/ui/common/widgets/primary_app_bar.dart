@@ -14,12 +14,19 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final platform = theme.platform;
+
+    final backIcon = switch (platform) {
+      TargetPlatform.android => FontAwesomeIcons.chevronLeft,
+      TargetPlatform.iOS => FontAwesomeIcons.chevronLeft,
+      _ => FontAwesomeIcons.xmark,
+    };
+
     return AppBar(
       toolbarHeight: height,
       leading: IconButton(
-        icon: const FaIcon(
-          FontAwesomeIcons.chevronLeft,
-        ),
+        icon: FaIcon(backIcon),
         onPressed: () {
           context.pop();
         },
