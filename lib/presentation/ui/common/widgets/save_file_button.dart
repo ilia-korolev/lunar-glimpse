@@ -7,12 +7,16 @@ class SaveFileButton extends StatelessWidget {
     required this.progress,
     required this.isDownloading,
     required this.onStartSaving,
+    this.iconColor,
+    this.backgroundColor,
     super.key,
   });
 
   final double? progress;
   final bool isDownloading;
   final void Function()? onStartSaving;
+  final Color? iconColor;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +28,11 @@ class SaveFileButton extends StatelessWidget {
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onStartSaving,
-        child: Builder(
-          builder: (context) {
-            return _SaveFileButtonBody(
-              progress: progress,
-              isDownloading: isDownloading,
-            );
-          },
+        child: _SaveFileButtonBody(
+          progress: progress,
+          isDownloading: isDownloading,
+          iconColor: iconColor,
+          backgroundColor: backgroundColor,
         ),
       ),
     );
@@ -41,10 +43,14 @@ class _SaveFileButtonBody extends StatefulWidget {
   const _SaveFileButtonBody({
     required this.progress,
     required this.isDownloading,
+    this.iconColor,
+    this.backgroundColor,
   });
 
   final double? progress;
   final bool isDownloading;
+  final Color? iconColor;
+  final Color? backgroundColor;
 
   @override
   State<_SaveFileButtonBody> createState() => _SaveFileButtonBodyState();
@@ -80,6 +86,10 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
         Container(
           height: theme.sizes.mediumIconSize + 2 * theme.spacing.semiSmall,
           width: theme.sizes.mediumIconSize + 2 * theme.spacing.semiSmall,
+          decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            shape: BoxShape.circle,
+          ),
           padding: EdgeInsets.all(theme.spacing.extraSmall),
           child: TweenAnimationBuilder(
             tween: Tween(
@@ -91,7 +101,8 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
               return CircularProgressIndicator(
                 value: widget.isDownloading ? value : 1,
                 strokeWidth: 3,
-                color: theme.colorScheme.onPrimaryContainer.withOpacity(0.5),
+                color: (widget.iconColor ?? theme.colorScheme.onSurface)
+                    .withOpacity(0.5),
               );
             },
           ),
@@ -132,7 +143,7 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
         key: const ValueKey('successfully-saved'),
         FontAwesomeIcons.check,
         size: theme.sizes.mediumIconSize,
-        color: theme.colorScheme.onPrimaryContainer,
+        color: widget.iconColor,
       );
     }
 
@@ -141,14 +152,14 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
         key: const ValueKey('ready-to-save'),
         FontAwesomeIcons.arrowDown,
         size: theme.sizes.mediumIconSize,
-        color: theme.colorScheme.onPrimaryContainer,
+        color: widget.iconColor,
       );
     }
 
     return Text(
       '${((widget.progress ?? 0) * 100).round()}%',
       style: theme.textTheme.labelMedium!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer,
+        color: widget.iconColor,
       ),
     );
   }
