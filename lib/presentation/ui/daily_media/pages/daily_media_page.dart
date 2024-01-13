@@ -224,10 +224,9 @@ class _MediaAppBar extends StatelessWidget {
           top: theme.spacing.small,
         ),
         child: PrimaryIconButton(
-          iconColor: theme.colorScheme.onPrimaryContainer,
+          icon: FontAwesomeIcons.chevronLeft,
           size: IconButtonSize.medium,
           backgroundColor: theme.colorScheme.background.withOpacity(0.4),
-          icon: FontAwesomeIcons.chevronLeft,
           onPressed: () {
             context.pop();
           },
@@ -241,7 +240,6 @@ class _MediaAppBar extends StatelessWidget {
           ),
           child: _SaveImageButton(
             imageUri: media.hdUri,
-            iconColor: theme.colorScheme.onPrimaryContainer,
           ),
         ),
       ],
@@ -282,8 +280,7 @@ class _MediaAppBar extends StatelessWidget {
                 PrimaryIconButton(
                   icon: FontAwesomeIcons.shareNodes,
                   size: IconButtonSize.large,
-                  iconColor: theme.colorScheme.onPrimaryContainer,
-                  backgroundColor: theme.colorScheme.background,
+                  backgroundColor: theme.colorScheme.surface,
                   elevation: 7,
                   onPressed: () {
                     GetIt.instance<ShareService>().shareUri(uri: media.uri);
@@ -295,8 +292,7 @@ class _MediaAppBar extends StatelessWidget {
                       ? FontAwesomeIcons.solidStar
                       : FontAwesomeIcons.star,
                   size: IconButtonSize.large,
-                  iconColor: theme.colorScheme.onPrimaryContainer,
-                  backgroundColor: theme.colorScheme.background,
+                  backgroundColor: theme.colorScheme.surface,
                   elevation: 7,
                   onPressed: () {
                     context
@@ -331,7 +327,7 @@ class _MediaDescription extends StatelessWidget {
         top: theme.spacing.small,
         left: theme.spacing.semiLarge,
         right: theme.spacing.semiLarge,
-        bottom: theme.spacing.semiSmall + bottomPadding,
+        bottom: theme.spacing.semiLarge + bottomPadding,
       ),
       sliver: SliverList.list(
         children: [
