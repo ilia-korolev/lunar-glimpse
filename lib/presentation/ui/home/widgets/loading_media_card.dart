@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 
 class LoadingMediaCard extends StatelessWidget {
@@ -7,19 +7,26 @@ class LoadingMediaCard extends StatelessWidget {
     super.key,
   });
 
+  static final media = Media(
+    uri: Uri(),
+    hdUri: Uri(),
+    date: const Date(day: 20, month: 12, year: 2000),
+    title: 'This is a really really really long title',
+    explanation: 'This is an explanation',
+    copyright: 'This is a copyright',
+    type: MediaType.image,
+  );
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
+    final mediaCard = MediaCard(
+      media: media,
+      onCardPressed: (Media media) {},
+      onSharePressed: (Media media) {},
+      onFavoritePressed: (Media media) {},
+    );
     return PrimaryShimmer(
-      child: Container(
-        decoration: BoxDecoration(
-          color: theme.primaryColor,
-          borderRadius: BorderRadius.all(theme.radiuses.large),
-        ),
-        margin: EdgeInsets.symmetric(horizontal: theme.spacing.semiLarge),
-        child: const AspectRatio(aspectRatio: 4 / 3),
-      ),
+      child: mediaCard,
     );
   }
 }

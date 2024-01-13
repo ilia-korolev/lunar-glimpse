@@ -6,6 +6,7 @@ import 'package:flutter_astronomy/presentation/ui/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 const _imageAspectRatio = 16 / 9;
 
@@ -124,58 +125,60 @@ class _MediaCardState extends State<MediaCard> {
 
     return Column(
       children: [
-        Stack(
-          children: [
-            _Thumbnail(thumbnailUri: widget.media.uri),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.all(theme.radiuses.large),
-                  onTap: () => widget.onCardPressed(widget.media),
+        Skeleton.leaf(
+          child: Stack(
+            children: [
+              _Thumbnail(thumbnailUri: widget.media.uri),
+              Positioned.fill(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.all(theme.radiuses.large),
+                    onTap: () => widget.onCardPressed(widget.media),
+                  ),
                 ),
               ),
-            ),
-            if (isMobile || _isHovered)
-              Positioned(
-                right: theme.spacing.semiSmall,
-                bottom: theme.spacing.semiSmall,
-                child: Row(
-                  children: [
-                    SmallIconButton(
-                      icon: FontAwesomeIcons.shareNodes,
-                      onPressed: () => widget.onSharePressed(widget.media),
-                      iconColor: lightTheme.colorScheme.onSurface,
-                      backgroundColor: lightTheme.colorScheme.surface,
-                    ),
-                    SizedBox(width: theme.spacing.semiSmall),
-                    SmallIconButton(
-                      onPressed: () => widget.onFavoritePressed(widget.media),
-                      icon: widget.media.isFavorite
-                          ? FontAwesomeIcons.solidStar
-                          : FontAwesomeIcons.star,
-                      iconColor: lightTheme.colorScheme.onSurface,
-                      backgroundColor: lightTheme.colorScheme.surface,
-                    ),
-                  ],
+              if (isMobile || _isHovered)
+                Positioned(
+                  right: theme.spacing.semiSmall,
+                  bottom: theme.spacing.semiSmall,
+                  child: Row(
+                    children: [
+                      SmallIconButton(
+                        icon: FontAwesomeIcons.shareNodes,
+                        onPressed: () => widget.onSharePressed(widget.media),
+                        iconColor: lightTheme.colorScheme.onSurface,
+                        backgroundColor: lightTheme.colorScheme.surface,
+                      ),
+                      SizedBox(width: theme.spacing.semiSmall),
+                      SmallIconButton(
+                        onPressed: () => widget.onFavoritePressed(widget.media),
+                        icon: widget.media.isFavorite
+                            ? FontAwesomeIcons.solidStar
+                            : FontAwesomeIcons.star,
+                        iconColor: lightTheme.colorScheme.onSurface,
+                        backgroundColor: lightTheme.colorScheme.surface,
+                      ),
+                    ],
+                  ),
+                ),
+              Positioned.fill(
+                child: MouseRegion(
+                  hitTestBehavior: HitTestBehavior.translucent,
+                  onEnter: (event) {
+                    setState(() {
+                      _isHovered = true;
+                    });
+                  },
+                  onExit: (event) {
+                    setState(() {
+                      _isHovered = false;
+                    });
+                  },
                 ),
               ),
-            Positioned.fill(
-              child: MouseRegion(
-                hitTestBehavior: HitTestBehavior.translucent,
-                onEnter: (event) {
-                  setState(() {
-                    _isHovered = true;
-                  });
-                },
-                onExit: (event) {
-                  setState(() {
-                    _isHovered = false;
-                  });
-                },
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(height: theme.spacing.small),
         Row(

@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 
 import '../widgets/_export.dart';
 
-const _loadingTileCount = 10;
+const _loadingTileCount = 12;
 
 class DailyMediaView extends StatefulWidget {
   const DailyMediaView({super.key});

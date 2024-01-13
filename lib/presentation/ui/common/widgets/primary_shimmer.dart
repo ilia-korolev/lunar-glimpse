@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PrimaryShimmer extends StatelessWidget {
   const PrimaryShimmer({
@@ -14,9 +14,13 @@ class PrimaryShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Shimmer.fromColors(
-      baseColor: theme.surfaceColors.surfaceContainer,
-      highlightColor: theme.colorScheme.secondaryContainer,
+    return Skeletonizer(
+      effect: ShimmerEffect(
+        baseColor: theme.surfaceColors.surfaceContainer,
+        highlightColor: theme.brightness == Brightness.light
+            ? theme.surfaceColors.surfaceContainerLow
+            : theme.surfaceColors.surfaceContainerHigh,
+      ),
       child: child,
     );
   }
