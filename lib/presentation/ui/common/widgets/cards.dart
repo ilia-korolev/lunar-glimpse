@@ -144,18 +144,20 @@ class _MediaCardState extends State<MediaCard> {
                   bottom: theme.spacing.semiSmall,
                   child: Row(
                     children: [
-                      SmallIconButton(
+                      PrimaryIconButton(
                         icon: FontAwesomeIcons.shareNodes,
+                        size: IconButtonSize.small,
                         onPressed: () => widget.onSharePressed(widget.media),
                         iconColor: lightTheme.colorScheme.onSurface,
                         backgroundColor: lightTheme.colorScheme.surface,
                       ),
                       SizedBox(width: theme.spacing.semiSmall),
-                      SmallIconButton(
-                        onPressed: () => widget.onFavoritePressed(widget.media),
+                      PrimaryIconButton(
                         icon: widget.media.isFavorite
                             ? FontAwesomeIcons.solidStar
                             : FontAwesomeIcons.star,
+                        size: IconButtonSize.small,
+                        onPressed: () => widget.onFavoritePressed(widget.media),
                         iconColor: lightTheme.colorScheme.onSurface,
                         backgroundColor: lightTheme.colorScheme.surface,
                       ),
@@ -268,8 +270,9 @@ class _ArticleCardBase extends StatelessWidget {
           Positioned(
             right: theme.spacing.medium,
             bottom: theme.spacing.small,
-            child: SmallIconButton(
+            child: PrimaryIconButton(
               icon: FontAwesomeIcons.shareNodes,
+              size: IconButtonSize.small,
               onPressed: () => onSharePressed(article),
             ),
           ),
@@ -292,7 +295,7 @@ class _ArticleInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
-    final iconSize = SmallIconButton.getSize(context: context);
+    final iconButtonSize = IconButtonSize.small.getButtonSize(context);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -344,7 +347,7 @@ class _ArticleInfo extends StatelessWidget {
             ),
           ),
           Container(
-            height: iconSize,
+            height: iconButtonSize,
             alignment: Alignment.centerLeft,
             child: Text(
               _formatDate(

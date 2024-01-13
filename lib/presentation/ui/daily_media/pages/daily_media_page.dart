@@ -223,8 +223,9 @@ class _MediaAppBar extends StatelessWidget {
           left: theme.spacing.small,
           top: theme.spacing.small,
         ),
-        child: MediumIconButton(
+        child: PrimaryIconButton(
           iconColor: theme.colorScheme.onPrimaryContainer,
+          size: IconButtonSize.medium,
           backgroundColor: theme.colorScheme.background.withOpacity(0.4),
           icon: FontAwesomeIcons.chevronLeft,
           onPressed: () {
@@ -278,11 +279,10 @@ class _MediaAppBar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButtonBase(
+                PrimaryIconButton(
                   icon: FontAwesomeIcons.shareNodes,
+                  size: IconButtonSize.large,
                   iconColor: theme.colorScheme.onPrimaryContainer,
-                  iconSize: theme.sizes.largeIconSize,
-                  padding: theme.spacing.semiSmall,
                   backgroundColor: theme.colorScheme.background,
                   elevation: 7,
                   onPressed: () {
@@ -290,8 +290,14 @@ class _MediaAppBar extends StatelessWidget {
                   },
                 ),
                 SizedBox(width: theme.spacing.semiLarge),
-                FavoriteButton(
-                  isFavorite: media.isFavorite,
+                PrimaryIconButton(
+                  icon: media.isFavorite
+                      ? FontAwesomeIcons.solidStar
+                      : FontAwesomeIcons.star,
+                  size: IconButtonSize.large,
+                  iconColor: theme.colorScheme.onPrimaryContainer,
+                  backgroundColor: theme.colorScheme.background,
+                  elevation: 7,
                   onPressed: () {
                     context
                         .read<DailyMediaBloc>()
@@ -445,17 +451,19 @@ class _ExpandedActionRow extends StatelessWidget {
           imageUri: media.hdUri,
         ),
         SizedBox(width: theme.spacing.small),
-        MediumIconButton(
+        PrimaryIconButton(
           icon: FontAwesomeIcons.shareNodes,
+          size: IconButtonSize.medium,
           onPressed: () {
             GetIt.instance<ShareService>().shareUri(uri: media.uri);
           },
         ),
         SizedBox(width: theme.spacing.small),
-        MediumIconButton(
+        PrimaryIconButton(
           icon: media.isFavorite
               ? FontAwesomeIcons.solidStar
               : FontAwesomeIcons.star,
+          size: IconButtonSize.medium,
           onPressed: () {
             context
                 .read<DailyMediaBloc>()
@@ -611,9 +619,10 @@ Future<Dialog?> _showImageViewerDialog({
             Positioned(
               right: theme.spacing.small,
               top: theme.spacing.small,
-              child: MediumIconButton(
-                backgroundColor: theme.colorScheme.background.withOpacity(0.4),
+              child: PrimaryIconButton(
                 icon: FontAwesomeIcons.xmark,
+                size: IconButtonSize.medium,
+                backgroundColor: theme.colorScheme.background.withOpacity(0.4),
                 onPressed: () {
                   context.pop();
                 },
