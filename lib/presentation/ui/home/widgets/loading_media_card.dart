@@ -7,9 +7,9 @@ class LoadingMediaCard extends StatelessWidget {
     super.key,
   });
 
-  static final media = Media(
-    uri: Uri(),
-    hdUri: Uri(),
+  static final _mockMedia = Media(
+    uri: Uri.parse('https://www.google.com/favicon.ico'),
+    hdUri: Uri.parse('https://www.google.com/favicon.ico'),
     date: const Date(day: 20, month: 12, year: 2000),
     title: 'This is a really really really long title',
     explanation: 'This is an explanation',
@@ -20,7 +20,7 @@ class LoadingMediaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaCard = MediaCard(
-      media: media,
+      media: _mockMedia,
       onCardPressed: (context, media) {},
       onSharePressed: (context, media) {},
       onFavoritePressed: (context, media) {},
