@@ -180,18 +180,21 @@ class _SuccessView extends StatelessWidget {
           itemBuilder: (context, index) {
             return MediaCard(
               media: mediaList[index],
-              onCardPressed: (Media media) {
+              onCardPressed: (context, media) {
                 context.go('/daily-media/favorites/${media.date.toInt()}');
               },
-              onFavoritePressed: (Media media) async {
+              onFavoritePressed: (context, media) async {
                 if (media.isFavorite) {
                   context
                       .read<FavoriteMediaListBloc>()
                       .add(FavoriteMediaListEvent.favoriteRemoved(media));
                 }
               },
-              onSharePressed: (media) {
-                GetIt.instance<ShareService>().shareUri(uri: media.uri);
+              onSharePressed: (context, media) {
+                GetIt.instance<ShareService>().shareUri(
+                  uri: media.uri,
+                  context: context,
+                );
               },
             );
           },

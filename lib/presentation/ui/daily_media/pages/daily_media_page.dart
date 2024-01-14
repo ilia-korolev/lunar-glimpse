@@ -227,9 +227,7 @@ class _MediaAppBar extends StatelessWidget {
           icon: FontAwesomeIcons.chevronLeft,
           size: IconButtonSize.medium,
           backgroundColor: theme.colorScheme.background.withOpacity(0.4),
-          onPressed: () {
-            context.pop();
-          },
+          onPressed: (_) => context.pop(),
         ),
       ),
       actions: [
@@ -282,8 +280,11 @@ class _MediaAppBar extends StatelessWidget {
                   size: IconButtonSize.large,
                   backgroundColor: theme.colorScheme.surface,
                   elevation: 7,
-                  onPressed: () {
-                    GetIt.instance<ShareService>().shareUri(uri: media.uri);
+                  onPressed: (BuildContext context) {
+                    GetIt.instance<ShareService>().shareUri(
+                      uri: media.uri,
+                      context: context,
+                    );
                   },
                 ),
                 SizedBox(width: theme.spacing.semiLarge),
@@ -294,7 +295,7 @@ class _MediaAppBar extends StatelessWidget {
                   size: IconButtonSize.large,
                   backgroundColor: theme.colorScheme.surface,
                   elevation: 7,
-                  onPressed: () {
+                  onPressed: (_) {
                     context
                         .read<DailyMediaBloc>()
                         .add(const DailyMediaEvent.favoriteToggled());
@@ -450,8 +451,11 @@ class _ExpandedActionRow extends StatelessWidget {
         PrimaryIconButton(
           icon: FontAwesomeIcons.shareNodes,
           size: IconButtonSize.medium,
-          onPressed: () {
-            GetIt.instance<ShareService>().shareUri(uri: media.uri);
+          onPressed: (BuildContext context) {
+            GetIt.instance<ShareService>().shareUri(
+              uri: media.uri,
+              context: context,
+            );
           },
         ),
         SizedBox(width: theme.spacing.small),
@@ -460,7 +464,7 @@ class _ExpandedActionRow extends StatelessWidget {
               ? FontAwesomeIcons.solidStar
               : FontAwesomeIcons.star,
           size: IconButtonSize.medium,
-          onPressed: () {
+          onPressed: (_) {
             context
                 .read<DailyMediaBloc>()
                 .add(const DailyMediaEvent.favoriteToggled());
@@ -517,11 +521,9 @@ class _ExpandedImage extends StatelessWidget {
 class _SaveImageButton extends StatelessWidget {
   const _SaveImageButton({
     required this.imageUri,
-    this.iconColor,
   });
 
   final Uri imageUri;
-  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -539,7 +541,6 @@ class _SaveImageButton extends StatelessWidget {
         return SaveFileButton(
           progress: progress,
           isDownloading: isInProgress,
-          iconColor: iconColor,
           onStartSaving: state.maybeMap(
             inProgress: (_) => null,
             complete: (_) => null,
@@ -619,9 +620,7 @@ Future<Dialog?> _showImageViewerDialog({
                 icon: FontAwesomeIcons.xmark,
                 size: IconButtonSize.medium,
                 backgroundColor: theme.colorScheme.background.withOpacity(0.4),
-                onPressed: () {
-                  context.pop();
-                },
+                onPressed: (_) => context.pop(),
               ),
             ),
           ],

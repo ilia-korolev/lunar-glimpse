@@ -21,9 +21,9 @@ class LoadingMediaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaCard = MediaCard(
       media: media,
-      onCardPressed: (Media media) {},
-      onSharePressed: (Media media) {},
-      onFavoritePressed: (Media media) {},
+      onCardPressed: (context, media) {},
+      onSharePressed: (context, media) {},
+      onFavoritePressed: (context, media) {},
     );
     return PrimaryShimmer(
       child: mediaCard,

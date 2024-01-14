@@ -43,7 +43,7 @@ class PrimaryIconButton extends StatelessWidget {
 
   final IconData icon;
   final IconButtonSize size;
-  final void Function() onPressed;
+  final void Function(BuildContext context) onPressed;
   final Color backgroundColor;
   final Color? iconColor;
   final double elevation;
@@ -61,7 +61,7 @@ class PrimaryIconButton extends StatelessWidget {
       elevation: elevation,
       child: InkWell(
         customBorder: const CircleBorder(),
-        onTap: onPressed,
+        onTap: () => onPressed(context),
         child: Container(
           height: buttonSize,
           width: buttonSize,

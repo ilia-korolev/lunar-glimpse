@@ -64,7 +64,7 @@ class _DailyMediaViewState extends State<DailyMediaView> {
               trailing: PrimaryIconButton(
                 icon: FontAwesomeIcons.solidStar,
                 size: IconButtonSize.medium,
-                onPressed: () {
+                onPressed: (_) {
                   context.go('/daily-media/favorites');
                 },
               ),
@@ -199,16 +199,19 @@ class _SuccessView extends StatelessWidget {
 
               return MediaCard(
                 media: mediaList[index],
-                onCardPressed: (Media media) {
+                onCardPressed: (context, media) {
                   context.go('/daily-media/${media.date.toInt()}');
                 },
-                onFavoritePressed: (Media media) {
+                onFavoritePressed: (context, media) {
                   context
                       .read<DailyMediaListBloc>()
                       .add(DailyMediaListEvent.favoriteToggled(media));
                 },
-                onSharePressed: (media) {
-                  GetIt.instance<ShareService>().shareUri(uri: media.uri);
+                onSharePressed: (context, media) {
+                  GetIt.instance<ShareService>().shareUri(
+                    uri: media.uri,
+                    context: context,
+                  );
                 },
               );
             },

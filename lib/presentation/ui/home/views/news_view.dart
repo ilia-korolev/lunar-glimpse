@@ -132,22 +132,28 @@ class _SuccessView extends StatelessWidget {
               case Breakpoint.medium:
                 return CompactArticleCard(
                   article: article,
-                  onCardPressed: (article) {
+                  onCardPressed: (context, article) {
                     url_launcher.launchUrl(article.uri);
                   },
-                  onSharePressed: (article) {
-                    GetIt.instance<ShareService>().shareUri(uri: article.uri);
+                  onSharePressed: (context, article) {
+                    GetIt.instance<ShareService>().shareUri(
+                      uri: article.uri,
+                      context: context,
+                    );
                   },
                 );
 
               case Breakpoint.expanded:
                 return ExpandedArticleCard(
                   article: article,
-                  onCardPressed: (article) {
+                  onCardPressed: (context, article) {
                     url_launcher.launchUrl(article.uri);
                   },
-                  onSharePressed: (article) {
-                    GetIt.instance<ShareService>().shareUri(uri: article.uri);
+                  onSharePressed: (context, article) {
+                    GetIt.instance<ShareService>().shareUri(
+                      uri: article.uri,
+                      context: context,
+                    );
                   },
                 );
             }

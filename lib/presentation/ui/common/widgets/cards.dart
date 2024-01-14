@@ -19,8 +19,8 @@ class CompactArticleCard extends StatelessWidget {
   });
 
   final Article article;
-  final void Function(Article media) onCardPressed;
-  final void Function(Article media) onSharePressed;
+  final void Function(BuildContext context, Article media) onCardPressed;
+  final void Function(BuildContext context, Article media) onSharePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +57,8 @@ class ExpandedArticleCard extends StatelessWidget {
   });
 
   final Article article;
-  final void Function(Article media) onCardPressed;
-  final void Function(Article media) onSharePressed;
+  final void Function(BuildContext context, Article media) onCardPressed;
+  final void Function(BuildContext context, Article media) onSharePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +105,9 @@ class MediaCard extends StatefulWidget {
   });
 
   final Media media;
-  final void Function(Media media) onCardPressed;
-  final void Function(Media media) onSharePressed;
-  final void Function(Media media) onFavoritePressed;
+  final void Function(BuildContext context, Media media) onCardPressed;
+  final void Function(BuildContext context, Media media) onSharePressed;
+  final void Function(BuildContext context, Media media) onFavoritePressed;
 
   @override
   State<MediaCard> createState() => _MediaCardState();
@@ -134,7 +134,7 @@ class _MediaCardState extends State<MediaCard> {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.all(theme.radiuses.large),
-                    onTap: () => widget.onCardPressed(widget.media),
+                    onTap: () => widget.onCardPressed(context, widget.media),
                   ),
                 ),
               ),
@@ -147,7 +147,12 @@ class _MediaCardState extends State<MediaCard> {
                       PrimaryIconButton(
                         icon: FontAwesomeIcons.shareNodes,
                         size: IconButtonSize.small,
-                        onPressed: () => widget.onSharePressed(widget.media),
+                        onPressed: (context) {
+                          return widget.onSharePressed(
+                            context,
+                            widget.media,
+                          );
+                        },
                         iconColor: lightTheme.colorScheme.onSurface,
                         backgroundColor: lightTheme.colorScheme.surface,
                       ),
@@ -157,7 +162,12 @@ class _MediaCardState extends State<MediaCard> {
                             ? FontAwesomeIcons.solidStar
                             : FontAwesomeIcons.star,
                         size: IconButtonSize.small,
-                        onPressed: () => widget.onFavoritePressed(widget.media),
+                        onPressed: (context) {
+                          return widget.onFavoritePressed(
+                            context,
+                            widget.media,
+                          );
+                        },
                         iconColor: lightTheme.colorScheme.onSurface,
                         backgroundColor: lightTheme.colorScheme.surface,
                       ),
@@ -242,8 +252,8 @@ class _ArticleCardBase extends StatelessWidget {
 
   final Widget child;
   final Article article;
-  final void Function(Article media) onCardPressed;
-  final void Function(Article media) onSharePressed;
+  final void Function(BuildContext context, Article media) onCardPressed;
+  final void Function(BuildContext context, Article media) onSharePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +273,7 @@ class _ArticleCardBase extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.all(theme.radiuses.large),
-                onTap: () => onCardPressed(article),
+                onTap: () => onCardPressed(context, article),
               ),
             ),
           ),
@@ -273,7 +283,7 @@ class _ArticleCardBase extends StatelessWidget {
             child: PrimaryIconButton(
               icon: FontAwesomeIcons.shareNodes,
               size: IconButtonSize.small,
-              onPressed: () => onSharePressed(article),
+              onPressed: (context) => onSharePressed(context, article),
             ),
           ),
         ],

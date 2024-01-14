@@ -12,6 +12,7 @@ dependencies:
   bloc_concurrency: ^0.2.3
   cached_network_image: ^3.3.1
   collection: ^1.18.0
+  device_info_plus: ^9.1.1
   dio: ^5.4.0
   drift: ^2.14.1
   file_saver: ^0.2.9

@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
@@ -69,7 +70,7 @@ Future<void> _registerServices() async {
       FileSaver.new,
     )
     ..registerLazySingleton<ShareService>(
-      ShareServiceImpl.new,
+      () => ShareServiceImpl(deviceInfo: DeviceInfoPlugin()),
     );
 }
 
