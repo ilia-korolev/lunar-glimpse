@@ -30,8 +30,10 @@ class _DailyMediaViewState extends State<DailyMediaView> {
   void initState() {
     super.initState();
 
+    if (_bloc.state.status.isInitial) {
     _bloc.add(const DailyMediaListEvent.fetched());
     _scrollController.addListener(_onScroll);
+    }
   }
 
   @override

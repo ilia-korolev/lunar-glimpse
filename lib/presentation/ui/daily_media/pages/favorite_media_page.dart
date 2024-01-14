@@ -26,7 +26,9 @@ class _FavoriteMediaPageState extends State<FavoriteMediaPage> {
   void initState() {
     super.initState();
 
-    _bloc.add(const FavoriteMediaListEvent.fetched());
+    if (_bloc.state.status.isInitial) {
+      _bloc.add(const FavoriteMediaListEvent.fetched());
+    }
   }
 
   @override

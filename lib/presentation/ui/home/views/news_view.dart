@@ -23,7 +23,9 @@ class _NewsViewState extends State<NewsView> {
   void initState() {
     super.initState();
 
-    _bloc.add(const NewsEvent.fetched());
+    if (_bloc.state.status.isInitial) {
+      _bloc.add(const NewsEvent.fetched());
+    }
   }
 
   @override
