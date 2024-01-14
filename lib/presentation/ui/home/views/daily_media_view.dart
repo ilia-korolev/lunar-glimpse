@@ -22,7 +22,8 @@ class DailyMediaView extends StatefulWidget {
   State<DailyMediaView> createState() => _DailyMediaViewState();
 }
 
-class _DailyMediaViewState extends State<DailyMediaView> {
+class _DailyMediaViewState extends State<DailyMediaView>
+    with WidgetsBindingObserver {
   final DailyMediaListBloc _bloc = GetIt.instance();
   final _scrollController = ScrollController();
 
@@ -30,16 +31,25 @@ class _DailyMediaViewState extends State<DailyMediaView> {
   void initState() {
     super.initState();
 
+    WidgetsBinding.instance.addObserver(this);
+    _scrollController.addListener(_onScrollExtentChanged);
+
     if (_bloc.state.status.isInitial) {
-    _bloc.add(const DailyMediaListEvent.fetched());
-    _scrollController.addListener(_onScroll);
+      _bloc.add(const DailyMediaListEvent.fetched());
     }
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+
+    _onScrollExtentChanged();
   }
 
   @override
   void dispose() {
     _scrollController
-      ..removeListener(_onScroll)
+      ..removeListener(_onScrollExtentChanged)
       ..dispose();
 
     super.dispose();
@@ -78,7 +88,7 @@ class _DailyMediaViewState extends State<DailyMediaView> {
     );
   }
 
-  void _onScroll() {
+  void _onScrollExtentChanged() {
     if (!_bloc.state.status.isSuccess || _bloc.state.mediaList.isEmpty) {
       return;
     }
