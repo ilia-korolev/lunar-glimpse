@@ -43,65 +43,71 @@ class _FavoriteMediaPageState extends State<FavoriteMediaPage> {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    return BlocProvider.value(
-      value: _bloc,
-      child: Scaffold(
-        appBar: PrimaryAppBar(
-          height: theme.sizes.mediumAppBarHeight,
-          title: Text(l10n.favoritesPageTitle),
-        ),
-        body: SafeArea(
-          child: StreamListener(
-            stream: _bloc.removedFavoriteStream,
-            onData: (media) {
-              final removedSnackBar = SnackBar(
-                action: SnackBarAction(
-                  label: l10n.removedFromFavoritesSnackBarButton,
-                  onPressed: () {
-                    GetIt.instance<DailyMediaListBloc>()
-                        .add(DailyMediaListEvent.favoriteToggled(media));
+    return SelectionArea(
+      child: SelectionTransformer.separated(
+        child: BlocProvider.value(
+          value: _bloc,
+          child: Scaffold(
+            appBar: PrimaryAppBar(
+              height: theme.sizes.mediumAppBarHeight,
+              title: Text(l10n.favoritesPageTitle),
+            ),
+            body: SafeArea(
+              child: StreamListener(
+                stream: _bloc.removedFavoriteStream,
+                onData: (media) {
+                  final removedSnackBar = SnackBar(
+                    action: SnackBarAction(
+                      label: l10n.removedFromFavoritesSnackBarButton,
+                      onPressed: () {
+                        GetIt.instance<DailyMediaListBloc>()
+                            .add(DailyMediaListEvent.favoriteToggled(media));
 
-                    final restoredSnackBar = SnackBar(
-                      content: Text(l10n.favoriteRestoredSnackBarButton),
-                    );
+                        final restoredSnackBar = SnackBar(
+                          content: Text(l10n.favoriteRestoredSnackBarButton),
+                        );
 
-                    GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
-                        .currentState
-                      ?..clearSnackBars()
-                      ..showSnackBar(restoredSnackBar);
+                        GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
+                            .currentState
+                          ?..clearSnackBars()
+                          ..showSnackBar(restoredSnackBar);
+                      },
+                    ),
+                    content: Text(l10n.removedFromFavoritesSnackBarText),
+                  );
+
+                  GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
+                      .currentState
+                    ?..clearSnackBars()
+                    ..showSnackBar(removedSnackBar);
+                },
+                child:
+                    BlocBuilder<FavoriteMediaListBloc, FavoriteMediaListState>(
+                  builder: (context, state) {
+                    switch (state.status) {
+                      case BlocStatus.initial:
+                        return const _InitialView();
+
+                      case BlocStatus.loading:
+                        return state.mediaList.isEmpty
+                            ? const _LoadingView()
+                            : _SuccessView(
+                                mediaList: state.mediaList,
+                              );
+
+                      case BlocStatus.success:
+                        return state.mediaList.isEmpty
+                            ? const _EmptyView()
+                            : _SuccessView(
+                                mediaList: state.mediaList,
+                              );
+
+                      case BlocStatus.failure:
+                        return const _FailureView();
+                    }
                   },
                 ),
-                content: Text(l10n.removedFromFavoritesSnackBarText),
-              );
-
-              GetIt.instance<GlobalKey<ScaffoldMessengerState>>().currentState
-                ?..clearSnackBars()
-                ..showSnackBar(removedSnackBar);
-            },
-            child: BlocBuilder<FavoriteMediaListBloc, FavoriteMediaListState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case BlocStatus.initial:
-                    return const _InitialView();
-
-                  case BlocStatus.loading:
-                    return state.mediaList.isEmpty
-                        ? const _LoadingView()
-                        : _SuccessView(
-                            mediaList: state.mediaList,
-                          );
-
-                  case BlocStatus.success:
-                    return state.mediaList.isEmpty
-                        ? const _EmptyView()
-                        : _SuccessView(
-                            mediaList: state.mediaList,
-                          );
-
-                  case BlocStatus.failure:
-                    return const _FailureView();
-                }
-              },
+              ),
             ),
           ),
         ),

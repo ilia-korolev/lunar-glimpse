@@ -21,46 +21,50 @@ class DailyMediaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => DailyMediaBloc(
-            repository: GetIt.instance(),
-          )..add(DailyMediaEvent.fetched(date: date)),
-        ),
-        BlocProvider(
-          create: (context) => SaveFileBloc(
-            repository: GetIt.instance(),
-          ),
-        ),
-      ],
-      child: Builder(
-        builder: (context) {
-          final theme = Theme.of(context);
-          final l10n = context.l10n;
-          final saveFileBloc = context.read<SaveFileBloc>();
+    return SelectionArea(
+      child: SelectionTransformer.separated(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => DailyMediaBloc(
+                repository: GetIt.instance(),
+              )..add(DailyMediaEvent.fetched(date: date)),
+            ),
+            BlocProvider(
+              create: (context) => SaveFileBloc(
+                repository: GetIt.instance(),
+              ),
+            ),
+          ],
+          child: Builder(
+            builder: (context) {
+              final theme = Theme.of(context);
+              final l10n = context.l10n;
+              final saveFileBloc = context.read<SaveFileBloc>();
 
-          return StreamListener(
-            stream: saveFileBloc.saveSuccessStream,
-            onData: (path) {
-              _showSuccessSnackBar(
-                message: l10n.saveImageSuccessSnackBarText,
-                path: path,
-                theme: theme,
+              return StreamListener(
+                stream: saveFileBloc.saveSuccessStream,
+                onData: (path) {
+                  _showSuccessSnackBar(
+                    message: l10n.saveImageSuccessSnackBarText,
+                    path: path,
+                    theme: theme,
+                  );
+                },
+                child: StreamListener(
+                  stream: saveFileBloc.saveFailureStream,
+                  onData: (message) {
+                    _showFailureSnackBar(
+                      message: l10n.saveImageFailedSnackBarText,
+                      theme: theme,
+                    );
+                  },
+                  child: const _Body(),
+                ),
               );
             },
-            child: StreamListener(
-              stream: saveFileBloc.saveFailureStream,
-              onData: (message) {
-                _showFailureSnackBar(
-                  message: l10n.saveImageFailedSnackBarText,
-                  theme: theme,
-                );
-              },
-              child: const _Body(),
-            ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

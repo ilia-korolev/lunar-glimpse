@@ -33,9 +33,11 @@ class FailureView extends StatelessWidget {
           SizedBox(height: theme.spacing.medium),
           SizedBox(
             width: theme.sizes.buttonWidth,
-            child: FilledButton(
-              onPressed: onPressed,
-              child: Text(l10n.tryAgainButton),
+            child: SelectionContainer.disabled(
+              child: FilledButton(
+                onPressed: onPressed,
+                child: Text(l10n.tryAgainButton),
+              ),
             ),
           ),
         ],

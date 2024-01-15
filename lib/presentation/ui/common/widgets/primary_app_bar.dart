@@ -23,15 +23,17 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       _ => FontAwesomeIcons.xmark,
     };
 
-    return AppBar(
-      toolbarHeight: height,
-      leading: IconButton(
-        icon: FaIcon(backIcon),
-        onPressed: () {
-          context.pop();
-        },
+    return SelectionContainer.disabled(
+      child: AppBar(
+        toolbarHeight: height,
+        leading: IconButton(
+          icon: FaIcon(backIcon),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: title,
       ),
-      title: title,
     );
   }
 

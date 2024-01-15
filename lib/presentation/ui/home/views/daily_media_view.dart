@@ -57,32 +57,36 @@ class _DailyMediaViewState extends State<DailyMediaView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _bloc,
-      child: PrimaryRefreshIndicator(
-        onRefresh: () async {
-          _bloc.add(const DailyMediaListEvent.refreshed());
+    return SelectionArea(
+      child: SelectionTransformer.separated(
+        child: BlocProvider.value(
+          value: _bloc,
+          child: PrimaryRefreshIndicator(
+            onRefresh: () async {
+              _bloc.add(const DailyMediaListEvent.refreshed());
 
-          await _bloc.stream.firstWhere(
-            (state) => !state.status.isLoading,
-          );
-        },
-        child: CustomScrollView(
-          controller: _scrollController,
-          cacheExtent: 2000,
-          slivers: [
-            HomeAppBar(
-              title: context.l10n.dailyMediaTitle,
-              trailing: PrimaryIconButton(
-                icon: FontAwesomeIcons.solidStar,
-                size: IconButtonSize.medium,
-                onPressed: (_) {
-                  context.go('/daily-media/favorites');
-                },
-              ),
+              await _bloc.stream.firstWhere(
+                (state) => !state.status.isLoading,
+              );
+            },
+            child: CustomScrollView(
+              controller: _scrollController,
+              cacheExtent: 2000,
+              slivers: [
+                HomeAppBar(
+                  title: context.l10n.dailyMediaTitle,
+                  trailing: PrimaryIconButton(
+                    icon: FontAwesomeIcons.solidStar,
+                    size: IconButtonSize.medium,
+                    onPressed: (_) {
+                      context.go('/daily-media/favorites');
+                    },
+                  ),
+                ),
+                const _MediaList(),
+              ],
             ),
-            const _MediaList(),
-          ],
+          ),
         ),
       ),
     );

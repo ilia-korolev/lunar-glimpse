@@ -30,21 +30,25 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _bloc,
-      child: PrimaryRefreshIndicator(
-        onRefresh: () async {
-          _bloc.add(const NewsEvent.refreshed());
+    return SelectionArea(
+      child: SelectionTransformer.separated(
+        child: BlocProvider.value(
+          value: _bloc,
+          child: PrimaryRefreshIndicator(
+            onRefresh: () async {
+              _bloc.add(const NewsEvent.refreshed());
 
-          await _bloc.stream.firstWhere(
-            (state) => !state.status.isLoading,
-          );
-        },
-        child: CustomScrollView(
-          slivers: [
-            HomeAppBar(title: context.l10n.newsTitle),
-            const _Body(),
-          ],
+              await _bloc.stream.firstWhere(
+                (state) => !state.status.isLoading,
+              );
+            },
+            child: CustomScrollView(
+              slivers: [
+                HomeAppBar(title: context.l10n.newsTitle),
+                const _Body(),
+              ],
+            ),
+          ),
         ),
       ),
     );
