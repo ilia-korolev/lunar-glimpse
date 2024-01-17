@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 typedef SelectionTransform = String Function(Iterable<String>);
 
 // TODO(ilia-korolev): remove this when Flutter gets support for separators
+// https://github.com/flutter/flutter/issues/104548
 
 /// A widget that transforms the text selection when copied.
 ///
