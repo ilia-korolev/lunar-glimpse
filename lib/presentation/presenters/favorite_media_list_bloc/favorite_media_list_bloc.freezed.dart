@@ -127,7 +127,7 @@ class _$FavoriteMediaListFetchedImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoriteMediaListFetchedImpl);
@@ -285,7 +285,7 @@ class _$FavoriteMediaListFavoriteRemovedImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoriteMediaListFavoriteRemovedImpl &&
@@ -430,7 +430,7 @@ class _$FavoriteMediaListTriedAgainImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoriteMediaListTriedAgainImpl);
@@ -584,7 +584,7 @@ class _$FavoriteMediaListMediaChangedImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoriteMediaListMediaChangedImpl &&
@@ -798,7 +798,7 @@ class _$DailyMediaListStateImpl extends _DailyMediaListState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DailyMediaListStateImpl &&

@@ -141,7 +141,7 @@ class _$DailyMediaFetchedImpl implements DailyMediaFetched {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DailyMediaFetchedImpl &&
@@ -272,7 +272,7 @@ class _$DailyMediaFavoriteToggledImpl implements DailyMediaFavoriteToggled {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DailyMediaFavoriteToggledImpl);
@@ -387,7 +387,7 @@ class _$DailyMediaTriedAgainImpl implements DailyMediaTriedAgain {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DailyMediaTriedAgainImpl);
@@ -527,7 +527,7 @@ class _$DailyMediaMediaChangedImpl implements DailyMediaMediaChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DailyMediaMediaChangedImpl &&
@@ -724,7 +724,7 @@ class _$InitialImpl extends _Initial {
   const _$InitialImpl() : super._();
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -834,7 +834,7 @@ class _$LoadingImpl extends _Loading {
   const _$LoadingImpl() : super._();
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
@@ -972,7 +972,7 @@ class _$SuccessImpl extends _Success {
   final Media media;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -1113,7 +1113,7 @@ class _$FailureImpl extends _Failure {
   final String message;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FailureImpl &&

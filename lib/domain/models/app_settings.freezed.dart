@@ -21,6 +21,8 @@ AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AppSettings {
   ThemeMode get themeMode => throw _privateConstructorUsedError;
+  @LocaleConverterNullable()
+  Locale? get locale => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,7 @@ abstract class $AppSettingsCopyWith<$Res> {
           AppSettings value, $Res Function(AppSettings) then) =
       _$AppSettingsCopyWithImpl<$Res, AppSettings>;
   @useResult
-  $Res call({ThemeMode themeMode});
+  $Res call({ThemeMode themeMode, @LocaleConverterNullable() Locale? locale});
 }
 
 /// @nodoc
@@ -51,12 +53,17 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
   @override
   $Res call({
     Object? themeMode = null,
+    Object? locale = freezed,
   }) {
     return _then(_value.copyWith(
       themeMode: null == themeMode
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
               as ThemeMode,
+      locale: freezed == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale?,
     ) as $Val);
   }
 }
@@ -69,7 +76,7 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       __$$AppSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ThemeMode themeMode});
+  $Res call({ThemeMode themeMode, @LocaleConverterNullable() Locale? locale});
 }
 
 /// @nodoc
@@ -84,12 +91,17 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? themeMode = null,
+    Object? locale = freezed,
   }) {
     return _then(_$AppSettingsImpl(
       themeMode: null == themeMode
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
               as ThemeMode,
+      locale: freezed == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale?,
     ));
   }
 }
@@ -97,31 +109,37 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AppSettingsImpl implements _AppSettings {
-  const _$AppSettingsImpl({required this.themeMode});
+  const _$AppSettingsImpl(
+      {required this.themeMode,
+      @LocaleConverterNullable() required this.locale});
 
   factory _$AppSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppSettingsImplFromJson(json);
 
   @override
   final ThemeMode themeMode;
+  @override
+  @LocaleConverterNullable()
+  final Locale? locale;
 
   @override
   String toString() {
-    return 'AppSettings(themeMode: $themeMode)';
+    return 'AppSettings(themeMode: $themeMode, locale: $locale)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppSettingsImpl &&
             (identical(other.themeMode, themeMode) ||
-                other.themeMode == themeMode));
+                other.themeMode == themeMode) &&
+            (identical(other.locale, locale) || other.locale == locale));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, themeMode);
+  int get hashCode => Object.hash(runtimeType, themeMode, locale);
 
   @JsonKey(ignore: true)
   @override
@@ -138,7 +156,9 @@ class _$AppSettingsImpl implements _AppSettings {
 }
 
 abstract class _AppSettings implements AppSettings {
-  const factory _AppSettings({required final ThemeMode themeMode}) =
+  const factory _AppSettings(
+          {required final ThemeMode themeMode,
+          @LocaleConverterNullable() required final Locale? locale}) =
       _$AppSettingsImpl;
 
   factory _AppSettings.fromJson(Map<String, dynamic> json) =
@@ -146,6 +166,9 @@ abstract class _AppSettings implements AppSettings {
 
   @override
   ThemeMode get themeMode;
+  @override
+  @LocaleConverterNullable()
+  Locale? get locale;
   @override
   @JsonKey(ignore: true)
   _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>

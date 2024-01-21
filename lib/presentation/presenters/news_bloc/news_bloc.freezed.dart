@@ -106,7 +106,7 @@ class _$NewsFetchedImpl implements NewsFetched {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$NewsFetchedImpl);
   }
@@ -214,7 +214,7 @@ class _$NewsRefreshedImpl implements NewsRefreshed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$NewsRefreshedImpl);
   }
@@ -322,7 +322,7 @@ class _$NewsTriedAgainImpl implements NewsTriedAgain {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$NewsTriedAgainImpl);
   }
@@ -508,7 +508,7 @@ class _$NewsStateImpl extends _NewsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewsStateImpl &&

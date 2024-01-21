@@ -1,5 +1,7 @@
 {
   "@@locale": "en",
+  "languageName": "English (US)",
+  "systemLanguageName": "System default",
   "dailyMediaTitle": "Daily Media",
   "newsTitle": "News",
   "settingsTitle": "Settings",
@@ -7,6 +9,8 @@
   "systemThemeModeTitle": "System default",
   "lightThemeModeTitle": "Light",
   "darkThemeModeTitle": "Dark",
+  "languageSettingsTitle": "Language",
+  "languageSettingsDescription": "Select language",
   "aboutSettingsTitle": "About",
   "aboutSettingsDescription": "All the stuff you need to know",
   "gitHubSettingsTitle": "GitHub Page",

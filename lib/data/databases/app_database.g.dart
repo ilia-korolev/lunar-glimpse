@@ -505,7 +505,7 @@ class $WebFeedEntitiesTable extends WebFeedEntities
   static TypeConverter<Uri, String> $converteruri = const _UriConverter();
   static TypeConverter<Uri, String> $converterfavicon = const _UriConverter();
   static TypeConverter<Locale, String> $converterlocale =
-      const _LocaleConverter();
+      const LocaleConverter();
 }
 
 class WebFeedEntity extends DataClass implements Insertable<WebFeedEntity> {

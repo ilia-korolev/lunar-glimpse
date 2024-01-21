@@ -383,7 +383,7 @@ class _ExpandedSuccessView extends StatelessWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final padding = math.max(
-            (constraints.maxWidth - theme.sizes.expandedContentWidth) / 2,
+            (constraints.maxWidth - theme.sizes.wideContentWidth) / 2,
             theme.spacing.large,
           );
 

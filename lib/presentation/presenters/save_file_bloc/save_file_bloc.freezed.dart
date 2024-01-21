@@ -135,7 +135,7 @@ class _$SaveFileStartedImpl implements SaveFileStarted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SaveFileStartedImpl &&
@@ -320,7 +320,7 @@ class _$SaveFileInitialImpl implements SaveFileInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$SaveFileInitialImpl);
   }
@@ -452,7 +452,7 @@ class _$SaveFileInProgressImpl implements SaveFileInProgress {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SaveFileInProgressImpl &&
@@ -600,7 +600,7 @@ class _$SaveFileCompleteImpl implements SaveFileComplete {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SaveFileCompleteImpl &&
@@ -729,7 +729,7 @@ class _$SaveFileFailureImpl implements SaveFileFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$SaveFileFailureImpl);
   }

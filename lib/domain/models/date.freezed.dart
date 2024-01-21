@@ -131,7 +131,7 @@ class _$DateImpl extends _Date {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DateImpl &&

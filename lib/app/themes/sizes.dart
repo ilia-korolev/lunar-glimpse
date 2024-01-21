@@ -14,7 +14,9 @@ class Sizes extends ThemeExtension<Sizes> {
     required this.largeIconSize,
     required this.avatarSize,
     required this.expandedArticleCardHeight,
-    required this.expandedContentWidth,
+    required this.narrowContentWidth,
+    required this.mediumContentWidth,
+    required this.wideContentWidth,
   });
 
   const Sizes.regular()
@@ -29,7 +31,9 @@ class Sizes extends ThemeExtension<Sizes> {
           largeIconSize: 32,
           avatarSize: 90,
           expandedArticleCardHeight: 175,
-          expandedContentWidth: 1024,
+          narrowContentWidth: 600,
+          mediumContentWidth: 840,
+          wideContentWidth: 1024,
         );
 
   final double smallAppBarHeight;
@@ -42,7 +46,9 @@ class Sizes extends ThemeExtension<Sizes> {
   final double largeIconSize;
   final double avatarSize;
   final double expandedArticleCardHeight;
-  final double expandedContentWidth;
+  final double narrowContentWidth;
+  final double mediumContentWidth;
+  final double wideContentWidth;
 
   @override
   Sizes copyWith({
@@ -56,7 +62,9 @@ class Sizes extends ThemeExtension<Sizes> {
     double? largeIconSize,
     double? avatarSize,
     double? expandedArticleCardHeight,
-    double? expandedContentWidth,
+    double? narrowContentWidth,
+    double? mediumContentWidth,
+    double? wideContentWidth,
   }) {
     return Sizes(
       smallAppBarHeight: smallAppBarHeight ?? this.smallAppBarHeight,
@@ -70,7 +78,9 @@ class Sizes extends ThemeExtension<Sizes> {
       avatarSize: avatarSize ?? this.avatarSize,
       expandedArticleCardHeight:
           expandedArticleCardHeight ?? this.expandedArticleCardHeight,
-      expandedContentWidth: expandedContentWidth ?? this.expandedContentWidth,
+      narrowContentWidth: narrowContentWidth ?? this.narrowContentWidth,
+      mediumContentWidth: mediumContentWidth ?? this.mediumContentWidth,
+      wideContentWidth: wideContentWidth ?? this.wideContentWidth,
     );
   }
 
@@ -134,9 +144,19 @@ class Sizes extends ThemeExtension<Sizes> {
         other.expandedArticleCardHeight,
         t,
       )!,
-      expandedContentWidth: lerpDouble(
-        expandedContentWidth,
-        other.expandedContentWidth,
+      narrowContentWidth: lerpDouble(
+        narrowContentWidth,
+        other.narrowContentWidth,
+        t,
+      )!,
+      mediumContentWidth: lerpDouble(
+        mediumContentWidth,
+        other.mediumContentWidth,
+        t,
+      )!,
+      wideContentWidth: lerpDouble(
+        wideContentWidth,
+        other.wideContentWidth,
         t,
       )!,
     );

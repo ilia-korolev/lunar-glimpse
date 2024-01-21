@@ -11,11 +11,14 @@ part of 'app_settings.dart';
 _$AppSettingsImpl _$$AppSettingsImplFromJson(Map<String, dynamic> json) =>
     _$AppSettingsImpl(
       themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
+      locale:
+          const LocaleConverterNullable().fromJson(json['locale'] as String?),
     );
 
 Map<String, dynamic> _$$AppSettingsImplToJson(_$AppSettingsImpl instance) =>
     <String, dynamic>{
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
+      'locale': const LocaleConverterNullable().toJson(instance.locale),
     };
 
 const _$ThemeModeEnumMap = {

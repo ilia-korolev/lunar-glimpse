@@ -22,4 +22,17 @@ class AppSettingsCubit extends Cubit<AppSettings> {
     await _appSettingsRepository.setSettings(settings: settings);
     emit(settings);
   }
+
+  Future<void> changeLocale(Locale? locale) async {
+    if (locale == state.locale) {
+      return;
+    }
+
+    final settings = state.copyWith(
+      locale: locale,
+    );
+
+    await _appSettingsRepository.setSettings(settings: settings);
+    emit(settings);
+  }
 }

@@ -7,7 +7,6 @@ import 'package:drift/native.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:intl/locale.dart' as intl;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -35,7 +34,7 @@ class DailyMediaEntities extends Table {
 class WebFeedEntities extends Table {
   TextColumn get uri => text().map(const _UriConverter())();
   TextColumn get favicon => text().map(const _UriConverter())();
-  TextColumn get locale => text().map(const _LocaleConverter())();
+  TextColumn get locale => text().map(const LocaleConverter())();
   BoolColumn get isHidden => boolean()();
 
   @override
@@ -91,27 +90,4 @@ class _UriConverter extends TypeConverter<Uri, String> {
 
   @override
   String toSql(Uri value) => value.toString();
-}
-
-class _LocaleConverter extends TypeConverter<Locale, String> {
-  const _LocaleConverter();
-
-  @override
-  Locale fromSql(String fromDb) => _tryParseLocale(fromDb);
-
-  @override
-  String toSql(Locale value) => value.toString();
-
-  // TODO(ilia-korolev): There is no parser for Locale class,
-  // fix it when there is
-  // https://github.com/flutter/flutter/issues/55720
-  Locale _tryParseLocale(String rawLocale) {
-    final intlLocale = intl.Locale.parse(rawLocale);
-
-    return Locale.fromSubtags(
-      languageCode: intlLocale.languageCode,
-      countryCode: intlLocale.countryCode,
-      scriptCode: intlLocale.scriptCode,
-    );
-  }
 }

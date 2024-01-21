@@ -52,6 +52,14 @@ class _Body extends StatelessWidget {
             },
           ),
           SettingButton(
+            icon: FontAwesomeIcons.globe,
+            title: l10n.languageSettingsTitle,
+            subtitle: l10n.languageSettingsDescription,
+            onPressed: () async {
+              context.go('/settings/language');
+            },
+          ),
+          SettingButton(
             icon: FontAwesomeIcons.circleInfo,
             title: l10n.aboutSettingsTitle,
             subtitle: l10n.aboutSettingsDescription,

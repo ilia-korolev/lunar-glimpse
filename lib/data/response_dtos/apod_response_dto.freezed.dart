@@ -231,7 +231,7 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ApodResponseDtoImpl &&

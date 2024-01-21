@@ -33,6 +33,7 @@ class App extends StatelessWidget {
                 theme: GetIt.instance<Theming>().light,
                 darkTheme: GetIt.instance<Theming>().dark,
                 themeMode: settings.themeMode,
+                locale: settings.locale,
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,

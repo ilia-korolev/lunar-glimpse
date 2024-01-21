@@ -54,6 +54,12 @@ class Routing {
               return const GithubInfoPage();
             },
           ),
+          GoRoute(
+            path: 'language',
+            builder: (context, state) {
+              return const LanguagePage();
+            },
+          ),
         ],
       ),
     ],
