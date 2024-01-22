@@ -8,74 +8,73 @@ import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'daily_media_list_bloc.freezed.dart';
-part 'daily_media_list_event.dart';
-part 'daily_media_list_state.dart';
+part 'gallery_bloc.freezed.dart';
+part 'gallery_event.dart';
+part 'gallery_state.dart';
 
 const _throttleDuration = Duration(milliseconds: 100);
 
-class DailyMediaListBloc
-    extends Bloc<DailyMediaListEvent, DailyMediaListState> {
-  DailyMediaListBloc({
-    required DailyMediaRepository repository,
+class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
+  GalleryBloc({
+    required GalleryRepository repository,
     this.pageSize = 25,
   })  : _repository = repository,
         super(
-          const DailyMediaListState(
+          const GalleryState(
             status: BlocStatus.initial,
           ),
         ) {
-    on<DailyMediaListFetched>(
+    on<GalleryFetched>(
       (event, emit) async => _fetched(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<DailyMediaListRefreshed>(
+    on<GalleryRefreshed>(
       (event, emit) async => _refreshed(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<DailyMediaListFavoriteToggled>(
-      (event, emit) async => _favoriteToggled(emit, event.media),
+    on<GalleryFavoriteToggled>(
+      (event, emit) async => _favoriteToggled(emit, event.item),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<DailyMediaListTriedAgain>(
+    on<GalleryTriedAgain>(
       (event, emit) async => _triedAgain(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<DailyMediaListMediaChanged>(
-      (event, emit) async => _mediaChanged(emit, event.media),
+    on<GalleryItemsChanged>(
+      (event, emit) async => _itemsChanged(emit, event.items),
     );
 
-    _mediaChangesListener = _repository.changes.listen((mediaList) {
-      add(DailyMediaListEvent.mediaChanged(mediaList));
+    _itemChangesListener = _repository.changes.listen((items) {
+      add(GalleryEvent.itemsChanged(items: items));
     });
   }
 
-  final DailyMediaRepository _repository;
+  final GalleryRepository _repository;
   final int pageSize;
 
-  late final StreamSubscription<List<Media>> _mediaChangesListener;
+  late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
 
-  DailyMediaListEvent? _previousEvent;
+  GalleryEvent? _previousEvent;
 
   @override
   Future<void> close() async {
-    await _mediaChangesListener.cancel();
+    await _itemChangesListener.cancel();
 
     return super.close();
   }
 
   @override
-  void onEvent(DailyMediaListEvent event) {
+  void onEvent(GalleryEvent event) {
     _storeEvent(event);
 
     super.onEvent(event);
   }
 
-  void _storeEvent(DailyMediaListEvent event) {
+  void _storeEvent(GalleryEvent event) {
     final shouldStore = event.maybeWhen<bool>(
       triedAgain: () => false,
       orElse: () => true,
@@ -88,7 +87,7 @@ class DailyMediaListBloc
     _previousEvent = event;
   }
 
-  Future<void> _fetched(Emitter<DailyMediaListState> emit) async {
+  Future<void> _fetched(Emitter<GalleryState> emit) async {
     try {
       if (state.hasReachedMax) {
         return;
@@ -100,24 +99,24 @@ class DailyMediaListBloc
         ),
       );
 
-      final response = state.mediaList.isEmpty
-          ? await _repository.getLatestMedia(count: pageSize)
-          : await _repository.getDailyMediaList(
-              endDate: state.mediaList.last.date.yesterday,
+      final response = state.items.isEmpty
+          ? await _repository.getLatestItems(count: pageSize)
+          : await _repository.getItems(
+              endDate: state.items.last.date.yesterday,
               count: pageSize,
             );
 
-      final mediaList = [
-        ...state.mediaList,
+      final items = [
+        ...state.items,
         ...response,
       ] // TODO(ilia-korolev): implement a video player
-          .where((m) => m.type == MediaType.image)
+          .where((m) => m.type == GalleryItemType.image)
           .toList();
 
       emit(
         state.copyWith(
           status: BlocStatus.success,
-          mediaList: mediaList,
+          items: items,
           hasReachedMax: response.length < pageSize,
         ),
       );
@@ -130,11 +129,11 @@ class DailyMediaListBloc
     }
   }
 
-  Future<void> _refreshed(Emitter<DailyMediaListState> emit) async {
+  Future<void> _refreshed(Emitter<GalleryState> emit) async {
     emit(
       state.copyWith(
         status: BlocStatus.loading,
-        mediaList: [],
+        items: [],
         hasReachedMax: false,
       ),
     );
@@ -143,12 +142,12 @@ class DailyMediaListBloc
   }
 
   Future<void> _favoriteToggled(
-    Emitter<DailyMediaListState> emit,
-    Media media,
+    Emitter<GalleryState> emit,
+    GalleryItem item,
   ) async {
     try {
       await _repository.toggleFavorite(
-        media: media,
+        galleryItem: item,
       );
 
       emit(
@@ -162,7 +161,7 @@ class DailyMediaListBloc
   }
 
   Future<void> _triedAgain(
-    Emitter<DailyMediaListState> emit,
+    Emitter<GalleryState> emit,
   ) async {
     if (_previousEvent == null) {
       return;
@@ -171,18 +170,18 @@ class DailyMediaListBloc
     add(_previousEvent!);
   }
 
-  Future<void> _mediaChanged(
-    Emitter<DailyMediaListState> emit,
-    List<Media> mediaList,
+  Future<void> _itemsChanged(
+    Emitter<GalleryState> emit,
+    List<GalleryItem> items,
   ) async {
-    final changedList = state.mediaList.map((old) {
-      final changed = mediaList.firstWhereOrNull(
+    final changedList = state.items.map((old) {
+      final changed = items.firstWhereOrNull(
         (changed) => changed.date == old.date,
       );
 
       return changed ?? old;
     }).toList();
 
-    emit(state.copyWith(mediaList: changedList));
+    emit(state.copyWith(items: changedList));
   }
 }

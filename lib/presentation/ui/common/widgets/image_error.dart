@@ -19,7 +19,7 @@ class ImageError extends StatelessWidget {
           size: theme.sizes.largeIconSize,
         ),
         SizedBox(height: theme.spacing.semiSmall),
-        Text(l10n.mediaLoadError),
+        Text(l10n.imageLoadError),
       ],
     );
   }

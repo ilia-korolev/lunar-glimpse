@@ -13,7 +13,7 @@ class ApodResponseDto with _$ApodResponseDto {
     required String explanation,
     required String title,
     required String url,
-    @JsonKey(name: 'media_type') required MediaType mediaType,
+    @JsonKey(name: 'media_type') required GalleryItemType mediaType,
     String? copyright,
     @JsonKey(name: 'hdurl') String? hdUrl,
   }) = _ApodResponseDto;
@@ -24,8 +24,8 @@ class ApodResponseDto with _$ApodResponseDto {
       _$ApodResponseDtoFromJson(json);
 
   /// Throws a [FormatException] if the dto cannot be converted.
-  Media toModel() {
-    return Media(
+  GalleryItem toModel() {
+    return GalleryItem(
       copyright: copyright,
       date: date,
       explanation: explanation,

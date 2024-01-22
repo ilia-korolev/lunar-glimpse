@@ -15,15 +15,15 @@ part 'app_database.initial_data.dart';
 
 const _dbPath = 'db.sqlite';
 
-@DataClassName('DailyMediaEntity')
-class DailyMediaEntities extends Table {
+@DataClassName('GalleryEntity')
+class GalleryEntities extends Table {
   IntColumn get date => integer().map(const DateConverter())();
   TextColumn get title => text()();
   TextColumn get explanation => text()();
   TextColumn get uri => text().map(const _UriConverter())();
   TextColumn get hdUri => text().map(const _UriConverter())();
   TextColumn get copyright => text().nullable()();
-  IntColumn get type => intEnum<MediaType>()();
+  IntColumn get type => intEnum<GalleryItemType>()();
   BoolColumn get isFavorite => boolean()();
 
   @override
@@ -43,7 +43,7 @@ class WebFeedEntities extends Table {
 
 @DriftDatabase(
   tables: [
-    DailyMediaEntities,
+    GalleryEntities,
     WebFeedEntities,
   ],
 )

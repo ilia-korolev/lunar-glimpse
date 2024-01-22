@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 
 class Routing {
   static final appRouter = GoRouter(
-    initialLocation: HomePageTab.dailyMedia.path,
+    initialLocation: HomePageTab.gallery.path,
     routes: [
       GoRoute(
-        path: HomePageTab.dailyMedia.path,
+        path: HomePageTab.gallery.path,
         pageBuilder: (context, state) {
           return const NoTransitionPage(
             child: HomePage(
-              tab: HomePageTab.dailyMedia,
+              tab: HomePageTab.gallery,
             ),
           );
         },
@@ -19,13 +19,13 @@ class Routing {
           GoRoute(
             path: 'favorites',
             builder: (context, state) {
-              return const FavoriteMediaPage();
+              return const GalleryFavoritesPage();
             },
             routes: [
-              _dailyMediaRoute,
+              _galleryItemRoute,
             ],
           ),
-          _dailyMediaRoute,
+          _galleryItemRoute,
         ],
       ),
       GoRoute(
@@ -65,18 +65,18 @@ class Routing {
     ],
   );
 
-  static GoRoute get _dailyMediaRoute {
+  static GoRoute get _galleryItemRoute {
     return GoRoute(
       path: ':date',
       builder: (context, state) {
-        final date = _parseMediaDate(state.pathParameters['date']);
+        final date = _parseDate(state.pathParameters['date']);
 
-        return DailyMediaPage(date: date);
+        return GalleryItemPage(date: date);
       },
     );
   }
 
-  static Date _parseMediaDate(String? date) {
+  static Date _parseDate(String? date) {
     if (date == null) {
       throw ArgumentError('The date param must be not null');
     }

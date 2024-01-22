@@ -5,18 +5,18 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $DailyMediaEntitiesTable extends DailyMediaEntities
-    with TableInfo<$DailyMediaEntitiesTable, DailyMediaEntity> {
+class $GalleryEntitiesTable extends GalleryEntities
+    with TableInfo<$GalleryEntitiesTable, GalleryEntity> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $DailyMediaEntitiesTable(this.attachedDatabase, [this._alias]);
+  $GalleryEntitiesTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
   late final GeneratedColumnWithTypeConverter<Date, int> date =
       GeneratedColumn<int>('date', aliasedName, false,
               type: DriftSqlType.int, requiredDuringInsert: false)
-          .withConverter<Date>($DailyMediaEntitiesTable.$converterdate);
+          .withConverter<Date>($GalleryEntitiesTable.$converterdate);
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
@@ -33,13 +33,13 @@ class $DailyMediaEntitiesTable extends DailyMediaEntities
   late final GeneratedColumnWithTypeConverter<Uri, String> uri =
       GeneratedColumn<String>('uri', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<Uri>($DailyMediaEntitiesTable.$converteruri);
+          .withConverter<Uri>($GalleryEntitiesTable.$converteruri);
   static const VerificationMeta _hdUriMeta = const VerificationMeta('hdUri');
   @override
   late final GeneratedColumnWithTypeConverter<Uri, String> hdUri =
       GeneratedColumn<String>('hd_uri', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<Uri>($DailyMediaEntitiesTable.$converterhdUri);
+          .withConverter<Uri>($GalleryEntitiesTable.$converterhdUri);
   static const VerificationMeta _copyrightMeta =
       const VerificationMeta('copyright');
   @override
@@ -48,10 +48,10 @@ class $DailyMediaEntitiesTable extends DailyMediaEntities
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
-  late final GeneratedColumnWithTypeConverter<MediaType, int> type =
+  late final GeneratedColumnWithTypeConverter<GalleryItemType, int> type =
       GeneratedColumn<int>('type', aliasedName, false,
               type: DriftSqlType.int, requiredDuringInsert: true)
-          .withConverter<MediaType>($DailyMediaEntitiesTable.$convertertype);
+          .withConverter<GalleryItemType>($GalleryEntitiesTable.$convertertype);
   static const VerificationMeta _isFavoriteMeta =
       const VerificationMeta('isFavorite');
   @override
@@ -68,9 +68,9 @@ class $DailyMediaEntitiesTable extends DailyMediaEntities
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'daily_media_entities';
+  static const String $name = 'gallery_entities';
   @override
-  VerificationContext validateIntegrity(Insertable<DailyMediaEntity> instance,
+  VerificationContext validateIntegrity(Insertable<GalleryEntity> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -110,25 +110,25 @@ class $DailyMediaEntitiesTable extends DailyMediaEntities
   @override
   Set<GeneratedColumn> get $primaryKey => {date};
   @override
-  DailyMediaEntity map(Map<String, dynamic> data, {String? tablePrefix}) {
+  GalleryEntity map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return DailyMediaEntity(
-      date: $DailyMediaEntitiesTable.$converterdate.fromSql(attachedDatabase
+    return GalleryEntity(
+      date: $GalleryEntitiesTable.$converterdate.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}date'])!),
       title: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       explanation: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}explanation'])!,
-      uri: $DailyMediaEntitiesTable.$converteruri.fromSql(attachedDatabase
+      uri: $GalleryEntitiesTable.$converteruri.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}uri'])!),
-      hdUri: $DailyMediaEntitiesTable.$converterhdUri.fromSql(attachedDatabase
+      hdUri: $GalleryEntitiesTable.$converterhdUri.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}hd_uri'])!),
       copyright: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}copyright']),
-      type: $DailyMediaEntitiesTable.$convertertype.fromSql(attachedDatabase
+      type: $GalleryEntitiesTable.$convertertype.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}type'])!),
       isFavorite: attachedDatabase.typeMapping
@@ -137,28 +137,27 @@ class $DailyMediaEntitiesTable extends DailyMediaEntities
   }
 
   @override
-  $DailyMediaEntitiesTable createAlias(String alias) {
-    return $DailyMediaEntitiesTable(attachedDatabase, alias);
+  $GalleryEntitiesTable createAlias(String alias) {
+    return $GalleryEntitiesTable(attachedDatabase, alias);
   }
 
   static TypeConverter<Date, int> $converterdate = const DateConverter();
   static TypeConverter<Uri, String> $converteruri = const _UriConverter();
   static TypeConverter<Uri, String> $converterhdUri = const _UriConverter();
-  static JsonTypeConverter2<MediaType, int, int> $convertertype =
-      const EnumIndexConverter<MediaType>(MediaType.values);
+  static JsonTypeConverter2<GalleryItemType, int, int> $convertertype =
+      const EnumIndexConverter<GalleryItemType>(GalleryItemType.values);
 }
 
-class DailyMediaEntity extends DataClass
-    implements Insertable<DailyMediaEntity> {
+class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
   final Date date;
   final String title;
   final String explanation;
   final Uri uri;
   final Uri hdUri;
   final String? copyright;
-  final MediaType type;
+  final GalleryItemType type;
   final bool isFavorite;
-  const DailyMediaEntity(
+  const GalleryEntity(
       {required this.date,
       required this.title,
       required this.explanation,
@@ -172,31 +171,31 @@ class DailyMediaEntity extends DataClass
     final map = <String, Expression>{};
     {
       map['date'] =
-          Variable<int>($DailyMediaEntitiesTable.$converterdate.toSql(date));
+          Variable<int>($GalleryEntitiesTable.$converterdate.toSql(date));
     }
     map['title'] = Variable<String>(title);
     map['explanation'] = Variable<String>(explanation);
     {
       map['uri'] =
-          Variable<String>($DailyMediaEntitiesTable.$converteruri.toSql(uri));
+          Variable<String>($GalleryEntitiesTable.$converteruri.toSql(uri));
     }
     {
-      map['hd_uri'] = Variable<String>(
-          $DailyMediaEntitiesTable.$converterhdUri.toSql(hdUri));
+      map['hd_uri'] =
+          Variable<String>($GalleryEntitiesTable.$converterhdUri.toSql(hdUri));
     }
     if (!nullToAbsent || copyright != null) {
       map['copyright'] = Variable<String>(copyright);
     }
     {
       map['type'] =
-          Variable<int>($DailyMediaEntitiesTable.$convertertype.toSql(type));
+          Variable<int>($GalleryEntitiesTable.$convertertype.toSql(type));
     }
     map['is_favorite'] = Variable<bool>(isFavorite);
     return map;
   }
 
-  DailyMediaEntitiesCompanion toCompanion(bool nullToAbsent) {
-    return DailyMediaEntitiesCompanion(
+  GalleryEntitiesCompanion toCompanion(bool nullToAbsent) {
+    return GalleryEntitiesCompanion(
       date: Value(date),
       title: Value(title),
       explanation: Value(explanation),
@@ -210,17 +209,17 @@ class DailyMediaEntity extends DataClass
     );
   }
 
-  factory DailyMediaEntity.fromJson(Map<String, dynamic> json,
+  factory GalleryEntity.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return DailyMediaEntity(
+    return GalleryEntity(
       date: serializer.fromJson<Date>(json['date']),
       title: serializer.fromJson<String>(json['title']),
       explanation: serializer.fromJson<String>(json['explanation']),
       uri: serializer.fromJson<Uri>(json['uri']),
       hdUri: serializer.fromJson<Uri>(json['hdUri']),
       copyright: serializer.fromJson<String?>(json['copyright']),
-      type: $DailyMediaEntitiesTable.$convertertype
+      type: $GalleryEntitiesTable.$convertertype
           .fromJson(serializer.fromJson<int>(json['type'])),
       isFavorite: serializer.fromJson<bool>(json['isFavorite']),
     );
@@ -236,21 +235,21 @@ class DailyMediaEntity extends DataClass
       'hdUri': serializer.toJson<Uri>(hdUri),
       'copyright': serializer.toJson<String?>(copyright),
       'type': serializer
-          .toJson<int>($DailyMediaEntitiesTable.$convertertype.toJson(type)),
+          .toJson<int>($GalleryEntitiesTable.$convertertype.toJson(type)),
       'isFavorite': serializer.toJson<bool>(isFavorite),
     };
   }
 
-  DailyMediaEntity copyWith(
+  GalleryEntity copyWith(
           {Date? date,
           String? title,
           String? explanation,
           Uri? uri,
           Uri? hdUri,
           Value<String?> copyright = const Value.absent(),
-          MediaType? type,
+          GalleryItemType? type,
           bool? isFavorite}) =>
-      DailyMediaEntity(
+      GalleryEntity(
         date: date ?? this.date,
         title: title ?? this.title,
         explanation: explanation ?? this.explanation,
@@ -262,7 +261,7 @@ class DailyMediaEntity extends DataClass
       );
   @override
   String toString() {
-    return (StringBuffer('DailyMediaEntity(')
+    return (StringBuffer('GalleryEntity(')
           ..write('date: $date, ')
           ..write('title: $title, ')
           ..write('explanation: $explanation, ')
@@ -281,7 +280,7 @@ class DailyMediaEntity extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is DailyMediaEntity &&
+      (other is GalleryEntity &&
           other.date == this.date &&
           other.title == this.title &&
           other.explanation == this.explanation &&
@@ -292,16 +291,16 @@ class DailyMediaEntity extends DataClass
           other.isFavorite == this.isFavorite);
 }
 
-class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
+class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
   final Value<Date> date;
   final Value<String> title;
   final Value<String> explanation;
   final Value<Uri> uri;
   final Value<Uri> hdUri;
   final Value<String?> copyright;
-  final Value<MediaType> type;
+  final Value<GalleryItemType> type;
   final Value<bool> isFavorite;
-  const DailyMediaEntitiesCompanion({
+  const GalleryEntitiesCompanion({
     this.date = const Value.absent(),
     this.title = const Value.absent(),
     this.explanation = const Value.absent(),
@@ -311,14 +310,14 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
     this.type = const Value.absent(),
     this.isFavorite = const Value.absent(),
   });
-  DailyMediaEntitiesCompanion.insert({
+  GalleryEntitiesCompanion.insert({
     this.date = const Value.absent(),
     required String title,
     required String explanation,
     required Uri uri,
     required Uri hdUri,
     this.copyright = const Value.absent(),
-    required MediaType type,
+    required GalleryItemType type,
     required bool isFavorite,
   })  : title = Value(title),
         explanation = Value(explanation),
@@ -326,7 +325,7 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
         hdUri = Value(hdUri),
         type = Value(type),
         isFavorite = Value(isFavorite);
-  static Insertable<DailyMediaEntity> custom({
+  static Insertable<GalleryEntity> custom({
     Expression<int>? date,
     Expression<String>? title,
     Expression<String>? explanation,
@@ -348,16 +347,16 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
     });
   }
 
-  DailyMediaEntitiesCompanion copyWith(
+  GalleryEntitiesCompanion copyWith(
       {Value<Date>? date,
       Value<String>? title,
       Value<String>? explanation,
       Value<Uri>? uri,
       Value<Uri>? hdUri,
       Value<String?>? copyright,
-      Value<MediaType>? type,
+      Value<GalleryItemType>? type,
       Value<bool>? isFavorite}) {
-    return DailyMediaEntitiesCompanion(
+    return GalleryEntitiesCompanion(
       date: date ?? this.date,
       title: title ?? this.title,
       explanation: explanation ?? this.explanation,
@@ -373,8 +372,8 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (date.present) {
-      map['date'] = Variable<int>(
-          $DailyMediaEntitiesTable.$converterdate.toSql(date.value));
+      map['date'] =
+          Variable<int>($GalleryEntitiesTable.$converterdate.toSql(date.value));
     }
     if (title.present) {
       map['title'] = Variable<String>(title.value);
@@ -384,18 +383,18 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
     }
     if (uri.present) {
       map['uri'] = Variable<String>(
-          $DailyMediaEntitiesTable.$converteruri.toSql(uri.value));
+          $GalleryEntitiesTable.$converteruri.toSql(uri.value));
     }
     if (hdUri.present) {
       map['hd_uri'] = Variable<String>(
-          $DailyMediaEntitiesTable.$converterhdUri.toSql(hdUri.value));
+          $GalleryEntitiesTable.$converterhdUri.toSql(hdUri.value));
     }
     if (copyright.present) {
       map['copyright'] = Variable<String>(copyright.value);
     }
     if (type.present) {
-      map['type'] = Variable<int>(
-          $DailyMediaEntitiesTable.$convertertype.toSql(type.value));
+      map['type'] =
+          Variable<int>($GalleryEntitiesTable.$convertertype.toSql(type.value));
     }
     if (isFavorite.present) {
       map['is_favorite'] = Variable<bool>(isFavorite.value);
@@ -405,7 +404,7 @@ class DailyMediaEntitiesCompanion extends UpdateCompanion<DailyMediaEntity> {
 
   @override
   String toString() {
-    return (StringBuffer('DailyMediaEntitiesCompanion(')
+    return (StringBuffer('GalleryEntitiesCompanion(')
           ..write('date: $date, ')
           ..write('title: $title, ')
           ..write('explanation: $explanation, ')
@@ -691,8 +690,8 @@ class WebFeedEntitiesCompanion extends UpdateCompanion<WebFeedEntity> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
-  late final $DailyMediaEntitiesTable dailyMediaEntities =
-      $DailyMediaEntitiesTable(this);
+  late final $GalleryEntitiesTable galleryEntities =
+      $GalleryEntitiesTable(this);
   late final $WebFeedEntitiesTable webFeedEntities =
       $WebFeedEntitiesTable(this);
   @override
@@ -700,5 +699,5 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [dailyMediaEntities, webFeedEntities];
+      [galleryEntities, webFeedEntities];
 }

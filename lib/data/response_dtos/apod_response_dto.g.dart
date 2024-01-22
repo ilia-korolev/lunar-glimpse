@@ -15,7 +15,7 @@ _$ApodResponseDtoImpl _$$ApodResponseDtoImplFromJson(
       explanation: json['explanation'] as String,
       title: json['title'] as String,
       url: json['url'] as String,
-      mediaType: $enumDecode(_$MediaTypeEnumMap, json['media_type']),
+      mediaType: $enumDecode(_$GalleryItemTypeEnumMap, json['media_type']),
       copyright: json['copyright'] as String?,
       hdUrl: json['hdurl'] as String?,
     );
@@ -27,7 +27,7 @@ Map<String, dynamic> _$$ApodResponseDtoImplToJson(
     'explanation': instance.explanation,
     'title': instance.title,
     'url': instance.url,
-    'media_type': _$MediaTypeEnumMap[instance.mediaType]!,
+    'media_type': _$GalleryItemTypeEnumMap[instance.mediaType]!,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -41,7 +41,7 @@ Map<String, dynamic> _$$ApodResponseDtoImplToJson(
   return val;
 }
 
-const _$MediaTypeEnumMap = {
-  MediaType.video: 'video',
-  MediaType.image: 'image',
+const _$GalleryItemTypeEnumMap = {
+  GalleryItemType.video: 'video',
+  GalleryItemType.image: 'image',
 };

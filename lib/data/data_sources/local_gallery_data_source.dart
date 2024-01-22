@@ -2,42 +2,42 @@ import 'package:drift/drift.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 
-abstract interface class LocalDailyMediaDataSource {
-  const LocalDailyMediaDataSource();
+abstract interface class LocalGalleryDataSource {
+  const LocalGalleryDataSource();
 
-  Future<void> cacheDailyMedia({
-    required List<Media> dailyMedia,
+  Future<void> cacheItems({
+    required List<GalleryItem> galleryItems,
     bool onConflictUpdate = false,
   });
 
-  Future<List<Media>> getDailyMedia({
+  Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
   });
 
-  Future<List<Media>> getFavoriteMediaList();
+  Future<List<GalleryItem>> getFavorites();
 }
 
-class DriftDailyMediaDataSource implements LocalDailyMediaDataSource {
-  const DriftDailyMediaDataSource({required AppDatabase database})
+class DriftGalleryDataSource implements LocalGalleryDataSource {
+  const DriftGalleryDataSource({required AppDatabase database})
       : _database = database;
 
   final AppDatabase _database;
 
   @override
-  Future<void> cacheDailyMedia({
-    required List<Media> dailyMedia,
+  Future<void> cacheItems({
+    required List<GalleryItem> galleryItems,
     bool onConflictUpdate = false,
   }) async {
-    if (dailyMedia.isEmpty) {
+    if (galleryItems.isEmpty) {
       return;
     }
 
     await _database.batch(
       (batch) => batch.insertAll(
-        _database.dailyMediaEntities,
-        dailyMedia.map(
-          (m) => DailyMediaEntity(
+        _database.galleryEntities,
+        galleryItems.map(
+          (m) => GalleryEntity(
             date: m.date,
             title: m.title,
             explanation: m.explanation,
@@ -56,21 +56,21 @@ class DriftDailyMediaDataSource implements LocalDailyMediaDataSource {
   }
 
   @override
-  Future<List<Media>> getDailyMedia({
+  Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
   }) async {
     final startDateInt = startDate.toInt();
     final endDateInt = endDate.toInt();
 
-    final dbEntities = await (_database.select(_database.dailyMediaEntities)
+    final dbEntities = await (_database.select(_database.galleryEntities)
           ..where((m) => m.date.isBetweenValues(startDateInt, endDateInt))
           ..orderBy([(t) => OrderingTerm.desc(t.date)]))
         .get();
 
     final models = dbEntities
         .map(
-          (e) => Media(
+          (e) => GalleryItem(
             uri: e.uri,
             hdUri: e.hdUri,
             date: e.date,
@@ -87,15 +87,15 @@ class DriftDailyMediaDataSource implements LocalDailyMediaDataSource {
   }
 
   @override
-  Future<List<Media>> getFavoriteMediaList() async {
-    final dbEntities = await (_database.select(_database.dailyMediaEntities)
+  Future<List<GalleryItem>> getFavorites() async {
+    final dbEntities = await (_database.select(_database.galleryEntities)
           ..where((m) => m.isFavorite)
           ..orderBy([(t) => OrderingTerm.desc(t.date)]))
         .get();
 
     final models = dbEntities
         .map(
-          (e) => Media(
+          (e) => GalleryItem(
             uri: e.uri,
             hdUri: e.hdUri,
             date: e.date,

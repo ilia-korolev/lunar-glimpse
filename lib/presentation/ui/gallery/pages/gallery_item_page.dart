@@ -11,8 +11,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class DailyMediaPage extends StatelessWidget {
-  const DailyMediaPage({
+class GalleryItemPage extends StatelessWidget {
+  const GalleryItemPage({
     required this.date,
     super.key,
   });
@@ -26,9 +26,9 @@ class DailyMediaPage extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => DailyMediaBloc(
+              create: (context) => GalleryItemBloc(
                 repository: GetIt.instance(),
-              )..add(DailyMediaEvent.fetched(date: date)),
+              )..add(GalleryItemEvent.fetched(date: date)),
             ),
             BlocProvider(
               create: (context) => SaveFileBloc(
@@ -121,7 +121,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeBreakpoint = Breakpoint.getActive(context);
 
-    return BlocBuilder<DailyMediaBloc, DailyMediaState>(
+    return BlocBuilder<GalleryItemBloc, GalleryItemState>(
       builder: (context, state) {
         return state.when(
           initial: () {
@@ -130,7 +130,7 @@ class _Body extends StatelessWidget {
           loading: () {
             return const _LoadingView();
           },
-          success: (Media media) {
+          success: (GalleryItem media) {
             return switch (activeBreakpoint) {
               Breakpoint.compact => _SuccessView(media: media),
               Breakpoint.medium => _SuccessView(media: media),
@@ -167,8 +167,8 @@ class _FailureView extends StatelessWidget {
       body: FailureView(
         onPressed: () {
           context
-              .read<DailyMediaBloc>()
-              .add(const DailyMediaEvent.triedAgain());
+              .read<GalleryItemBloc>()
+              .add(const GalleryItemEvent.triedAgain());
         },
       ),
     );
@@ -180,7 +180,7 @@ class _SuccessView extends StatelessWidget {
     required this.media,
   });
 
-  final Media media;
+  final GalleryItem media;
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +212,7 @@ class _MediaAppBar extends StatelessWidget {
     required this.expandedHeight,
   });
 
-  final Media media;
+  final GalleryItem media;
   final double expandedHeight;
 
   @override
@@ -301,8 +301,8 @@ class _MediaAppBar extends StatelessWidget {
                   elevation: 7,
                   onPressed: (_) {
                     context
-                        .read<DailyMediaBloc>()
-                        .add(const DailyMediaEvent.favoriteToggled());
+                        .read<GalleryItemBloc>()
+                        .add(const GalleryItemEvent.favoriteToggled());
                   },
                 ),
                 SizedBox(width: theme.spacing.extraLarge),
@@ -320,7 +320,7 @@ class _MediaDescription extends StatelessWidget {
     required this.media,
   });
 
-  final Media media;
+  final GalleryItem media;
 
   @override
   Widget build(BuildContext context) {
@@ -370,7 +370,7 @@ class _ExpandedSuccessView extends StatelessWidget {
     required this.media,
   });
 
-  final Media media;
+  final GalleryItem media;
 
   @override
   Widget build(BuildContext context) {
@@ -419,7 +419,7 @@ class _ExpandedActionRow extends StatelessWidget {
     required this.media,
   });
 
-  final Media media;
+  final GalleryItem media;
 
   @override
   Widget build(BuildContext context) {
@@ -470,8 +470,8 @@ class _ExpandedActionRow extends StatelessWidget {
           size: IconButtonSize.medium,
           onPressed: (_) {
             context
-                .read<DailyMediaBloc>()
-                .add(const DailyMediaEvent.favoriteToggled());
+                .read<GalleryItemBloc>()
+                .add(const GalleryItemEvent.favoriteToggled());
           },
         ),
       ],
@@ -484,7 +484,7 @@ class _ExpandedImage extends StatelessWidget {
     required this.media,
   });
 
-  final Media media;
+  final GalleryItem media;
 
   @override
   Widget build(BuildContext context) {
@@ -566,7 +566,7 @@ class _SaveImageButton extends StatelessWidget {
 
 Future<Dialog?> _showImageViewerDialog({
   required BuildContext context,
-  required Media media,
+  required GalleryItem media,
 }) {
   return showDialog<Dialog>(
     context: context,

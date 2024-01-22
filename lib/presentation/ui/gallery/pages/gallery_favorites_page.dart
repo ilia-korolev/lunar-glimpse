@@ -3,22 +3,22 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
 import 'package:flutter_astronomy/core/_export.dart';
-import 'package:flutter_astronomy/domain/models/media.dart';
+import 'package:flutter_astronomy/domain/models/gallery_item.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class FavoriteMediaPage extends StatefulWidget {
-  const FavoriteMediaPage({super.key});
+class GalleryFavoritesPage extends StatefulWidget {
+  const GalleryFavoritesPage({super.key});
 
   @override
-  State<FavoriteMediaPage> createState() => _FavoriteMediaPageState();
+  State<GalleryFavoritesPage> createState() => _GalleryFavoritesPageState();
 }
 
-class _FavoriteMediaPageState extends State<FavoriteMediaPage> {
-  final FavoriteMediaListBloc _bloc = FavoriteMediaListBloc(
+class _GalleryFavoritesPageState extends State<GalleryFavoritesPage> {
+  final GalleryFavoritesBloc _bloc = GalleryFavoritesBloc(
     repository: GetIt.instance(),
   );
 
@@ -27,7 +27,7 @@ class _FavoriteMediaPageState extends State<FavoriteMediaPage> {
     super.initState();
 
     if (_bloc.state.status.isInitial) {
-      _bloc.add(const FavoriteMediaListEvent.fetched());
+      _bloc.add(const GalleryFavoritesEvent.fetched());
     }
   }
 
@@ -55,13 +55,13 @@ class _FavoriteMediaPageState extends State<FavoriteMediaPage> {
             body: SafeArea(
               child: StreamListener(
                 stream: _bloc.removedFavoriteStream,
-                onData: (media) {
+                onData: (item) {
                   final removedSnackBar = SnackBar(
                     action: SnackBarAction(
                       label: l10n.removedFromFavoritesSnackBarButton,
                       onPressed: () {
-                        GetIt.instance<DailyMediaListBloc>()
-                            .add(DailyMediaListEvent.favoriteToggled(media));
+                        GetIt.instance<GalleryBloc>()
+                            .add(GalleryEvent.favoriteToggled(item: item));
 
                         final restoredSnackBar = SnackBar(
                           content: Text(l10n.favoriteRestoredSnackBarButton),
@@ -81,25 +81,24 @@ class _FavoriteMediaPageState extends State<FavoriteMediaPage> {
                     ?..clearSnackBars()
                     ..showSnackBar(removedSnackBar);
                 },
-                child:
-                    BlocBuilder<FavoriteMediaListBloc, FavoriteMediaListState>(
+                child: BlocBuilder<GalleryFavoritesBloc, GalleryFavoritesState>(
                   builder: (context, state) {
                     switch (state.status) {
                       case BlocStatus.initial:
                         return const _InitialView();
 
                       case BlocStatus.loading:
-                        return state.mediaList.isEmpty
+                        return state.items.isEmpty
                             ? const _LoadingView()
                             : _SuccessView(
-                                mediaList: state.mediaList,
+                                galleryItems: state.items,
                               );
 
                       case BlocStatus.success:
-                        return state.mediaList.isEmpty
+                        return state.items.isEmpty
                             ? const _EmptyView()
                             : _SuccessView(
-                                mediaList: state.mediaList,
+                                galleryItems: state.items,
                               );
 
                       case BlocStatus.failure:
@@ -157,10 +156,10 @@ class _LoadingView extends StatelessWidget {
 
 class _SuccessView extends StatelessWidget {
   const _SuccessView({
-    required this.mediaList,
+    required this.galleryItems,
   });
 
-  final List<Media> mediaList;
+  final List<GalleryItem> galleryItems;
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +171,7 @@ class _SuccessView extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final crossAxisCount = math.max(
-          constraints.maxWidth ~/ theme.sizes.mediaCardMinWidth,
+          constraints.maxWidth ~/ theme.sizes.galleryItemCardMinWidth,
           1,
         );
 
@@ -186,27 +185,27 @@ class _SuccessView extends StatelessWidget {
           mainAxisSpacing: padding,
           crossAxisSpacing: padding,
           itemBuilder: (context, index) {
-            return MediaCard(
-              media: mediaList[index],
-              onCardPressed: (context, media) {
-                context.go('/daily-media/favorites/${media.date.toInt()}');
+            return GalleryCard(
+              item: galleryItems[index],
+              onCardPressed: (context, item) {
+                context.go('/gallery/favorites/${item.date.toInt()}');
               },
-              onFavoritePressed: (context, media) async {
-                if (media.isFavorite) {
+              onFavoritePressed: (context, item) async {
+                if (item.isFavorite) {
                   context
-                      .read<FavoriteMediaListBloc>()
-                      .add(FavoriteMediaListEvent.favoriteRemoved(media));
+                      .read<GalleryFavoritesBloc>()
+                      .add(GalleryFavoritesEvent.itemUnfavorited(item: item));
                 }
               },
-              onSharePressed: (context, media) {
+              onSharePressed: (context, item) {
                 GetIt.instance<ShareService>().shareUri(
-                  uri: media.uri,
+                  uri: item.uri,
                   context: context,
                 );
               },
             );
           },
-          itemCount: mediaList.length,
+          itemCount: galleryItems.length,
         );
       },
     );
@@ -221,8 +220,8 @@ class _FailureView extends StatelessWidget {
     return FailureView(
       onPressed: () {
         context
-            .read<FavoriteMediaListBloc>()
-            .add(const FavoriteMediaListEvent.triedAgain());
+            .read<GalleryFavoritesBloc>()
+            .add(const GalleryFavoritesEvent.triedAgain());
       },
     );
   }

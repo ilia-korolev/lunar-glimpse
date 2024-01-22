@@ -8,7 +8,7 @@ class Sizes extends ThemeExtension<Sizes> {
     required this.mediumAppBarHeight,
     required this.navBarHeight,
     required this.buttonWidth,
-    required this.mediaCardMinWidth,
+    required this.galleryItemCardMinWidth,
     required this.smallIconSize,
     required this.mediumIconSize,
     required this.largeIconSize,
@@ -25,7 +25,7 @@ class Sizes extends ThemeExtension<Sizes> {
           mediumAppBarHeight: 66,
           navBarHeight: 64,
           buttonWidth: 200,
-          mediaCardMinWidth: 360,
+          galleryItemCardMinWidth: 360,
           smallIconSize: 16,
           mediumIconSize: 24,
           largeIconSize: 32,
@@ -40,7 +40,7 @@ class Sizes extends ThemeExtension<Sizes> {
   final double mediumAppBarHeight;
   final double navBarHeight;
   final double buttonWidth;
-  final double mediaCardMinWidth;
+  final double galleryItemCardMinWidth;
   final double smallIconSize;
   final double mediumIconSize;
   final double largeIconSize;
@@ -56,7 +56,7 @@ class Sizes extends ThemeExtension<Sizes> {
     double? mediumAppBarHeight,
     double? navBarHeight,
     double? buttonWidth,
-    double? mediaCardMinWidth,
+    double? galleryItemCardMinWidth,
     double? smallIconSize,
     double? mediumIconSize,
     double? largeIconSize,
@@ -71,7 +71,8 @@ class Sizes extends ThemeExtension<Sizes> {
       mediumAppBarHeight: mediumAppBarHeight ?? this.mediumAppBarHeight,
       navBarHeight: navBarHeight ?? this.navBarHeight,
       buttonWidth: buttonWidth ?? this.buttonWidth,
-      mediaCardMinWidth: mediaCardMinWidth ?? this.mediaCardMinWidth,
+      galleryItemCardMinWidth:
+          galleryItemCardMinWidth ?? this.galleryItemCardMinWidth,
       smallIconSize: smallIconSize ?? this.smallIconSize,
       mediumIconSize: mediumIconSize ?? this.mediumIconSize,
       largeIconSize: largeIconSize ?? this.largeIconSize,
@@ -114,9 +115,9 @@ class Sizes extends ThemeExtension<Sizes> {
         other.buttonWidth,
         t,
       )!,
-      mediaCardMinWidth: lerpDouble(
-        mediaCardMinWidth,
-        other.mediaCardMinWidth,
+      galleryItemCardMinWidth: lerpDouble(
+        galleryItemCardMinWidth,
+        other.galleryItemCardMinWidth,
         t,
       )!,
       smallIconSize: lerpDouble(

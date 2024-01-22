@@ -7,73 +7,74 @@ import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'favorite_media_list_bloc.freezed.dart';
-part 'favorite_media_list_event.dart';
-part 'favorite_media_list_state.dart';
+part 'gallery_favorites_bloc.freezed.dart';
+part 'gallery_favorites_event.dart';
+part 'gallery_favorites_state.dart';
 
 const _throttleDuration = Duration(milliseconds: 100);
 
-class FavoriteMediaListBloc
-    extends Bloc<FavoriteMediaListEvent, FavoriteMediaListState> {
-  FavoriteMediaListBloc({
-    required DailyMediaRepository repository,
+class GalleryFavoritesBloc
+    extends Bloc<GalleryFavoritesEvent, GalleryFavoritesState> {
+  GalleryFavoritesBloc({
+    required GalleryRepository repository,
   })  : _repository = repository,
         super(
-          const FavoriteMediaListState(
+          const GalleryFavoritesState(
             status: BlocStatus.initial,
           ),
         ) {
-    on<FavoriteMediaListFetched>(
+    on<GalleryFavoritesFetched>(
       (event, emit) async => _fetched(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<FavoriteMediaListFavoriteRemoved>(
-      (event, emit) async => _favoriteRemoved(emit, event.media),
+    on<GalleryFavoritesItemUnfavorited>(
+      (event, emit) async => _favoriteRemoved(emit, event.item),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<FavoriteMediaListTriedAgain>(
+    on<GalleryFavoritesTriedAgain>(
       (event, emit) async => _triedAgain(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    on<FavoriteMediaListMediaChanged>(
-      (event, emit) async => _mediaChanged(emit, event.media),
+    on<GalleryFavoritesItemsChanged>(
+      (event, emit) async => _itemsChanged(emit, event.items),
     );
 
-    _mediaChangesListener = _repository.changes.listen((mediaList) {
-      add(FavoriteMediaListEvent.mediaChanged(mediaList));
+    _itemChangesListener = _repository.changes.listen((items) {
+      add(GalleryFavoritesEvent.itemsChanged(items: items));
     });
   }
 
-  Stream<Media> get removedFavoriteStream => _removedFavoriteController.stream;
+  Stream<GalleryItem> get removedFavoriteStream =>
+      _removedFavoriteController.stream;
 
-  final DailyMediaRepository _repository;
+  final GalleryRepository _repository;
 
-  final StreamController<Media> _removedFavoriteController =
-      StreamController<Media>.broadcast();
+  final StreamController<GalleryItem> _removedFavoriteController =
+      StreamController<GalleryItem>.broadcast();
 
-  late final StreamSubscription<List<Media>> _mediaChangesListener;
+  late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
 
-  FavoriteMediaListEvent? _previousEvent;
+  GalleryFavoritesEvent? _previousEvent;
 
   @override
   Future<void> close() async {
-    await _mediaChangesListener.cancel();
+    await _itemChangesListener.cancel();
     await _removedFavoriteController.close();
 
     return super.close();
   }
 
   @override
-  void onEvent(FavoriteMediaListEvent event) {
+  void onEvent(GalleryFavoritesEvent event) {
     _storeEvent(event);
 
     super.onEvent(event);
   }
 
-  void _storeEvent(FavoriteMediaListEvent event) {
+  void _storeEvent(GalleryFavoritesEvent event) {
     final shouldStore = event.maybeWhen<bool>(
       triedAgain: () => false,
       orElse: () => true,
@@ -86,7 +87,7 @@ class FavoriteMediaListBloc
     _previousEvent = event;
   }
 
-  Future<void> _fetched(Emitter<FavoriteMediaListState> emit) async {
+  Future<void> _fetched(Emitter<GalleryFavoritesState> emit) async {
     try {
       emit(
         state.copyWith(
@@ -94,17 +95,17 @@ class FavoriteMediaListBloc
         ),
       );
 
-      final response = await _repository.getFavoriteMediaList();
+      final response = await _repository.getFavorites();
 
-      final mediaList = response
+      final items = response
           // TODO(ilia-korolev): implement a video player
-          .where((m) => m.type == MediaType.image)
+          .where((m) => m.type == GalleryItemType.image)
           .toList();
 
       emit(
         state.copyWith(
           status: BlocStatus.success,
-          mediaList: mediaList,
+          items: items,
         ),
       );
     } on Exception catch (_) {
@@ -117,36 +118,36 @@ class FavoriteMediaListBloc
   }
 
   Future<void> _favoriteRemoved(
-    Emitter<FavoriteMediaListState> emit,
-    Media media,
+    Emitter<GalleryFavoritesState> emit,
+    GalleryItem item,
   ) async {
     try {
       assert(
-        media.isFavorite,
-        'the media must be favorite',
+        item.isFavorite,
+        'the item must be favorite',
       );
 
-      final indexOfMedia = state.mediaList.indexOf(media);
+      final indexOfItem = state.items.indexOf(item);
 
-      if (indexOfMedia == -1) {
+      if (indexOfItem == -1) {
         throw ArgumentError(
-          'The media is not on the list: $media',
-          'media',
+          'The item is not on the list: $item',
+          'item',
         );
       }
 
       await _repository.toggleFavorite(
-        media: media,
+        galleryItem: item,
       );
 
-      final updatedList = [...state.mediaList]..removeAt(indexOfMedia);
+      final updatedList = [...state.items]..removeAt(indexOfItem);
 
-      _removedFavoriteController.add(media.copyWith(isFavorite: false));
+      _removedFavoriteController.add(item.copyWith(isFavorite: false));
 
       emit(
         state.copyWith(
           status: BlocStatus.success,
-          mediaList: updatedList,
+          items: updatedList,
         ),
       );
     } on Exception catch (_) {
@@ -155,7 +156,7 @@ class FavoriteMediaListBloc
   }
 
   Future<void> _triedAgain(
-    Emitter<FavoriteMediaListState> emit,
+    Emitter<GalleryFavoritesState> emit,
   ) async {
     if (_previousEvent == null) {
       return;
@@ -164,9 +165,9 @@ class FavoriteMediaListBloc
     add(_previousEvent!);
   }
 
-  Future<void> _mediaChanged(
-    Emitter<FavoriteMediaListState> emit,
-    List<Media> mediaList,
+  Future<void> _itemsChanged(
+    Emitter<GalleryFavoritesState> emit,
+    List<GalleryItem> items,
   ) async {
     await _fetched(emit);
   }

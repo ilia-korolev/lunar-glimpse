@@ -45,7 +45,7 @@ class HomeNavigationRail extends StatelessWidget {
           destinations: [
             NavigationRailDestination(
               icon: const FaIcon(FontAwesomeIcons.rocket),
-              label: Text(HomePageTab.dailyMedia.title(l10n)),
+              label: Text(HomePageTab.gallery.title(l10n)),
             ),
             NavigationRailDestination(
               icon: const FaIcon(FontAwesomeIcons.newspaper),

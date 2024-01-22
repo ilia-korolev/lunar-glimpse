@@ -1,20 +1,20 @@
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'media.freezed.dart';
+part 'gallery_item.freezed.dart';
 
-enum MediaType { video, image }
+enum GalleryItemType { video, image }
 
 @freezed
-class Media with _$Media {
-  const factory Media({
+class GalleryItem with _$GalleryItem {
+  const factory GalleryItem({
     required Uri uri,
     required Uri hdUri,
     required Date date,
     required String title,
     required String explanation,
     required String? copyright,
-    required MediaType type,
+    required GalleryItemType type,
     @Default(false) bool isFavorite,
-  }) = _Media;
+  }) = _GalleryItem;
 }

@@ -7,14 +7,14 @@ import '../views/_export.dart';
 import '../widgets/_export.dart';
 
 enum HomePageTab {
-  dailyMedia,
+  gallery,
   news,
   settings;
 
   String title(AppLocalizations l10n) {
     switch (this) {
-      case HomePageTab.dailyMedia:
-        return l10n.dailyMediaTitle;
+      case HomePageTab.gallery:
+        return l10n.galleryTitle;
       case HomePageTab.news:
         return l10n.newsTitle;
       case HomePageTab.settings:
@@ -24,8 +24,8 @@ enum HomePageTab {
 
   String get path {
     switch (this) {
-      case HomePageTab.dailyMedia:
-        return '/daily-media';
+      case HomePageTab.gallery:
+        return '/gallery';
       case HomePageTab.news:
         return '/news';
       case HomePageTab.settings:
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
             duration: theme.durations.medium,
             index: tab.index,
             children: const [
-              DailyMediaView(),
+              GalleryView(),
               NewsView(),
               SettingsView(),
             ],
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
               duration: theme.durations.medium,
               index: tab.index,
               children: const [
-                DailyMediaView(),
+                GalleryView(),
                 NewsView(),
                 SettingsView(),
               ],

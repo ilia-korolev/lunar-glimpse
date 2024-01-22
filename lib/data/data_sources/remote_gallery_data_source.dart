@@ -3,18 +3,18 @@ import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 
-abstract interface class RemoteDailyMediaDataSource {
-  const RemoteDailyMediaDataSource();
+abstract interface class RemoteGalleryDataSource {
+  const RemoteGalleryDataSource();
 
-  Future<Media> getTodayMedia();
+  Future<GalleryItem> getLatestItem();
 
-  Future<List<Media>> getDailyMedia({
+  Future<List<GalleryItem>> getGalleryItems({
     required Date startDate,
     required Date endDate,
   });
 }
 
-class NasaApodDataSource implements RemoteDailyMediaDataSource {
+class NasaApodDataSource implements RemoteGalleryDataSource {
   const NasaApodDataSource({
     required HttpService httpService,
     String apiKey = 'DEMO_KEY',
@@ -25,7 +25,7 @@ class NasaApodDataSource implements RemoteDailyMediaDataSource {
   final String _apiKey;
 
   @override
-  Future<Media> getTodayMedia() async {
+  Future<GalleryItem> getLatestItem() async {
     final request = ApodRequestDto(
       apiKey: _apiKey,
     );
@@ -42,14 +42,15 @@ class NasaApodDataSource implements RemoteDailyMediaDataSource {
       throw InvalidResponseException();
     }
 
-    final mediaDto = ApodResponseDto.fromJson(jsonData as Map<String, dynamic>);
-    final media = mediaDto.toModel();
+    final responseDto =
+        ApodResponseDto.fromJson(jsonData as Map<String, dynamic>);
+    final galleryItem = responseDto.toModel();
 
-    return media;
+    return galleryItem;
   }
 
   @override
-  Future<List<Media>> getDailyMedia({
+  Future<List<GalleryItem>> getGalleryItems({
     required Date startDate,
     required Date endDate,
   }) async {
@@ -71,11 +72,11 @@ class NasaApodDataSource implements RemoteDailyMediaDataSource {
       throw InvalidResponseException();
     }
 
-    final mediaList = jsonData.reversed
+    final galleryItems = jsonData.reversed
         .map((e) => ApodResponseDto.fromJson(e as Map<String, dynamic>))
         .map((e) => e.toModel())
         .toList();
 
-    return mediaList;
+    return galleryItems;
   }
 }

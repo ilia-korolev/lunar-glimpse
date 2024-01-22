@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'media.dart';
+part of 'gallery_item.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,24 +15,26 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Media {
+mixin _$GalleryItem {
   Uri get uri => throw _privateConstructorUsedError;
   Uri get hdUri => throw _privateConstructorUsedError;
   Date get date => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get explanation => throw _privateConstructorUsedError;
   String? get copyright => throw _privateConstructorUsedError;
-  MediaType get type => throw _privateConstructorUsedError;
+  GalleryItemType get type => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $MediaCopyWith<Media> get copyWith => throw _privateConstructorUsedError;
+  $GalleryItemCopyWith<GalleryItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MediaCopyWith<$Res> {
-  factory $MediaCopyWith(Media value, $Res Function(Media) then) =
-      _$MediaCopyWithImpl<$Res, Media>;
+abstract class $GalleryItemCopyWith<$Res> {
+  factory $GalleryItemCopyWith(
+          GalleryItem value, $Res Function(GalleryItem) then) =
+      _$GalleryItemCopyWithImpl<$Res, GalleryItem>;
   @useResult
   $Res call(
       {Uri uri,
@@ -41,16 +43,16 @@ abstract class $MediaCopyWith<$Res> {
       String title,
       String explanation,
       String? copyright,
-      MediaType type,
+      GalleryItemType type,
       bool isFavorite});
 
   $DateCopyWith<$Res> get date;
 }
 
 /// @nodoc
-class _$MediaCopyWithImpl<$Res, $Val extends Media>
-    implements $MediaCopyWith<$Res> {
-  _$MediaCopyWithImpl(this._value, this._then);
+class _$GalleryItemCopyWithImpl<$Res, $Val extends GalleryItem>
+    implements $GalleryItemCopyWith<$Res> {
+  _$GalleryItemCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -97,7 +99,7 @@ class _$MediaCopyWithImpl<$Res, $Val extends Media>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as MediaType,
+              as GalleryItemType,
       isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -115,10 +117,11 @@ class _$MediaCopyWithImpl<$Res, $Val extends Media>
 }
 
 /// @nodoc
-abstract class _$$MediaImplCopyWith<$Res> implements $MediaCopyWith<$Res> {
-  factory _$$MediaImplCopyWith(
-          _$MediaImpl value, $Res Function(_$MediaImpl) then) =
-      __$$MediaImplCopyWithImpl<$Res>;
+abstract class _$$GalleryItemImplCopyWith<$Res>
+    implements $GalleryItemCopyWith<$Res> {
+  factory _$$GalleryItemImplCopyWith(
+          _$GalleryItemImpl value, $Res Function(_$GalleryItemImpl) then) =
+      __$$GalleryItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -128,7 +131,7 @@ abstract class _$$MediaImplCopyWith<$Res> implements $MediaCopyWith<$Res> {
       String title,
       String explanation,
       String? copyright,
-      MediaType type,
+      GalleryItemType type,
       bool isFavorite});
 
   @override
@@ -136,11 +139,11 @@ abstract class _$$MediaImplCopyWith<$Res> implements $MediaCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$MediaImplCopyWithImpl<$Res>
-    extends _$MediaCopyWithImpl<$Res, _$MediaImpl>
-    implements _$$MediaImplCopyWith<$Res> {
-  __$$MediaImplCopyWithImpl(
-      _$MediaImpl _value, $Res Function(_$MediaImpl) _then)
+class __$$GalleryItemImplCopyWithImpl<$Res>
+    extends _$GalleryItemCopyWithImpl<$Res, _$GalleryItemImpl>
+    implements _$$GalleryItemImplCopyWith<$Res> {
+  __$$GalleryItemImplCopyWithImpl(
+      _$GalleryItemImpl _value, $Res Function(_$GalleryItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +158,7 @@ class __$$MediaImplCopyWithImpl<$Res>
     Object? type = null,
     Object? isFavorite = null,
   }) {
-    return _then(_$MediaImpl(
+    return _then(_$GalleryItemImpl(
       uri: null == uri
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -183,7 +186,7 @@ class __$$MediaImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as MediaType,
+              as GalleryItemType,
       isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -194,8 +197,8 @@ class __$$MediaImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MediaImpl implements _Media {
-  const _$MediaImpl(
+class _$GalleryItemImpl implements _GalleryItem {
+  const _$GalleryItemImpl(
       {required this.uri,
       required this.hdUri,
       required this.date,
@@ -218,21 +221,21 @@ class _$MediaImpl implements _Media {
   @override
   final String? copyright;
   @override
-  final MediaType type;
+  final GalleryItemType type;
   @override
   @JsonKey()
   final bool isFavorite;
 
   @override
   String toString() {
-    return 'Media(uri: $uri, hdUri: $hdUri, date: $date, title: $title, explanation: $explanation, copyright: $copyright, type: $type, isFavorite: $isFavorite)';
+    return 'GalleryItem(uri: $uri, hdUri: $hdUri, date: $date, title: $title, explanation: $explanation, copyright: $copyright, type: $type, isFavorite: $isFavorite)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MediaImpl &&
+            other is _$GalleryItemImpl &&
             (identical(other.uri, uri) || other.uri == uri) &&
             (identical(other.hdUri, hdUri) || other.hdUri == hdUri) &&
             (identical(other.date, date) || other.date == date) &&
@@ -253,20 +256,20 @@ class _$MediaImpl implements _Media {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MediaImplCopyWith<_$MediaImpl> get copyWith =>
-      __$$MediaImplCopyWithImpl<_$MediaImpl>(this, _$identity);
+  _$$GalleryItemImplCopyWith<_$GalleryItemImpl> get copyWith =>
+      __$$GalleryItemImplCopyWithImpl<_$GalleryItemImpl>(this, _$identity);
 }
 
-abstract class _Media implements Media {
-  const factory _Media(
+abstract class _GalleryItem implements GalleryItem {
+  const factory _GalleryItem(
       {required final Uri uri,
       required final Uri hdUri,
       required final Date date,
       required final String title,
       required final String explanation,
       required final String? copyright,
-      required final MediaType type,
-      final bool isFavorite}) = _$MediaImpl;
+      required final GalleryItemType type,
+      final bool isFavorite}) = _$GalleryItemImpl;
 
   @override
   Uri get uri;
@@ -281,11 +284,11 @@ abstract class _Media implements Media {
   @override
   String? get copyright;
   @override
-  MediaType get type;
+  GalleryItemType get type;
   @override
   bool get isFavorite;
   @override
   @JsonKey(ignore: true)
-  _$$MediaImplCopyWith<_$MediaImpl> get copyWith =>
+  _$$GalleryItemImplCopyWith<_$GalleryItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

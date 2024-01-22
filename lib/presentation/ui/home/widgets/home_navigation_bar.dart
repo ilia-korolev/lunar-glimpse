@@ -31,7 +31,7 @@ class HomeNavigationBar extends StatelessWidget {
       destinations: [
         NavigationDestination(
           icon: const FaIcon(FontAwesomeIcons.rocket),
-          label: HomePageTab.dailyMedia.title(l10n),
+          label: HomePageTab.gallery.title(l10n),
         ),
         NavigationDestination(
           icon: const FaIcon(FontAwesomeIcons.newspaper),

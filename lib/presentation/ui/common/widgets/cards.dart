@@ -19,8 +19,8 @@ class CompactArticleCard extends StatelessWidget {
   });
 
   final Article article;
-  final void Function(BuildContext context, Article media) onCardPressed;
-  final void Function(BuildContext context, Article media) onSharePressed;
+  final void Function(BuildContext context, Article article) onCardPressed;
+  final void Function(BuildContext context, Article article) onSharePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +57,8 @@ class ExpandedArticleCard extends StatelessWidget {
   });
 
   final Article article;
-  final void Function(BuildContext context, Article media) onCardPressed;
-  final void Function(BuildContext context, Article media) onSharePressed;
+  final void Function(BuildContext context, Article article) onCardPressed;
+  final void Function(BuildContext context, Article article) onSharePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -95,25 +95,25 @@ class ExpandedArticleCard extends StatelessWidget {
   }
 }
 
-class MediaCard extends StatefulWidget {
-  const MediaCard({
-    required this.media,
+class GalleryCard extends StatefulWidget {
+  const GalleryCard({
+    required this.item,
     required this.onCardPressed,
     required this.onSharePressed,
     required this.onFavoritePressed,
     super.key,
   });
 
-  final Media media;
-  final void Function(BuildContext context, Media media) onCardPressed;
-  final void Function(BuildContext context, Media media) onSharePressed;
-  final void Function(BuildContext context, Media media) onFavoritePressed;
+  final GalleryItem item;
+  final void Function(BuildContext context, GalleryItem item) onCardPressed;
+  final void Function(BuildContext context, GalleryItem item) onSharePressed;
+  final void Function(BuildContext context, GalleryItem item) onFavoritePressed;
 
   @override
-  State<MediaCard> createState() => _MediaCardState();
+  State<GalleryCard> createState() => _GalleryCardState();
 }
 
-class _MediaCardState extends State<MediaCard> {
+class _GalleryCardState extends State<GalleryCard> {
   bool _isHovered = false;
 
   @override
@@ -128,13 +128,13 @@ class _MediaCardState extends State<MediaCard> {
         Skeleton.leaf(
           child: Stack(
             children: [
-              _Thumbnail(thumbnailUri: widget.media.uri),
+              _Thumbnail(thumbnailUri: widget.item.uri),
               Positioned.fill(
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.all(theme.radiuses.large),
-                    onTap: () => widget.onCardPressed(context, widget.media),
+                    onTap: () => widget.onCardPressed(context, widget.item),
                   ),
                 ),
               ),
@@ -150,7 +150,7 @@ class _MediaCardState extends State<MediaCard> {
                         onPressed: (context) {
                           return widget.onSharePressed(
                             context,
-                            widget.media,
+                            widget.item,
                           );
                         },
                         iconColor: lightTheme.colorScheme.onSurface,
@@ -158,14 +158,14 @@ class _MediaCardState extends State<MediaCard> {
                       ),
                       SizedBox(width: theme.spacing.semiSmall),
                       PrimaryIconButton(
-                        icon: widget.media.isFavorite
+                        icon: widget.item.isFavorite
                             ? FontAwesomeIcons.solidStar
                             : FontAwesomeIcons.star,
                         size: IconButtonSize.small,
                         onPressed: (context) {
                           return widget.onFavoritePressed(
                             context,
-                            widget.media,
+                            widget.item,
                           );
                         },
                         iconColor: lightTheme.colorScheme.onSurface,
@@ -197,7 +197,7 @@ class _MediaCardState extends State<MediaCard> {
           children: [
             Expanded(
               child: Text(
-                widget.media.title,
+                widget.item.title,
                 style: theme.textTheme.titleSmall!.copyWith(
                   color: theme.colorScheme.onSurface,
                 ),
@@ -206,7 +206,7 @@ class _MediaCardState extends State<MediaCard> {
               ),
             ),
             Text(
-              widget.media.date.format('yMd'),
+              widget.item.date.format('yMd'),
               style: theme.textTheme.labelSmall!.copyWith(
                 color: theme.colorScheme.outline,
               ),
@@ -252,8 +252,8 @@ class _ArticleCardBase extends StatelessWidget {
 
   final Widget child;
   final Article article;
-  final void Function(BuildContext context, Article media) onCardPressed;
-  final void Function(BuildContext context, Article media) onSharePressed;
+  final void Function(BuildContext context, Article article) onCardPressed;
+  final void Function(BuildContext context, Article article) onSharePressed;
 
   @override
   Widget build(BuildContext context) {

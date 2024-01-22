@@ -2,7 +2,7 @@
   "@@locale": "en",
   "languageName": "English (US)",
   "systemLanguageName": "System default",
-  "dailyMediaTitle": "Daily Media",
+  "galleryTitle": "APOD Gallery",
   "newsTitle": "News",
   "settingsTitle": "Settings",
   "themeSettingsTitle": "Theme",
@@ -31,11 +31,11 @@
     }
   },
   "favoritesPageTitle": "Favorites",
-  "favoritesPageNoFavoritesText": "You will see media you add to Favorites here",
+  "favoritesPageNoFavoritesText": "You will see items you add to Favorites here",
   "removedFromFavoritesSnackBarText": "Removed from Favorites",
   "removedFromFavoritesSnackBarButton": "Undo",
   "favoriteRestoredSnackBarButton": "Restored",
-  "mediaLoadError": "Failed to load",
+  "imageLoadError": "Failed to load",
   "minutesAgo": "{minutes, plural, =0{{minutes} minutes ago} =1{{minutes} minute ago} other{{minutes} minutes ago}}",
   "@minutesAgo": {
     "placeholders": {

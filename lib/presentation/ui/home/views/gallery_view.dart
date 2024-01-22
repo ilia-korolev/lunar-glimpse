@@ -15,16 +15,15 @@ import '../widgets/_export.dart';
 
 const _loadingTileCount = 12;
 
-class DailyMediaView extends StatefulWidget {
-  const DailyMediaView({super.key});
+class GalleryView extends StatefulWidget {
+  const GalleryView({super.key});
 
   @override
-  State<DailyMediaView> createState() => _DailyMediaViewState();
+  State<GalleryView> createState() => _GalleryViewState();
 }
 
-class _DailyMediaViewState extends State<DailyMediaView>
-    with WidgetsBindingObserver {
-  final DailyMediaListBloc _bloc = GetIt.instance();
+class _GalleryViewState extends State<GalleryView> with WidgetsBindingObserver {
+  final GalleryBloc _bloc = GetIt.instance();
   final _scrollController = ScrollController();
 
   @override
@@ -35,7 +34,7 @@ class _DailyMediaViewState extends State<DailyMediaView>
     _scrollController.addListener(_onScrollExtentChanged);
 
     if (_bloc.state.status.isInitial) {
-      _bloc.add(const DailyMediaListEvent.fetched());
+      _bloc.add(const GalleryEvent.fetched());
     }
   }
 
@@ -63,7 +62,7 @@ class _DailyMediaViewState extends State<DailyMediaView>
           value: _bloc,
           child: PrimaryRefreshIndicator(
             onRefresh: () async {
-              _bloc.add(const DailyMediaListEvent.refreshed());
+              _bloc.add(const GalleryEvent.refreshed());
 
               await _bloc.stream.firstWhere(
                 (state) => !state.status.isLoading,
@@ -74,16 +73,16 @@ class _DailyMediaViewState extends State<DailyMediaView>
               cacheExtent: 2000,
               slivers: [
                 HomeAppBar(
-                  title: context.l10n.dailyMediaTitle,
+                  title: context.l10n.galleryTitle,
                   trailing: PrimaryIconButton(
                     icon: FontAwesomeIcons.solidStar,
                     size: IconButtonSize.medium,
                     onPressed: (_) {
-                      context.go('/daily-media/favorites');
+                      context.go('/gallery/favorites');
                     },
                   ),
                 ),
-                const _MediaList(),
+                const _GalleryContent(),
               ],
             ),
           ),
@@ -93,12 +92,12 @@ class _DailyMediaViewState extends State<DailyMediaView>
   }
 
   void _onScrollExtentChanged() {
-    if (!_bloc.state.status.isSuccess || _bloc.state.mediaList.isEmpty) {
+    if (!_bloc.state.status.isSuccess || _bloc.state.items.isEmpty) {
       return;
     }
 
     if (_isBottom) {
-      _bloc.add(const DailyMediaListEvent.fetched());
+      _bloc.add(const GalleryEvent.fetched());
     }
   }
 
@@ -109,7 +108,7 @@ class _DailyMediaViewState extends State<DailyMediaView>
 
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScrollOffset = _scrollController.offset;
-    final loadedTileCount = _bloc.state.mediaList.length;
+    final loadedTileCount = _bloc.state.items.length;
 
     final tileHeight = maxScroll / (loadedTileCount + _loadingTileCount);
     final loadedListOffset = tileHeight * (loadedTileCount - _loadingTileCount);
@@ -118,28 +117,28 @@ class _DailyMediaViewState extends State<DailyMediaView>
   }
 }
 
-class _MediaList extends StatelessWidget {
-  const _MediaList();
+class _GalleryContent extends StatelessWidget {
+  const _GalleryContent();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DailyMediaListBloc, DailyMediaListState>(
+    return BlocBuilder<GalleryBloc, GalleryState>(
       builder: (context, state) {
         switch (state.status) {
           case BlocStatus.initial:
             return const _InitialView();
 
           case BlocStatus.loading:
-            return state.mediaList.isEmpty
+            return state.items.isEmpty
                 ? const _LoadingView()
                 : _SuccessView(
-                    mediaList: state.mediaList,
+                    galleryItems: state.items,
                     hasReachedMax: state.hasReachedMax,
                   );
 
           case BlocStatus.success:
             return _SuccessView(
-              mediaList: state.mediaList,
+              galleryItems: state.items,
               hasReachedMax: state.hasReachedMax,
             );
 
@@ -175,11 +174,11 @@ class _LoadingView extends StatelessWidget {
 
 class _SuccessView extends StatelessWidget {
   const _SuccessView({
-    required this.mediaList,
+    required this.galleryItems,
     required this.hasReachedMax,
   });
 
-  final List<Media> mediaList;
+  final List<GalleryItem> galleryItems;
   final bool hasReachedMax;
 
   @override
@@ -198,7 +197,7 @@ class _SuccessView extends StatelessWidget {
       sliver: SliverLayoutBuilder(
         builder: (context, constraints) {
           final crossAxisCount = math.max(
-            constraints.crossAxisExtent ~/ theme.sizes.mediaCardMinWidth,
+            constraints.crossAxisExtent ~/ theme.sizes.galleryItemCardMinWidth,
             1,
           );
 
@@ -209,31 +208,31 @@ class _SuccessView extends StatelessWidget {
             mainAxisSpacing: padding,
             crossAxisSpacing: padding,
             itemBuilder: (context, index) {
-              if (index >= mediaList.length) {
-                return const LoadingMediaCard();
+              if (index >= galleryItems.length) {
+                return const LoadingGalleryCard();
               }
 
-              return MediaCard(
-                media: mediaList[index],
-                onCardPressed: (context, media) {
-                  context.go('/daily-media/${media.date.toInt()}');
+              return GalleryCard(
+                item: galleryItems[index],
+                onCardPressed: (context, item) {
+                  context.go('/gallery/${item.date.toInt()}');
                 },
-                onFavoritePressed: (context, media) {
+                onFavoritePressed: (context, item) {
                   context
-                      .read<DailyMediaListBloc>()
-                      .add(DailyMediaListEvent.favoriteToggled(media));
+                      .read<GalleryBloc>()
+                      .add(GalleryEvent.favoriteToggled(item: item));
                 },
-                onSharePressed: (context, media) {
+                onSharePressed: (context, item) {
                   GetIt.instance<ShareService>().shareUri(
-                    uri: media.uri,
+                    uri: item.uri,
                     context: context,
                   );
                 },
               );
             },
             itemCount: hasReachedMax
-                ? mediaList.length
-                : mediaList.length + _loadingTileCount,
+                ? galleryItems.length
+                : galleryItems.length + _loadingTileCount,
           );
         },
       ),
@@ -250,9 +249,7 @@ class _FailureView extends StatelessWidget {
       hasScrollBody: false,
       child: FailureView(
         onPressed: () {
-          context
-              .read<DailyMediaListBloc>()
-              .add(const DailyMediaListEvent.triedAgain());
+          context.read<GalleryBloc>().add(const GalleryEvent.triedAgain());
         },
       ),
     );

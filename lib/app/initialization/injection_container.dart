@@ -84,8 +84,8 @@ Future<void> _registerDataSources() async {
         SharedPreferences,
       ],
     )
-    ..registerSingletonWithDependencies<LocalDailyMediaDataSource>(
-      () => DriftDailyMediaDataSource(database: _getIt()),
+    ..registerSingletonWithDependencies<LocalGalleryDataSource>(
+      () => DriftGalleryDataSource(database: _getIt()),
       dependsOn: [
         AppDatabase,
       ],
@@ -95,7 +95,7 @@ Future<void> _registerDataSources() async {
         database: _getIt(),
       ),
     )
-    ..registerLazySingleton<RemoteDailyMediaDataSource>(
+    ..registerLazySingleton<RemoteGalleryDataSource>(
       () => NasaApodDataSource(httpService: _getIt()),
     )
     ..registerLazySingleton<RemoteNewsDataSource>(
@@ -121,10 +121,10 @@ Future<void> _registerRepositories() async {
         LocalAppSettingsDataSource,
       ],
     )
-    ..registerLazySingleton<DailyMediaRepository>(
-      () => DailyMediaRepositoryImpl(
-        localDailyMediaDataSource: _getIt(),
-        remoteDailyMediaDataSource: _getIt(),
+    ..registerLazySingleton<GalleryRepository>(
+      () => GalleryRepositoryImpl(
+        localGalleryDataSource: _getIt(),
+        remoteGalleryDataSource: _getIt(),
       ),
     )
     ..registerLazySingleton<NewsRepository>(
@@ -152,8 +152,8 @@ Future<void> _registerBlocs() async {
         appSettingsRepository: GetIt.instance(),
       ),
     )
-    ..registerLazySingleton<DailyMediaListBloc>(
-      () => DailyMediaListBloc(
+    ..registerLazySingleton<GalleryBloc>(
+      () => GalleryBloc(
         repository: _getIt(),
       ),
     )

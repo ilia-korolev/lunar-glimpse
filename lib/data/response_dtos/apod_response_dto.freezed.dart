@@ -26,7 +26,7 @@ mixin _$ApodResponseDto {
   String get title => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'media_type')
-  MediaType get mediaType => throw _privateConstructorUsedError;
+  GalleryItemType get mediaType => throw _privateConstructorUsedError;
   String? get copyright => throw _privateConstructorUsedError;
   @JsonKey(name: 'hdurl')
   String? get hdUrl => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $ApodResponseDtoCopyWith<$Res> {
       String explanation,
       String title,
       String url,
-      @JsonKey(name: 'media_type') MediaType mediaType,
+      @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
       @JsonKey(name: 'hdurl') String? hdUrl});
 
@@ -96,7 +96,7 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
       mediaType: null == mediaType
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
-              as MediaType,
+              as GalleryItemType,
       copyright: freezed == copyright
           ? _value.copyright
           : copyright // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ abstract class _$$ApodResponseDtoImplCopyWith<$Res>
       String explanation,
       String title,
       String url,
-      @JsonKey(name: 'media_type') MediaType mediaType,
+      @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
       @JsonKey(name: 'hdurl') String? hdUrl});
 
@@ -177,7 +177,7 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
       mediaType: null == mediaType
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
-              as MediaType,
+              as GalleryItemType,
       copyright: freezed == copyright
           ? _value.copyright
           : copyright // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
   final String url;
   @override
   @JsonKey(name: 'media_type')
-  final MediaType mediaType;
+  final GalleryItemType mediaType;
   @override
   final String? copyright;
   @override
@@ -273,7 +273,7 @@ abstract class _ApodResponseDto extends ApodResponseDto {
       required final String explanation,
       required final String title,
       required final String url,
-      @JsonKey(name: 'media_type') required final MediaType mediaType,
+      @JsonKey(name: 'media_type') required final GalleryItemType mediaType,
       final String? copyright,
       @JsonKey(name: 'hdurl') final String? hdUrl}) = _$ApodResponseDtoImpl;
   const _ApodResponseDto._() : super._();
@@ -292,7 +292,7 @@ abstract class _ApodResponseDto extends ApodResponseDto {
   String get url;
   @override
   @JsonKey(name: 'media_type')
-  MediaType get mediaType;
+  GalleryItemType get mediaType;
   @override
   String? get copyright;
   @override
