@@ -7,7 +7,7 @@ class LoadingGalleryCard extends StatelessWidget {
     super.key,
   });
 
-  static final _mockMedia = GalleryItem(
+  static final _mockItem = GalleryItem(
     uri: Uri.parse('https://www.google.com/favicon.ico'),
     hdUri: Uri.parse('https://www.google.com/favicon.ico'),
     date: const Date(day: 20, month: 12, year: 2000),
@@ -19,14 +19,14 @@ class LoadingGalleryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaCard = GalleryCard(
-      item: _mockMedia,
-      onCardPressed: (context, media) {},
-      onSharePressed: (context, media) {},
-      onFavoritePressed: (context, media) {},
+    final galleryCard = GalleryCard(
+      item: _mockItem,
+      onCardPressed: (context, item) {},
+      onSharePressed: (context, item) {},
+      onFavoritePressed: (context, item) {},
     );
     return PrimaryShimmer(
-      child: mediaCard,
+      child: galleryCard,
     );
   }
 }

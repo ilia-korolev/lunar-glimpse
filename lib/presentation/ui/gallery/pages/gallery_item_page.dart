@@ -130,11 +130,11 @@ class _Body extends StatelessWidget {
           loading: () {
             return const _LoadingView();
           },
-          success: (GalleryItem media) {
+          success: (GalleryItem item) {
             return switch (activeBreakpoint) {
-              Breakpoint.compact => _SuccessView(media: media),
-              Breakpoint.medium => _SuccessView(media: media),
-              Breakpoint.expanded => _ExpandedSuccessView(media: media),
+              Breakpoint.compact => _SuccessView(item: item),
+              Breakpoint.medium => _SuccessView(item: item),
+              Breakpoint.expanded => _ExpandedSuccessView(item: item),
             };
           },
           failure: (String message) {
@@ -177,10 +177,10 @@ class _FailureView extends StatelessWidget {
 
 class _SuccessView extends StatelessWidget {
   const _SuccessView({
-    required this.media,
+    required this.item,
   });
 
-  final GalleryItem media;
+  final GalleryItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -191,12 +191,12 @@ class _SuccessView extends StatelessWidget {
 
           return CustomScrollView(
             slivers: [
-              _MediaAppBar(
-                media: media,
+              _GalleryItemAppBar(
+                item: item,
                 expandedHeight: imageSize,
               ),
-              _MediaDescription(
-                media: media,
+              _GalleryItemDescription(
+                item: item,
               ),
             ],
           );
@@ -206,13 +206,13 @@ class _SuccessView extends StatelessWidget {
   }
 }
 
-class _MediaAppBar extends StatelessWidget {
-  const _MediaAppBar({
-    required this.media,
+class _GalleryItemAppBar extends StatelessWidget {
+  const _GalleryItemAppBar({
+    required this.item,
     required this.expandedHeight,
   });
 
-  final GalleryItem media;
+  final GalleryItem item;
   final double expandedHeight;
 
   @override
@@ -241,7 +241,7 @@ class _MediaAppBar extends StatelessWidget {
             top: theme.spacing.small,
           ),
           child: _SaveImageButton(
-            imageUri: media.hdUri,
+            imageUri: item.hdUri,
           ),
         ),
       ],
@@ -251,11 +251,11 @@ class _MediaAppBar extends StatelessWidget {
           onTap: () {
             _showImageViewerDialog(
               context: context,
-              media: media,
+              item: item,
             );
           },
           child: ImageContent(
-            uri: media.uri.toString(),
+            uri: item.uri.toString(),
           ),
         ),
       ),
@@ -286,21 +286,21 @@ class _MediaAppBar extends StatelessWidget {
                   elevation: 7,
                   onPressed: (BuildContext context) {
                     GetIt.instance<ShareService>().shareUri(
-                      uri: media.uri,
+                      uri: item.uri,
                       context: context,
                     );
                   },
                 ),
                 SizedBox(width: theme.spacing.semiLarge),
                 PrimaryIconButton(
-                  icon: media.isFavorite
+                  icon: item.isFavorite
                       ? FontAwesomeIcons.solidStar
                       : FontAwesomeIcons.star,
                   size: IconButtonSize.large,
-                  iconColor: media.isFavorite
+                  iconColor: item.isFavorite
                       ? theme.colorScheme.surface
                       : theme.colorScheme.onSurface,
-                  backgroundColor: media.isFavorite
+                  backgroundColor: item.isFavorite
                       ? theme.colorScheme.onSurface
                       : theme.colorScheme.surface,
                   elevation: 7,
@@ -320,12 +320,12 @@ class _MediaAppBar extends StatelessWidget {
   }
 }
 
-class _MediaDescription extends StatelessWidget {
-  const _MediaDescription({
-    required this.media,
+class _GalleryItemDescription extends StatelessWidget {
+  const _GalleryItemDescription({
+    required this.item,
   });
 
-  final GalleryItem media;
+  final GalleryItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -342,20 +342,20 @@ class _MediaDescription extends StatelessWidget {
       sliver: SliverList.list(
         children: [
           Text(
-            media.title,
+            item.title,
             style: theme.textTheme.headlineSmall,
           ),
           SizedBox(height: theme.spacing.semiSmall),
           Text(
-            media.date.format('yMd'),
+            item.date.format('yMd'),
             style: theme.textTheme.titleSmall,
           ),
           SizedBox(height: theme.spacing.semiSmall),
           Text(
-            media.explanation,
+            item.explanation,
             style: theme.textTheme.bodyMedium,
           ),
-          if (media.copyright case final copyright?) ...[
+          if (item.copyright case final copyright?) ...[
             SizedBox(height: theme.spacing.semiSmall),
             Text(
               context.l10n.copyrightLabel(
@@ -372,10 +372,10 @@ class _MediaDescription extends StatelessWidget {
 
 class _ExpandedSuccessView extends StatelessWidget {
   const _ExpandedSuccessView({
-    required this.media,
+    required this.item,
   });
 
-  final GalleryItem media;
+  final GalleryItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -400,15 +400,15 @@ class _ExpandedSuccessView extends StatelessWidget {
             ),
             children: [
               Text(
-                media.title,
+                item.title,
                 style: theme.textTheme.headlineSmall,
               ),
-              _ExpandedActionRow(media: media),
+              _ExpandedActionRow(item: item),
               SizedBox(height: theme.spacing.medium),
-              _ExpandedImage(media: media),
+              _ExpandedImage(item: item),
               SizedBox(height: theme.spacing.large),
               Text(
-                media.explanation,
+                item.explanation,
                 style: theme.textTheme.bodyMedium,
               ),
             ],
@@ -421,10 +421,10 @@ class _ExpandedSuccessView extends StatelessWidget {
 
 class _ExpandedActionRow extends StatelessWidget {
   const _ExpandedActionRow({
-    required this.media,
+    required this.item,
   });
 
-  final GalleryItem media;
+  final GalleryItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -437,12 +437,12 @@ class _ExpandedActionRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              media.date.format('yMd'),
+              item.date.format('yMd'),
               style: theme.textTheme.labelLarge!.copyWith(
                 color: theme.colorScheme.outline,
               ),
             ),
-            if (media.copyright case final copyright?) ...[
+            if (item.copyright case final copyright?) ...[
               Text(
                 copyright.trim().replaceAll('\n', ''),
                 style: theme.textTheme.labelMedium!.copyWith(
@@ -454,7 +454,7 @@ class _ExpandedActionRow extends StatelessWidget {
         ),
         const Spacer(),
         _SaveImageButton(
-          imageUri: media.hdUri,
+          imageUri: item.hdUri,
         ),
         SizedBox(width: theme.spacing.small),
         PrimaryIconButton(
@@ -462,14 +462,14 @@ class _ExpandedActionRow extends StatelessWidget {
           size: IconButtonSize.medium,
           onPressed: (BuildContext context) {
             GetIt.instance<ShareService>().shareUri(
-              uri: media.uri,
+              uri: item.uri,
               context: context,
             );
           },
         ),
         SizedBox(width: theme.spacing.small),
         PrimaryIconButton(
-          icon: media.isFavorite
+          icon: item.isFavorite
               ? FontAwesomeIcons.solidStar
               : FontAwesomeIcons.star,
           size: IconButtonSize.medium,
@@ -486,10 +486,10 @@ class _ExpandedActionRow extends StatelessWidget {
 
 class _ExpandedImage extends StatelessWidget {
   const _ExpandedImage({
-    required this.media,
+    required this.item,
   });
 
-  final GalleryItem media;
+  final GalleryItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -506,7 +506,7 @@ class _ExpandedImage extends StatelessWidget {
         fit: StackFit.passthrough,
         children: [
           ImageContent(
-            uri: media.uri.toString(),
+            uri: item.uri.toString(),
           ),
           Positioned.fill(
             child: Material(
@@ -515,7 +515,7 @@ class _ExpandedImage extends StatelessWidget {
                 onTap: () {
                   _showImageViewerDialog(
                     context: context,
-                    media: media,
+                    item: item,
                   );
                 },
               ),
@@ -571,7 +571,7 @@ class _SaveImageButton extends StatelessWidget {
 
 Future<Dialog?> _showImageViewerDialog({
   required BuildContext context,
-  required GalleryItem media,
+  required GalleryItem item,
 }) {
   return showDialog<Dialog>(
     context: context,
@@ -600,7 +600,7 @@ Future<Dialog?> _showImageViewerDialog({
                       child: Center(
                         child: CachedNetworkImage(
                           fit: BoxFit.contain,
-                          imageUrl: media.hdUri.toString(),
+                          imageUrl: item.hdUri.toString(),
                           progressIndicatorBuilder: (_, __, downloadProgress) {
                             final progress =
                                 downloadProgress.progress?.clamp(0.0, 1.0) ??
