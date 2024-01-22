@@ -2,7 +2,7 @@
   "@@locale": "en",
   "languageName": "English (US)",
   "systemLanguageName": "System default",
-  "galleryTitle": "APOD Gallery",
+  "galleryTitle": "NASA Gallery",
   "newsTitle": "News",
   "settingsTitle": "Settings",
   "themeSettingsTitle": "Theme",
@@ -36,7 +36,7 @@
   "removedFromFavoritesSnackBarButton": "Undo",
   "favoriteRestoredSnackBarButton": "Restored",
   "imageLoadError": "Failed to load",
-  "minutesAgo": "{minutes, plural, =0{{minutes} minutes ago} =1{{minutes} minute ago} other{{minutes} minutes ago}}",
+  "minutesAgo": "{minutes, plural, =1{{minutes} minute ago} other{{minutes} minutes ago}}",
   "@minutesAgo": {
     "placeholders": {
       "minutes": {
@@ -45,7 +45,7 @@
       }
     }
   },
-  "hoursAgo": "{hours, plural, =0{{hours} hours ago} =1{{hours} hour ago} other{{hours} hours ago}}",
+  "hoursAgo": "{hours, plural, =1{{hours} hour ago} other{{hours} hours ago}}",
   "@hoursAgo": {
     "placeholders": {
       "hours": {
@@ -57,4 +57,3 @@
   "saveImageSuccessSnackBarText": "The image saved to: ",
   "saveImageFailedSnackBarText": "Unable to save the image"
 }
-
