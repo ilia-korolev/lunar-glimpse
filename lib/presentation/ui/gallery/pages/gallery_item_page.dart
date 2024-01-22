@@ -297,7 +297,12 @@ class _MediaAppBar extends StatelessWidget {
                       ? FontAwesomeIcons.solidStar
                       : FontAwesomeIcons.star,
                   size: IconButtonSize.large,
-                  backgroundColor: theme.colorScheme.surface,
+                  iconColor: media.isFavorite
+                      ? theme.colorScheme.surface
+                      : theme.colorScheme.onSurface,
+                  backgroundColor: media.isFavorite
+                      ? theme.colorScheme.onSurface
+                      : theme.colorScheme.surface,
                   elevation: 7,
                   onPressed: (_) {
                     context

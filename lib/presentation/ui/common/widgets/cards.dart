@@ -168,8 +168,12 @@ class _GalleryCardState extends State<GalleryCard> {
                             widget.item,
                           );
                         },
-                        iconColor: lightTheme.colorScheme.onSurface,
-                        backgroundColor: lightTheme.colorScheme.surface,
+                        iconColor: widget.item.isFavorite
+                            ? lightTheme.colorScheme.surface
+                            : lightTheme.colorScheme.onSurface,
+                        backgroundColor: widget.item.isFavorite
+                            ? lightTheme.colorScheme.onSurface
+                            : lightTheme.colorScheme.surface,
                       ),
                     ],
                   ),
