@@ -77,7 +77,12 @@ class _LocaleTileExpanded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tileLocale = locale ?? Localizations.localeOf(context);
+    final tileLocale = locale ??
+        basicLocaleListResolution(
+          WidgetsBinding.instance.platformDispatcher.locales,
+          AppLocalizations.supportedLocales,
+        );
+
     final l10n = lookupAppLocalizations(tileLocale);
     final theme = Theme.of(context);
 
