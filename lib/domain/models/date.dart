@@ -60,8 +60,8 @@ The input number must have 8 digits: $integer''',
     return (year * 10000) + (month * 100) + day;
   }
 
-  String format(String pattern) {
-    final format = DateFormat(pattern);
+  String format(String pattern, [String? locale]) {
+    final format = DateFormat(pattern, locale);
 
     return format.format(toDateTime());
   }

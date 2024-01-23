@@ -329,6 +329,7 @@ class _GalleryItemDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final theme = Theme.of(context);
     final bottomPadding = MediaQuery.of(context).padding.bottom;
 
@@ -347,7 +348,7 @@ class _GalleryItemDescription extends StatelessWidget {
           ),
           SizedBox(height: theme.spacing.semiSmall),
           Text(
-            item.date.format('yMd'),
+            item.date.format('yMd', l10n.localeName),
             style: theme.textTheme.titleSmall,
           ),
           SizedBox(height: theme.spacing.semiSmall),
@@ -358,7 +359,7 @@ class _GalleryItemDescription extends StatelessWidget {
           if (item.copyright case final copyright?) ...[
             SizedBox(height: theme.spacing.semiSmall),
             Text(
-              context.l10n.copyrightLabel(
+              l10n.copyrightLabel(
                 copyright.trim().replaceAll('\n', ''),
               ),
               style: theme.textTheme.labelSmall,
@@ -428,6 +429,7 @@ class _ExpandedActionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return Row(
@@ -437,7 +439,7 @@ class _ExpandedActionRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              item.date.format('yMd'),
+              item.date.format('yMd', l10n.localeName),
               style: theme.textTheme.labelLarge!.copyWith(
                 color: theme.colorScheme.outline,
               ),

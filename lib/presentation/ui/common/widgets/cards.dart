@@ -118,6 +118,7 @@ class _GalleryCardState extends State<GalleryCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final theme = Theme.of(context);
     final lightTheme = GetIt.instance<Theming>().light;
     final isMobile = theme.platform == TargetPlatform.android ||
@@ -210,7 +211,7 @@ class _GalleryCardState extends State<GalleryCard> {
               ),
             ),
             Text(
-              widget.item.date.format('yMd'),
+              widget.item.date.format('yMd', l10n.localeName),
               style: theme.textTheme.labelSmall!.copyWith(
                 color: theme.colorScheme.outline,
               ),
@@ -393,6 +394,6 @@ class _ArticleInfo extends StatelessWidget {
       return l10n.minutesAgo(difference.inMinutes);
     }
 
-    return DateFormat.yMd().format(date);
+    return DateFormat.yMd(l10n.localeName).format(date);
   }
 }
