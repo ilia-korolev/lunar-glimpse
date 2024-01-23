@@ -247,10 +247,12 @@ class _FailureView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverFillRemaining(
       hasScrollBody: false,
-      child: FailureView(
-        onPressed: () {
-          context.read<GalleryBloc>().add(const GalleryEvent.triedAgain());
-        },
+      child: SizedBox.shrink(
+        child: FailureView(
+          onPressed: () {
+            context.read<GalleryBloc>().add(const GalleryEvent.triedAgain());
+          },
+        ),
       ),
     );
   }
