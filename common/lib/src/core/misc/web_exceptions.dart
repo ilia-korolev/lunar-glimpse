@@ -1,0 +1,1 @@
+class InvalidResponseException implements Exception {}

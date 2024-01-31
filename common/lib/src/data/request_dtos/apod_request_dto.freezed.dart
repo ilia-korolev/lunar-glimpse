@@ -25,13 +25,11 @@ mixin _$ApodRequestDto {
   /// Cannot be used with count or startDate and endDate.
   ///
   /// Default value is today
-  @DateConverterNullable()
   Date? get date => throw _privateConstructorUsedError;
 
   /// The start of a date range, when requesting date for a range of dates.
   ///
   /// Cannot be used with date or count.
-  @DateConverterNullable()
   Date? get startDate => throw _privateConstructorUsedError;
 
   /// The end of the date range, when used with startDate.
@@ -39,7 +37,6 @@ mixin _$ApodRequestDto {
   /// Cannot be used with date or count.
   ///
   /// Default value is today
-  @DateConverterNullable()
   Date? get endDate => throw _privateConstructorUsedError;
 
   /// If this is specified then count randomly chosen images will be returned.
@@ -68,9 +65,9 @@ abstract class $ApodRequestDtoCopyWith<$Res> {
       _$ApodRequestDtoCopyWithImpl<$Res, ApodRequestDto>;
   @useResult
   $Res call(
-      {@DateConverterNullable() Date? date,
-      @DateConverterNullable() Date? startDate,
-      @DateConverterNullable() Date? endDate,
+      {Date? date,
+      Date? startDate,
+      Date? endDate,
       int? count,
       bool thumbs,
       String apiKey});
@@ -174,9 +171,9 @@ abstract class _$$ApodRequestDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@DateConverterNullable() Date? date,
-      @DateConverterNullable() Date? startDate,
-      @DateConverterNullable() Date? endDate,
+      {Date? date,
+      Date? startDate,
+      Date? endDate,
       int? count,
       bool thumbs,
       String apiKey});
@@ -241,9 +238,9 @@ class __$$ApodRequestDtoImplCopyWithImpl<$Res>
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class _$ApodRequestDtoImpl extends _ApodRequestDto {
   const _$ApodRequestDtoImpl(
-      {@DateConverterNullable() this.date,
-      @DateConverterNullable() this.startDate,
-      @DateConverterNullable() this.endDate,
+      {this.date,
+      this.startDate,
+      this.endDate,
       this.count,
       this.thumbs = false,
       this.apiKey = 'DEMO_KEY'})
@@ -270,14 +267,12 @@ class _$ApodRequestDtoImpl extends _ApodRequestDto {
   ///
   /// Default value is today
   @override
-  @DateConverterNullable()
   final Date? date;
 
   /// The start of a date range, when requesting date for a range of dates.
   ///
   /// Cannot be used with date or count.
   @override
-  @DateConverterNullable()
   final Date? startDate;
 
   /// The end of the date range, when used with startDate.
@@ -286,7 +281,6 @@ class _$ApodRequestDtoImpl extends _ApodRequestDto {
   ///
   /// Default value is today
   @override
-  @DateConverterNullable()
   final Date? endDate;
 
   /// If this is specified then count randomly chosen images will be returned.
@@ -348,9 +342,9 @@ class _$ApodRequestDtoImpl extends _ApodRequestDto {
 
 abstract class _ApodRequestDto extends ApodRequestDto {
   const factory _ApodRequestDto(
-      {@DateConverterNullable() final Date? date,
-      @DateConverterNullable() final Date? startDate,
-      @DateConverterNullable() final Date? endDate,
+      {final Date? date,
+      final Date? startDate,
+      final Date? endDate,
       final int? count,
       final bool thumbs,
       final String apiKey}) = _$ApodRequestDtoImpl;
@@ -366,14 +360,12 @@ abstract class _ApodRequestDto extends ApodRequestDto {
   /// Cannot be used with count or startDate and endDate.
   ///
   /// Default value is today
-  @DateConverterNullable()
   Date? get date;
   @override
 
   /// The start of a date range, when requesting date for a range of dates.
   ///
   /// Cannot be used with date or count.
-  @DateConverterNullable()
   Date? get startDate;
   @override
 
@@ -382,7 +374,6 @@ abstract class _ApodRequestDto extends ApodRequestDto {
   /// Cannot be used with date or count.
   ///
   /// Default value is today
-  @DateConverterNullable()
   Date? get endDate;
   @override
 

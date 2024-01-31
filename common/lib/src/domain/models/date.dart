@@ -45,6 +45,16 @@ The input number must have 8 digits: $integer''',
     return Date(year: year, month: month, day: day);
   }
 
+  factory Date.fromJson(String json) {
+    final dateTime = DateTime.parse(json);
+
+    return Date.fromDateTime(dateTime: dateTime);
+  }
+
+  String toJson() {
+    return format('yyyy-MM-dd');
+  }
+
   factory Date.parse(String string) {
     final dateTime = DateTime.parse(string);
 

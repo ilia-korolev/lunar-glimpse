@@ -8,13 +8,14 @@ part 'apod_response_dto.g.dart';
 class ApodResponseDto with _$ApodResponseDto {
   @JsonSerializable(includeIfNull: false)
   const factory ApodResponseDto({
-    @DateConverter() required Date date,
+    required Date date,
     required String explanation,
     required String title,
     required String url,
     @JsonKey(name: 'media_type') required GalleryItemType mediaType,
     String? copyright,
     @JsonKey(name: 'hdurl') String? hdUrl,
+    @Default('en') String languageCode,
   }) = _ApodResponseDto;
 
   const ApodResponseDto._();
@@ -32,6 +33,7 @@ class ApodResponseDto with _$ApodResponseDto {
       uri: Uri.parse(url),
       hdUri: Uri.parse(hdUrl ?? url),
       type: mediaType,
+      languageCode: languageCode,
     );
   }
 }

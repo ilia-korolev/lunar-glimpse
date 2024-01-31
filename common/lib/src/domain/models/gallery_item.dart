@@ -2,6 +2,7 @@ import 'package:astro_common/src/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'gallery_item.freezed.dart';
+part 'gallery_item.g.dart';
 
 enum GalleryItemType { video, image }
 
@@ -15,6 +16,10 @@ class GalleryItem with _$GalleryItem {
     required String explanation,
     required String? copyright,
     required GalleryItemType type,
+    required String languageCode,
     @Default(false) bool isFavorite,
   }) = _GalleryItem;
+
+  factory GalleryItem.fromJson(Map<String, dynamic> json) =>
+      _$GalleryItemFromJson(json);
 }

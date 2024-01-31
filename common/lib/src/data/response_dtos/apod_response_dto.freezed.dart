@@ -20,7 +20,6 @@ ApodResponseDto _$ApodResponseDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ApodResponseDto {
-  @DateConverter()
   Date get date => throw _privateConstructorUsedError;
   String get explanation => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -30,6 +29,7 @@ mixin _$ApodResponseDto {
   String? get copyright => throw _privateConstructorUsedError;
   @JsonKey(name: 'hdurl')
   String? get hdUrl => throw _privateConstructorUsedError;
+  String get languageCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,13 +44,14 @@ abstract class $ApodResponseDtoCopyWith<$Res> {
       _$ApodResponseDtoCopyWithImpl<$Res, ApodResponseDto>;
   @useResult
   $Res call(
-      {@DateConverter() Date date,
+      {Date date,
       String explanation,
       String title,
       String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
-      @JsonKey(name: 'hdurl') String? hdUrl});
+      @JsonKey(name: 'hdurl') String? hdUrl,
+      String languageCode});
 
   $DateCopyWith<$Res> get date;
 }
@@ -75,6 +76,7 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
     Object? mediaType = null,
     Object? copyright = freezed,
     Object? hdUrl = freezed,
+    Object? languageCode = null,
   }) {
     return _then(_value.copyWith(
       date: null == date
@@ -105,6 +107,10 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
           ? _value.hdUrl
           : hdUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      languageCode: null == languageCode
+          ? _value.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -126,13 +132,14 @@ abstract class _$$ApodResponseDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@DateConverter() Date date,
+      {Date date,
       String explanation,
       String title,
       String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
-      @JsonKey(name: 'hdurl') String? hdUrl});
+      @JsonKey(name: 'hdurl') String? hdUrl,
+      String languageCode});
 
   @override
   $DateCopyWith<$Res> get date;
@@ -156,6 +163,7 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
     Object? mediaType = null,
     Object? copyright = freezed,
     Object? hdUrl = freezed,
+    Object? languageCode = null,
   }) {
     return _then(_$ApodResponseDtoImpl(
       date: null == date
@@ -186,6 +194,10 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
           ? _value.hdUrl
           : hdUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      languageCode: null == languageCode
+          ? _value.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -195,20 +207,20 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
 @JsonSerializable(includeIfNull: false)
 class _$ApodResponseDtoImpl extends _ApodResponseDto {
   const _$ApodResponseDtoImpl(
-      {@DateConverter() required this.date,
+      {required this.date,
       required this.explanation,
       required this.title,
       required this.url,
       @JsonKey(name: 'media_type') required this.mediaType,
       this.copyright,
-      @JsonKey(name: 'hdurl') this.hdUrl})
+      @JsonKey(name: 'hdurl') this.hdUrl,
+      this.languageCode = 'en'})
       : super._();
 
   factory _$ApodResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$ApodResponseDtoImplFromJson(json);
 
   @override
-  @DateConverter()
   final Date date;
   @override
   final String explanation;
@@ -224,10 +236,13 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
   @override
   @JsonKey(name: 'hdurl')
   final String? hdUrl;
+  @override
+  @JsonKey()
+  final String languageCode;
 
   @override
   String toString() {
-    return 'ApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl)';
+    return 'ApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl, languageCode: $languageCode)';
   }
 
   @override
@@ -244,13 +259,15 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
                 other.mediaType == mediaType) &&
             (identical(other.copyright, copyright) ||
                 other.copyright == copyright) &&
-            (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl));
+            (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl) &&
+            (identical(other.languageCode, languageCode) ||
+                other.languageCode == languageCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, date, explanation, title, url, mediaType, copyright, hdUrl);
+  int get hashCode => Object.hash(runtimeType, date, explanation, title, url,
+      mediaType, copyright, hdUrl, languageCode);
 
   @JsonKey(ignore: true)
   @override
@@ -269,20 +286,20 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
 
 abstract class _ApodResponseDto extends ApodResponseDto {
   const factory _ApodResponseDto(
-      {@DateConverter() required final Date date,
+      {required final Date date,
       required final String explanation,
       required final String title,
       required final String url,
       @JsonKey(name: 'media_type') required final GalleryItemType mediaType,
       final String? copyright,
-      @JsonKey(name: 'hdurl') final String? hdUrl}) = _$ApodResponseDtoImpl;
+      @JsonKey(name: 'hdurl') final String? hdUrl,
+      final String languageCode}) = _$ApodResponseDtoImpl;
   const _ApodResponseDto._() : super._();
 
   factory _ApodResponseDto.fromJson(Map<String, dynamic> json) =
       _$ApodResponseDtoImpl.fromJson;
 
   @override
-  @DateConverter()
   Date get date;
   @override
   String get explanation;
@@ -298,6 +315,8 @@ abstract class _ApodResponseDto extends ApodResponseDto {
   @override
   @JsonKey(name: 'hdurl')
   String? get hdUrl;
+  @override
+  String get languageCode;
   @override
   @JsonKey(ignore: true)
   _$$ApodResponseDtoImplCopyWith<_$ApodResponseDtoImpl> get copyWith =>

@@ -25,19 +25,19 @@ class ApodRequestDto with _$ApodRequestDto {
     /// Cannot be used with count or startDate and endDate.
     ///
     /// Default value is today
-    @DateConverterNullable() Date? date,
+    Date? date,
 
     /// The start of a date range, when requesting date for a range of dates.
     ///
     /// Cannot be used with date or count.
-    @DateConverterNullable() Date? startDate,
+    Date? startDate,
 
     /// The end of the date range, when used with startDate.
     ///
     /// Cannot be used with date or count.
     ///
     /// Default value is today
-    @DateConverterNullable() Date? endDate,
+    Date? endDate,
 
     /// If this is specified then count randomly chosen images will be returned.
     ///
