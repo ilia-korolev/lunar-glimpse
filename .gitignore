@@ -1,0 +1,5 @@
+# Files and directories created by the Operating System
+.DS_Store
+
+# The production .env file
+.env.prod
