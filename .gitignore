@@ -3,3 +3,6 @@
 
 # The production .env file
 .env.prod
+
+# Certbot files
+certbot/
