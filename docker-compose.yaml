@@ -18,6 +18,7 @@ services:
 
   certbot:
     image: certbot/certbot:latest
+    container_name: certbot-container
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
