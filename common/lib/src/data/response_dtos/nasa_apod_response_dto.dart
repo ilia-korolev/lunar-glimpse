@@ -1,27 +1,27 @@
-import 'package:flutter_astronomy/data/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:astro_common/src/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'apod_response_dto.freezed.dart';
-part 'apod_response_dto.g.dart';
+part 'nasa_apod_response_dto.freezed.dart';
+part 'nasa_apod_response_dto.g.dart';
 
 @freezed
-class ApodResponseDto with _$ApodResponseDto {
+class NasaApodResponseDto with _$NasaApodResponseDto {
   @JsonSerializable(includeIfNull: false)
-  const factory ApodResponseDto({
-    @DateConverter() required Date date,
+  const factory NasaApodResponseDto({
+    required Date date,
     required String explanation,
     required String title,
     required String url,
     @JsonKey(name: 'media_type') required GalleryItemType mediaType,
     String? copyright,
     @JsonKey(name: 'hdurl') String? hdUrl,
-  }) = _ApodResponseDto;
+    @Default('en') String languageCode,
+  }) = _NasaApodResponseDto;
 
-  const ApodResponseDto._();
+  const NasaApodResponseDto._();
 
-  factory ApodResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$ApodResponseDtoFromJson(json);
+  factory NasaApodResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$NasaApodResponseDtoFromJson(json);
 
   /// Throws a [FormatException] if the dto cannot be converted.
   GalleryItem toModel() {
@@ -33,6 +33,7 @@ class ApodResponseDto with _$ApodResponseDto {
       uri: Uri.parse(url),
       hdUri: Uri.parse(hdUrl ?? url),
       type: mediaType,
+      languageCode: languageCode,
     );
   }
 }

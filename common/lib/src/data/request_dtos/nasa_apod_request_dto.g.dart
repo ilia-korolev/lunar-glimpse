@@ -2,14 +2,15 @@
 
 // ignore_for_file: require_trailing_commas, non_constant_identifier_names, unnecessary_null_checks, lines_longer_than_80_chars
 
-part of 'apod_request_dto.dart';
+part of 'nasa_apod_request_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ApodRequestDtoImpl _$$ApodRequestDtoImplFromJson(Map<String, dynamic> json) =>
-    _$ApodRequestDtoImpl(
+_$NasaApodRequestDtoImpl _$$NasaApodRequestDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NasaApodRequestDtoImpl(
       date: json['date'] == null ? null : Date.fromJson(json['date'] as String),
       startDate: json['start_date'] == null
           ? null
@@ -22,8 +23,8 @@ _$ApodRequestDtoImpl _$$ApodRequestDtoImplFromJson(Map<String, dynamic> json) =>
       apiKey: json['api_key'] as String? ?? 'DEMO_KEY',
     );
 
-Map<String, dynamic> _$$ApodRequestDtoImplToJson(
-    _$ApodRequestDtoImpl instance) {
+Map<String, dynamic> _$$NasaApodRequestDtoImplToJson(
+    _$NasaApodRequestDtoImpl instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

@@ -1,5 +1,5 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 class DateConverter

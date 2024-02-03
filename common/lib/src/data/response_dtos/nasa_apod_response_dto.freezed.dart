@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'apod_response_dto.dart';
+part of 'nasa_apod_response_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ApodResponseDto _$ApodResponseDtoFromJson(Map<String, dynamic> json) {
-  return _ApodResponseDto.fromJson(json);
+NasaApodResponseDto _$NasaApodResponseDtoFromJson(Map<String, dynamic> json) {
+  return _NasaApodResponseDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ApodResponseDto {
-  @DateConverter()
+mixin _$NasaApodResponseDto {
   Date get date => throw _privateConstructorUsedError;
   String get explanation => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -30,35 +29,37 @@ mixin _$ApodResponseDto {
   String? get copyright => throw _privateConstructorUsedError;
   @JsonKey(name: 'hdurl')
   String? get hdUrl => throw _privateConstructorUsedError;
+  String get languageCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ApodResponseDtoCopyWith<ApodResponseDto> get copyWith =>
+  $NasaApodResponseDtoCopyWith<NasaApodResponseDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApodResponseDtoCopyWith<$Res> {
-  factory $ApodResponseDtoCopyWith(
-          ApodResponseDto value, $Res Function(ApodResponseDto) then) =
-      _$ApodResponseDtoCopyWithImpl<$Res, ApodResponseDto>;
+abstract class $NasaApodResponseDtoCopyWith<$Res> {
+  factory $NasaApodResponseDtoCopyWith(
+          NasaApodResponseDto value, $Res Function(NasaApodResponseDto) then) =
+      _$NasaApodResponseDtoCopyWithImpl<$Res, NasaApodResponseDto>;
   @useResult
   $Res call(
-      {@DateConverter() Date date,
+      {Date date,
       String explanation,
       String title,
       String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
-      @JsonKey(name: 'hdurl') String? hdUrl});
+      @JsonKey(name: 'hdurl') String? hdUrl,
+      String languageCode});
 
   $DateCopyWith<$Res> get date;
 }
 
 /// @nodoc
-class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
-    implements $ApodResponseDtoCopyWith<$Res> {
-  _$ApodResponseDtoCopyWithImpl(this._value, this._then);
+class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
+    implements $NasaApodResponseDtoCopyWith<$Res> {
+  _$NasaApodResponseDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -75,6 +76,7 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
     Object? mediaType = null,
     Object? copyright = freezed,
     Object? hdUrl = freezed,
+    Object? languageCode = null,
   }) {
     return _then(_value.copyWith(
       date: null == date
@@ -105,6 +107,10 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
           ? _value.hdUrl
           : hdUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      languageCode: null == languageCode
+          ? _value.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -118,32 +124,33 @@ class _$ApodResponseDtoCopyWithImpl<$Res, $Val extends ApodResponseDto>
 }
 
 /// @nodoc
-abstract class _$$ApodResponseDtoImplCopyWith<$Res>
-    implements $ApodResponseDtoCopyWith<$Res> {
-  factory _$$ApodResponseDtoImplCopyWith(_$ApodResponseDtoImpl value,
-          $Res Function(_$ApodResponseDtoImpl) then) =
-      __$$ApodResponseDtoImplCopyWithImpl<$Res>;
+abstract class _$$NasaApodResponseDtoImplCopyWith<$Res>
+    implements $NasaApodResponseDtoCopyWith<$Res> {
+  factory _$$NasaApodResponseDtoImplCopyWith(_$NasaApodResponseDtoImpl value,
+          $Res Function(_$NasaApodResponseDtoImpl) then) =
+      __$$NasaApodResponseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@DateConverter() Date date,
+      {Date date,
       String explanation,
       String title,
       String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
-      @JsonKey(name: 'hdurl') String? hdUrl});
+      @JsonKey(name: 'hdurl') String? hdUrl,
+      String languageCode});
 
   @override
   $DateCopyWith<$Res> get date;
 }
 
 /// @nodoc
-class __$$ApodResponseDtoImplCopyWithImpl<$Res>
-    extends _$ApodResponseDtoCopyWithImpl<$Res, _$ApodResponseDtoImpl>
-    implements _$$ApodResponseDtoImplCopyWith<$Res> {
-  __$$ApodResponseDtoImplCopyWithImpl(
-      _$ApodResponseDtoImpl _value, $Res Function(_$ApodResponseDtoImpl) _then)
+class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
+    extends _$NasaApodResponseDtoCopyWithImpl<$Res, _$NasaApodResponseDtoImpl>
+    implements _$$NasaApodResponseDtoImplCopyWith<$Res> {
+  __$$NasaApodResponseDtoImplCopyWithImpl(_$NasaApodResponseDtoImpl _value,
+      $Res Function(_$NasaApodResponseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -156,8 +163,9 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
     Object? mediaType = null,
     Object? copyright = freezed,
     Object? hdUrl = freezed,
+    Object? languageCode = null,
   }) {
-    return _then(_$ApodResponseDtoImpl(
+    return _then(_$NasaApodResponseDtoImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -186,6 +194,10 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
           ? _value.hdUrl
           : hdUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      languageCode: null == languageCode
+          ? _value.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -193,22 +205,22 @@ class __$$ApodResponseDtoImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$ApodResponseDtoImpl extends _ApodResponseDto {
-  const _$ApodResponseDtoImpl(
-      {@DateConverter() required this.date,
+class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
+  const _$NasaApodResponseDtoImpl(
+      {required this.date,
       required this.explanation,
       required this.title,
       required this.url,
       @JsonKey(name: 'media_type') required this.mediaType,
       this.copyright,
-      @JsonKey(name: 'hdurl') this.hdUrl})
+      @JsonKey(name: 'hdurl') this.hdUrl,
+      this.languageCode = 'en'})
       : super._();
 
-  factory _$ApodResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ApodResponseDtoImplFromJson(json);
+  factory _$NasaApodResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NasaApodResponseDtoImplFromJson(json);
 
   @override
-  @DateConverter()
   final Date date;
   @override
   final String explanation;
@@ -224,17 +236,20 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
   @override
   @JsonKey(name: 'hdurl')
   final String? hdUrl;
+  @override
+  @JsonKey()
+  final String languageCode;
 
   @override
   String toString() {
-    return 'ApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl)';
+    return 'NasaApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl, languageCode: $languageCode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApodResponseDtoImpl &&
+            other is _$NasaApodResponseDtoImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.explanation, explanation) ||
                 other.explanation == explanation) &&
@@ -244,45 +259,47 @@ class _$ApodResponseDtoImpl extends _ApodResponseDto {
                 other.mediaType == mediaType) &&
             (identical(other.copyright, copyright) ||
                 other.copyright == copyright) &&
-            (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl));
+            (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl) &&
+            (identical(other.languageCode, languageCode) ||
+                other.languageCode == languageCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, date, explanation, title, url, mediaType, copyright, hdUrl);
+  int get hashCode => Object.hash(runtimeType, date, explanation, title, url,
+      mediaType, copyright, hdUrl, languageCode);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApodResponseDtoImplCopyWith<_$ApodResponseDtoImpl> get copyWith =>
-      __$$ApodResponseDtoImplCopyWithImpl<_$ApodResponseDtoImpl>(
+  _$$NasaApodResponseDtoImplCopyWith<_$NasaApodResponseDtoImpl> get copyWith =>
+      __$$NasaApodResponseDtoImplCopyWithImpl<_$NasaApodResponseDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApodResponseDtoImplToJson(
+    return _$$NasaApodResponseDtoImplToJson(
       this,
     );
   }
 }
 
-abstract class _ApodResponseDto extends ApodResponseDto {
-  const factory _ApodResponseDto(
-      {@DateConverter() required final Date date,
+abstract class _NasaApodResponseDto extends NasaApodResponseDto {
+  const factory _NasaApodResponseDto(
+      {required final Date date,
       required final String explanation,
       required final String title,
       required final String url,
       @JsonKey(name: 'media_type') required final GalleryItemType mediaType,
       final String? copyright,
-      @JsonKey(name: 'hdurl') final String? hdUrl}) = _$ApodResponseDtoImpl;
-  const _ApodResponseDto._() : super._();
+      @JsonKey(name: 'hdurl') final String? hdUrl,
+      final String languageCode}) = _$NasaApodResponseDtoImpl;
+  const _NasaApodResponseDto._() : super._();
 
-  factory _ApodResponseDto.fromJson(Map<String, dynamic> json) =
-      _$ApodResponseDtoImpl.fromJson;
+  factory _NasaApodResponseDto.fromJson(Map<String, dynamic> json) =
+      _$NasaApodResponseDtoImpl.fromJson;
 
   @override
-  @DateConverter()
   Date get date;
   @override
   String get explanation;
@@ -299,7 +316,9 @@ abstract class _ApodResponseDto extends ApodResponseDto {
   @JsonKey(name: 'hdurl')
   String? get hdUrl;
   @override
+  String get languageCode;
+  @override
   @JsonKey(ignore: true)
-  _$$ApodResponseDtoImplCopyWith<_$ApodResponseDtoImpl> get copyWith =>
+  _$$NasaApodResponseDtoImplCopyWith<_$NasaApodResponseDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

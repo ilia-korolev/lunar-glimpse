@@ -70,6 +70,7 @@ class DioHttpService implements HttpService {
 
     return Options(
       responseType: _mapResponseType(options.responseType),
+      followRedirects: options.followRedirects,
     );
   }
 

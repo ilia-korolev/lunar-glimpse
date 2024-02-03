@@ -1,4 +1,4 @@
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:astro_common/astro_common.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:go_router/go_router.dart';
 

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'apod_request_dto.dart';
+part of 'nasa_apod_request_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ApodRequestDto _$ApodRequestDtoFromJson(Map<String, dynamic> json) {
-  return _ApodRequestDto.fromJson(json);
+NasaApodRequestDto _$NasaApodRequestDtoFromJson(Map<String, dynamic> json) {
+  return _NasaApodRequestDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ApodRequestDto {
+mixin _$NasaApodRequestDto {
   /// The date of the APOD image to retrieve.
   ///
   /// Cannot be used with count or startDate and endDate.
@@ -54,15 +54,15 @@ mixin _$ApodRequestDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ApodRequestDtoCopyWith<ApodRequestDto> get copyWith =>
+  $NasaApodRequestDtoCopyWith<NasaApodRequestDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApodRequestDtoCopyWith<$Res> {
-  factory $ApodRequestDtoCopyWith(
-          ApodRequestDto value, $Res Function(ApodRequestDto) then) =
-      _$ApodRequestDtoCopyWithImpl<$Res, ApodRequestDto>;
+abstract class $NasaApodRequestDtoCopyWith<$Res> {
+  factory $NasaApodRequestDtoCopyWith(
+          NasaApodRequestDto value, $Res Function(NasaApodRequestDto) then) =
+      _$NasaApodRequestDtoCopyWithImpl<$Res, NasaApodRequestDto>;
   @useResult
   $Res call(
       {Date? date,
@@ -78,9 +78,9 @@ abstract class $ApodRequestDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ApodRequestDtoCopyWithImpl<$Res, $Val extends ApodRequestDto>
-    implements $ApodRequestDtoCopyWith<$Res> {
-  _$ApodRequestDtoCopyWithImpl(this._value, this._then);
+class _$NasaApodRequestDtoCopyWithImpl<$Res, $Val extends NasaApodRequestDto>
+    implements $NasaApodRequestDtoCopyWith<$Res> {
+  _$NasaApodRequestDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -163,11 +163,11 @@ class _$ApodRequestDtoCopyWithImpl<$Res, $Val extends ApodRequestDto>
 }
 
 /// @nodoc
-abstract class _$$ApodRequestDtoImplCopyWith<$Res>
-    implements $ApodRequestDtoCopyWith<$Res> {
-  factory _$$ApodRequestDtoImplCopyWith(_$ApodRequestDtoImpl value,
-          $Res Function(_$ApodRequestDtoImpl) then) =
-      __$$ApodRequestDtoImplCopyWithImpl<$Res>;
+abstract class _$$NasaApodRequestDtoImplCopyWith<$Res>
+    implements $NasaApodRequestDtoCopyWith<$Res> {
+  factory _$$NasaApodRequestDtoImplCopyWith(_$NasaApodRequestDtoImpl value,
+          $Res Function(_$NasaApodRequestDtoImpl) then) =
+      __$$NasaApodRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -187,11 +187,11 @@ abstract class _$$ApodRequestDtoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ApodRequestDtoImplCopyWithImpl<$Res>
-    extends _$ApodRequestDtoCopyWithImpl<$Res, _$ApodRequestDtoImpl>
-    implements _$$ApodRequestDtoImplCopyWith<$Res> {
-  __$$ApodRequestDtoImplCopyWithImpl(
-      _$ApodRequestDtoImpl _value, $Res Function(_$ApodRequestDtoImpl) _then)
+class __$$NasaApodRequestDtoImplCopyWithImpl<$Res>
+    extends _$NasaApodRequestDtoCopyWithImpl<$Res, _$NasaApodRequestDtoImpl>
+    implements _$$NasaApodRequestDtoImplCopyWith<$Res> {
+  __$$NasaApodRequestDtoImplCopyWithImpl(_$NasaApodRequestDtoImpl _value,
+      $Res Function(_$NasaApodRequestDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -204,7 +204,7 @@ class __$$ApodRequestDtoImplCopyWithImpl<$Res>
     Object? thumbs = null,
     Object? apiKey = null,
   }) {
-    return _then(_$ApodRequestDtoImpl(
+    return _then(_$NasaApodRequestDtoImpl(
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -236,8 +236,8 @@ class __$$ApodRequestDtoImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
-class _$ApodRequestDtoImpl extends _ApodRequestDto {
-  const _$ApodRequestDtoImpl(
+class _$NasaApodRequestDtoImpl extends _NasaApodRequestDto {
+  const _$NasaApodRequestDtoImpl(
       {this.date,
       this.startDate,
       this.endDate,
@@ -258,8 +258,8 @@ class _$ApodRequestDtoImpl extends _ApodRequestDto {
             'count cannot be used with date or startDate and endDate.'),
         super._();
 
-  factory _$ApodRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ApodRequestDtoImplFromJson(json);
+  factory _$NasaApodRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NasaApodRequestDtoImplFromJson(json);
 
   /// The date of the APOD image to retrieve.
   ///
@@ -303,14 +303,14 @@ class _$ApodRequestDtoImpl extends _ApodRequestDto {
 
   @override
   String toString() {
-    return 'ApodRequestDto(date: $date, startDate: $startDate, endDate: $endDate, count: $count, thumbs: $thumbs, apiKey: $apiKey)';
+    return 'NasaApodRequestDto(date: $date, startDate: $startDate, endDate: $endDate, count: $count, thumbs: $thumbs, apiKey: $apiKey)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApodRequestDtoImpl &&
+            other is _$NasaApodRequestDtoImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
@@ -328,30 +328,30 @@ class _$ApodRequestDtoImpl extends _ApodRequestDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApodRequestDtoImplCopyWith<_$ApodRequestDtoImpl> get copyWith =>
-      __$$ApodRequestDtoImplCopyWithImpl<_$ApodRequestDtoImpl>(
+  _$$NasaApodRequestDtoImplCopyWith<_$NasaApodRequestDtoImpl> get copyWith =>
+      __$$NasaApodRequestDtoImplCopyWithImpl<_$NasaApodRequestDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApodRequestDtoImplToJson(
+    return _$$NasaApodRequestDtoImplToJson(
       this,
     );
   }
 }
 
-abstract class _ApodRequestDto extends ApodRequestDto {
-  const factory _ApodRequestDto(
+abstract class _NasaApodRequestDto extends NasaApodRequestDto {
+  const factory _NasaApodRequestDto(
       {final Date? date,
       final Date? startDate,
       final Date? endDate,
       final int? count,
       final bool thumbs,
-      final String apiKey}) = _$ApodRequestDtoImpl;
-  const _ApodRequestDto._() : super._();
+      final String apiKey}) = _$NasaApodRequestDtoImpl;
+  const _NasaApodRequestDto._() : super._();
 
-  factory _ApodRequestDto.fromJson(Map<String, dynamic> json) =
-      _$ApodRequestDtoImpl.fromJson;
+  factory _NasaApodRequestDto.fromJson(Map<String, dynamic> json) =
+      _$NasaApodRequestDtoImpl.fromJson;
 
   @override
 
@@ -393,6 +393,6 @@ abstract class _ApodRequestDto extends ApodRequestDto {
   String get apiKey;
   @override
   @JsonKey(ignore: true)
-  _$$ApodRequestDtoImplCopyWith<_$ApodRequestDtoImpl> get copyWith =>
+  _$$NasaApodRequestDtoImplCopyWith<_$NasaApodRequestDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

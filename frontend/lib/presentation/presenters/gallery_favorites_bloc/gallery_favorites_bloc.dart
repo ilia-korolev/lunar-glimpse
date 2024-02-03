@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:astro_common/astro_common.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_astronomy/core/_export.dart';

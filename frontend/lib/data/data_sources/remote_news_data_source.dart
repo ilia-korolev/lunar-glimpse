@@ -1,3 +1,4 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:xml/xml.dart';

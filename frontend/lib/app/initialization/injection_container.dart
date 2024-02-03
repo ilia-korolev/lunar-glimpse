@@ -1,3 +1,4 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ Future<void> _registerServices() async {
       ),
     )
     ..registerLazySingleton<HttpService>(
-      () => HttpServiceImpl(
+      () => DioHttpService(
         interceptors: [
           LoggingDioInterceptor(
             logger: _getIt(),
@@ -96,7 +97,10 @@ Future<void> _registerDataSources() async {
       ),
     )
     ..registerLazySingleton<RemoteGalleryDataSource>(
-      () => NasaApodDataSource(httpService: _getIt()),
+      () => AstroBackendGalleryDataSource(
+        httpService: _getIt(),
+        apiUrl: 'https://lunarglimpse.com/api',
+      ),
     )
     ..registerLazySingleton<RemoteNewsDataSource>(
       () => RssNewsDataSource(

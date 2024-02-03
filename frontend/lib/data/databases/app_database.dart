@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/isolate.dart';
 import 'package:drift/native.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_astronomy/data/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -24,6 +24,7 @@ class GalleryEntities extends Table {
   TextColumn get hdUri => text().map(const _UriConverter())();
   TextColumn get copyright => text().nullable()();
   IntColumn get type => intEnum<GalleryItemType>()();
+  TextColumn get languageCode => text()();
   BoolColumn get isFavorite => boolean()();
 
   @override

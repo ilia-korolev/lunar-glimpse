@@ -27,9 +27,11 @@ class HttpResponse<T> {
 class HttpOptions {
   HttpOptions({
     this.responseType,
+    this.followRedirects,
   });
 
   final HttpResponseType? responseType;
+  final bool? followRedirects;
 }
 
 enum HttpResponseType {

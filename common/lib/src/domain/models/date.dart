@@ -51,14 +51,14 @@ The input number must have 8 digits: $integer''',
     return Date.fromDateTime(dateTime: dateTime);
   }
 
-  String toJson() {
-    return format('yyyy-MM-dd');
-  }
-
   factory Date.parse(String string) {
     final dateTime = DateTime.parse(string);
 
     return Date.fromDateTime(dateTime: dateTime);
+  }
+
+  String toJson() {
+    return format('yyyy-MM-dd');
   }
 
   DateTime toDateTime() {

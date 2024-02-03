@@ -5,20 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_astronomy",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "flutter_astronomy (profile mode)",
+            "name": "frontend",
             "request": "launch",
             "type": "dart",
+            "cwd": "frontend",        
+        },
+        {
+            "name": "frontend (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "frontend",
             "flutterMode": "profile"
         },
         {
-            "name": "flutter_astronomy (release mode)",
+            "name": "frontend (release mode)",
             "request": "launch",
             "type": "dart",
+            "cwd": "frontend",
             "flutterMode": "release"
         }
     ]

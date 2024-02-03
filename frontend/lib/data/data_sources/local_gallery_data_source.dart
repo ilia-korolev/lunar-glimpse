@@ -1,6 +1,6 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_astronomy/data/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
 
 abstract interface class LocalGalleryDataSource {
   const LocalGalleryDataSource();
@@ -37,15 +37,16 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
       (batch) => batch.insertAll(
         _database.galleryEntities,
         galleryItems.map(
-          (m) => GalleryEntity(
-            date: m.date,
-            title: m.title,
-            explanation: m.explanation,
-            uri: m.uri,
-            hdUri: m.hdUri,
-            copyright: m.copyright,
-            type: m.type,
-            isFavorite: m.isFavorite,
+          (i) => GalleryEntity(
+            date: i.date,
+            title: i.title,
+            explanation: i.explanation,
+            uri: i.uri,
+            hdUri: i.hdUri,
+            copyright: i.copyright,
+            type: i.type,
+            languageCode: i.languageCode,
+            isFavorite: i.isFavorite,
           ),
         ),
         mode: onConflictUpdate
@@ -78,6 +79,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
             explanation: e.explanation,
             copyright: e.copyright,
             type: e.type,
+            languageCode: e.languageCode,
             isFavorite: e.isFavorite,
           ),
         )
@@ -103,6 +105,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
             explanation: e.explanation,
             copyright: e.copyright,
             type: e.type,
+            languageCode: e.languageCode,
             isFavorite: e.isFavorite,
           ),
         )

@@ -1,5 +1,5 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 
 class LoadingGalleryCard extends StatelessWidget {
@@ -15,6 +15,7 @@ class LoadingGalleryCard extends StatelessWidget {
     explanation: 'This is an explanation',
     copyright: 'This is a copyright',
     type: GalleryItemType.image,
+    languageCode: 'en',
   );
 
   @override

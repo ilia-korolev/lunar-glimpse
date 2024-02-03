@@ -2,15 +2,15 @@
 
 // ignore_for_file: require_trailing_commas, non_constant_identifier_names, unnecessary_null_checks, lines_longer_than_80_chars
 
-part of 'apod_response_dto.dart';
+part of 'nasa_apod_response_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ApodResponseDtoImpl _$$ApodResponseDtoImplFromJson(
+_$NasaApodResponseDtoImpl _$$NasaApodResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$ApodResponseDtoImpl(
+    _$NasaApodResponseDtoImpl(
       date: Date.fromJson(json['date'] as String),
       explanation: json['explanation'] as String,
       title: json['title'] as String,
@@ -21,8 +21,8 @@ _$ApodResponseDtoImpl _$$ApodResponseDtoImplFromJson(
       languageCode: json['languageCode'] as String? ?? 'en',
     );
 
-Map<String, dynamic> _$$ApodResponseDtoImplToJson(
-    _$ApodResponseDtoImpl instance) {
+Map<String, dynamic> _$$NasaApodResponseDtoImplToJson(
+    _$NasaApodResponseDtoImpl instance) {
   final val = <String, dynamic>{
     'date': instance.date.toJson(),
     'explanation': instance.explanation,

@@ -1,12 +1,11 @@
-import 'package:flutter_astronomy/data/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:astro_common/src/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'apod_request_dto.freezed.dart';
-part 'apod_request_dto.g.dart';
+part 'nasa_apod_request_dto.freezed.dart';
+part 'nasa_apod_request_dto.g.dart';
 
 @freezed
-class ApodRequestDto with _$ApodRequestDto {
+class NasaApodRequestDto with _$NasaApodRequestDto {
   @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
   @Assert(
     '''(date == null) || (startDate == null && endDate == null && count == null)''',
@@ -20,25 +19,25 @@ class ApodRequestDto with _$ApodRequestDto {
     '''(count == null) || (date == null && startDate == null && endDate == null)''',
     '''count cannot be used with date or startDate and endDate.''',
   )
-  const factory ApodRequestDto({
+  const factory NasaApodRequestDto({
     /// The date of the APOD image to retrieve.
     ///
     /// Cannot be used with count or startDate and endDate.
     ///
     /// Default value is today
-    @DateConverterNullable() Date? date,
+    Date? date,
 
     /// The start of a date range, when requesting date for a range of dates.
     ///
     /// Cannot be used with date or count.
-    @DateConverterNullable() Date? startDate,
+    Date? startDate,
 
     /// The end of the date range, when used with startDate.
     ///
     /// Cannot be used with date or count.
     ///
     /// Default value is today
-    @DateConverterNullable() Date? endDate,
+    Date? endDate,
 
     /// If this is specified then count randomly chosen images will be returned.
     ///
@@ -52,10 +51,10 @@ class ApodRequestDto with _$ApodRequestDto {
 
     /// api.nasa.gov key for expanded usage
     @Default('DEMO_KEY') String apiKey,
-  }) = _ApodRequestDto;
+  }) = _NasaApodRequestDto;
 
-  const ApodRequestDto._();
+  const NasaApodRequestDto._();
 
-  factory ApodRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$ApodRequestDtoFromJson(json);
+  factory NasaApodRequestDto.fromJson(Map<String, dynamic> json) =>
+      _$NasaApodRequestDtoFromJson(json);
 }

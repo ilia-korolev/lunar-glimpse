@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
+import 'package:astro_common/astro_common.dart';
 
-import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/data/_export.dart';
 
 abstract interface class RemoteDownloadFileDataSource {
@@ -28,8 +27,8 @@ class HttpDownloadFileDataSource implements RemoteDownloadFileDataSource {
       onReceiveProgress: (received, total) {
         progressStreamController.add(received / total);
       },
-      options: Options(
-        responseType: ResponseType.bytes,
+      options: HttpOptions(
+        responseType: HttpResponseType.bytes,
         followRedirects: false,
       ),
     );
