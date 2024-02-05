@@ -29,7 +29,6 @@ mixin _$NasaApodResponseDto {
   String? get copyright => throw _privateConstructorUsedError;
   @JsonKey(name: 'hdurl')
   String? get hdUrl => throw _privateConstructorUsedError;
-  String get languageCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,8 +49,7 @@ abstract class $NasaApodResponseDtoCopyWith<$Res> {
       String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
-      @JsonKey(name: 'hdurl') String? hdUrl,
-      String languageCode});
+      @JsonKey(name: 'hdurl') String? hdUrl});
 
   $DateCopyWith<$Res> get date;
 }
@@ -76,7 +74,6 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
     Object? mediaType = null,
     Object? copyright = freezed,
     Object? hdUrl = freezed,
-    Object? languageCode = null,
   }) {
     return _then(_value.copyWith(
       date: null == date
@@ -107,10 +104,6 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
           ? _value.hdUrl
           : hdUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 
@@ -138,8 +131,7 @@ abstract class _$$NasaApodResponseDtoImplCopyWith<$Res>
       String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
-      @JsonKey(name: 'hdurl') String? hdUrl,
-      String languageCode});
+      @JsonKey(name: 'hdurl') String? hdUrl});
 
   @override
   $DateCopyWith<$Res> get date;
@@ -163,7 +155,6 @@ class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
     Object? mediaType = null,
     Object? copyright = freezed,
     Object? hdUrl = freezed,
-    Object? languageCode = null,
   }) {
     return _then(_$NasaApodResponseDtoImpl(
       date: null == date
@@ -194,10 +185,6 @@ class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
           ? _value.hdUrl
           : hdUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -213,8 +200,7 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
       required this.url,
       @JsonKey(name: 'media_type') required this.mediaType,
       this.copyright,
-      @JsonKey(name: 'hdurl') this.hdUrl,
-      this.languageCode = 'en'})
+      @JsonKey(name: 'hdurl') this.hdUrl})
       : super._();
 
   factory _$NasaApodResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -236,13 +222,10 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
   @override
   @JsonKey(name: 'hdurl')
   final String? hdUrl;
-  @override
-  @JsonKey()
-  final String languageCode;
 
   @override
   String toString() {
-    return 'NasaApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl, languageCode: $languageCode)';
+    return 'NasaApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl)';
   }
 
   @override
@@ -259,15 +242,13 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
                 other.mediaType == mediaType) &&
             (identical(other.copyright, copyright) ||
                 other.copyright == copyright) &&
-            (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl) &&
-            (identical(other.languageCode, languageCode) ||
-                other.languageCode == languageCode));
+            (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, date, explanation, title, url,
-      mediaType, copyright, hdUrl, languageCode);
+  int get hashCode => Object.hash(
+      runtimeType, date, explanation, title, url, mediaType, copyright, hdUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -292,8 +273,7 @@ abstract class _NasaApodResponseDto extends NasaApodResponseDto {
       required final String url,
       @JsonKey(name: 'media_type') required final GalleryItemType mediaType,
       final String? copyright,
-      @JsonKey(name: 'hdurl') final String? hdUrl,
-      final String languageCode}) = _$NasaApodResponseDtoImpl;
+      @JsonKey(name: 'hdurl') final String? hdUrl}) = _$NasaApodResponseDtoImpl;
   const _NasaApodResponseDto._() : super._();
 
   factory _NasaApodResponseDto.fromJson(Map<String, dynamic> json) =
@@ -315,8 +295,6 @@ abstract class _NasaApodResponseDto extends NasaApodResponseDto {
   @override
   @JsonKey(name: 'hdurl')
   String? get hdUrl;
-  @override
-  String get languageCode;
   @override
   @JsonKey(ignore: true)
   _$$NasaApodResponseDtoImplCopyWith<_$NasaApodResponseDtoImpl> get copyWith =>

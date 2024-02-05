@@ -17,7 +17,7 @@ _$GalleryItemImpl _$$GalleryItemImplFromJson(Map<String, dynamic> json) =>
       explanation: json['explanation'] as String,
       copyright: json['copyright'] as String?,
       type: $enumDecode(_$GalleryItemTypeEnumMap, json['type']),
-      languageCode: json['languageCode'] as String,
+      language: $enumDecode(_$GalleryItemLanguageEnumMap, json['language']),
       isFavorite: json['isFavorite'] as bool? ?? false,
     );
 
@@ -30,11 +30,18 @@ Map<String, dynamic> _$$GalleryItemImplToJson(_$GalleryItemImpl instance) =>
       'explanation': instance.explanation,
       'copyright': instance.copyright,
       'type': _$GalleryItemTypeEnumMap[instance.type]!,
-      'languageCode': instance.languageCode,
+      'language': _$GalleryItemLanguageEnumMap[instance.language]!,
       'isFavorite': instance.isFavorite,
     };
 
 const _$GalleryItemTypeEnumMap = {
   GalleryItemType.video: 'video',
   GalleryItemType.image: 'image',
+};
+
+const _$GalleryItemLanguageEnumMap = {
+  GalleryItemLanguage.english: 'english',
+  GalleryItemLanguage.japanese: 'japanese',
+  GalleryItemLanguage.russian: 'russian',
+  GalleryItemLanguage.chinese: 'chinese',
 };

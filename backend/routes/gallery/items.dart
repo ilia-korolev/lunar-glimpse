@@ -19,6 +19,13 @@ Future<Response> onRequest(RequestContext context) async {
       );
     }
 
+    if (queryParams['language'] == null) {
+      return Response(
+        statusCode: HttpStatus.badRequest,
+        body: 'language must be provided',
+      );
+    }
+
     final requestDto = AstroBackendGalleryItemsRequestDto.fromJson(queryParams);
 
     if (requestDto.endDate.compareTo(requestDto.startDate) < 0) {
@@ -32,6 +39,7 @@ Future<Response> onRequest(RequestContext context) async {
     final items = await galleryRepository.getItems(
       startDate: requestDto.startDate,
       endDate: requestDto.endDate,
+      language: requestDto.language,
     );
 
     return Response.json(body: items.map((i) => i.toJson()).toList());

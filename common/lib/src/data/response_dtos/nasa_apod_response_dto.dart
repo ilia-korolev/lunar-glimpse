@@ -15,7 +15,6 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
     @JsonKey(name: 'media_type') required GalleryItemType mediaType,
     String? copyright,
     @JsonKey(name: 'hdurl') String? hdUrl,
-    @Default('en') String languageCode,
   }) = _NasaApodResponseDto;
 
   const NasaApodResponseDto._();
@@ -33,7 +32,7 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
       uri: Uri.parse(url),
       hdUri: Uri.parse(hdUrl ?? url),
       type: mediaType,
-      languageCode: languageCode,
+      language: GalleryItemLanguage.english,
     );
   }
 }

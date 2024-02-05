@@ -23,6 +23,7 @@ AstroBackendGalleryItemsRequestDto _$AstroBackendGalleryItemsRequestDtoFromJson(
 mixin _$AstroBackendGalleryItemsRequestDto {
   Date get startDate => throw _privateConstructorUsedError;
   Date get endDate => throw _privateConstructorUsedError;
+  GalleryItemLanguage get language => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +40,7 @@ abstract class $AstroBackendGalleryItemsRequestDtoCopyWith<$Res> {
       _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
           AstroBackendGalleryItemsRequestDto>;
   @useResult
-  $Res call({Date startDate, Date endDate});
+  $Res call({Date startDate, Date endDate, GalleryItemLanguage language});
 
   $DateCopyWith<$Res> get startDate;
   $DateCopyWith<$Res> get endDate;
@@ -61,6 +62,7 @@ class _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
   $Res call({
     Object? startDate = null,
     Object? endDate = null,
+    Object? language = null,
   }) {
     return _then(_value.copyWith(
       startDate: null == startDate
@@ -71,6 +73,10 @@ class _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as Date,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as GalleryItemLanguage,
     ) as $Val);
   }
 
@@ -100,7 +106,7 @@ abstract class _$$AstroBackendGalleryItemsRequestDtoImplCopyWith<$Res>
       __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Date startDate, Date endDate});
+  $Res call({Date startDate, Date endDate, GalleryItemLanguage language});
 
   @override
   $DateCopyWith<$Res> get startDate;
@@ -123,6 +129,7 @@ class __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? startDate = null,
     Object? endDate = null,
+    Object? language = null,
   }) {
     return _then(_$AstroBackendGalleryItemsRequestDtoImpl(
       startDate: null == startDate
@@ -133,6 +140,10 @@ class __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as Date,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as GalleryItemLanguage,
     ));
   }
 }
@@ -143,7 +154,7 @@ class __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>
 class _$AstroBackendGalleryItemsRequestDtoImpl
     extends _AstroBackendGalleryItemsRequestDto {
   const _$AstroBackendGalleryItemsRequestDtoImpl(
-      {required this.startDate, required this.endDate})
+      {required this.startDate, required this.endDate, required this.language})
       : super._();
 
   factory _$AstroBackendGalleryItemsRequestDtoImpl.fromJson(
@@ -154,10 +165,12 @@ class _$AstroBackendGalleryItemsRequestDtoImpl
   final Date startDate;
   @override
   final Date endDate;
+  @override
+  final GalleryItemLanguage language;
 
   @override
   String toString() {
-    return 'AstroBackendGalleryItemsRequestDto(startDate: $startDate, endDate: $endDate)';
+    return 'AstroBackendGalleryItemsRequestDto(startDate: $startDate, endDate: $endDate, language: $language)';
   }
 
   @override
@@ -167,12 +180,14 @@ class _$AstroBackendGalleryItemsRequestDtoImpl
             other is _$AstroBackendGalleryItemsRequestDtoImpl &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, startDate, endDate);
+  int get hashCode => Object.hash(runtimeType, startDate, endDate, language);
 
   @JsonKey(ignore: true)
   @override
@@ -193,8 +208,10 @@ class _$AstroBackendGalleryItemsRequestDtoImpl
 abstract class _AstroBackendGalleryItemsRequestDto
     extends AstroBackendGalleryItemsRequestDto {
   const factory _AstroBackendGalleryItemsRequestDto(
-      {required final Date startDate,
-      required final Date endDate}) = _$AstroBackendGalleryItemsRequestDtoImpl;
+          {required final Date startDate,
+          required final Date endDate,
+          required final GalleryItemLanguage language}) =
+      _$AstroBackendGalleryItemsRequestDtoImpl;
   const _AstroBackendGalleryItemsRequestDto._() : super._();
 
   factory _AstroBackendGalleryItemsRequestDto.fromJson(
@@ -205,6 +222,8 @@ abstract class _AstroBackendGalleryItemsRequestDto
   Date get startDate;
   @override
   Date get endDate;
+  @override
+  GalleryItemLanguage get language;
   @override
   @JsonKey(ignore: true)
   _$$AstroBackendGalleryItemsRequestDtoImplCopyWith<

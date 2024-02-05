@@ -11,6 +11,7 @@ class AstroBackendGalleryItemsRequestDto
   const factory AstroBackendGalleryItemsRequestDto({
     required Date startDate,
     required Date endDate,
+    required GalleryItemLanguage language,
   }) = _AstroBackendGalleryItemsRequestDto;
 
   const AstroBackendGalleryItemsRequestDto._();

@@ -15,19 +15,18 @@ class LoadingGalleryCard extends StatelessWidget {
     explanation: 'This is an explanation',
     copyright: 'This is a copyright',
     type: GalleryItemType.image,
-    languageCode: 'en',
+    language: GalleryItemLanguage.english,
   );
 
   @override
   Widget build(BuildContext context) {
-    final galleryCard = GalleryCard(
-      item: _mockItem,
-      onCardPressed: (context, item) {},
-      onSharePressed: (context, item) {},
-      onFavoritePressed: (context, item) {},
-    );
     return PrimaryShimmer(
-      child: galleryCard,
+      child: GalleryCard(
+        item: _mockItem,
+        onCardPressed: (context, item) {},
+        onSharePressed: (context, item) {},
+        onFavoritePressed: (context, item) {},
+      ),
     );
   }
 }

@@ -27,7 +27,7 @@ mixin _$GalleryItem {
   String get explanation => throw _privateConstructorUsedError;
   String? get copyright => throw _privateConstructorUsedError;
   GalleryItemType get type => throw _privateConstructorUsedError;
-  String get languageCode => throw _privateConstructorUsedError;
+  GalleryItemLanguage get language => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $GalleryItemCopyWith<$Res> {
       String explanation,
       String? copyright,
       GalleryItemType type,
-      String languageCode,
+      GalleryItemLanguage language,
       bool isFavorite});
 
   $DateCopyWith<$Res> get date;
@@ -76,7 +76,7 @@ class _$GalleryItemCopyWithImpl<$Res, $Val extends GalleryItem>
     Object? explanation = null,
     Object? copyright = freezed,
     Object? type = null,
-    Object? languageCode = null,
+    Object? language = null,
     Object? isFavorite = null,
   }) {
     return _then(_value.copyWith(
@@ -108,10 +108,10 @@ class _$GalleryItemCopyWithImpl<$Res, $Val extends GalleryItem>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as GalleryItemType,
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as GalleryItemLanguage,
       isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -144,7 +144,7 @@ abstract class _$$GalleryItemImplCopyWith<$Res>
       String explanation,
       String? copyright,
       GalleryItemType type,
-      String languageCode,
+      GalleryItemLanguage language,
       bool isFavorite});
 
   @override
@@ -169,7 +169,7 @@ class __$$GalleryItemImplCopyWithImpl<$Res>
     Object? explanation = null,
     Object? copyright = freezed,
     Object? type = null,
-    Object? languageCode = null,
+    Object? language = null,
     Object? isFavorite = null,
   }) {
     return _then(_$GalleryItemImpl(
@@ -201,10 +201,10 @@ class __$$GalleryItemImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as GalleryItemType,
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as GalleryItemLanguage,
       isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -224,7 +224,7 @@ class _$GalleryItemImpl implements _GalleryItem {
       required this.explanation,
       required this.copyright,
       required this.type,
-      required this.languageCode,
+      required this.language,
       this.isFavorite = false});
 
   factory _$GalleryItemImpl.fromJson(Map<String, dynamic> json) =>
@@ -245,14 +245,14 @@ class _$GalleryItemImpl implements _GalleryItem {
   @override
   final GalleryItemType type;
   @override
-  final String languageCode;
+  final GalleryItemLanguage language;
   @override
   @JsonKey()
   final bool isFavorite;
 
   @override
   String toString() {
-    return 'GalleryItem(uri: $uri, hdUri: $hdUri, date: $date, title: $title, explanation: $explanation, copyright: $copyright, type: $type, languageCode: $languageCode, isFavorite: $isFavorite)';
+    return 'GalleryItem(uri: $uri, hdUri: $hdUri, date: $date, title: $title, explanation: $explanation, copyright: $copyright, type: $type, language: $language, isFavorite: $isFavorite)';
   }
 
   @override
@@ -269,8 +269,8 @@ class _$GalleryItemImpl implements _GalleryItem {
             (identical(other.copyright, copyright) ||
                 other.copyright == copyright) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.languageCode, languageCode) ||
-                other.languageCode == languageCode) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.isFavorite, isFavorite) ||
                 other.isFavorite == isFavorite));
   }
@@ -278,7 +278,7 @@ class _$GalleryItemImpl implements _GalleryItem {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, uri, hdUri, date, title,
-      explanation, copyright, type, languageCode, isFavorite);
+      explanation, copyright, type, language, isFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -303,7 +303,7 @@ abstract class _GalleryItem implements GalleryItem {
       required final String explanation,
       required final String? copyright,
       required final GalleryItemType type,
-      required final String languageCode,
+      required final GalleryItemLanguage language,
       final bool isFavorite}) = _$GalleryItemImpl;
 
   factory _GalleryItem.fromJson(Map<String, dynamic> json) =
@@ -324,7 +324,7 @@ abstract class _GalleryItem implements GalleryItem {
   @override
   GalleryItemType get type;
   @override
-  String get languageCode;
+  GalleryItemLanguage get language;
   @override
   bool get isFavorite;
   @override

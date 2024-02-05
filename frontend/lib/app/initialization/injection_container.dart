@@ -96,7 +96,7 @@ Future<void> _registerDataSources() async {
         database: _getIt(),
       ),
     )
-    ..registerLazySingleton<RemoteGalleryDataSource>(
+    ..registerLazySingleton<RemoteMultiLanguageGalleryDataSource>(
       () => AstroBackendGalleryDataSource(
         httpService: _getIt(),
         apiUrl: 'https://lunarglimpse.com/api',

@@ -48,10 +48,18 @@ class $GalleryEntitiesTable extends GalleryEntities
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
-  late final GeneratedColumnWithTypeConverter<GalleryItemType, int> type =
-      GeneratedColumn<int>('type', aliasedName, false,
-              type: DriftSqlType.int, requiredDuringInsert: true)
+  late final GeneratedColumnWithTypeConverter<GalleryItemType, String> type =
+      GeneratedColumn<String>('type', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<GalleryItemType>($GalleryEntitiesTable.$convertertype);
+  static const VerificationMeta _languageMeta =
+      const VerificationMeta('language');
+  @override
+  late final GeneratedColumnWithTypeConverter<GalleryItemLanguage, String>
+      language = GeneratedColumn<String>('language', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
+          .withConverter<GalleryItemLanguage>(
+              $GalleryEntitiesTable.$converterlanguage);
   static const VerificationMeta _isFavoriteMeta =
       const VerificationMeta('isFavorite');
   @override
@@ -61,12 +69,6 @@ class $GalleryEntitiesTable extends GalleryEntities
       requiredDuringInsert: true,
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'CHECK ("is_favorite" IN (0, 1))'));
-  static const VerificationMeta _languageCodeMeta =
-      const VerificationMeta('languageCode');
-  @override
-  late final GeneratedColumn<String> languageCode = GeneratedColumn<String>(
-      'language_code', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         date,
@@ -76,8 +78,8 @@ class $GalleryEntitiesTable extends GalleryEntities
         hdUri,
         copyright,
         type,
-        isFavorite,
-        languageCode
+        language,
+        isFavorite
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -111,6 +113,7 @@ class $GalleryEntitiesTable extends GalleryEntities
           copyright.isAcceptableOrUnknown(data['copyright']!, _copyrightMeta));
     }
     context.handle(_typeMeta, const VerificationResult.success());
+    context.handle(_languageMeta, const VerificationResult.success());
     if (data.containsKey('is_favorite')) {
       context.handle(
           _isFavoriteMeta,
@@ -118,14 +121,6 @@ class $GalleryEntitiesTable extends GalleryEntities
               data['is_favorite']!, _isFavoriteMeta));
     } else if (isInserting) {
       context.missing(_isFavoriteMeta);
-    }
-    if (data.containsKey('language_code')) {
-      context.handle(
-          _languageCodeMeta,
-          languageCode.isAcceptableOrUnknown(
-              data['language_code']!, _languageCodeMeta));
-    } else if (isInserting) {
-      context.missing(_languageCodeMeta);
     }
     return context;
   }
@@ -153,11 +148,12 @@ class $GalleryEntitiesTable extends GalleryEntities
           .read(DriftSqlType.string, data['${effectivePrefix}copyright']),
       type: $GalleryEntitiesTable.$convertertype.fromSql(attachedDatabase
           .typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}type'])!),
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!),
+      language: $GalleryEntitiesTable.$converterlanguage.fromSql(
+          attachedDatabase.typeMapping
+              .read(DriftSqlType.string, data['${effectivePrefix}language'])!),
       isFavorite: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_favorite'])!,
-      languageCode: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}language_code'])!,
     );
   }
 
@@ -169,8 +165,11 @@ class $GalleryEntitiesTable extends GalleryEntities
   static TypeConverter<Date, int> $converterdate = const DateConverter();
   static TypeConverter<Uri, String> $converteruri = const _UriConverter();
   static TypeConverter<Uri, String> $converterhdUri = const _UriConverter();
-  static JsonTypeConverter2<GalleryItemType, int, int> $convertertype =
-      const EnumIndexConverter<GalleryItemType>(GalleryItemType.values);
+  static JsonTypeConverter2<GalleryItemType, String, String> $convertertype =
+      const EnumNameConverter<GalleryItemType>(GalleryItemType.values);
+  static JsonTypeConverter2<GalleryItemLanguage, String, String>
+      $converterlanguage =
+      const EnumNameConverter<GalleryItemLanguage>(GalleryItemLanguage.values);
 }
 
 class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
@@ -181,8 +180,8 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
   final Uri hdUri;
   final String? copyright;
   final GalleryItemType type;
+  final GalleryItemLanguage language;
   final bool isFavorite;
-  final String languageCode;
   const GalleryEntity(
       {required this.date,
       required this.title,
@@ -191,8 +190,8 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
       required this.hdUri,
       this.copyright,
       required this.type,
-      required this.isFavorite,
-      required this.languageCode});
+      required this.language,
+      required this.isFavorite});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -215,10 +214,13 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
     }
     {
       map['type'] =
-          Variable<int>($GalleryEntitiesTable.$convertertype.toSql(type));
+          Variable<String>($GalleryEntitiesTable.$convertertype.toSql(type));
+    }
+    {
+      map['language'] = Variable<String>(
+          $GalleryEntitiesTable.$converterlanguage.toSql(language));
     }
     map['is_favorite'] = Variable<bool>(isFavorite);
-    map['language_code'] = Variable<String>(languageCode);
     return map;
   }
 
@@ -233,8 +235,8 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
           ? const Value.absent()
           : Value(copyright),
       type: Value(type),
+      language: Value(language),
       isFavorite: Value(isFavorite),
-      languageCode: Value(languageCode),
     );
   }
 
@@ -249,9 +251,10 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
       hdUri: serializer.fromJson<Uri>(json['hdUri']),
       copyright: serializer.fromJson<String?>(json['copyright']),
       type: $GalleryEntitiesTable.$convertertype
-          .fromJson(serializer.fromJson<int>(json['type'])),
+          .fromJson(serializer.fromJson<String>(json['type'])),
+      language: $GalleryEntitiesTable.$converterlanguage
+          .fromJson(serializer.fromJson<String>(json['language'])),
       isFavorite: serializer.fromJson<bool>(json['isFavorite']),
-      languageCode: serializer.fromJson<String>(json['languageCode']),
     );
   }
   @override
@@ -265,9 +268,10 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
       'hdUri': serializer.toJson<Uri>(hdUri),
       'copyright': serializer.toJson<String?>(copyright),
       'type': serializer
-          .toJson<int>($GalleryEntitiesTable.$convertertype.toJson(type)),
+          .toJson<String>($GalleryEntitiesTable.$convertertype.toJson(type)),
+      'language': serializer.toJson<String>(
+          $GalleryEntitiesTable.$converterlanguage.toJson(language)),
       'isFavorite': serializer.toJson<bool>(isFavorite),
-      'languageCode': serializer.toJson<String>(languageCode),
     };
   }
 
@@ -279,8 +283,8 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
           Uri? hdUri,
           Value<String?> copyright = const Value.absent(),
           GalleryItemType? type,
-          bool? isFavorite,
-          String? languageCode}) =>
+          GalleryItemLanguage? language,
+          bool? isFavorite}) =>
       GalleryEntity(
         date: date ?? this.date,
         title: title ?? this.title,
@@ -289,8 +293,8 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
         hdUri: hdUri ?? this.hdUri,
         copyright: copyright.present ? copyright.value : this.copyright,
         type: type ?? this.type,
+        language: language ?? this.language,
         isFavorite: isFavorite ?? this.isFavorite,
-        languageCode: languageCode ?? this.languageCode,
       );
   @override
   String toString() {
@@ -302,15 +306,15 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
           ..write('hdUri: $hdUri, ')
           ..write('copyright: $copyright, ')
           ..write('type: $type, ')
-          ..write('isFavorite: $isFavorite, ')
-          ..write('languageCode: $languageCode')
+          ..write('language: $language, ')
+          ..write('isFavorite: $isFavorite')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(date, title, explanation, uri, hdUri,
-      copyright, type, isFavorite, languageCode);
+      copyright, type, language, isFavorite);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -322,8 +326,8 @@ class GalleryEntity extends DataClass implements Insertable<GalleryEntity> {
           other.hdUri == this.hdUri &&
           other.copyright == this.copyright &&
           other.type == this.type &&
-          other.isFavorite == this.isFavorite &&
-          other.languageCode == this.languageCode);
+          other.language == this.language &&
+          other.isFavorite == this.isFavorite);
 }
 
 class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
@@ -334,8 +338,8 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
   final Value<Uri> hdUri;
   final Value<String?> copyright;
   final Value<GalleryItemType> type;
+  final Value<GalleryItemLanguage> language;
   final Value<bool> isFavorite;
-  final Value<String> languageCode;
   const GalleryEntitiesCompanion({
     this.date = const Value.absent(),
     this.title = const Value.absent(),
@@ -344,8 +348,8 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
     this.hdUri = const Value.absent(),
     this.copyright = const Value.absent(),
     this.type = const Value.absent(),
+    this.language = const Value.absent(),
     this.isFavorite = const Value.absent(),
-    this.languageCode = const Value.absent(),
   });
   GalleryEntitiesCompanion.insert({
     this.date = const Value.absent(),
@@ -355,15 +359,15 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
     required Uri hdUri,
     this.copyright = const Value.absent(),
     required GalleryItemType type,
+    required GalleryItemLanguage language,
     required bool isFavorite,
-    required String languageCode,
   })  : title = Value(title),
         explanation = Value(explanation),
         uri = Value(uri),
         hdUri = Value(hdUri),
         type = Value(type),
-        isFavorite = Value(isFavorite),
-        languageCode = Value(languageCode);
+        language = Value(language),
+        isFavorite = Value(isFavorite);
   static Insertable<GalleryEntity> custom({
     Expression<int>? date,
     Expression<String>? title,
@@ -371,9 +375,9 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
     Expression<String>? uri,
     Expression<String>? hdUri,
     Expression<String>? copyright,
-    Expression<int>? type,
+    Expression<String>? type,
+    Expression<String>? language,
     Expression<bool>? isFavorite,
-    Expression<String>? languageCode,
   }) {
     return RawValuesInsertable({
       if (date != null) 'date': date,
@@ -383,8 +387,8 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
       if (hdUri != null) 'hd_uri': hdUri,
       if (copyright != null) 'copyright': copyright,
       if (type != null) 'type': type,
+      if (language != null) 'language': language,
       if (isFavorite != null) 'is_favorite': isFavorite,
-      if (languageCode != null) 'language_code': languageCode,
     });
   }
 
@@ -396,8 +400,8 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
       Value<Uri>? hdUri,
       Value<String?>? copyright,
       Value<GalleryItemType>? type,
-      Value<bool>? isFavorite,
-      Value<String>? languageCode}) {
+      Value<GalleryItemLanguage>? language,
+      Value<bool>? isFavorite}) {
     return GalleryEntitiesCompanion(
       date: date ?? this.date,
       title: title ?? this.title,
@@ -406,8 +410,8 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
       hdUri: hdUri ?? this.hdUri,
       copyright: copyright ?? this.copyright,
       type: type ?? this.type,
+      language: language ?? this.language,
       isFavorite: isFavorite ?? this.isFavorite,
-      languageCode: languageCode ?? this.languageCode,
     );
   }
 
@@ -436,14 +440,15 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
       map['copyright'] = Variable<String>(copyright.value);
     }
     if (type.present) {
-      map['type'] =
-          Variable<int>($GalleryEntitiesTable.$convertertype.toSql(type.value));
+      map['type'] = Variable<String>(
+          $GalleryEntitiesTable.$convertertype.toSql(type.value));
+    }
+    if (language.present) {
+      map['language'] = Variable<String>(
+          $GalleryEntitiesTable.$converterlanguage.toSql(language.value));
     }
     if (isFavorite.present) {
       map['is_favorite'] = Variable<bool>(isFavorite.value);
-    }
-    if (languageCode.present) {
-      map['language_code'] = Variable<String>(languageCode.value);
     }
     return map;
   }
@@ -458,8 +463,8 @@ class GalleryEntitiesCompanion extends UpdateCompanion<GalleryEntity> {
           ..write('hdUri: $hdUri, ')
           ..write('copyright: $copyright, ')
           ..write('type: $type, ')
-          ..write('isFavorite: $isFavorite, ')
-          ..write('languageCode: $languageCode')
+          ..write('language: $language, ')
+          ..write('isFavorite: $isFavorite')
           ..write(')'))
         .toString();
   }

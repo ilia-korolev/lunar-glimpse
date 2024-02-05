@@ -23,8 +23,8 @@ class GalleryEntities extends Table {
   TextColumn get uri => text().map(const _UriConverter())();
   TextColumn get hdUri => text().map(const _UriConverter())();
   TextColumn get copyright => text().nullable()();
-  IntColumn get type => intEnum<GalleryItemType>()();
-  TextColumn get languageCode => text()();
+  TextColumn get type => textEnum<GalleryItemType>()();
+  TextColumn get language => textEnum<GalleryItemLanguage>()();
   BoolColumn get isFavorite => boolean()();
 
   @override

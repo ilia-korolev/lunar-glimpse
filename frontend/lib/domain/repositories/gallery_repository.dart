@@ -31,12 +31,12 @@ abstract interface class GalleryRepository {
 class GalleryRepositoryImpl implements GalleryRepository {
   GalleryRepositoryImpl({
     required LocalGalleryDataSource localGalleryDataSource,
-    required RemoteGalleryDataSource remoteGalleryDataSource,
+    required RemoteMultiLanguageGalleryDataSource remoteGalleryDataSource,
   })  : _localGalleryDataSource = localGalleryDataSource,
         _remoteGalleryDataSource = remoteGalleryDataSource;
 
   final LocalGalleryDataSource _localGalleryDataSource;
-  final RemoteGalleryDataSource _remoteGalleryDataSource;
+  final RemoteMultiLanguageGalleryDataSource _remoteGalleryDataSource;
 
   final _changesController = StreamController<List<GalleryItem>>.broadcast();
 
@@ -47,7 +47,9 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<List<GalleryItem>> getLatestItems({
     required int count,
   }) async {
-    final latestItem = await _remoteGalleryDataSource.getLatestItem();
+    final latestItem = await _remoteGalleryDataSource.getLatestItem(
+      language: GalleryItemLanguage.english,
+    );
 
     await _localGalleryDataSource.cacheItems(
       galleryItems: [latestItem],
@@ -151,6 +153,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
         final result = await _remoteGalleryDataSource.getGalleryItems(
           startDate: start,
           endDate: end,
+          language: GalleryItemLanguage.english,
         );
 
         results.add(result);

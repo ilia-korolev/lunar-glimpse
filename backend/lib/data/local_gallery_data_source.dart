@@ -13,6 +13,7 @@ abstract interface class LocalGalleryDataSource {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
+    required GalleryItemLanguage language,
   });
 }
 
@@ -39,7 +40,7 @@ class PostgresGalleryDataSource implements LocalGalleryDataSource {
 
     await _dbConnection.execute(
       '''
-  INSERT INTO gallery (date, uri, hd_uri, title, explanation, copyright, type, language_code)
+  INSERT INTO gallery (date, uri, hd_uri, title, explanation, copyright, type, language)
   VALUES
     $insertValues
   ON CONFLICT DO NOTHING;
@@ -51,13 +52,15 @@ class PostgresGalleryDataSource implements LocalGalleryDataSource {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
+    required GalleryItemLanguage language,
   }) async {
     final result = await _dbConnection.execute(
       '''
   SELECT *
   FROM gallery
   WHERE date >= '${startDate.format('yyyy-MM-dd')}'::date
-  AND date <= '${endDate.format('yyyy-MM-dd')}'::date;
+  AND date <= '${endDate.format('yyyy-MM-dd')}'::date
+  AND language = '${language.name}';
 ''',
     );
 
@@ -69,8 +72,8 @@ class PostgresGalleryDataSource implements LocalGalleryDataSource {
         title: r[3]! as String,
         explanation: r[4]! as String,
         copyright: r[5] as String?,
-        type: (r[6]! as UndecodedBytes).asString,
-        languageCode: (r[7]! as UndecodedBytes).asString,
+        type: r[6]! as String,
+        language: r[7]! as String,
       ),
     );
 
@@ -87,7 +90,7 @@ class GalleryEntity {
     required this.explanation,
     required this.copyright,
     required this.type,
-    required this.languageCode,
+    required this.language,
   });
 
   factory GalleryEntity.fromModel(GalleryItem item) {
@@ -99,7 +102,7 @@ class GalleryEntity {
       explanation: item.explanation,
       copyright: item.copyright,
       type: item.type.name,
-      languageCode: item.languageCode,
+      language: item.language.name,
     );
   }
 
@@ -110,7 +113,7 @@ class GalleryEntity {
   final String explanation;
   final String? copyright;
   final String type;
-  final String languageCode;
+  final String language;
 
   String toInsertString() {
     return '''
@@ -122,7 +125,7 @@ class GalleryEntity {
     ${explanation.sqlEscaped},
     ${copyright.sqlEscaped},
     ${type.sqlEscaped},
-    ${languageCode.sqlEscaped}
+    ${language.sqlEscaped}
   )''';
   }
 
@@ -134,6 +137,13 @@ class GalleryEntity {
             '${_galleryItemTypeEnumMap.values.join(', ')}',
           );
 
+    final itemLanguage = _galleryItemLanguageEnumMap.containsKey(language)
+        ? _galleryItemLanguageEnumMap[language]!
+        : throw ArgumentError(
+            '`$type` is not one of the supported values: '
+            '${_galleryItemLanguageEnumMap.values.join(', ')}',
+          );
+
     return GalleryItem(
       uri: Uri.parse(uri),
       hdUri: Uri.parse(hdUri),
@@ -142,7 +152,7 @@ class GalleryEntity {
       explanation: explanation,
       copyright: copyright,
       type: itemType,
-      languageCode: languageCode,
+      language: itemLanguage,
     );
   }
 }
@@ -174,4 +184,11 @@ extension _StringNullX on String? {
 const _galleryItemTypeEnumMap = {
   'video': GalleryItemType.video,
   'image': GalleryItemType.image,
+};
+
+const _galleryItemLanguageEnumMap = {
+  'english': GalleryItemLanguage.english,
+  'japanese': GalleryItemLanguage.japanese,
+  'russian': GalleryItemLanguage.russian,
+  'chinese': GalleryItemLanguage.chinese,
 };

@@ -45,7 +45,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
             hdUri: i.hdUri,
             copyright: i.copyright,
             type: i.type,
-            languageCode: i.languageCode,
+            language: i.language,
             isFavorite: i.isFavorite,
           ),
         ),
@@ -79,7 +79,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
             explanation: e.explanation,
             copyright: e.copyright,
             type: e.type,
-            languageCode: e.languageCode,
+            language: e.language,
             isFavorite: e.isFavorite,
           ),
         )
@@ -105,7 +105,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
             explanation: e.explanation,
             copyright: e.copyright,
             type: e.type,
-            languageCode: e.languageCode,
+            language: e.language,
             isFavorite: e.isFavorite,
           ),
         )

@@ -18,7 +18,6 @@ _$NasaApodResponseDtoImpl _$$NasaApodResponseDtoImplFromJson(
       mediaType: $enumDecode(_$GalleryItemTypeEnumMap, json['media_type']),
       copyright: json['copyright'] as String?,
       hdUrl: json['hdurl'] as String?,
-      languageCode: json['languageCode'] as String? ?? 'en',
     );
 
 Map<String, dynamic> _$$NasaApodResponseDtoImplToJson(
@@ -39,7 +38,6 @@ Map<String, dynamic> _$$NasaApodResponseDtoImplToJson(
 
   writeNotNull('copyright', instance.copyright);
   writeNotNull('hdurl', instance.hdUrl);
-  val['languageCode'] = instance.languageCode;
   return val;
 }
 

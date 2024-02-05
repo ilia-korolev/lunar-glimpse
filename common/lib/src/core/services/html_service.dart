@@ -28,10 +28,12 @@ class HttpOptions {
   HttpOptions({
     this.responseType,
     this.followRedirects,
+    this.headers,
   });
 
   final HttpResponseType? responseType;
   final bool? followRedirects;
+  final Map<String, String?>? headers;
 }
 
 enum HttpResponseType {

@@ -28,6 +28,10 @@ Future<GalleryRepository> _createGalleryRepositoryAsync() async {
     remoteGalleryDataSource: NasaApodDataSource(
       httpService: httpService,
     ),
+    remoteTranslationDataSource: GoogleTranslationDataSource(
+      httpService: httpService,
+      apiKey: Platform.environment['GOOGLE_TRANSLATE_API_KEY']!,
+    ),
   );
 }
 
