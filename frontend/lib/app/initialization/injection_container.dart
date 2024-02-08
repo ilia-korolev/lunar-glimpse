@@ -22,6 +22,9 @@ Future<void> configureDependencies() async {
 
 Future<void> _registerServices() async {
   _getIt
+    ..registerLazySingleton<Flavor>(
+      Flavor.fromEnvironment,
+    )
     ..registerSingletonAsync<SharedPreferences>(
       () async => SharedPreferences.getInstance(),
     )
@@ -99,8 +102,7 @@ Future<void> _registerDataSources() async {
     ..registerLazySingleton<RemoteMultiLanguageGalleryDataSource>(
       () => AstroBackendGalleryDataSource(
         httpService: _getIt(),
-        apiUrl: 'http://localhost:8080',
-        // apiUrl: 'https://lunarglimpse.com/api',
+        apiUrl: _getIt<Flavor>().galleryApiUrl,
       ),
     )
     ..registerLazySingleton<RemoteNewsDataSource>(

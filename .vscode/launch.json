@@ -5,24 +5,50 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "frontend",
-            "request": "launch",
-            "type": "dart",
-            "cwd": "frontend",        
-        },
-        {
-            "name": "frontend (profile mode)",
+            "name": "[DEV] frontend",
             "request": "launch",
             "type": "dart",
             "cwd": "frontend",
-            "flutterMode": "profile"
+            "args": ["--flavor", "development"]
         },
         {
-            "name": "frontend (release mode)",
+            "name": "[DEV] frontend (profile mode)",
             "request": "launch",
             "type": "dart",
             "cwd": "frontend",
-            "flutterMode": "release"
+            "flutterMode": "profile",
+            "args": ["--flavor", "development"]
+        },
+        {
+            "name": "[DEV] frontend (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "frontend",
+            "flutterMode": "release",
+            "args": ["--flavor", "development"]
+        },
+        {
+            "name": "[PROD] frontend",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "frontend",
+            "args": ["--flavor", "production"]
+        },
+        {
+            "name": "[PROD] frontend (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "frontend",
+            "flutterMode": "profile",
+            "args": ["--flavor", "production"]
+        },
+        {
+            "name": "[PROD] frontend (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "frontend",
+            "flutterMode": "release",
+            "args": ["--flavor", "production"]
         }
     ]
 }

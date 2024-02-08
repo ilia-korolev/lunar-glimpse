@@ -1,4 +1,4 @@
-package com.example.flutter_astronomy
+package com.lunarglimpse.app
 
 import io.flutter.embedding.android.FlutterActivity
 
