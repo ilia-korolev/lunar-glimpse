@@ -16,16 +16,26 @@ part 'app_database.initial_data.dart';
 const _dbPath = 'db.sqlite';
 
 @DataClassName('GalleryEntity')
-class GalleryEntities extends Table {
+class Gallery extends Table {
   IntColumn get date => integer().map(const DateConverter())();
-  TextColumn get title => text()();
-  TextColumn get explanation => text()();
   TextColumn get uri => text().map(const _UriConverter())();
   TextColumn get hdUri => text().map(const _UriConverter())();
   TextColumn get copyright => text().nullable()();
   TextColumn get type => textEnum<GalleryItemType>()();
-  TextColumn get language => textEnum<GalleryItemLanguage>()();
   BoolColumn get isFavorite => boolean()();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {date};
+}
+
+@DataClassName('GalleryTranslationEntity')
+class GalleryTranslations extends Table {
+  IntColumn get date =>
+      integer().map(const DateConverter()).references(Gallery, #date)();
+  TextColumn get language => textEnum<GalleryItemLanguage>()();
+  TextColumn get originalLanguage => textEnum<GalleryItemLanguage>()();
+  TextColumn get title => text()();
+  TextColumn get explanation => text()();
 
   @override
   Set<Column<Object>>? get primaryKey => {date};
@@ -44,7 +54,8 @@ class WebFeedEntities extends Table {
 
 @DriftDatabase(
   tables: [
-    GalleryEntities,
+    Gallery,
+    GalleryTranslations,
     WebFeedEntities,
   ],
 )
@@ -79,6 +90,9 @@ class AppDatabase extends _$AppDatabase {
           await batch(
             (batch) => batch.insertAll(webFeedEntities, _initialWebFeeds),
           );
+        },
+        beforeOpen: (details) async {
+          await customStatement('PRAGMA foreign_keys = ON');
         },
       );
 }

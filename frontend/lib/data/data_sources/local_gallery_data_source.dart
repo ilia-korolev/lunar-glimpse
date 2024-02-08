@@ -13,9 +13,12 @@ abstract interface class LocalGalleryDataSource {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
+    required GalleryItemLanguage language,
   });
 
-  Future<List<GalleryItem>> getFavorites();
+  Future<List<GalleryItem>> getFavorites({
+    required GalleryItemLanguage language,
+  });
 }
 
 class DriftGalleryDataSource implements LocalGalleryDataSource {
@@ -34,25 +37,40 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
     }
 
     await _database.batch(
-      (batch) => batch.insertAll(
-        _database.galleryEntities,
-        galleryItems.map(
-          (i) => GalleryEntity(
-            date: i.date,
-            title: i.title,
-            explanation: i.explanation,
-            uri: i.uri,
-            hdUri: i.hdUri,
-            copyright: i.copyright,
-            type: i.type,
-            language: i.language,
-            isFavorite: i.isFavorite,
-          ),
-        ),
-        mode: onConflictUpdate
-            ? InsertMode.insertOrReplace
-            : InsertMode.insertOrIgnore,
-      ),
+      (batch) {
+        batch
+          ..insertAll(
+            _database.gallery,
+            galleryItems.map(
+              (i) => GalleryEntity(
+                date: i.date,
+                uri: i.uri,
+                hdUri: i.hdUri,
+                copyright: i.copyright,
+                type: i.type,
+                isFavorite: i.isFavorite,
+              ),
+            ),
+            mode: onConflictUpdate
+                ? InsertMode.insertOrReplace
+                : InsertMode.insertOrIgnore,
+          )
+          ..insertAll(
+            _database.galleryTranslations,
+            galleryItems.map(
+              (i) => GalleryTranslationEntity(
+                date: i.date,
+                language: i.language,
+                originalLanguage: i.originalLanguage,
+                title: i.title,
+                explanation: i.explanation,
+              ),
+            ),
+            mode: onConflictUpdate
+                ? InsertMode.insertOrReplace
+                : InsertMode.insertOrIgnore,
+          );
+      },
     );
   }
 
@@ -60,56 +78,81 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
+    required GalleryItemLanguage language,
   }) async {
     final startDateInt = startDate.toInt();
     final endDateInt = endDate.toInt();
 
-    final dbEntities = await (_database.select(_database.galleryEntities)
-          ..where((m) => m.date.isBetweenValues(startDateInt, endDateInt))
-          ..orderBy([(t) => OrderingTerm.desc(t.date)]))
-        .get();
+    final gTable = _database.gallery;
+    final tTable = _database.galleryTranslations;
 
-    final models = dbEntities
-        .map(
-          (e) => GalleryItem(
-            uri: e.uri,
-            hdUri: e.hdUri,
-            date: e.date,
-            title: e.title,
-            explanation: e.explanation,
-            copyright: e.copyright,
-            type: e.type,
-            language: e.language,
-            isFavorite: e.isFavorite,
-          ),
-        )
-        .toList();
+    final query = _database
+        .select(gTable)
+        .join([innerJoin(tTable, tTable.date.equalsExp(gTable.date))])
+      ..where(gTable.date.isBetweenValues(startDateInt, endDateInt))
+      ..where(tTable.language.equals(language.name))
+      ..orderBy([OrderingTerm.desc(gTable.date)]);
+
+    final queryResult = await query.get();
+
+    final models = queryResult.map(
+      (r) {
+        final g = r.readTable(gTable);
+        final t = r.readTable(tTable);
+
+        return GalleryItem(
+          date: g.date,
+          uri: g.uri,
+          hdUri: g.hdUri,
+          copyright: g.copyright,
+          type: g.type,
+          isFavorite: g.isFavorite,
+          language: t.language,
+          originalLanguage: t.originalLanguage,
+          title: t.title,
+          explanation: t.explanation,
+        );
+      },
+    ).toList();
 
     return models;
   }
 
   @override
-  Future<List<GalleryItem>> getFavorites() async {
-    final dbEntities = await (_database.select(_database.galleryEntities)
-          ..where((m) => m.isFavorite)
-          ..orderBy([(t) => OrderingTerm.desc(t.date)]))
-        .get();
+  Future<List<GalleryItem>> getFavorites({
+    required GalleryItemLanguage language,
+  }) async {
+    final gTable = _database.gallery;
+    final tTable = _database.galleryTranslations;
 
-    final models = dbEntities
-        .map(
-          (e) => GalleryItem(
-            uri: e.uri,
-            hdUri: e.hdUri,
-            date: e.date,
-            title: e.title,
-            explanation: e.explanation,
-            copyright: e.copyright,
-            type: e.type,
-            language: e.language,
-            isFavorite: e.isFavorite,
-          ),
-        )
-        .toList();
+    final query = _database
+        .select(gTable)
+        .join([innerJoin(tTable, tTable.date.equalsExp(gTable.date))])
+      ..where(gTable.isFavorite)
+      ..where(tTable.language.equals(language.name))
+      ..orderBy([OrderingTerm.desc(gTable.date)]);
+
+    final queryResult = await query.get();
+
+    final models = queryResult.map(
+      (r) {
+        final g = r.readTable(gTable);
+        final t = r.readTable(tTable);
+
+        return GalleryItem(
+          date: g.date,
+          uri: g.uri,
+          hdUri: g.hdUri,
+          copyright: g.copyright,
+          type: g.type,
+          isFavorite: g.isFavorite,
+          language: t.language,
+          originalLanguage: t.originalLanguage,
+          title: t.title,
+          explanation: t.explanation,
+        );
+      },
+    ).toList();
 
     return models;
   }

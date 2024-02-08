@@ -104,4 +104,20 @@ The input number must have 8 digits: $integer''',
   int compareTo(Date other) {
     return toInt().compareTo(other.toInt());
   }
+
+  bool operator >=(Object other) {
+    return other is Date && toInt() >= other.toInt();
+  }
+
+  bool operator >(Object other) {
+    return other is Date && toInt() > other.toInt();
+  }
+
+  bool operator <=(Object other) {
+    return other is Date && toInt() <= other.toInt();
+  }
+
+  bool operator <(Object other) {
+    return other is Date && toInt() < other.toInt();
+  }
 }

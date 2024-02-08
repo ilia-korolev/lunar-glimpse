@@ -25,14 +25,16 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
   /// Throws a [FormatException] if the dto cannot be converted.
   GalleryItem toModel() {
     return GalleryItem(
-      copyright: copyright,
       date: date,
-      explanation: explanation,
-      title: title,
       uri: Uri.parse(url),
       hdUri: Uri.parse(hdUrl ?? url),
+      copyright: copyright,
       type: mediaType,
+      isFavorite: false,
       language: GalleryItemLanguage.english,
+      originalLanguage: GalleryItemLanguage.english,
+      title: title,
+      explanation: explanation,
     );
   }
 }

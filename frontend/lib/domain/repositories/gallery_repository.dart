@@ -47,8 +47,10 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<List<GalleryItem>> getLatestItems({
     required int count,
   }) async {
+    const language = GalleryItemLanguage.english;
+
     final latestItem = await _remoteGalleryDataSource.getLatestItem(
-      language: GalleryItemLanguage.english,
+      language: language,
     );
 
     await _localGalleryDataSource.cacheItems(
@@ -63,17 +65,21 @@ class GalleryRepositoryImpl implements GalleryRepository {
     required Date endDate,
     required int count,
   }) async {
+    const language = GalleryItemLanguage.english;
+
     final startDate = endDate.subtract(Duration(days: count - 1));
 
     final cachedItems = await _localGalleryDataSource.getItems(
       startDate: startDate,
       endDate: endDate,
+      language: language,
     );
 
     final uncachedItems = await _getUncachedItems(
+      endDate: endDate,
       startDate: startDate,
-      count: count,
-      cached: cachedItems,
+      cachedItems: cachedItems,
+      language: language,
     );
 
     await _localGalleryDataSource.cacheItems(
@@ -83,7 +89,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
     final items = [
       ...cachedItems,
       ...uncachedItems,
-    ]..sort((a, b) => b.date.compareTo(a.date));
+    ]..sort((a, b) => a.date.compareTo(b.date));
 
     return items;
   }
@@ -114,54 +120,43 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
   @override
   Future<List<GalleryItem>> getFavorites() {
-    return _localGalleryDataSource.getFavorites();
+    const language = GalleryItemLanguage.english;
+
+    return _localGalleryDataSource.getFavorites(
+      language: language,
+    );
   }
 
   Future<List<GalleryItem>> _getUncachedItems({
+    required Date endDate,
     required Date startDate,
-    required int count,
-    required List<GalleryItem> cached,
+    required List<GalleryItem> cachedItems,
+    required GalleryItemLanguage language,
   }) async {
-    final results = <List<GalleryItem>>[];
+    final count = endDate.difference(startDate).inDays + 1;
 
-    final days = List<Date>.generate(
+    final requestedDates = List<Date>.generate(
       count,
       (index) => startDate.add(Duration(days: index)),
       growable: false,
     );
 
-    bool hasDate(Date date) {
-      return cached.any((e) => e.date == date);
+    final cachedDates = cachedItems.map((e) => e.date);
+    final uncachedDates = requestedDates.difference(cachedDates);
+    final uncachedPeriods = uncachedDates.toPeriods();
+
+    final uncachedItems = <GalleryItem>[];
+
+    for (final uncachedPeriod in uncachedPeriods) {
+      uncachedItems.addAll(
+        await _remoteGalleryDataSource.getGalleryItems(
+          startDate: uncachedPeriod.startDate,
+          endDate: uncachedPeriod.endDate,
+          language: language,
+        ),
+      );
     }
 
-    var start = startDate;
-
-    for (var i = 0; i < days.length; ++i) {
-      final hasCurrentDate = hasDate(days[i]);
-
-      if (hasCurrentDate) {
-        continue;
-      }
-
-      if (i - 1 < 0 || hasDate(days[i - 1])) {
-        start = days[i];
-      }
-
-      if (i + 1 >= days.length || hasDate(days[i + 1])) {
-        final end = days[i];
-
-        final result = await _remoteGalleryDataSource.getGalleryItems(
-          startDate: start,
-          endDate: end,
-          language: GalleryItemLanguage.english,
-        );
-
-        results.add(result);
-      }
-    }
-
-    final result = results.expand((m) => m).toList();
-
-    return result;
+    return uncachedItems;
   }
 }

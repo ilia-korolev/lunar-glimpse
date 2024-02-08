@@ -23,15 +23,16 @@ enum GalleryItemLanguage {
 @freezed
 class GalleryItem with _$GalleryItem {
   const factory GalleryItem({
+    required Date date,
     required Uri uri,
     required Uri hdUri,
-    required Date date,
-    required String title,
-    required String explanation,
     required String? copyright,
     required GalleryItemType type,
+    required bool isFavorite,
     required GalleryItemLanguage language,
-    @Default(false) bool isFavorite,
+    required GalleryItemLanguage originalLanguage,
+    required String title,
+    required String explanation,
   }) = _GalleryItem;
 
   factory GalleryItem.fromJson(Map<String, dynamic> json) =>

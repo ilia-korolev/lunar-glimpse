@@ -131,3 +131,16 @@ class GoogleTranslationDataSource implements RemoteTranslationDataSource {
     return result;
   }
 }
+
+class MockTranslationDataSource implements RemoteTranslationDataSource {
+  const MockTranslationDataSource();
+
+  @override
+  Future<List<String>> translateText({
+    required List<String> source,
+    required String sourceLanguage,
+    required String targetLanguage,
+  }) async {
+    return source.map((s) => '$targetLanguage: $s').toList();
+  }
+}

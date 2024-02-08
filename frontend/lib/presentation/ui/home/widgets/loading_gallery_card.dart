@@ -8,14 +8,16 @@ class LoadingGalleryCard extends StatelessWidget {
   });
 
   static final _mockItem = GalleryItem(
+    date: const Date(day: 20, month: 12, year: 2000),
     uri: Uri.parse('https://www.google.com/favicon.ico'),
     hdUri: Uri.parse('https://www.google.com/favicon.ico'),
-    date: const Date(day: 20, month: 12, year: 2000),
-    title: 'This is a really really really long title',
-    explanation: 'This is an explanation',
     copyright: 'This is a copyright',
     type: GalleryItemType.image,
+    isFavorite: false,
     language: GalleryItemLanguage.english,
+    originalLanguage: GalleryItemLanguage.english,
+    title: 'This is a really really really long title',
+    explanation: 'This is an explanation',
   );
 
   @override

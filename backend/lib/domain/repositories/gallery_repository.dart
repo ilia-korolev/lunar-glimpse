@@ -21,11 +21,11 @@ class GalleryRepositoryImpl implements GalleryRepository {
     required RemoteGalleryDataSource remoteGalleryDataSource,
     required RemoteTranslationDataSource remoteTranslationDataSource,
   })  : _localGalleryDataSource = localGalleryDataSource,
-        _remoteEnglishGalleryDataSource = remoteGalleryDataSource,
+        _remoteGalleryDataSource = remoteGalleryDataSource,
         _remoteTranslationDataSource = remoteTranslationDataSource;
 
   final LocalGalleryDataSource _localGalleryDataSource;
-  final RemoteGalleryDataSource _remoteEnglishGalleryDataSource;
+  final RemoteGalleryDataSource _remoteGalleryDataSource;
   final RemoteTranslationDataSource _remoteTranslationDataSource;
 
   @override
@@ -34,14 +34,14 @@ class GalleryRepositoryImpl implements GalleryRepository {
     required Date endDate,
     required GalleryItemLanguage language,
   }) async {
-    if (language == GalleryItemLanguage.english) {
-      return _getEnglishItems(
+    if (language == _remoteGalleryDataSource.language) {
+      return _getItemsInOriginalLanguage(
         startDate: startDate,
         endDate: endDate,
       );
     }
 
-    return _getNonEnglishItems(
+    return _getTranslatedItems(
       startDate: startDate,
       endDate: endDate,
       language: language,
@@ -52,33 +52,34 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<GalleryItem> getLatestItem({
     required GalleryItemLanguage language,
   }) async {
-    final englishItem = await _remoteEnglishGalleryDataSource.getLatestItem();
+    final itemInOriginalLanguage =
+        await _remoteGalleryDataSource.getLatestItem();
 
     await _localGalleryDataSource.cacheItems(
-      galleryItems: [englishItem],
+      galleryItems: [itemInOriginalLanguage],
     );
 
-    if (language == GalleryItemLanguage.english) {
-      return englishItem;
+    if (language == _remoteGalleryDataSource.language) {
+      return itemInOriginalLanguage;
     }
 
-    final items = await _getNonEnglishItems(
-      startDate: englishItem.date,
-      endDate: englishItem.date,
+    final items = await _getTranslatedItems(
+      startDate: itemInOriginalLanguage.date,
+      endDate: itemInOriginalLanguage.date,
       language: language,
     );
 
     return items.first;
   }
 
-  Future<List<GalleryItem>> _getEnglishItems({
+  Future<List<GalleryItem>> _getItemsInOriginalLanguage({
     required Date startDate,
     required Date endDate,
   }) async {
     final cachedItems = await _localGalleryDataSource.getItems(
       startDate: startDate,
       endDate: endDate,
-      language: GalleryItemLanguage.english,
+      language: _remoteGalleryDataSource.language,
     );
 
     final uncachedItems = await _getUncachedEnglishItems(
@@ -120,7 +121,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
     for (final uncachedPeriod in uncachedPeriods) {
       uncachedItems.addAll(
-        await _remoteEnglishGalleryDataSource.getGalleryItems(
+        await _remoteGalleryDataSource.getGalleryItems(
           startDate: uncachedPeriod.startDate,
           endDate: uncachedPeriod.endDate,
         ),
@@ -130,7 +131,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
     return uncachedItems;
   }
 
-  Future<List<GalleryItem>> _getNonEnglishItems({
+  Future<List<GalleryItem>> _getTranslatedItems({
     required Date startDate,
     required Date endDate,
     required GalleryItemLanguage language,
@@ -141,15 +142,16 @@ class GalleryRepositoryImpl implements GalleryRepository {
       language: language,
     );
 
-    final englishItems = await _getEnglishItemsForTranslate(
+    final itemsInOriginalLanguage = await _getItemsToTranslate(
       startDate: startDate,
       endDate: endDate,
       cachedItems: cachedItems,
     );
 
     final translatedItems = await _translateItems(
-      englishItems: englishItems,
-      language: language,
+      englishItems: itemsInOriginalLanguage,
+      sourceLanguage: _remoteGalleryDataSource.language,
+      targetLanguage: language,
     );
 
     await _localGalleryDataSource.cacheItems(
@@ -164,7 +166,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
     return items;
   }
 
-  Future<List<GalleryItem>> _getEnglishItemsForTranslate({
+  Future<List<GalleryItem>> _getItemsToTranslate({
     required Date startDate,
     required Date endDate,
     required List<GalleryItem> cachedItems,
@@ -185,7 +187,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
     for (final uncachedPeriod in uncachedPeriods) {
       englishItems.addAll(
-        await _getEnglishItems(
+        await _getItemsInOriginalLanguage(
           startDate: uncachedPeriod.startDate,
           endDate: uncachedPeriod.endDate,
         ),
@@ -196,7 +198,8 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
   Future<List<GalleryItem>> _translateItems({
     required List<GalleryItem> englishItems,
-    required GalleryItemLanguage language,
+    required GalleryItemLanguage sourceLanguage,
+    required GalleryItemLanguage targetLanguage,
   }) async {
     final translatedItems = <GalleryItem>[];
 
@@ -208,69 +211,19 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
       final translatedText = await _remoteTranslationDataSource.translateText(
         source: textToTranslate,
-        sourceLanguage: GalleryItemLanguage.english.languageCode,
-        targetLanguage: language.languageCode,
+        sourceLanguage: sourceLanguage.languageCode,
+        targetLanguage: targetLanguage.languageCode,
       );
 
       translatedItems.add(
         englishItem.copyWith(
           title: translatedText[0],
           explanation: translatedText[1],
-          language: language,
+          language: targetLanguage,
         ),
       );
     }
 
     return translatedItems;
   }
-}
-
-extension _DateListX on List<Date> {
-  List<Date> difference(Iterable<Date> other) {
-    return toSet().difference(other.toSet()).toList();
-  }
-
-  List<_Period> toPeriods() {
-    if (isEmpty) {
-      return [];
-    }
-
-    if (length == 1) {
-      return [_Period(startDate: first, endDate: first)];
-    }
-
-    final sortedList = List<Date>.from(this, growable: false)
-      ..sort((a, b) => a.compareTo(b));
-
-    final periods = <_Period>[];
-
-    var start = sortedList.first;
-    var end = start;
-
-    for (var i = 1; i < sortedList.length; ++i) {
-      if (sortedList[i].difference(end).inDays == 1) {
-        end = sortedList[i];
-
-        if (i == sortedList.length - 1) {
-          periods.add(_Period(startDate: start, endDate: end));
-        }
-      } else {
-        periods.add(_Period(startDate: start, endDate: end));
-        start = sortedList[i];
-        end = start;
-      }
-    }
-
-    return periods;
-  }
-}
-
-class _Period {
-  _Period({
-    required this.startDate,
-    required this.endDate,
-  });
-
-  final Date startDate;
-  final Date endDate;
 }

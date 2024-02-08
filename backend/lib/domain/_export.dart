@@ -1,1 +1,1 @@
-export 'gallery_repository.dart';
+export 'repositories/_export.dart';

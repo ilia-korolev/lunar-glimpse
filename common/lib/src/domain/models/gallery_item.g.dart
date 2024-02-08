@@ -10,28 +10,32 @@ part of 'gallery_item.dart';
 
 _$GalleryItemImpl _$$GalleryItemImplFromJson(Map<String, dynamic> json) =>
     _$GalleryItemImpl(
+      date: Date.fromJson(json['date'] as String),
       uri: Uri.parse(json['uri'] as String),
       hdUri: Uri.parse(json['hdUri'] as String),
-      date: Date.fromJson(json['date'] as String),
-      title: json['title'] as String,
-      explanation: json['explanation'] as String,
       copyright: json['copyright'] as String?,
       type: $enumDecode(_$GalleryItemTypeEnumMap, json['type']),
+      isFavorite: json['isFavorite'] as bool,
       language: $enumDecode(_$GalleryItemLanguageEnumMap, json['language']),
-      isFavorite: json['isFavorite'] as bool? ?? false,
+      originalLanguage:
+          $enumDecode(_$GalleryItemLanguageEnumMap, json['originalLanguage']),
+      title: json['title'] as String,
+      explanation: json['explanation'] as String,
     );
 
 Map<String, dynamic> _$$GalleryItemImplToJson(_$GalleryItemImpl instance) =>
     <String, dynamic>{
+      'date': instance.date.toJson(),
       'uri': instance.uri.toString(),
       'hdUri': instance.hdUri.toString(),
-      'date': instance.date.toJson(),
-      'title': instance.title,
-      'explanation': instance.explanation,
       'copyright': instance.copyright,
       'type': _$GalleryItemTypeEnumMap[instance.type]!,
-      'language': _$GalleryItemLanguageEnumMap[instance.language]!,
       'isFavorite': instance.isFavorite,
+      'language': _$GalleryItemLanguageEnumMap[instance.language]!,
+      'originalLanguage':
+          _$GalleryItemLanguageEnumMap[instance.originalLanguage]!,
+      'title': instance.title,
+      'explanation': instance.explanation,
     };
 
 const _$GalleryItemTypeEnumMap = {

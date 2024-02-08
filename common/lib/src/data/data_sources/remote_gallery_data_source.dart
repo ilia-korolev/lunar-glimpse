@@ -3,6 +3,8 @@ import 'package:astro_common/astro_common.dart';
 abstract interface class RemoteGalleryDataSource {
   const RemoteGalleryDataSource();
 
+  GalleryItemLanguage get language;
+
   Future<GalleryItem> getLatestItem();
 
   Future<List<GalleryItem>> getGalleryItems({
@@ -20,6 +22,9 @@ class NasaApodDataSource implements RemoteGalleryDataSource {
 
   final HttpService _httpService;
   final String _apiKey;
+
+  @override
+  GalleryItemLanguage get language => GalleryItemLanguage.english;
 
   @override
   Future<GalleryItem> getLatestItem() async {

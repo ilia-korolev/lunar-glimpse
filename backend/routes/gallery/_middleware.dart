@@ -21,6 +21,10 @@ Future<GalleryRepository> _createGalleryRepositoryAsync() async {
     ],
   );
 
+  final translationSource = TranslationSource.fromString(
+    Platform.environment['TRANSLATION_SOURCE']!,
+  );
+
   return GalleryRepositoryImpl(
     localGalleryDataSource: PostgresGalleryDataSource(
       dbConnection: await _openDbConnection(),
@@ -28,10 +32,18 @@ Future<GalleryRepository> _createGalleryRepositoryAsync() async {
     remoteGalleryDataSource: NasaApodDataSource(
       httpService: httpService,
     ),
-    remoteTranslationDataSource: GoogleTranslationDataSource(
-      httpService: httpService,
-      apiKey: Platform.environment['GOOGLE_TRANSLATE_API_KEY']!,
-    ),
+    remoteTranslationDataSource: switch (translationSource) {
+      TranslationSource.google => GoogleTranslationDataSource(
+          httpService: httpService,
+          apiKey: Platform.environment['GOOGLE_TRANSLATE_API_KEY']!,
+        ),
+      TranslationSource.deepl => DeepLTranslationDataSource(
+          httpService: httpService,
+          deepLApi: DeepLApi.free,
+          apiKey: Platform.environment['DEEPL_API_KEY']!,
+        ),
+      TranslationSource.none => const MockTranslationDataSource(),
+    },
   );
 }
 
@@ -44,3 +56,18 @@ Future<Connection> _openDbConnection() => Connection.open(
       ),
       settings: const ConnectionSettings(sslMode: SslMode.disable),
     );
+
+enum TranslationSource {
+  google,
+  deepl,
+  none;
+
+  static TranslationSource fromString(String str) => switch (str) {
+        'google' => TranslationSource.google,
+        'deepl' => TranslationSource.deepl,
+        'none' => TranslationSource.none,
+        _ => throw UnsupportedError(
+            'The translation source is not supported: $str',
+          )
+      };
+}
