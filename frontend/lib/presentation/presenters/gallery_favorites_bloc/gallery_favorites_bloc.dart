@@ -17,8 +17,10 @@ const _throttleDuration = Duration(milliseconds: 100);
 class GalleryFavoritesBloc
     extends Bloc<GalleryFavoritesEvent, GalleryFavoritesState> {
   GalleryFavoritesBloc({
-    required GalleryRepository repository,
-  })  : _repository = repository,
+    required GalleryRepository galleryRepository,
+    required AppSettingsRepository appSettingsRepository,
+  })  : _galleryRepository = galleryRepository,
+        _appSettingsRepository = appSettingsRepository,
         super(
           const GalleryFavoritesState(
             status: BlocStatus.initial,
@@ -43,26 +45,43 @@ class GalleryFavoritesBloc
       (event, emit) async => _itemsChanged(emit, event.items),
     );
 
-    _itemChangesListener = _repository.changes.listen((items) {
+    on<GalleryFavoritesAppSettingsChanged>(
+      (event, emit) async => _appSettingsChanged(emit, event.appSettings),
+    );
+
+    _itemChangesListener = _galleryRepository.changes.listen((items) {
       add(GalleryFavoritesEvent.itemsChanged(items: items));
     });
+
+    _appSettingsListener = _appSettingsRepository.appSettings.listen(
+      (appSettings) {
+        add(GalleryFavoritesEvent.appSettingsChanged(appSettings: appSettings));
+      },
+    );
+
+    _language = _appSettingsRepository.getSettings().language;
   }
 
   Stream<GalleryItem> get removedFavoriteStream =>
       _removedFavoriteController.stream;
 
-  final GalleryRepository _repository;
+  final GalleryRepository _galleryRepository;
+  final AppSettingsRepository _appSettingsRepository;
 
   final StreamController<GalleryItem> _removedFavoriteController =
       StreamController<GalleryItem>.broadcast();
 
+  late GalleryItemLanguage _language;
+
   late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
+  late final StreamSubscription<AppSettings> _appSettingsListener;
 
   GalleryFavoritesEvent? _previousEvent;
 
   @override
   Future<void> close() async {
     await _itemChangesListener.cancel();
+    await _appSettingsListener.cancel();
     await _removedFavoriteController.close();
 
     return super.close();
@@ -96,7 +115,9 @@ class GalleryFavoritesBloc
         ),
       );
 
-      final response = await _repository.getFavorites();
+      final response = await _galleryRepository.getFavorites(
+        language: _language,
+      );
 
       final items = response
           // TODO(ilia-korolev): implement a video player
@@ -137,7 +158,7 @@ class GalleryFavoritesBloc
         );
       }
 
-      await _repository.toggleFavorite(
+      await _galleryRepository.toggleFavorite(
         galleryItem: item,
       );
 
@@ -171,5 +192,16 @@ class GalleryFavoritesBloc
     List<GalleryItem> items,
   ) async {
     await _fetched(emit);
+  }
+
+  void _appSettingsChanged(
+    Emitter<GalleryFavoritesState> emit,
+    AppSettings appSettings,
+  ) {
+    if (_language != appSettings.language) {
+      _language = appSettings.language;
+
+      emit(const GalleryFavoritesState(status: BlocStatus.initial));
+    }
   }
 }

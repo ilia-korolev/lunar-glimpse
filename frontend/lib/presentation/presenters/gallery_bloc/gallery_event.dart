@@ -15,4 +15,8 @@ class GalleryEvent with _$GalleryEvent {
   const factory GalleryEvent.itemsChanged({
     required List<GalleryItem> items,
   }) = GalleryItemsChanged;
+
+  const factory GalleryEvent.appSettingsChanged({
+    required AppSettings appSettings,
+  }) = GalleryAppSettingsChanged;
 }

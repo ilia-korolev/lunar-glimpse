@@ -13,4 +13,8 @@ class GalleryFavoritesEvent with _$GalleryFavoritesEvent {
   const factory GalleryFavoritesEvent.itemsChanged({
     required List<GalleryItem> items,
   }) = GalleryFavoritesItemsChanged;
+
+  const factory GalleryFavoritesEvent.appSettingsChanged({
+    required AppSettings appSettings,
+  }) = GalleryFavoritesAppSettingsChanged;
 }

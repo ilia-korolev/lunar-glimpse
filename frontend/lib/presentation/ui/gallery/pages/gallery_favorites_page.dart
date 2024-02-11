@@ -19,7 +19,8 @@ class GalleryFavoritesPage extends StatefulWidget {
 
 class _GalleryFavoritesPageState extends State<GalleryFavoritesPage> {
   final GalleryFavoritesBloc _bloc = GalleryFavoritesBloc(
-    repository: GetIt.instance(),
+    galleryRepository: GetIt.instance(),
+    appSettingsRepository: GetIt.instance(),
   );
 
   @override

@@ -38,7 +38,7 @@ class GalleryTranslations extends Table {
   TextColumn get explanation => text()();
 
   @override
-  Set<Column<Object>>? get primaryKey => {date};
+  Set<Column<Object>>? get primaryKey => {date, language};
 }
 
 @DataClassName('WebFeedEntity')

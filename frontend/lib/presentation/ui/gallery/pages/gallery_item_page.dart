@@ -27,7 +27,8 @@ class GalleryItemPage extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => GalleryItemBloc(
-                repository: GetIt.instance(),
+                galleryRepository: GetIt.instance(),
+                appSettingsRepository: GetIt.instance(),
               )..add(GalleryItemEvent.fetched(date: date)),
             ),
             BlocProvider(

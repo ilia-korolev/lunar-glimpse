@@ -156,12 +156,13 @@ Future<void> _registerBlocs() async {
   _getIt
     ..registerLazySingleton<AppSettingsCubit>(
       () => AppSettingsCubit(
-        appSettingsRepository: GetIt.instance(),
+        appSettingsRepository: _getIt(),
       ),
     )
     ..registerLazySingleton<GalleryBloc>(
       () => GalleryBloc(
-        repository: _getIt(),
+        galleryRepository: _getIt(),
+        appSettingsRepository: _getIt(),
       ),
     )
     ..registerLazySingleton<NewsBloc>(

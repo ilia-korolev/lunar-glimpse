@@ -11,21 +11,26 @@ abstract interface class GalleryRepository {
   Future<List<GalleryItem>> getItems({
     required Date endDate,
     required int count,
+    required GalleryItemLanguage language,
   });
 
   Future<GalleryItem> getItem({
     required Date date,
+    required GalleryItemLanguage language,
   });
 
   Future<List<GalleryItem>> getLatestItems({
     required int count,
+    required GalleryItemLanguage language,
   });
 
   Future<void> toggleFavorite({
     required GalleryItem galleryItem,
   });
 
-  Future<List<GalleryItem>> getFavorites();
+  Future<List<GalleryItem>> getFavorites({
+    required GalleryItemLanguage language,
+  });
 }
 
 class GalleryRepositoryImpl implements GalleryRepository {
@@ -46,9 +51,8 @@ class GalleryRepositoryImpl implements GalleryRepository {
   @override
   Future<List<GalleryItem>> getLatestItems({
     required int count,
+    required GalleryItemLanguage language,
   }) async {
-    const language = GalleryItemLanguage.english;
-
     final latestItem = await _remoteGalleryDataSource.getLatestItem(
       language: language,
     );
@@ -57,46 +61,38 @@ class GalleryRepositoryImpl implements GalleryRepository {
       galleryItems: [latestItem],
     );
 
-    return getItems(endDate: latestItem.date, count: count);
+    return getItems(
+      endDate: latestItem.date,
+      count: count,
+      language: language,
+    );
   }
 
   @override
   Future<List<GalleryItem>> getItems({
     required Date endDate,
     required int count,
+    required GalleryItemLanguage language,
   }) async {
-    const language = GalleryItemLanguage.english;
-
     final startDate = endDate.subtract(Duration(days: count - 1));
 
-    final cachedItems = await _localGalleryDataSource.getItems(
+    return _getItems(
       startDate: startDate,
       endDate: endDate,
       language: language,
     );
-
-    final uncachedItems = await _getUncachedItems(
-      endDate: endDate,
-      startDate: startDate,
-      cachedItems: cachedItems,
-      language: language,
-    );
-
-    await _localGalleryDataSource.cacheItems(
-      galleryItems: uncachedItems,
-    );
-
-    final items = [
-      ...cachedItems,
-      ...uncachedItems,
-    ]..sort((a, b) => a.date.compareTo(b.date));
-
-    return items;
   }
 
   @override
-  Future<GalleryItem> getItem({required Date date}) async {
-    final item = await getItems(endDate: date, count: 1);
+  Future<GalleryItem> getItem({
+    required Date date,
+    required GalleryItemLanguage language,
+  }) async {
+    final item = await getItems(
+      endDate: date,
+      count: 1,
+      language: language,
+    );
 
     return item.single;
   }
@@ -119,12 +115,57 @@ class GalleryRepositoryImpl implements GalleryRepository {
   }
 
   @override
-  Future<List<GalleryItem>> getFavorites() {
-    const language = GalleryItemLanguage.english;
+  Future<List<GalleryItem>> getFavorites({
+    required GalleryItemLanguage language,
+  }) async {
+    final dates = await _localGalleryDataSource.getFavoriteDates();
+    final periods = dates.toPeriods();
 
-    return _localGalleryDataSource.getFavorites(
+    final favorites = <GalleryItem>[];
+
+    for (final period in periods) {
+      final periodFavorites = await _getItems(
+        startDate: period.startDate,
+        endDate: period.endDate,
+        language: language,
+      );
+
+      favorites.addAll(periodFavorites);
+    }
+
+    favorites.sort((a, b) => b.date.compareTo(a.date));
+
+    return favorites;
+  }
+
+  Future<List<GalleryItem>> _getItems({
+    required Date startDate,
+    required Date endDate,
+    required GalleryItemLanguage language,
+  }) async {
+    final cachedItems = await _localGalleryDataSource.getItems(
+      startDate: startDate,
+      endDate: endDate,
       language: language,
     );
+
+    final uncachedItems = await _getUncachedItems(
+      endDate: endDate,
+      startDate: startDate,
+      cachedItems: cachedItems,
+      language: language,
+    );
+
+    await _localGalleryDataSource.cacheItems(
+      galleryItems: uncachedItems,
+    );
+
+    final items = [
+      ...cachedItems,
+      ...uncachedItems,
+    ]..sort((a, b) => b.date.compareTo(a.date));
+
+    return items;
   }
 
   Future<List<GalleryItem>> _getUncachedItems({

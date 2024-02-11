@@ -17,9 +17,11 @@ const _throttleDuration = Duration(milliseconds: 100);
 
 class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   GalleryBloc({
-    required GalleryRepository repository,
+    required GalleryRepository galleryRepository,
+    required AppSettingsRepository appSettingsRepository,
     this.pageSize = 25,
-  })  : _repository = repository,
+  })  : _galleryRepository = galleryRepository,
+        _appSettingsRepository = appSettingsRepository,
         super(
           const GalleryState(
             status: BlocStatus.initial,
@@ -49,21 +51,40 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
       (event, emit) async => _itemsChanged(emit, event.items),
     );
 
-    _itemChangesListener = _repository.changes.listen((items) {
-      add(GalleryEvent.itemsChanged(items: items));
-    });
+    on<GalleryAppSettingsChanged>(
+      (event, emit) async => _appSettingsChanged(emit, event.appSettings),
+    );
+
+    _itemChangesListener = _galleryRepository.changes.listen(
+      (items) {
+        add(GalleryEvent.itemsChanged(items: items));
+      },
+    );
+
+    _appSettingsListener = _appSettingsRepository.appSettings.listen(
+      (appSettings) {
+        add(GalleryEvent.appSettingsChanged(appSettings: appSettings));
+      },
+    );
+
+    _language = _appSettingsRepository.getSettings().language;
   }
 
-  final GalleryRepository _repository;
+  final GalleryRepository _galleryRepository;
+  final AppSettingsRepository _appSettingsRepository;
   final int pageSize;
 
+  late GalleryItemLanguage _language;
+
   late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
+  late final StreamSubscription<AppSettings> _appSettingsListener;
 
   GalleryEvent? _previousEvent;
 
   @override
   Future<void> close() async {
     await _itemChangesListener.cancel();
+    await _appSettingsListener.cancel();
 
     return super.close();
   }
@@ -101,10 +122,14 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
       );
 
       final response = state.items.isEmpty
-          ? await _repository.getLatestItems(count: pageSize)
-          : await _repository.getItems(
+          ? await _galleryRepository.getLatestItems(
+              count: pageSize,
+              language: _language,
+            )
+          : await _galleryRepository.getItems(
               endDate: state.items.last.date.yesterday,
               count: pageSize,
+              language: _language,
             );
 
       final items = [
@@ -147,7 +172,7 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     GalleryItem item,
   ) async {
     try {
-      await _repository.toggleFavorite(
+      await _galleryRepository.toggleFavorite(
         galleryItem: item,
       );
 
@@ -184,5 +209,16 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     }).toList();
 
     emit(state.copyWith(items: changedList));
+  }
+
+  Future<void> _appSettingsChanged(
+    Emitter<GalleryState> emit,
+    AppSettings appSettings,
+  ) async {
+    if (_language != appSettings.language) {
+      _language = appSettings.language;
+
+      await _refreshed(emit);
+    }
   }
 }

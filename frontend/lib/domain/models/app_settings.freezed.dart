@@ -108,10 +108,11 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AppSettingsImpl implements _AppSettings {
+class _$AppSettingsImpl extends _AppSettings {
   const _$AppSettingsImpl(
       {required this.themeMode,
-      @LocaleConverterNullable() required this.locale});
+      @LocaleConverterNullable() required this.locale})
+      : super._();
 
   factory _$AppSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppSettingsImplFromJson(json);
@@ -155,11 +156,12 @@ class _$AppSettingsImpl implements _AppSettings {
   }
 }
 
-abstract class _AppSettings implements AppSettings {
+abstract class _AppSettings extends AppSettings {
   const factory _AppSettings(
           {required final ThemeMode themeMode,
           @LocaleConverterNullable() required final Locale? locale}) =
       _$AppSettingsImpl;
+  const _AppSettings._() : super._();
 
   factory _AppSettings.fromJson(Map<String, dynamic> json) =
       _$AppSettingsImpl.fromJson;

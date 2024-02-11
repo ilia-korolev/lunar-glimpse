@@ -349,7 +349,7 @@ class $GalleryTranslationsTable extends GalleryTranslations
   late final GeneratedColumnWithTypeConverter<Date, int> date =
       GeneratedColumn<int>('date', aliasedName, false,
               type: DriftSqlType.int,
-              requiredDuringInsert: false,
+              requiredDuringInsert: true,
               defaultConstraints: GeneratedColumn.constraintIsAlways(
                   'REFERENCES gallery (date)'))
           .withConverter<Date>($GalleryTranslationsTable.$converterdate);
@@ -416,7 +416,7 @@ class $GalleryTranslationsTable extends GalleryTranslations
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {date};
+  Set<GeneratedColumn> get $primaryKey => {date, language};
   @override
   GalleryTranslationEntity map(Map<String, dynamic> data,
       {String? tablePrefix}) {
@@ -570,20 +570,24 @@ class GalleryTranslationsCompanion
   final Value<GalleryItemLanguage> originalLanguage;
   final Value<String> title;
   final Value<String> explanation;
+  final Value<int> rowid;
   const GalleryTranslationsCompanion({
     this.date = const Value.absent(),
     this.language = const Value.absent(),
     this.originalLanguage = const Value.absent(),
     this.title = const Value.absent(),
     this.explanation = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
   GalleryTranslationsCompanion.insert({
-    this.date = const Value.absent(),
+    required Date date,
     required GalleryItemLanguage language,
     required GalleryItemLanguage originalLanguage,
     required String title,
     required String explanation,
-  })  : language = Value(language),
+    this.rowid = const Value.absent(),
+  })  : date = Value(date),
+        language = Value(language),
         originalLanguage = Value(originalLanguage),
         title = Value(title),
         explanation = Value(explanation);
@@ -593,6 +597,7 @@ class GalleryTranslationsCompanion
     Expression<String>? originalLanguage,
     Expression<String>? title,
     Expression<String>? explanation,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (date != null) 'date': date,
@@ -600,6 +605,7 @@ class GalleryTranslationsCompanion
       if (originalLanguage != null) 'original_language': originalLanguage,
       if (title != null) 'title': title,
       if (explanation != null) 'explanation': explanation,
+      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -608,13 +614,15 @@ class GalleryTranslationsCompanion
       Value<GalleryItemLanguage>? language,
       Value<GalleryItemLanguage>? originalLanguage,
       Value<String>? title,
-      Value<String>? explanation}) {
+      Value<String>? explanation,
+      Value<int>? rowid}) {
     return GalleryTranslationsCompanion(
       date: date ?? this.date,
       language: language ?? this.language,
       originalLanguage: originalLanguage ?? this.originalLanguage,
       title: title ?? this.title,
       explanation: explanation ?? this.explanation,
+      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -640,6 +648,9 @@ class GalleryTranslationsCompanion
     if (explanation.present) {
       map['explanation'] = Variable<String>(explanation.value);
     }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
     return map;
   }
 
@@ -650,7 +661,8 @@ class GalleryTranslationsCompanion
           ..write('language: $language, ')
           ..write('originalLanguage: $originalLanguage, ')
           ..write('title: $title, ')
-          ..write('explanation: $explanation')
+          ..write('explanation: $explanation, ')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }

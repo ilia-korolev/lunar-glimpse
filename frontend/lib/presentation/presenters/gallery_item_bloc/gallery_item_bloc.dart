@@ -12,8 +12,10 @@ part 'gallery_item_state.dart';
 
 class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
   GalleryItemBloc({
-    required GalleryRepository repository,
-  })  : _repository = repository,
+    required GalleryRepository galleryRepository,
+    required AppSettingsRepository appSettingsRepository,
+  })  : _galleryRepository = galleryRepository,
+        _appSettingsRepository = appSettingsRepository,
         super(const GalleryItemState.initial()) {
     on<GalleryItemFetched>(
       (event, emit) async => _fetched(emit, event.date),
@@ -31,22 +33,41 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
       (event, emit) async => _itemsChanged(emit, event.items),
     );
 
-    _itemChangesListener = _repository.changes.listen(
+    on<GalleryItemAppSettingsChanged>(
+      (event, emit) async => _appSettingsChanged(emit, event.appSettings),
+    );
+
+    _itemChangesListener = _galleryRepository.changes.listen(
       (items) {
         add(GalleryItemEvent.itemsChanged(items: items));
       },
     );
+
+    _appSettingsListener = _appSettingsRepository.appSettings.listen(
+      (appSettings) {
+        add(
+          GalleryItemEvent.appSettingsChanged(appSettings: appSettings),
+        );
+      },
+    );
+
+    _language = _appSettingsRepository.getSettings().language;
   }
 
-  final GalleryRepository _repository;
+  final GalleryRepository _galleryRepository;
+  final AppSettingsRepository _appSettingsRepository;
+
+  late GalleryItemLanguage _language;
 
   late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
+  late final StreamSubscription<AppSettings> _appSettingsListener;
 
   GalleryItemEvent? _previousEvent;
 
   @override
   Future<void> close() async {
     await _itemChangesListener.cancel();
+    await _appSettingsListener.cancel();
 
     return super.close();
   }
@@ -75,7 +96,10 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
     emit(const GalleryItemState.loading());
 
     try {
-      final item = await _repository.getItem(date: date);
+      final item = await _galleryRepository.getItem(
+        date: date,
+        language: _language,
+      );
 
       emit(GalleryItemState.success(item: item));
     } on Exception catch (e) {
@@ -94,7 +118,7 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
         ),
       );
 
-      await _repository.toggleFavorite(
+      await _galleryRepository.toggleFavorite(
         galleryItem: galleryItem,
       );
     } on Exception catch (e) {
@@ -133,5 +157,18 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
         );
       },
     );
+  }
+
+  void _appSettingsChanged(
+    Emitter<GalleryItemState> emit,
+    AppSettings appSettings,
+  ) {
+    if (_language != appSettings.language) {
+      _language = appSettings.language;
+
+      state.whenOrNull(
+        success: (item) => _fetched(emit, item.date),
+      );
+    }
   }
 }

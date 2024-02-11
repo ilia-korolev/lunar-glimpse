@@ -22,6 +22,7 @@ mixin _$GalleryFavoritesEvent {
     required TResult Function(GalleryItem item) itemUnfavorited,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$GalleryFavoritesEvent {
     TResult? Function(GalleryItem item)? itemUnfavorited,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$GalleryFavoritesEvent {
     TResult Function(GalleryItem item)? itemUnfavorited,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +51,8 @@ mixin _$GalleryFavoritesEvent {
         itemUnfavorited,
     required TResult Function(GalleryFavoritesTriedAgain value) triedAgain,
     required TResult Function(GalleryFavoritesItemsChanged value) itemsChanged,
+    required TResult Function(GalleryFavoritesAppSettingsChanged value)
+        appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +61,8 @@ mixin _$GalleryFavoritesEvent {
     TResult? Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult? Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult? Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +71,8 @@ mixin _$GalleryFavoritesEvent {
     TResult Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,6 +152,7 @@ class _$GalleryFavoritesFetchedImpl
     required TResult Function(GalleryItem item) itemUnfavorited,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return fetched();
   }
@@ -154,6 +164,7 @@ class _$GalleryFavoritesFetchedImpl
     TResult? Function(GalleryItem item)? itemUnfavorited,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return fetched?.call();
   }
@@ -165,6 +176,7 @@ class _$GalleryFavoritesFetchedImpl
     TResult Function(GalleryItem item)? itemUnfavorited,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -181,6 +193,8 @@ class _$GalleryFavoritesFetchedImpl
         itemUnfavorited,
     required TResult Function(GalleryFavoritesTriedAgain value) triedAgain,
     required TResult Function(GalleryFavoritesItemsChanged value) itemsChanged,
+    required TResult Function(GalleryFavoritesAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return fetched(this);
   }
@@ -192,6 +206,8 @@ class _$GalleryFavoritesFetchedImpl
     TResult? Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult? Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult? Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
   }) {
     return fetched?.call(this);
   }
@@ -203,6 +219,8 @@ class _$GalleryFavoritesFetchedImpl
     TResult Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -310,6 +328,7 @@ class _$GalleryFavoritesItemUnfavoritedImpl
     required TResult Function(GalleryItem item) itemUnfavorited,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return itemUnfavorited(item);
   }
@@ -321,6 +340,7 @@ class _$GalleryFavoritesItemUnfavoritedImpl
     TResult? Function(GalleryItem item)? itemUnfavorited,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return itemUnfavorited?.call(item);
   }
@@ -332,6 +352,7 @@ class _$GalleryFavoritesItemUnfavoritedImpl
     TResult Function(GalleryItem item)? itemUnfavorited,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (itemUnfavorited != null) {
@@ -348,6 +369,8 @@ class _$GalleryFavoritesItemUnfavoritedImpl
         itemUnfavorited,
     required TResult Function(GalleryFavoritesTriedAgain value) triedAgain,
     required TResult Function(GalleryFavoritesItemsChanged value) itemsChanged,
+    required TResult Function(GalleryFavoritesAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return itemUnfavorited(this);
   }
@@ -359,6 +382,8 @@ class _$GalleryFavoritesItemUnfavoritedImpl
     TResult? Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult? Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult? Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
   }) {
     return itemUnfavorited?.call(this);
   }
@@ -370,6 +395,8 @@ class _$GalleryFavoritesItemUnfavoritedImpl
     TResult Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
     required TResult orElse(),
   }) {
     if (itemUnfavorited != null) {
@@ -447,6 +474,7 @@ class _$GalleryFavoritesTriedAgainImpl
     required TResult Function(GalleryItem item) itemUnfavorited,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return triedAgain();
   }
@@ -458,6 +486,7 @@ class _$GalleryFavoritesTriedAgainImpl
     TResult? Function(GalleryItem item)? itemUnfavorited,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return triedAgain?.call();
   }
@@ -469,6 +498,7 @@ class _$GalleryFavoritesTriedAgainImpl
     TResult Function(GalleryItem item)? itemUnfavorited,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (triedAgain != null) {
@@ -485,6 +515,8 @@ class _$GalleryFavoritesTriedAgainImpl
         itemUnfavorited,
     required TResult Function(GalleryFavoritesTriedAgain value) triedAgain,
     required TResult Function(GalleryFavoritesItemsChanged value) itemsChanged,
+    required TResult Function(GalleryFavoritesAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return triedAgain(this);
   }
@@ -496,6 +528,8 @@ class _$GalleryFavoritesTriedAgainImpl
     TResult? Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult? Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult? Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
   }) {
     return triedAgain?.call(this);
   }
@@ -507,6 +541,8 @@ class _$GalleryFavoritesTriedAgainImpl
     TResult Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
     required TResult orElse(),
   }) {
     if (triedAgain != null) {
@@ -611,6 +647,7 @@ class _$GalleryFavoritesItemsChangedImpl
     required TResult Function(GalleryItem item) itemUnfavorited,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return itemsChanged(items);
   }
@@ -622,6 +659,7 @@ class _$GalleryFavoritesItemsChangedImpl
     TResult? Function(GalleryItem item)? itemUnfavorited,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return itemsChanged?.call(items);
   }
@@ -633,6 +671,7 @@ class _$GalleryFavoritesItemsChangedImpl
     TResult Function(GalleryItem item)? itemUnfavorited,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (itemsChanged != null) {
@@ -649,6 +688,8 @@ class _$GalleryFavoritesItemsChangedImpl
         itemUnfavorited,
     required TResult Function(GalleryFavoritesTriedAgain value) triedAgain,
     required TResult Function(GalleryFavoritesItemsChanged value) itemsChanged,
+    required TResult Function(GalleryFavoritesAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return itemsChanged(this);
   }
@@ -660,6 +701,8 @@ class _$GalleryFavoritesItemsChangedImpl
     TResult? Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult? Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult? Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
   }) {
     return itemsChanged?.call(this);
   }
@@ -671,6 +714,8 @@ class _$GalleryFavoritesItemsChangedImpl
     TResult Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
     TResult Function(GalleryFavoritesTriedAgain value)? triedAgain,
     TResult Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
     required TResult orElse(),
   }) {
     if (itemsChanged != null) {
@@ -689,6 +734,192 @@ abstract class GalleryFavoritesItemsChanged implements GalleryFavoritesEvent {
   @JsonKey(ignore: true)
   _$$GalleryFavoritesItemsChangedImplCopyWith<
           _$GalleryFavoritesItemsChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GalleryFavoritesAppSettingsChangedImplCopyWith<$Res> {
+  factory _$$GalleryFavoritesAppSettingsChangedImplCopyWith(
+          _$GalleryFavoritesAppSettingsChangedImpl value,
+          $Res Function(_$GalleryFavoritesAppSettingsChangedImpl) then) =
+      __$$GalleryFavoritesAppSettingsChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AppSettings appSettings});
+
+  $AppSettingsCopyWith<$Res> get appSettings;
+}
+
+/// @nodoc
+class __$$GalleryFavoritesAppSettingsChangedImplCopyWithImpl<$Res>
+    extends _$GalleryFavoritesEventCopyWithImpl<$Res,
+        _$GalleryFavoritesAppSettingsChangedImpl>
+    implements _$$GalleryFavoritesAppSettingsChangedImplCopyWith<$Res> {
+  __$$GalleryFavoritesAppSettingsChangedImplCopyWithImpl(
+      _$GalleryFavoritesAppSettingsChangedImpl _value,
+      $Res Function(_$GalleryFavoritesAppSettingsChangedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appSettings = null,
+  }) {
+    return _then(_$GalleryFavoritesAppSettingsChangedImpl(
+      appSettings: null == appSettings
+          ? _value.appSettings
+          : appSettings // ignore: cast_nullable_to_non_nullable
+              as AppSettings,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AppSettingsCopyWith<$Res> get appSettings {
+    return $AppSettingsCopyWith<$Res>(_value.appSettings, (value) {
+      return _then(_value.copyWith(appSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$GalleryFavoritesAppSettingsChangedImpl
+    with DiagnosticableTreeMixin
+    implements GalleryFavoritesAppSettingsChanged {
+  const _$GalleryFavoritesAppSettingsChangedImpl({required this.appSettings});
+
+  @override
+  final AppSettings appSettings;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GalleryFavoritesEvent.appSettingsChanged(appSettings: $appSettings)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'GalleryFavoritesEvent.appSettingsChanged'))
+      ..add(DiagnosticsProperty('appSettings', appSettings));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GalleryFavoritesAppSettingsChangedImpl &&
+            (identical(other.appSettings, appSettings) ||
+                other.appSettings == appSettings));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, appSettings);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GalleryFavoritesAppSettingsChangedImplCopyWith<
+          _$GalleryFavoritesAppSettingsChangedImpl>
+      get copyWith => __$$GalleryFavoritesAppSettingsChangedImplCopyWithImpl<
+          _$GalleryFavoritesAppSettingsChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetched,
+    required TResult Function(GalleryItem item) itemUnfavorited,
+    required TResult Function() triedAgain,
+    required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
+  }) {
+    return appSettingsChanged(appSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetched,
+    TResult? Function(GalleryItem item)? itemUnfavorited,
+    TResult? Function()? triedAgain,
+    TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
+  }) {
+    return appSettingsChanged?.call(appSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetched,
+    TResult Function(GalleryItem item)? itemUnfavorited,
+    TResult Function()? triedAgain,
+    TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
+    required TResult orElse(),
+  }) {
+    if (appSettingsChanged != null) {
+      return appSettingsChanged(appSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GalleryFavoritesFetched value) fetched,
+    required TResult Function(GalleryFavoritesItemUnfavorited value)
+        itemUnfavorited,
+    required TResult Function(GalleryFavoritesTriedAgain value) triedAgain,
+    required TResult Function(GalleryFavoritesItemsChanged value) itemsChanged,
+    required TResult Function(GalleryFavoritesAppSettingsChanged value)
+        appSettingsChanged,
+  }) {
+    return appSettingsChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GalleryFavoritesFetched value)? fetched,
+    TResult? Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
+    TResult? Function(GalleryFavoritesTriedAgain value)? triedAgain,
+    TResult? Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
+  }) {
+    return appSettingsChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GalleryFavoritesFetched value)? fetched,
+    TResult Function(GalleryFavoritesItemUnfavorited value)? itemUnfavorited,
+    TResult Function(GalleryFavoritesTriedAgain value)? triedAgain,
+    TResult Function(GalleryFavoritesItemsChanged value)? itemsChanged,
+    TResult Function(GalleryFavoritesAppSettingsChanged value)?
+        appSettingsChanged,
+    required TResult orElse(),
+  }) {
+    if (appSettingsChanged != null) {
+      return appSettingsChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GalleryFavoritesAppSettingsChanged
+    implements GalleryFavoritesEvent {
+  const factory GalleryFavoritesAppSettingsChanged(
+          {required final AppSettings appSettings}) =
+      _$GalleryFavoritesAppSettingsChangedImpl;
+
+  AppSettings get appSettings;
+  @JsonKey(ignore: true)
+  _$$GalleryFavoritesAppSettingsChangedImplCopyWith<
+          _$GalleryFavoritesAppSettingsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

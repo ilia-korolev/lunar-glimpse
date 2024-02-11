@@ -22,6 +22,7 @@ mixin _$GalleryItemEvent {
     required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$GalleryItemEvent {
     TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$GalleryItemEvent {
     TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,8 @@ mixin _$GalleryItemEvent {
     required TResult Function(GalleryItemFavoriteToggled value) favoriteToggled,
     required TResult Function(GalleryItemTriedAgain value) triedAgain,
     required TResult Function(GalleryItemItemsChanged value) itemsChanged,
+    required TResult Function(GalleryItemAppSettingsChanged value)
+        appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +60,7 @@ mixin _$GalleryItemEvent {
     TResult? Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult? Function(GalleryItemTriedAgain value)? triedAgain,
     TResult? Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +69,7 @@ mixin _$GalleryItemEvent {
     TResult Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult Function(GalleryItemTriedAgain value)? triedAgain,
     TResult Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,6 +172,7 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
     required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return fetched(date);
   }
@@ -176,6 +184,7 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
     TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return fetched?.call(date);
   }
@@ -187,6 +196,7 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
     TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -202,6 +212,8 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
     required TResult Function(GalleryItemFavoriteToggled value) favoriteToggled,
     required TResult Function(GalleryItemTriedAgain value) triedAgain,
     required TResult Function(GalleryItemItemsChanged value) itemsChanged,
+    required TResult Function(GalleryItemAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return fetched(this);
   }
@@ -213,6 +225,7 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
     TResult? Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult? Function(GalleryItemTriedAgain value)? triedAgain,
     TResult? Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
   }) {
     return fetched?.call(this);
   }
@@ -224,6 +237,7 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
     TResult Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult Function(GalleryItemTriedAgain value)? triedAgain,
     TResult Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (fetched != null) {
@@ -289,6 +303,7 @@ class _$GalleryItemFavoriteToggledImpl implements GalleryItemFavoriteToggled {
     required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return favoriteToggled();
   }
@@ -300,6 +315,7 @@ class _$GalleryItemFavoriteToggledImpl implements GalleryItemFavoriteToggled {
     TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return favoriteToggled?.call();
   }
@@ -311,6 +327,7 @@ class _$GalleryItemFavoriteToggledImpl implements GalleryItemFavoriteToggled {
     TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -326,6 +343,8 @@ class _$GalleryItemFavoriteToggledImpl implements GalleryItemFavoriteToggled {
     required TResult Function(GalleryItemFavoriteToggled value) favoriteToggled,
     required TResult Function(GalleryItemTriedAgain value) triedAgain,
     required TResult Function(GalleryItemItemsChanged value) itemsChanged,
+    required TResult Function(GalleryItemAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return favoriteToggled(this);
   }
@@ -337,6 +356,7 @@ class _$GalleryItemFavoriteToggledImpl implements GalleryItemFavoriteToggled {
     TResult? Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult? Function(GalleryItemTriedAgain value)? triedAgain,
     TResult? Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
   }) {
     return favoriteToggled?.call(this);
   }
@@ -348,6 +368,7 @@ class _$GalleryItemFavoriteToggledImpl implements GalleryItemFavoriteToggled {
     TResult Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult Function(GalleryItemTriedAgain value)? triedAgain,
     TResult Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -405,6 +426,7 @@ class _$GalleryItemTriedAgainImpl implements GalleryItemTriedAgain {
     required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return triedAgain();
   }
@@ -416,6 +438,7 @@ class _$GalleryItemTriedAgainImpl implements GalleryItemTriedAgain {
     TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return triedAgain?.call();
   }
@@ -427,6 +450,7 @@ class _$GalleryItemTriedAgainImpl implements GalleryItemTriedAgain {
     TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (triedAgain != null) {
@@ -442,6 +466,8 @@ class _$GalleryItemTriedAgainImpl implements GalleryItemTriedAgain {
     required TResult Function(GalleryItemFavoriteToggled value) favoriteToggled,
     required TResult Function(GalleryItemTriedAgain value) triedAgain,
     required TResult Function(GalleryItemItemsChanged value) itemsChanged,
+    required TResult Function(GalleryItemAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return triedAgain(this);
   }
@@ -453,6 +479,7 @@ class _$GalleryItemTriedAgainImpl implements GalleryItemTriedAgain {
     TResult? Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult? Function(GalleryItemTriedAgain value)? triedAgain,
     TResult? Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
   }) {
     return triedAgain?.call(this);
   }
@@ -464,6 +491,7 @@ class _$GalleryItemTriedAgainImpl implements GalleryItemTriedAgain {
     TResult Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult Function(GalleryItemTriedAgain value)? triedAgain,
     TResult Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (triedAgain != null) {
@@ -555,6 +583,7 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
     required TResult Function() favoriteToggled,
     required TResult Function() triedAgain,
     required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
   }) {
     return itemsChanged(items);
   }
@@ -566,6 +595,7 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
     TResult? Function()? favoriteToggled,
     TResult? Function()? triedAgain,
     TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
   }) {
     return itemsChanged?.call(items);
   }
@@ -577,6 +607,7 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
     TResult Function()? favoriteToggled,
     TResult Function()? triedAgain,
     TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (itemsChanged != null) {
@@ -592,6 +623,8 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
     required TResult Function(GalleryItemFavoriteToggled value) favoriteToggled,
     required TResult Function(GalleryItemTriedAgain value) triedAgain,
     required TResult Function(GalleryItemItemsChanged value) itemsChanged,
+    required TResult Function(GalleryItemAppSettingsChanged value)
+        appSettingsChanged,
   }) {
     return itemsChanged(this);
   }
@@ -603,6 +636,7 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
     TResult? Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult? Function(GalleryItemTriedAgain value)? triedAgain,
     TResult? Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
   }) {
     return itemsChanged?.call(this);
   }
@@ -614,6 +648,7 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
     TResult Function(GalleryItemFavoriteToggled value)? favoriteToggled,
     TResult Function(GalleryItemTriedAgain value)? triedAgain,
     TResult Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
     required TResult orElse(),
   }) {
     if (itemsChanged != null) {
@@ -630,6 +665,178 @@ abstract class GalleryItemItemsChanged implements GalleryItemEvent {
   List<GalleryItem> get items;
   @JsonKey(ignore: true)
   _$$GalleryItemItemsChangedImplCopyWith<_$GalleryItemItemsChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GalleryItemAppSettingsChangedImplCopyWith<$Res> {
+  factory _$$GalleryItemAppSettingsChangedImplCopyWith(
+          _$GalleryItemAppSettingsChangedImpl value,
+          $Res Function(_$GalleryItemAppSettingsChangedImpl) then) =
+      __$$GalleryItemAppSettingsChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AppSettings appSettings});
+
+  $AppSettingsCopyWith<$Res> get appSettings;
+}
+
+/// @nodoc
+class __$$GalleryItemAppSettingsChangedImplCopyWithImpl<$Res>
+    extends _$GalleryItemEventCopyWithImpl<$Res,
+        _$GalleryItemAppSettingsChangedImpl>
+    implements _$$GalleryItemAppSettingsChangedImplCopyWith<$Res> {
+  __$$GalleryItemAppSettingsChangedImplCopyWithImpl(
+      _$GalleryItemAppSettingsChangedImpl _value,
+      $Res Function(_$GalleryItemAppSettingsChangedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appSettings = null,
+  }) {
+    return _then(_$GalleryItemAppSettingsChangedImpl(
+      appSettings: null == appSettings
+          ? _value.appSettings
+          : appSettings // ignore: cast_nullable_to_non_nullable
+              as AppSettings,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AppSettingsCopyWith<$Res> get appSettings {
+    return $AppSettingsCopyWith<$Res>(_value.appSettings, (value) {
+      return _then(_value.copyWith(appSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$GalleryItemAppSettingsChangedImpl
+    implements GalleryItemAppSettingsChanged {
+  const _$GalleryItemAppSettingsChangedImpl({required this.appSettings});
+
+  @override
+  final AppSettings appSettings;
+
+  @override
+  String toString() {
+    return 'GalleryItemEvent.appSettingsChanged(appSettings: $appSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GalleryItemAppSettingsChangedImpl &&
+            (identical(other.appSettings, appSettings) ||
+                other.appSettings == appSettings));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, appSettings);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GalleryItemAppSettingsChangedImplCopyWith<
+          _$GalleryItemAppSettingsChangedImpl>
+      get copyWith => __$$GalleryItemAppSettingsChangedImplCopyWithImpl<
+          _$GalleryItemAppSettingsChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Date date) fetched,
+    required TResult Function() favoriteToggled,
+    required TResult Function() triedAgain,
+    required TResult Function(List<GalleryItem> items) itemsChanged,
+    required TResult Function(AppSettings appSettings) appSettingsChanged,
+  }) {
+    return appSettingsChanged(appSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Date date)? fetched,
+    TResult? Function()? favoriteToggled,
+    TResult? Function()? triedAgain,
+    TResult? Function(List<GalleryItem> items)? itemsChanged,
+    TResult? Function(AppSettings appSettings)? appSettingsChanged,
+  }) {
+    return appSettingsChanged?.call(appSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Date date)? fetched,
+    TResult Function()? favoriteToggled,
+    TResult Function()? triedAgain,
+    TResult Function(List<GalleryItem> items)? itemsChanged,
+    TResult Function(AppSettings appSettings)? appSettingsChanged,
+    required TResult orElse(),
+  }) {
+    if (appSettingsChanged != null) {
+      return appSettingsChanged(appSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GalleryItemFetched value) fetched,
+    required TResult Function(GalleryItemFavoriteToggled value) favoriteToggled,
+    required TResult Function(GalleryItemTriedAgain value) triedAgain,
+    required TResult Function(GalleryItemItemsChanged value) itemsChanged,
+    required TResult Function(GalleryItemAppSettingsChanged value)
+        appSettingsChanged,
+  }) {
+    return appSettingsChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GalleryItemFetched value)? fetched,
+    TResult? Function(GalleryItemFavoriteToggled value)? favoriteToggled,
+    TResult? Function(GalleryItemTriedAgain value)? triedAgain,
+    TResult? Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult? Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
+  }) {
+    return appSettingsChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GalleryItemFetched value)? fetched,
+    TResult Function(GalleryItemFavoriteToggled value)? favoriteToggled,
+    TResult Function(GalleryItemTriedAgain value)? triedAgain,
+    TResult Function(GalleryItemItemsChanged value)? itemsChanged,
+    TResult Function(GalleryItemAppSettingsChanged value)? appSettingsChanged,
+    required TResult orElse(),
+  }) {
+    if (appSettingsChanged != null) {
+      return appSettingsChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GalleryItemAppSettingsChanged implements GalleryItemEvent {
+  const factory GalleryItemAppSettingsChanged(
+          {required final AppSettings appSettings}) =
+      _$GalleryItemAppSettingsChangedImpl;
+
+  AppSettings get appSettings;
+  @JsonKey(ignore: true)
+  _$$GalleryItemAppSettingsChangedImplCopyWith<
+          _$GalleryItemAppSettingsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

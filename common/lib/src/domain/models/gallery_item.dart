@@ -12,6 +12,17 @@ enum GalleryItemLanguage {
   russian,
   chinese;
 
+  static GalleryItemLanguage fromLanguageCode(String languageCode) =>
+      switch (languageCode) {
+        'en' => GalleryItemLanguage.english,
+        'ja' => GalleryItemLanguage.japanese,
+        'ru' => GalleryItemLanguage.russian,
+        'zh' => GalleryItemLanguage.chinese,
+        _ => throw UnsupportedError(
+            'The language code is not supported: $languageCode',
+          ),
+      };
+
   String get languageCode => switch (this) {
         GalleryItemLanguage.english => 'en',
         GalleryItemLanguage.japanese => 'ja',
