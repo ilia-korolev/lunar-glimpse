@@ -6,7 +6,7 @@
 
 Run dev (make sure Postgres is running):
 ```
-DB_HOST=localhost DB_NAME='dev_db' DB_USER='dev_user' DB_PASSWORD='dev_password' dart_frog dev
+DB_HOST=localhost DB_NAME='dev_db' DB_USER='dev_user' DB_PASSWORD='dev_password' TRANSLATION_SOURCE=none dart_frog dev
 ```
 
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
