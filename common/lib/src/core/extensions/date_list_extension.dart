@@ -25,14 +25,14 @@ extension DateListX on List<Date> {
     for (var i = 1; i < sortedList.length; ++i) {
       if (sortedList[i].difference(end).inDays == 1) {
         end = sortedList[i];
-
-        if (i == sortedList.length - 1) {
-          periods.add(Period(startDate: start, endDate: end));
-        }
       } else {
         periods.add(Period(startDate: start, endDate: end));
         start = sortedList[i];
         end = start;
+      }
+
+      if (i == sortedList.length - 1) {
+        periods.add(Period(startDate: start, endDate: end));
       }
     }
 
