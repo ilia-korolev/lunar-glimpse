@@ -8,7 +8,7 @@ CREATE TABLE gallery (
 );
 
 CREATE TABLE gallery_translations (
-    PRIMARY KEY (date, language),
+    PRIMARY KEY(date, language),
     FOREIGN KEY(date) REFERENCES gallery(date) ON DELETE CASCADE,
     date date NOT NULL,
     language text NOT NULL,
@@ -16,3 +16,33 @@ CREATE TABLE gallery_translations (
     title text NOT NULL,
     explanation text NOT NULL
 );
+
+COPY gallery
+FROM '/docker-entrypoint-initdb.d/gallery.csv'
+DELIMITER ','
+NULL AS E'\'\''
+CSV HEADER;
+
+COPY gallery_translations
+FROM '/docker-entrypoint-initdb.d/gallery_translations_en.csv'
+DELIMITER ','
+NULL AS E'\'\''
+CSV HEADER;
+
+COPY gallery_translations
+FROM '/docker-entrypoint-initdb.d/gallery_translations_ja.csv'
+DELIMITER ','
+NULL AS E'\'\''
+CSV HEADER;
+
+COPY gallery_translations
+FROM '/docker-entrypoint-initdb.d/gallery_translations_ru.csv'
+DELIMITER ','
+NULL AS E'\'\''
+CSV HEADER;
+
+COPY gallery_translations
+FROM '/docker-entrypoint-initdb.d/gallery_translations_zh.csv'
+DELIMITER ','
+NULL AS E'\'\''
+CSV HEADER;
