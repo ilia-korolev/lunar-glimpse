@@ -23,10 +23,10 @@ mixin _$NasaApodResponseDto {
   Date get date => throw _privateConstructorUsedError;
   String get explanation => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'media_type')
   GalleryItemType get mediaType => throw _privateConstructorUsedError;
   String? get copyright => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'hdurl')
   String? get hdUrl => throw _privateConstructorUsedError;
 
@@ -46,9 +46,9 @@ abstract class $NasaApodResponseDtoCopyWith<$Res> {
       {Date date,
       String explanation,
       String title,
-      String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
+      String? url,
       @JsonKey(name: 'hdurl') String? hdUrl});
 
   $DateCopyWith<$Res> get date;
@@ -70,9 +70,9 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
     Object? date = null,
     Object? explanation = null,
     Object? title = null,
-    Object? url = null,
     Object? mediaType = null,
     Object? copyright = freezed,
+    Object? url = freezed,
     Object? hdUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -88,10 +88,6 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
       mediaType: null == mediaType
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
@@ -99,6 +95,10 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
       copyright: freezed == copyright
           ? _value.copyright
           : copyright // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String?,
       hdUrl: freezed == hdUrl
           ? _value.hdUrl
@@ -128,9 +128,9 @@ abstract class _$$NasaApodResponseDtoImplCopyWith<$Res>
       {Date date,
       String explanation,
       String title,
-      String url,
       @JsonKey(name: 'media_type') GalleryItemType mediaType,
       String? copyright,
+      String? url,
       @JsonKey(name: 'hdurl') String? hdUrl});
 
   @override
@@ -151,9 +151,9 @@ class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
     Object? date = null,
     Object? explanation = null,
     Object? title = null,
-    Object? url = null,
     Object? mediaType = null,
     Object? copyright = freezed,
+    Object? url = freezed,
     Object? hdUrl = freezed,
   }) {
     return _then(_$NasaApodResponseDtoImpl(
@@ -169,10 +169,6 @@ class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
       mediaType: null == mediaType
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
@@ -180,6 +176,10 @@ class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
       copyright: freezed == copyright
           ? _value.copyright
           : copyright // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String?,
       hdUrl: freezed == hdUrl
           ? _value.hdUrl
@@ -197,9 +197,9 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
       {required this.date,
       required this.explanation,
       required this.title,
-      required this.url,
       @JsonKey(name: 'media_type') required this.mediaType,
       this.copyright,
+      this.url,
       @JsonKey(name: 'hdurl') this.hdUrl})
       : super._();
 
@@ -213,19 +213,19 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
   @override
   final String title;
   @override
-  final String url;
-  @override
   @JsonKey(name: 'media_type')
   final GalleryItemType mediaType;
   @override
   final String? copyright;
+  @override
+  final String? url;
   @override
   @JsonKey(name: 'hdurl')
   final String? hdUrl;
 
   @override
   String toString() {
-    return 'NasaApodResponseDto(date: $date, explanation: $explanation, title: $title, url: $url, mediaType: $mediaType, copyright: $copyright, hdUrl: $hdUrl)';
+    return 'NasaApodResponseDto(date: $date, explanation: $explanation, title: $title, mediaType: $mediaType, copyright: $copyright, url: $url, hdUrl: $hdUrl)';
   }
 
   @override
@@ -237,18 +237,18 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
             (identical(other.explanation, explanation) ||
                 other.explanation == explanation) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.url, url) || other.url == url) &&
             (identical(other.mediaType, mediaType) ||
                 other.mediaType == mediaType) &&
             (identical(other.copyright, copyright) ||
                 other.copyright == copyright) &&
+            (identical(other.url, url) || other.url == url) &&
             (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, date, explanation, title, url, mediaType, copyright, hdUrl);
+      runtimeType, date, explanation, title, mediaType, copyright, url, hdUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -270,9 +270,9 @@ abstract class _NasaApodResponseDto extends NasaApodResponseDto {
       {required final Date date,
       required final String explanation,
       required final String title,
-      required final String url,
       @JsonKey(name: 'media_type') required final GalleryItemType mediaType,
       final String? copyright,
+      final String? url,
       @JsonKey(name: 'hdurl') final String? hdUrl}) = _$NasaApodResponseDtoImpl;
   const _NasaApodResponseDto._() : super._();
 
@@ -286,12 +286,12 @@ abstract class _NasaApodResponseDto extends NasaApodResponseDto {
   @override
   String get title;
   @override
-  String get url;
-  @override
   @JsonKey(name: 'media_type')
   GalleryItemType get mediaType;
   @override
   String? get copyright;
+  @override
+  String? get url;
   @override
   @JsonKey(name: 'hdurl')
   String? get hdUrl;

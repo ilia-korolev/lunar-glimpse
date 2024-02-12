@@ -11,9 +11,9 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
     required Date date,
     required String explanation,
     required String title,
-    required String url,
     @JsonKey(name: 'media_type') required GalleryItemType mediaType,
     String? copyright,
+    String? url,
     @JsonKey(name: 'hdurl') String? hdUrl,
   }) = _NasaApodResponseDto;
 
@@ -24,10 +24,13 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
 
   /// Throws a [FormatException] if the dto cannot be converted.
   GalleryItem toModel() {
+    final urlOrDefault =
+        url ?? 'https://apod.nasa.gov/apod/ap${date.format('yyMMdd')}.html';
+
     return GalleryItem(
       date: date,
-      uri: Uri.parse(url),
-      hdUri: Uri.parse(hdUrl ?? url),
+      uri: Uri.parse(urlOrDefault),
+      hdUri: Uri.parse(hdUrl ?? urlOrDefault),
       copyright: copyright,
       type: mediaType,
       isFavorite: false,

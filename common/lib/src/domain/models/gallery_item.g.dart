@@ -41,6 +41,8 @@ Map<String, dynamic> _$$GalleryItemImplToJson(_$GalleryItemImpl instance) =>
 const _$GalleryItemTypeEnumMap = {
   GalleryItemType.video: 'video',
   GalleryItemType.image: 'image',
+  GalleryItemType.other: 'other',
+  GalleryItemType.empty: 'empty',
 };
 
 const _$GalleryItemLanguageEnumMap = {

@@ -98,6 +98,8 @@ class GalleryEntity {
 const _galleryItemTypeEnumMap = {
   'video': GalleryItemType.video,
   'image': GalleryItemType.image,
+  'other': GalleryItemType.other,
+  'empty': GalleryItemType.empty,
 };
 
 const _galleryItemLanguageEnumMap = {

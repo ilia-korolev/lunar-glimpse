@@ -4,7 +4,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'gallery_item.freezed.dart';
 part 'gallery_item.g.dart';
 
-enum GalleryItemType { video, image }
+enum GalleryItemType {
+  video,
+  image,
+  other,
+  empty,
+}
 
 enum GalleryItemLanguage {
   english,

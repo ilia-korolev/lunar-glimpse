@@ -14,9 +14,9 @@ _$NasaApodResponseDtoImpl _$$NasaApodResponseDtoImplFromJson(
       date: Date.fromJson(json['date'] as String),
       explanation: json['explanation'] as String,
       title: json['title'] as String,
-      url: json['url'] as String,
       mediaType: $enumDecode(_$GalleryItemTypeEnumMap, json['media_type']),
       copyright: json['copyright'] as String?,
+      url: json['url'] as String?,
       hdUrl: json['hdurl'] as String?,
     );
 
@@ -26,7 +26,6 @@ Map<String, dynamic> _$$NasaApodResponseDtoImplToJson(
     'date': instance.date.toJson(),
     'explanation': instance.explanation,
     'title': instance.title,
-    'url': instance.url,
     'media_type': _$GalleryItemTypeEnumMap[instance.mediaType]!,
   };
 
@@ -37,6 +36,7 @@ Map<String, dynamic> _$$NasaApodResponseDtoImplToJson(
   }
 
   writeNotNull('copyright', instance.copyright);
+  writeNotNull('url', instance.url);
   writeNotNull('hdurl', instance.hdUrl);
   return val;
 }
@@ -44,4 +44,6 @@ Map<String, dynamic> _$$NasaApodResponseDtoImplToJson(
 const _$GalleryItemTypeEnumMap = {
   GalleryItemType.video: 'video',
   GalleryItemType.image: 'image',
+  GalleryItemType.other: 'other',
+  GalleryItemType.empty: 'empty',
 };
