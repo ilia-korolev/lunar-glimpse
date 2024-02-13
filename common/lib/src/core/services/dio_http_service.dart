@@ -18,18 +18,26 @@ class DioHttpService implements HttpService {
     CancelToken? cancelToken,
     void Function(int, int)? onReceiveProgress,
   }) async {
-    final dioResponse = await _dio.get<T>(
-      path,
-      data: data,
-      queryParameters: queryParameters,
-      options: _mapOptions(options),
-      cancelToken: cancelToken,
-      onReceiveProgress: onReceiveProgress,
-    );
+    try {
+      final dioResponse = await _dio.get<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: _mapOptions(options),
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+      );
 
-    final httpResponse = _mapResponse(dioResponse);
+      final httpResponse = _mapResponse(dioResponse);
 
-    return httpResponse;
+      return httpResponse;
+    } on DioException catch (e) {
+      if (e.requestOptions.path == NasaApodDataSource.path) {
+        _handleNasaApodException(e);
+      }
+
+      rethrow;
+    }
   }
 
   @override
@@ -42,19 +50,27 @@ class DioHttpService implements HttpService {
     void Function(int, int)? onSendProgress,
     void Function(int, int)? onReceiveProgress,
   }) async {
-    final dioResponse = await _dio.post<T>(
-      path,
-      data: data,
-      queryParameters: queryParameters,
-      options: _mapOptions(options),
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
+    try {
+      final dioResponse = await _dio.post<T>(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: _mapOptions(options),
+        cancelToken: cancelToken,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
 
-    final httpResponse = _mapResponse(dioResponse);
+      final httpResponse = _mapResponse(dioResponse);
 
-    return httpResponse;
+      return httpResponse;
+    } on DioException catch (e) {
+      if (e.requestOptions.path == NasaApodDataSource.path) {
+        _handleNasaApodException(e);
+      }
+
+      rethrow;
+    }
   }
 
   HttpResponse<T> _mapResponse<T>(Response<T> dioResponse) {
@@ -82,6 +98,31 @@ class DioHttpService implements HttpService {
         HttpResponseType.plain => ResponseType.plain,
         HttpResponseType.bytes => ResponseType.bytes,
       };
+
+  void _handleNasaApodException(DioException dioException) {
+    final statusCode = dioException.response?.statusCode;
+
+    if (statusCode == 403) {
+      final data = dioException.response?.data as Map<String, dynamic>;
+      final error = data['error']! as Map<String, dynamic>;
+      final message = error['message'] as String;
+
+      throw NasaApodException(
+        statusCode: statusCode!,
+        message: message,
+      );
+    }
+
+    if (statusCode == 400) {
+      final data = dioException.response?.data as Map<String, dynamic>;
+      final message = data['msg'] as String;
+
+      throw NasaApodException(
+        statusCode: statusCode!,
+        message: message,
+      );
+    }
+  }
 }
 
 class LoggingDioInterceptor extends Interceptor {

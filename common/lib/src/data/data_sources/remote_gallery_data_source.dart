@@ -20,6 +20,9 @@ class NasaApodDataSource implements RemoteGalleryDataSource {
   })  : _httpService = httpService,
         _apiKey = apiKey;
 
+  static const earliestDate = Date(year: 1995, month: 6, day: 16);
+  static const path = 'https://api.nasa.gov/planetary/apod';
+
   final HttpService _httpService;
   final String _apiKey;
 
@@ -33,7 +36,7 @@ class NasaApodDataSource implements RemoteGalleryDataSource {
     );
 
     final response = await _httpService.get<dynamic>(
-      'https://api.nasa.gov/planetary/apod',
+      path,
       queryParameters: request.toJson(),
       options: HttpOptions(responseType: HttpResponseType.json),
     );
@@ -63,7 +66,7 @@ class NasaApodDataSource implements RemoteGalleryDataSource {
     );
 
     final response = await _httpService.get<List<dynamic>>(
-      'https://api.nasa.gov/planetary/apod',
+      path,
       queryParameters: request.toJson(),
       options: HttpOptions(responseType: HttpResponseType.json),
     );

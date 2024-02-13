@@ -35,6 +35,16 @@ Future<Response> onRequest(RequestContext context) async {
       );
     }
 
+    final maxItems = int.tryParse(Platform.environment['MAX_ITEMS'] ?? '');
+    if (maxItems != null &&
+        requestDto.endDate.difference(requestDto.startDate).inDays >=
+            maxItems) {
+      return Response(
+        statusCode: HttpStatus.badRequest,
+        body: 'The maximum number of requested items was exceeded: $maxItems',
+      );
+    }
+
     final galleryRepository = await context.read<Future<GalleryRepository>>();
     final items = await galleryRepository.getItems(
       startDate: requestDto.startDate,
@@ -47,6 +57,11 @@ Future<Response> onRequest(RequestContext context) async {
     return Response(
       statusCode: HttpStatus.badRequest,
       body: 'Invalid date format was provided',
+    );
+  } on NasaApodException catch (e) {
+    return Response(
+      statusCode: e.statusCode,
+      body: e.message,
     );
   }
 }
