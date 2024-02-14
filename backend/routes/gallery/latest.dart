@@ -11,11 +11,22 @@ Future<Response> onRequest(RequestContext context) async {
 
   try {
     final queryParams = context.request.uri.queryParameters;
+    final languageName = queryParams['language'];
 
-    if (queryParams['language'] == null) {
+    if (languageName == null) {
       return Response(
         statusCode: HttpStatus.badRequest,
         body: 'language must be provided',
+      );
+    }
+
+    final languageIsSupported =
+        GalleryItemLanguage.values.any((l) => l.name == languageName);
+
+    if (!languageIsSupported) {
+      return Response(
+        statusCode: HttpStatus.badRequest,
+        body: 'The language is not supported: "$languageName"',
       );
     }
 
