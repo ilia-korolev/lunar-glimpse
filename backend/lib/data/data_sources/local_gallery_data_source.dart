@@ -2,6 +2,8 @@ import 'package:astro_backend/_export.dart';
 import 'package:astro_common/astro_common.dart';
 import 'package:postgres/postgres.dart';
 
+typedef PostgresPool = Pool<dynamic>;
+
 abstract interface class LocalGalleryDataSource {
   const LocalGalleryDataSource();
 
@@ -18,10 +20,10 @@ abstract interface class LocalGalleryDataSource {
 
 class PostgresGalleryDataSource implements LocalGalleryDataSource {
   const PostgresGalleryDataSource({
-    required Connection dbConnection,
-  }) : _dbConnection = dbConnection;
+    required PostgresPool postgresPool,
+  }) : _postgresPool = postgresPool;
 
-  final Connection _dbConnection;
+  final PostgresPool _postgresPool;
 
   @override
   Future<void> cacheItems({
@@ -39,7 +41,7 @@ class PostgresGalleryDataSource implements LocalGalleryDataSource {
     final translationInsertValues =
         entities.map((e) => e.toGalleryTranslationsInsertString()).join(',');
 
-    await _dbConnection.runTx(
+    await _postgresPool.runTx(
       (session) async {
         await session.execute(
           '''
@@ -68,7 +70,7 @@ class PostgresGalleryDataSource implements LocalGalleryDataSource {
     required Date endDate,
     required GalleryItemLanguage language,
   }) async {
-    final result = await _dbConnection.execute(
+    final result = await _postgresPool.execute(
       '''
       SELECT 
         g.date,

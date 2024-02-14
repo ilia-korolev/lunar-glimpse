@@ -7,10 +7,14 @@ class EnvironmentVariables {
     required this.dbUser,
     required this.dbPassword,
     required this.translationSource,
-    this.googleTranslateApiKey,
-    this.deeplApiKey,
-    this.nasaApiKey,
-    this.maxItems,
+    required this.googleTranslateApiKey,
+    required this.deeplApiKey,
+    required this.nasaApiKey,
+    required this.maxItems,
+    required this.dbMaxConnectionCount,
+    required this.dbMaxConnectionAge,
+    required this.dbMaxSessionUse,
+    required this.dbMaxQueryCount,
   });
 
   factory EnvironmentVariables._init() {
@@ -65,6 +69,26 @@ class EnvironmentVariables {
     final nasaApiKey = Platform.environment[_nasaApiKeyEnv];
     final maxItems = int.tryParse(Platform.environment[_maxItemsEnv] ?? '');
 
+    final dbMaxConnectionCount =
+        int.tryParse(Platform.environment[_dbMaxConnectionCountEnv] ?? '');
+
+    final dbMaxConnectionAgeSec =
+        int.tryParse(Platform.environment[_dbMaxConnectionAgeEnv] ?? '');
+
+    final dbMaxConnectionAge = dbMaxConnectionAgeSec == null
+        ? null
+        : Duration(seconds: dbMaxConnectionAgeSec);
+
+    final dbMaxSessionUseSec =
+        int.tryParse(Platform.environment[_dbMaxSessionUseEnv] ?? '');
+
+    final dbMaxSessionUse = dbMaxSessionUseSec == null
+        ? null
+        : Duration(seconds: dbMaxSessionUseSec);
+
+    final dbMaxQueryCount =
+        int.tryParse(Platform.environment[_dbMaxQueryCountEnv] ?? '');
+
     return EnvironmentVariables._(
       dbHost: dbHost,
       dbName: dbName,
@@ -75,6 +99,10 @@ class EnvironmentVariables {
       deeplApiKey: deeplApiKey,
       nasaApiKey: nasaApiKey,
       maxItems: maxItems,
+      dbMaxConnectionCount: dbMaxConnectionCount,
+      dbMaxConnectionAge: dbMaxConnectionAge,
+      dbMaxSessionUse: dbMaxSessionUse,
+      dbMaxQueryCount: dbMaxQueryCount,
     );
   }
 
@@ -87,6 +115,10 @@ class EnvironmentVariables {
   final String? deeplApiKey;
   final String? nasaApiKey;
   final int? maxItems;
+  final int? dbMaxConnectionCount;
+  final Duration? dbMaxConnectionAge;
+  final Duration? dbMaxSessionUse;
+  final int? dbMaxQueryCount;
 
   static const _dbHostEnv = 'DB_HOST';
   static const _dbNameEnv = 'DB_NAME';
@@ -97,6 +129,10 @@ class EnvironmentVariables {
   static const _deeplApiKeyEnv = 'DEEPL_API_KEY';
   static const _nasaApiKeyEnv = 'NASA_API_KEY';
   static const _maxItemsEnv = 'MAX_ITEMS';
+  static const _dbMaxConnectionCountEnv = 'DB_MAX_CONNECTION_COUNT';
+  static const _dbMaxConnectionAgeEnv = 'DB_MAX_CONNECTION_AGE';
+  static const _dbMaxSessionUseEnv = 'DB_MAX_SESSION_USE';
+  static const _dbMaxQueryCountEnv = 'DB_MAX_QUERY_COUNT';
 
   static final instance = EnvironmentVariables._init();
 }
