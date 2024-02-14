@@ -9,24 +9,31 @@ Future<Response> onRequest(RequestContext context) async {
     return Response(statusCode: HttpStatus.methodNotAllowed);
   }
 
-  final queryParams = context.request.uri.queryParameters;
+  try {
+    final queryParams = context.request.uri.queryParameters;
 
-  if (queryParams['language'] == null) {
+    if (queryParams['language'] == null) {
+      return Response(
+        statusCode: HttpStatus.badRequest,
+        body: 'language must be provided',
+      );
+    }
+
+    final requestDto = AstroBackendGalleryLatestRequestDto.fromJson(
+      queryParams,
+    );
+
+    final galleryRepository = await context.read<Future<GalleryRepository>>();
+
+    final latest = await galleryRepository.getLatestItem(
+      language: requestDto.language,
+    );
+
+    return Response.json(body: latest.toJson());
+  } on NasaApodException catch (e) {
     return Response(
-      statusCode: HttpStatus.badRequest,
-      body: 'language must be provided',
+      statusCode: e.statusCode,
+      body: e.message,
     );
   }
-
-  final requestDto = AstroBackendGalleryLatestRequestDto.fromJson(
-    queryParams,
-  );
-
-  final galleryRepository = await context.read<Future<GalleryRepository>>();
-
-  final latest = await galleryRepository.getLatestItem(
-    language: requestDto.language,
-  );
-
-  return Response.json(body: latest.toJson());
 }
