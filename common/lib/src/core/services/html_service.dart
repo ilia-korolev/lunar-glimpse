@@ -27,11 +27,13 @@ class HttpResponse<T> {
 class HttpOptions {
   HttpOptions({
     this.responseType,
+    this.contentType,
     this.followRedirects,
     this.headers,
   });
 
   final HttpResponseType? responseType;
+  final String? contentType;
   final bool? followRedirects;
   final Map<String, String?>? headers;
 }

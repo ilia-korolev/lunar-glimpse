@@ -45,7 +45,7 @@ class DeepLTranslationDataSource implements RemoteTranslationDataSource {
         headers: {
           'Authorization': 'DeepL-Auth-Key $_apiKey',
         },
-        responseType: HttpResponseType.json,
+        contentType: 'application/json',
       ),
       data: DeepLTranslateTextRequestDto(
         source: source,
@@ -66,9 +66,10 @@ class DeepLTranslationDataSource implements RemoteTranslationDataSource {
       throw InvalidResponseException();
     }
 
-    final result = (translations as List<Map<String, dynamic>>)
+    final result = (translations as List<dynamic>)
         .map(
-          (json) => GoogleTextTranslation.fromJson(json).translatedText,
+          (json) =>
+              DeepLTextTranslation.fromJson(json as Map<String, dynamic>).text,
         )
         .toList();
 
