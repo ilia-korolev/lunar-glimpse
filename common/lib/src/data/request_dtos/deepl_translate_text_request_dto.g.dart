@@ -14,6 +14,7 @@ _$DeepLTranslateTextRequestDtoImpl _$$DeepLTranslateTextRequestDtoImplFromJson(
       source: (json['text'] as List<dynamic>).map((e) => e as String).toList(),
       sourceLanguage: json['source_lang'] as String,
       targetLanguage: json['target_lang'] as String,
+      formality: $enumDecode(_$DeepLFormalityEnumMap, json['formality']),
     );
 
 Map<String, dynamic> _$$DeepLTranslateTextRequestDtoImplToJson(
@@ -22,4 +23,12 @@ Map<String, dynamic> _$$DeepLTranslateTextRequestDtoImplToJson(
       'text': instance.source,
       'source_lang': instance.sourceLanguage,
       'target_lang': instance.targetLanguage,
+      'formality': _$DeepLFormalityEnumMap[instance.formality]!,
     };
+
+const _$DeepLFormalityEnumMap = {
+  DeepLFormality.more: 'more',
+  DeepLFormality.less: 'less',
+  DeepLFormality.preferMore: 'prefer_more',
+  DeepLFormality.preferLess: 'prefer_less',
+};

@@ -27,6 +27,7 @@ mixin _$DeepLTranslateTextRequestDto {
   String get sourceLanguage => throw _privateConstructorUsedError;
   @JsonKey(name: 'target_lang')
   String get targetLanguage => throw _privateConstructorUsedError;
+  DeepLFormality get formality => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $DeepLTranslateTextRequestDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'text') List<String> source,
       @JsonKey(name: 'source_lang') String sourceLanguage,
-      @JsonKey(name: 'target_lang') String targetLanguage});
+      @JsonKey(name: 'target_lang') String targetLanguage,
+      DeepLFormality formality});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$DeepLTranslateTextRequestDtoCopyWithImpl<$Res,
     Object? source = null,
     Object? sourceLanguage = null,
     Object? targetLanguage = null,
+    Object? formality = null,
   }) {
     return _then(_value.copyWith(
       source: null == source
@@ -79,6 +82,10 @@ class _$DeepLTranslateTextRequestDtoCopyWithImpl<$Res,
           ? _value.targetLanguage
           : targetLanguage // ignore: cast_nullable_to_non_nullable
               as String,
+      formality: null == formality
+          ? _value.formality
+          : formality // ignore: cast_nullable_to_non_nullable
+              as DeepLFormality,
     ) as $Val);
   }
 }
@@ -95,7 +102,8 @@ abstract class _$$DeepLTranslateTextRequestDtoImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'text') List<String> source,
       @JsonKey(name: 'source_lang') String sourceLanguage,
-      @JsonKey(name: 'target_lang') String targetLanguage});
+      @JsonKey(name: 'target_lang') String targetLanguage,
+      DeepLFormality formality});
 }
 
 /// @nodoc
@@ -114,6 +122,7 @@ class __$$DeepLTranslateTextRequestDtoImplCopyWithImpl<$Res>
     Object? source = null,
     Object? sourceLanguage = null,
     Object? targetLanguage = null,
+    Object? formality = null,
   }) {
     return _then(_$DeepLTranslateTextRequestDtoImpl(
       source: null == source
@@ -128,6 +137,10 @@ class __$$DeepLTranslateTextRequestDtoImplCopyWithImpl<$Res>
           ? _value.targetLanguage
           : targetLanguage // ignore: cast_nullable_to_non_nullable
               as String,
+      formality: null == formality
+          ? _value.formality
+          : formality // ignore: cast_nullable_to_non_nullable
+              as DeepLFormality,
     ));
   }
 }
@@ -138,7 +151,8 @@ class _$DeepLTranslateTextRequestDtoImpl extends _DeepLTranslateTextRequestDto {
   const _$DeepLTranslateTextRequestDtoImpl(
       {@JsonKey(name: 'text') required final List<String> source,
       @JsonKey(name: 'source_lang') required this.sourceLanguage,
-      @JsonKey(name: 'target_lang') required this.targetLanguage})
+      @JsonKey(name: 'target_lang') required this.targetLanguage,
+      required this.formality})
       : _source = source,
         super._();
 
@@ -161,10 +175,12 @@ class _$DeepLTranslateTextRequestDtoImpl extends _DeepLTranslateTextRequestDto {
   @override
   @JsonKey(name: 'target_lang')
   final String targetLanguage;
+  @override
+  final DeepLFormality formality;
 
   @override
   String toString() {
-    return 'DeepLTranslateTextRequestDto(source: $source, sourceLanguage: $sourceLanguage, targetLanguage: $targetLanguage)';
+    return 'DeepLTranslateTextRequestDto(source: $source, sourceLanguage: $sourceLanguage, targetLanguage: $targetLanguage, formality: $formality)';
   }
 
   @override
@@ -176,7 +192,9 @@ class _$DeepLTranslateTextRequestDtoImpl extends _DeepLTranslateTextRequestDto {
             (identical(other.sourceLanguage, sourceLanguage) ||
                 other.sourceLanguage == sourceLanguage) &&
             (identical(other.targetLanguage, targetLanguage) ||
-                other.targetLanguage == targetLanguage));
+                other.targetLanguage == targetLanguage) &&
+            (identical(other.formality, formality) ||
+                other.formality == formality));
   }
 
   @JsonKey(ignore: true)
@@ -185,7 +203,8 @@ class _$DeepLTranslateTextRequestDtoImpl extends _DeepLTranslateTextRequestDto {
       runtimeType,
       const DeepCollectionEquality().hash(_source),
       sourceLanguage,
-      targetLanguage);
+      targetLanguage,
+      formality);
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +227,8 @@ abstract class _DeepLTranslateTextRequestDto
   const factory _DeepLTranslateTextRequestDto(
           {@JsonKey(name: 'text') required final List<String> source,
           @JsonKey(name: 'source_lang') required final String sourceLanguage,
-          @JsonKey(name: 'target_lang') required final String targetLanguage}) =
+          @JsonKey(name: 'target_lang') required final String targetLanguage,
+          required final DeepLFormality formality}) =
       _$DeepLTranslateTextRequestDtoImpl;
   const _DeepLTranslateTextRequestDto._() : super._();
 
@@ -224,6 +244,8 @@ abstract class _DeepLTranslateTextRequestDto
   @override
   @JsonKey(name: 'target_lang')
   String get targetLanguage;
+  @override
+  DeepLFormality get formality;
   @override
   @JsonKey(ignore: true)
   _$$DeepLTranslateTextRequestDtoImplCopyWith<

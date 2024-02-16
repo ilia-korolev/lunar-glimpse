@@ -51,6 +51,7 @@ class DeepLTranslationDataSource implements RemoteTranslationDataSource {
         source: source,
         sourceLanguage: sourceLanguage,
         targetLanguage: targetLanguage,
+        formality: DeepLFormality.preferMore,
       ).toJson(),
     );
 
