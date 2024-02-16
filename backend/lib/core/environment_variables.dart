@@ -19,28 +19,28 @@ class EnvironmentVariables {
 
   factory EnvironmentVariables._init() {
     final dbHost = Platform.environment[_dbHostEnv];
-    if (dbHost == null) {
+    if (dbHost?.isEmpty ?? true) {
       throw ArgumentError(
         'Environment variable $_dbHostEnv must be provided',
       );
     }
 
     final dbName = Platform.environment[_dbNameEnv];
-    if (dbName == null) {
+    if (dbName?.isEmpty ?? true) {
       throw ArgumentError(
         'Environment variable $_dbNameEnv must be provided',
       );
     }
 
     final dbUser = Platform.environment[_dbUserEnv];
-    if (dbUser == null) {
+    if (dbUser?.isEmpty ?? true) {
       throw ArgumentError(
         'Environment variable $_dbUserEnv must be provided',
       );
     }
 
     final dbPassword = Platform.environment[_dbPasswordEnv];
-    if (dbPassword == null) {
+    if (dbPassword?.isEmpty ?? true) {
       throw ArgumentError(
         'Environment variable $_dbPasswordEnv must be provided',
       );
@@ -53,14 +53,15 @@ class EnvironmentVariables {
     final googleTranslateApiKey =
         Platform.environment[_googleTranslateApiKeyEnv];
     if (translationSource == TranslationSource.google &&
-        googleTranslateApiKey == null) {
+        (googleTranslateApiKey?.isEmpty ?? true)) {
       throw ArgumentError(
         'Environment variable $_googleTranslateApiKeyEnv must be provided',
       );
     }
 
     final deeplApiKey = Platform.environment[_deeplApiKeyEnv];
-    if (translationSource == TranslationSource.deepl && deeplApiKey == null) {
+    if (translationSource == TranslationSource.deepl &&
+        (deeplApiKey?.isEmpty ?? true)) {
       throw ArgumentError(
         'Environment variable $_deeplApiKeyEnv must be provided',
       );
@@ -90,10 +91,10 @@ class EnvironmentVariables {
         int.tryParse(Platform.environment[_dbMaxQueryCountEnv] ?? '');
 
     return EnvironmentVariables._(
-      dbHost: dbHost,
-      dbName: dbName,
-      dbUser: dbUser,
-      dbPassword: dbPassword,
+      dbHost: dbHost!,
+      dbName: dbName!,
+      dbUser: dbUser!,
+      dbPassword: dbPassword!,
       translationSource: translationSource,
       googleTranslateApiKey: googleTranslateApiKey,
       deeplApiKey: deeplApiKey,
