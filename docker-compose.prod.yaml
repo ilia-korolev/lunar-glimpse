@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    depends_on:
+      - backend
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot-container
+    command: >-
+             certonly --reinstall --webroot --webroot-path=/var/www/certbot
+             --email ${EMAIL} --agree-tos --no-eff-email
+             -d ${DOMAIN}
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+  backend:
+    image: ghcr.io/ilia-korolev/astro-backend:latest
+    container_name: astro-backend-container
+    restart: always
+    expose:
+      - 8080
+    environment:
+      DB_HOST: database
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      TRANSLATION_SOURCE: ${TRANSLATION_SOURCE}
+      GOOGLE_TRANSLATE_API_KEY: ${GOOGLE_TRANSLATE_API_KEY}
+      DEEPL_API_KEY: ${DEEPL_API_KEY}
+      NASA_API_KEY: ${NASA_API_KEY}
+      MAX_ITEMS: ${MAX_ITEMS}
+      DB_MAX_CONNECTION_COUNT: ${DB_MAX_CONNECTION_COUNT}
+      DB_MAX_CONNECTION_AGE: ${DB_MAX_CONNECTION_AGE}
+      DB_MAX_SESSION_USE: ${DB_MAX_SESSION_USE}
+      DB_MAX_QUERY_COUNT: ${DB_MAX_QUERY_COUNT}
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    container_name: postgres-container
+    restart: always
+    expose:
+      - 5432
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}

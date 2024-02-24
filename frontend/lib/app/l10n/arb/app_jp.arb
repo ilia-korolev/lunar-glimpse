@@ -1,0 +1,59 @@
+{
+  "@@locale": "ja",
+  "languageName": "日本語",
+  "systemLanguageName": "端末の言語",
+  "galleryTitle": "NASAギャラリー",
+  "newsTitle": "ニュース",
+  "settingsTitle": "設定",
+  "themeSettingsTitle": "テーマ",
+  "systemThemeModeTitle": "システムデフォルト",
+  "lightThemeModeTitle": "ライト",
+  "darkThemeModeTitle": "ダーク",
+  "languageSettingsTitle": "言語",
+  "languageSettingsDescription": "言語を選択",
+  "aboutSettingsTitle": "アプリについて",
+  "aboutSettingsDescription": "知っておくべきこと",
+  "gitHubSettingsTitle": "GitHubページ",
+  "gitHubSettingsDescription": "アプリのGitHubページ",
+  "gitHubInfoPageTitle": "アプリのGitHubページ",
+  "gitHubInfoPageText": "ここでソースコードを見たり、バグ報告や機能要望をしたりできます",
+  "gitHubInfoPageButton": "GitHubへ",
+  "responseErrorTitle": "おっとっと！",
+  "responseErrorText": "何かがうまくいかなかったようだ",
+  "tryAgainButton": "もう一度試す",
+  "copyrightLabel": "著作権: {copyright}",
+  "@copyrightLabel": {
+    "placeholders": {
+      "copyright": {
+        "type": "String",
+        "example": "ボブ"
+      }
+    }
+  },
+  "favoritesPageTitle": "お気に入り",
+  "favoritesPageNoFavoritesText": "ここには、お気に入りに追加したアイテムが表示されます",
+  "removedFromFavoritesSnackBarText": "お気に入りから削除しました",
+  "removedFromFavoritesSnackBarButton": "元に戻す",
+  "favoriteRestoredSnackBarButton": "復元されました",
+  "imageLoadError": "読み込みに失敗しました",
+  "minutesAgo": "{minutes}分前",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "example": "59"
+      }
+    }
+  },
+  "hoursAgo": "{hours}時間前}",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "num",
+        "example": "23"
+      }
+    }
+  },
+  "saveImageSuccessSnackBarText": "画像が保存されました: ",
+  "saveImageFailedSnackBarText": "画像の保存に失敗しました"
+}
