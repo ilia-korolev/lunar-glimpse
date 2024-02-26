@@ -1,0 +1,12 @@
+icons_launcher:
+  image_path: "assets/launcher_icons/ic_launcher.png"
+  platforms:
+    android:
+      enable: true
+      adaptive_foreground_image: "assets/launcher_icons/ic_launcher_foreground.png"
+      adaptive_background_image: "assets/launcher_icons/ic_launcher_background.png"
+    ios:
+      enable: true
+    macos:
+      enable: true
+      image_path: "assets/launcher_icons/ic_launcher_macos.png"
