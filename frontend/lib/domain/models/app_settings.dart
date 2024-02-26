@@ -12,6 +12,7 @@ class AppSettings with _$AppSettings {
   const factory AppSettings({
     required ThemeMode themeMode,
     @LocaleConverterNullable() required Locale? locale,
+    required bool translateGallery,
   }) = _AppSettings;
 
   const AppSettings._();
@@ -27,12 +28,15 @@ class AppSettings with _$AppSettings {
         );
   }
 
-  GalleryItemLanguage get language => GalleryItemLanguage.fromLanguageCode(
-        localeOfDefault.languageCode,
-      );
+  GalleryItemLanguage get galleryLanguage => !translateGallery
+      ? GalleryItemLanguage.english
+      : GalleryItemLanguage.fromLanguageCode(
+          localeOfDefault.languageCode,
+        );
 
   static const system = AppSettings(
     themeMode: ThemeMode.system,
     locale: null,
+    translateGallery: true,
   );
 }

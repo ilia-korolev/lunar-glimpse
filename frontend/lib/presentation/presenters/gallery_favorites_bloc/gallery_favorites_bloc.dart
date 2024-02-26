@@ -59,7 +59,7 @@ class GalleryFavoritesBloc
       },
     );
 
-    _language = _appSettingsRepository.getSettings().language;
+    _language = _appSettingsRepository.getSettings().galleryLanguage;
   }
 
   Stream<GalleryItem> get removedFavoriteStream =>
@@ -198,8 +198,8 @@ class GalleryFavoritesBloc
     Emitter<GalleryFavoritesState> emit,
     AppSettings appSettings,
   ) {
-    if (_language != appSettings.language) {
-      _language = appSettings.language;
+    if (_language != appSettings.galleryLanguage) {
+      _language = appSettings.galleryLanguage;
 
       emit(const GalleryFavoritesState(status: BlocStatus.initial));
     }

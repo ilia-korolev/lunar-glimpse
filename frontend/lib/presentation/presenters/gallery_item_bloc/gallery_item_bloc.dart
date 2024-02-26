@@ -51,7 +51,7 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
       },
     );
 
-    _language = _appSettingsRepository.getSettings().language;
+    _language = _appSettingsRepository.getSettings().galleryLanguage;
   }
 
   final GalleryRepository _galleryRepository;
@@ -163,8 +163,8 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
     Emitter<GalleryItemState> emit,
     AppSettings appSettings,
   ) {
-    if (_language != appSettings.language) {
-      _language = appSettings.language;
+    if (_language != appSettings.galleryLanguage) {
+      _language = appSettings.galleryLanguage;
 
       state.whenOrNull(
         success: (item) => _fetched(emit, item.date),

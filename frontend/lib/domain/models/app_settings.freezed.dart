@@ -12,7 +12,7 @@ part of 'app_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) {
   return _AppSettings.fromJson(json);
@@ -23,6 +23,7 @@ mixin _$AppSettings {
   ThemeMode get themeMode => throw _privateConstructorUsedError;
   @LocaleConverterNullable()
   Locale? get locale => throw _privateConstructorUsedError;
+  bool get translateGallery => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,10 @@ abstract class $AppSettingsCopyWith<$Res> {
           AppSettings value, $Res Function(AppSettings) then) =
       _$AppSettingsCopyWithImpl<$Res, AppSettings>;
   @useResult
-  $Res call({ThemeMode themeMode, @LocaleConverterNullable() Locale? locale});
+  $Res call(
+      {ThemeMode themeMode,
+      @LocaleConverterNullable() Locale? locale,
+      bool translateGallery});
 }
 
 /// @nodoc
@@ -54,6 +58,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
   $Res call({
     Object? themeMode = null,
     Object? locale = freezed,
+    Object? translateGallery = null,
   }) {
     return _then(_value.copyWith(
       themeMode: null == themeMode
@@ -64,6 +69,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale?,
+      translateGallery: null == translateGallery
+          ? _value.translateGallery
+          : translateGallery // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +85,10 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       __$$AppSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ThemeMode themeMode, @LocaleConverterNullable() Locale? locale});
+  $Res call(
+      {ThemeMode themeMode,
+      @LocaleConverterNullable() Locale? locale,
+      bool translateGallery});
 }
 
 /// @nodoc
@@ -92,6 +104,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? themeMode = null,
     Object? locale = freezed,
+    Object? translateGallery = null,
   }) {
     return _then(_$AppSettingsImpl(
       themeMode: null == themeMode
@@ -102,6 +115,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale?,
+      translateGallery: null == translateGallery
+          ? _value.translateGallery
+          : translateGallery // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -111,7 +128,8 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
 class _$AppSettingsImpl extends _AppSettings {
   const _$AppSettingsImpl(
       {required this.themeMode,
-      @LocaleConverterNullable() required this.locale})
+      @LocaleConverterNullable() required this.locale,
+      required this.translateGallery})
       : super._();
 
   factory _$AppSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -122,10 +140,12 @@ class _$AppSettingsImpl extends _AppSettings {
   @override
   @LocaleConverterNullable()
   final Locale? locale;
+  @override
+  final bool translateGallery;
 
   @override
   String toString() {
-    return 'AppSettings(themeMode: $themeMode, locale: $locale)';
+    return 'AppSettings(themeMode: $themeMode, locale: $locale, translateGallery: $translateGallery)';
   }
 
   @override
@@ -135,12 +155,15 @@ class _$AppSettingsImpl extends _AppSettings {
             other is _$AppSettingsImpl &&
             (identical(other.themeMode, themeMode) ||
                 other.themeMode == themeMode) &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.translateGallery, translateGallery) ||
+                other.translateGallery == translateGallery));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, themeMode, locale);
+  int get hashCode =>
+      Object.hash(runtimeType, themeMode, locale, translateGallery);
 
   @JsonKey(ignore: true)
   @override
@@ -158,9 +181,9 @@ class _$AppSettingsImpl extends _AppSettings {
 
 abstract class _AppSettings extends AppSettings {
   const factory _AppSettings(
-          {required final ThemeMode themeMode,
-          @LocaleConverterNullable() required final Locale? locale}) =
-      _$AppSettingsImpl;
+      {required final ThemeMode themeMode,
+      @LocaleConverterNullable() required final Locale? locale,
+      required final bool translateGallery}) = _$AppSettingsImpl;
   const _AppSettings._() : super._();
 
   factory _AppSettings.fromJson(Map<String, dynamic> json) =
@@ -171,6 +194,8 @@ abstract class _AppSettings extends AppSettings {
   @override
   @LocaleConverterNullable()
   Locale? get locale;
+  @override
+  bool get translateGallery;
   @override
   @JsonKey(ignore: true)
   _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>

@@ -13,12 +13,14 @@ _$AppSettingsImpl _$$AppSettingsImplFromJson(Map<String, dynamic> json) =>
       themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
       locale:
           const LocaleConverterNullable().fromJson(json['locale'] as String?),
+      translateGallery: json['translateGallery'] as bool,
     );
 
 Map<String, dynamic> _$$AppSettingsImplToJson(_$AppSettingsImpl instance) =>
     <String, dynamic>{
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
       'locale': const LocaleConverterNullable().toJson(instance.locale),
+      'translateGallery': instance.translateGallery,
     };
 
 const _$ThemeModeEnumMap = {

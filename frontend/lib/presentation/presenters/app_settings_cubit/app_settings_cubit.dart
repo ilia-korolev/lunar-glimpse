@@ -35,4 +35,19 @@ class AppSettingsCubit extends Cubit<AppSettings> {
     await _appSettingsRepository.setSettings(settings: settings);
     emit(settings);
   }
+
+  Future<void> changeTranslateGallery({
+    required bool translateGallery,
+  }) async {
+    if (translateGallery == state.translateGallery) {
+      return;
+    }
+
+    final settings = state.copyWith(
+      translateGallery: translateGallery,
+    );
+
+    await _appSettingsRepository.setSettings(settings: settings);
+    emit(settings);
+  }
 }
