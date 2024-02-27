@@ -1,5 +1,64 @@
 {
   "@@locale": "zh",
-  "languageName": "中文"
+  "languageName": "中文 (简体)",
+  "systemLanguageName": "系统默认",
+  "galleryTitle": "NASA 图片库",
+  "newsTitle": "新闻",
+  "settingsTitle": "设置",
+  "themeSettingsTitle": "主题",
+  "systemThemeModeTitle": "系统默认",
+  "lightThemeModeTitle": "浅色",
+  "darkThemeModeTitle": "深色",
+  "languageSettingsTitle": "语言",
+  "languageSettingsDescription": "选择语言",
+  "languageSettingsTranslationTitle": "翻译",
+  "languageSettingsTranslateGallery": "翻译图片库",
+  "languageSettingsTranslationNoteTitle": "请注意",
+  "languageSettingsTranslationNoteText": "NASA 图片库的翻译由机器生成，可能并不完全准确。如需获取最准确的信息，请查看英文原版。",
+  "aboutSettingsTitle": "关于",
+  "aboutSettingsDescription": "您需要了解的所有信息",
+  "gitHubSettingsTitle": "GitHub 页面",
+  "gitHubSettingsDescription": "应用程序 GitHub 页面",
+  "gitHubInfoPageTitle": "应用程序 GitHub 页面",
+  "gitHubInfoPageText": "您可以在此处找到源代码、提交错误报告或提出功能请求",
+  "gitHubInfoPageButton": "前往 GitHub",
+  "responseErrorTitle": "哎呀！",
+  "responseErrorText": "出现了一些问题",
+  "tryAgainButton": "重试",
+  "copyrightLabel": "版权所有: {copyright}",
+  "@copyrightLabel": {
+    "placeholders": {
+      "copyright": {
+        "type": "String",
+        "example": "作者名"
+      }
+    }
+  },
+  "favoritesPageTitle": "收藏",
+  "favoritesPageNoFavoritesText": "您将在此处看到添加到收藏夹的项目",
+  "removedFromFavoritesSnackBarText": "已从收藏夹中移除",
+  "removedFromFavoritesSnackBarButton": "撤销",
+  "favoriteRestoredSnackBarButton": "已恢复",
+  "imageLoadError": "加载失败",
+  "minutesAgo": "{minutes}分钟前",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "example": "59"
+      }
+    }
+  },
+  "hoursAgo": "{hours}小时前",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "num",
+        "example": "23"
+      }
+    }
+  },
+  "saveImageSuccessSnackBarText": "图像已保存至: ",
+  "saveImageFailedSnackBarText": "无法保存图像",
+  "buttonClose": "关闭"
 }
-
