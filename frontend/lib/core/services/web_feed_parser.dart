@@ -19,15 +19,13 @@ class WebFeedParserImpl implements WebFeedParser {
     required XmlDocument xmlDocument,
     required WebFeed source,
   }) {
-    final channelElement = xmlDocument.findAllElements('channel').first;
-
-    final articles = channelElement.findElements('item').map(
+    final articles = xmlDocument.findAllElements('item').map(
       (i) {
         return Article(
           title: i.findAllElements('title').first.innerText.trim(),
-          description: i.findAllElements('description').first.innerText.trim(),
+          description: _parseDescription(i),
           uri: Uri.parse(i.findAllElements('link').first.innerText),
-          date: _parseRfc822Date(i.findAllElements('pubDate').first.innerText),
+          date: _parseDate(i),
           author: _parseAuthor(i),
           thumbnail: _parseThumbnail(i),
           source: source,
@@ -36,6 +34,24 @@ class WebFeedParserImpl implements WebFeedParser {
     ).toList();
 
     return articles;
+  }
+
+  String _parseDescription(XmlElement i) {
+    return i.findAllElements('description').firstOrNull?.innerText.trim() ??
+        i.findAllElements('turbo:topic').first.innerText.trim();
+  }
+
+  DateTime _parseDate(XmlElement i) {
+    final dateToParse = i.findAllElements('pubDate').firstOrNull?.innerText ??
+        i.findAllElements('dc:date').first.innerText;
+
+    final date = DateTime.tryParse(dateToParse);
+
+    if (date != null) {
+      return date;
+    }
+
+    return _parseRfc822Date(dateToParse);
   }
 
   // TODO(ilia-korolev): intl has no implementation for parsing time zones
