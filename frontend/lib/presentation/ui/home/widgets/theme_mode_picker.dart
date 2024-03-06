@@ -17,14 +17,17 @@ class ThemeModePicker extends StatelessWidget {
         vertical: theme.spacing.semiLarge,
         horizontal: theme.spacing.small,
       ),
-      child: Row(
-        children: ThemeMode.values
-            .map(
-              (themeMode) => Expanded(
-                child: ThemeModeButton(themeMode: themeMode),
-              ),
-            )
-            .toList(),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: ThemeMode.values
+              .map(
+                (themeMode) => Expanded(
+                  child: ThemeModeButton(themeMode: themeMode),
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

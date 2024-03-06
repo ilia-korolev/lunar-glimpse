@@ -42,6 +42,7 @@ class ThemeModeButton extends StatelessWidget {
               style: theme.textTheme.bodyLarge,
             ),
             SizedBox(height: theme.spacing.small),
+            const Spacer(),
             BlocBuilder<AppSettingsCubit, AppSettings>(
               buildWhen: (previous, current) {
                 return previous.themeMode != current.themeMode;
