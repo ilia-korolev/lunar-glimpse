@@ -25,8 +25,8 @@ class ImageContent extends StatelessWidget {
           ),
         );
       },
-      fadeInDuration: theme.durations.medium,
-      fadeOutDuration: theme.durations.medium,
+      fadeInDuration: theme.durations.short,
+      fadeOutDuration: theme.durations.short,
       errorWidget: (context, url, error) {
         return ColoredBox(
           color: theme.colorScheme.secondaryContainer,

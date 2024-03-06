@@ -2,22 +2,22 @@ import 'package:collection/collection.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:xml/xml.dart';
 
-abstract interface class WebFeedParser {
-  const WebFeedParser();
+abstract interface class RssParser {
+  const RssParser();
 
   List<Article> parse({
     required XmlDocument xmlDocument,
-    required WebFeed source,
+    required NewsSource source,
   });
 }
 
-class WebFeedParserImpl implements WebFeedParser {
-  const WebFeedParserImpl();
+class RssParserImpl implements RssParser {
+  const RssParserImpl();
 
   @override
   List<Article> parse({
     required XmlDocument xmlDocument,
-    required WebFeed source,
+    required NewsSource source,
   }) {
     final articles = xmlDocument.findAllElements('item').map(
       (i) {

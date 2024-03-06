@@ -2,18 +2,18 @@ import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'web_feed.freezed.dart';
+part 'news_source.freezed.dart';
 
 @freezed
-class WebFeed with _$WebFeed {
-  const factory WebFeed({
+class NewsSource with _$NewsSource {
+  const factory NewsSource({
     required Uri uri,
     required Uri favicon,
     required Locale locale,
-    required bool isHidden,
-  }) = _WebFeed;
+    required bool isShown,
+  }) = _NewsSource;
 
-  const WebFeed._();
+  const NewsSource._();
 
   String get name => uri.host.replaceFirst('www.', '');
 }

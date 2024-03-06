@@ -4,6 +4,7 @@
   "systemLanguageName": "系统默认",
   "galleryTitle": "NASA 图片库",
   "newsTitle": "新闻",
+  "newsSourcesTitle": "新闻来源",
   "settingsTitle": "设置",
   "themeSettingsTitle": "主题",
   "systemThemeModeTitle": "系统默认",
@@ -60,5 +61,6 @@
   },
   "saveImageSuccessSnackBarText": "图像已保存至: ",
   "saveImageFailedSnackBarText": "无法保存图像",
-  "buttonClose": "关闭"
+  "closeButton": "关闭",
+  "applyButton": "应用"
 }

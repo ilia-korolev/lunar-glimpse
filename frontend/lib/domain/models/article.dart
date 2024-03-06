@@ -10,7 +10,7 @@ class Article with _$Article {
     required String description,
     required Uri uri,
     required DateTime date,
-    required WebFeed source,
+    required NewsSource source,
     Uri? thumbnail,
     String? author,
   }) = _Article;

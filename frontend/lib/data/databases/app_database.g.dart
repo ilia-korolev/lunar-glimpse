@@ -668,60 +668,60 @@ class GalleryTranslationsCompanion
   }
 }
 
-class $WebFeedEntitiesTable extends WebFeedEntities
-    with TableInfo<$WebFeedEntitiesTable, WebFeedEntity> {
+class $NewsSourceEntitiesTable extends NewsSourceEntities
+    with TableInfo<$NewsSourceEntitiesTable, NewsSourceEntity> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $WebFeedEntitiesTable(this.attachedDatabase, [this._alias]);
+  $NewsSourceEntitiesTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _uriMeta = const VerificationMeta('uri');
   @override
   late final GeneratedColumnWithTypeConverter<Uri, String> uri =
       GeneratedColumn<String>('uri', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<Uri>($WebFeedEntitiesTable.$converteruri);
+          .withConverter<Uri>($NewsSourceEntitiesTable.$converteruri);
   static const VerificationMeta _faviconMeta =
       const VerificationMeta('favicon');
   @override
   late final GeneratedColumnWithTypeConverter<Uri, String> favicon =
       GeneratedColumn<String>('favicon', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<Uri>($WebFeedEntitiesTable.$converterfavicon);
+          .withConverter<Uri>($NewsSourceEntitiesTable.$converterfavicon);
   static const VerificationMeta _localeMeta = const VerificationMeta('locale');
   @override
   late final GeneratedColumnWithTypeConverter<Locale, String> locale =
       GeneratedColumn<String>('locale', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<Locale>($WebFeedEntitiesTable.$converterlocale);
-  static const VerificationMeta _isHiddenMeta =
-      const VerificationMeta('isHidden');
+          .withConverter<Locale>($NewsSourceEntitiesTable.$converterlocale);
+  static const VerificationMeta _isShownMeta =
+      const VerificationMeta('isShown');
   @override
-  late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
-      'is_hidden', aliasedName, false,
+  late final GeneratedColumn<bool> isShown = GeneratedColumn<bool>(
+      'is_shown', aliasedName, false,
       type: DriftSqlType.bool,
       requiredDuringInsert: true,
       defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("is_hidden" IN (0, 1))'));
+          GeneratedColumn.constraintIsAlways('CHECK ("is_shown" IN (0, 1))'));
   @override
-  List<GeneratedColumn> get $columns => [uri, favicon, locale, isHidden];
+  List<GeneratedColumn> get $columns => [uri, favicon, locale, isShown];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'web_feed_entities';
+  static const String $name = 'news_source_entities';
   @override
-  VerificationContext validateIntegrity(Insertable<WebFeedEntity> instance,
+  VerificationContext validateIntegrity(Insertable<NewsSourceEntity> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     context.handle(_uriMeta, const VerificationResult.success());
     context.handle(_faviconMeta, const VerificationResult.success());
     context.handle(_localeMeta, const VerificationResult.success());
-    if (data.containsKey('is_hidden')) {
-      context.handle(_isHiddenMeta,
-          isHidden.isAcceptableOrUnknown(data['is_hidden']!, _isHiddenMeta));
+    if (data.containsKey('is_shown')) {
+      context.handle(_isShownMeta,
+          isShown.isAcceptableOrUnknown(data['is_shown']!, _isShownMeta));
     } else if (isInserting) {
-      context.missing(_isHiddenMeta);
+      context.missing(_isShownMeta);
     }
     return context;
   }
@@ -729,26 +729,26 @@ class $WebFeedEntitiesTable extends WebFeedEntities
   @override
   Set<GeneratedColumn> get $primaryKey => {uri};
   @override
-  WebFeedEntity map(Map<String, dynamic> data, {String? tablePrefix}) {
+  NewsSourceEntity map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return WebFeedEntity(
-      uri: $WebFeedEntitiesTable.$converteruri.fromSql(attachedDatabase
+    return NewsSourceEntity(
+      uri: $NewsSourceEntitiesTable.$converteruri.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}uri'])!),
-      favicon: $WebFeedEntitiesTable.$converterfavicon.fromSql(attachedDatabase
-          .typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}favicon'])!),
-      locale: $WebFeedEntitiesTable.$converterlocale.fromSql(attachedDatabase
+      favicon: $NewsSourceEntitiesTable.$converterfavicon.fromSql(
+          attachedDatabase.typeMapping
+              .read(DriftSqlType.string, data['${effectivePrefix}favicon'])!),
+      locale: $NewsSourceEntitiesTable.$converterlocale.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}locale'])!),
-      isHidden: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_hidden'])!,
+      isShown: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_shown'])!,
     );
   }
 
   @override
-  $WebFeedEntitiesTable createAlias(String alias) {
-    return $WebFeedEntitiesTable(attachedDatabase, alias);
+  $NewsSourceEntitiesTable createAlias(String alias) {
+    return $NewsSourceEntitiesTable(attachedDatabase, alias);
   }
 
   static TypeConverter<Uri, String> $converteruri = const _UriConverter();
@@ -757,52 +757,53 @@ class $WebFeedEntitiesTable extends WebFeedEntities
       const LocaleConverter();
 }
 
-class WebFeedEntity extends DataClass implements Insertable<WebFeedEntity> {
+class NewsSourceEntity extends DataClass
+    implements Insertable<NewsSourceEntity> {
   final Uri uri;
   final Uri favicon;
   final Locale locale;
-  final bool isHidden;
-  const WebFeedEntity(
+  final bool isShown;
+  const NewsSourceEntity(
       {required this.uri,
       required this.favicon,
       required this.locale,
-      required this.isHidden});
+      required this.isShown});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     {
       map['uri'] =
-          Variable<String>($WebFeedEntitiesTable.$converteruri.toSql(uri));
+          Variable<String>($NewsSourceEntitiesTable.$converteruri.toSql(uri));
     }
     {
       map['favicon'] = Variable<String>(
-          $WebFeedEntitiesTable.$converterfavicon.toSql(favicon));
+          $NewsSourceEntitiesTable.$converterfavicon.toSql(favicon));
     }
     {
       map['locale'] = Variable<String>(
-          $WebFeedEntitiesTable.$converterlocale.toSql(locale));
+          $NewsSourceEntitiesTable.$converterlocale.toSql(locale));
     }
-    map['is_hidden'] = Variable<bool>(isHidden);
+    map['is_shown'] = Variable<bool>(isShown);
     return map;
   }
 
-  WebFeedEntitiesCompanion toCompanion(bool nullToAbsent) {
-    return WebFeedEntitiesCompanion(
+  NewsSourceEntitiesCompanion toCompanion(bool nullToAbsent) {
+    return NewsSourceEntitiesCompanion(
       uri: Value(uri),
       favicon: Value(favicon),
       locale: Value(locale),
-      isHidden: Value(isHidden),
+      isShown: Value(isShown),
     );
   }
 
-  factory WebFeedEntity.fromJson(Map<String, dynamic> json,
+  factory NewsSourceEntity.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return WebFeedEntity(
+    return NewsSourceEntity(
       uri: serializer.fromJson<Uri>(json['uri']),
       favicon: serializer.fromJson<Uri>(json['favicon']),
       locale: serializer.fromJson<Locale>(json['locale']),
-      isHidden: serializer.fromJson<bool>(json['isHidden']),
+      isShown: serializer.fromJson<bool>(json['isShown']),
     );
   }
   @override
@@ -812,91 +813,91 @@ class WebFeedEntity extends DataClass implements Insertable<WebFeedEntity> {
       'uri': serializer.toJson<Uri>(uri),
       'favicon': serializer.toJson<Uri>(favicon),
       'locale': serializer.toJson<Locale>(locale),
-      'isHidden': serializer.toJson<bool>(isHidden),
+      'isShown': serializer.toJson<bool>(isShown),
     };
   }
 
-  WebFeedEntity copyWith(
-          {Uri? uri, Uri? favicon, Locale? locale, bool? isHidden}) =>
-      WebFeedEntity(
+  NewsSourceEntity copyWith(
+          {Uri? uri, Uri? favicon, Locale? locale, bool? isShown}) =>
+      NewsSourceEntity(
         uri: uri ?? this.uri,
         favicon: favicon ?? this.favicon,
         locale: locale ?? this.locale,
-        isHidden: isHidden ?? this.isHidden,
+        isShown: isShown ?? this.isShown,
       );
   @override
   String toString() {
-    return (StringBuffer('WebFeedEntity(')
+    return (StringBuffer('NewsSourceEntity(')
           ..write('uri: $uri, ')
           ..write('favicon: $favicon, ')
           ..write('locale: $locale, ')
-          ..write('isHidden: $isHidden')
+          ..write('isShown: $isShown')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(uri, favicon, locale, isHidden);
+  int get hashCode => Object.hash(uri, favicon, locale, isShown);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is WebFeedEntity &&
+      (other is NewsSourceEntity &&
           other.uri == this.uri &&
           other.favicon == this.favicon &&
           other.locale == this.locale &&
-          other.isHidden == this.isHidden);
+          other.isShown == this.isShown);
 }
 
-class WebFeedEntitiesCompanion extends UpdateCompanion<WebFeedEntity> {
+class NewsSourceEntitiesCompanion extends UpdateCompanion<NewsSourceEntity> {
   final Value<Uri> uri;
   final Value<Uri> favicon;
   final Value<Locale> locale;
-  final Value<bool> isHidden;
+  final Value<bool> isShown;
   final Value<int> rowid;
-  const WebFeedEntitiesCompanion({
+  const NewsSourceEntitiesCompanion({
     this.uri = const Value.absent(),
     this.favicon = const Value.absent(),
     this.locale = const Value.absent(),
-    this.isHidden = const Value.absent(),
+    this.isShown = const Value.absent(),
     this.rowid = const Value.absent(),
   });
-  WebFeedEntitiesCompanion.insert({
+  NewsSourceEntitiesCompanion.insert({
     required Uri uri,
     required Uri favicon,
     required Locale locale,
-    required bool isHidden,
+    required bool isShown,
     this.rowid = const Value.absent(),
   })  : uri = Value(uri),
         favicon = Value(favicon),
         locale = Value(locale),
-        isHidden = Value(isHidden);
-  static Insertable<WebFeedEntity> custom({
+        isShown = Value(isShown);
+  static Insertable<NewsSourceEntity> custom({
     Expression<String>? uri,
     Expression<String>? favicon,
     Expression<String>? locale,
-    Expression<bool>? isHidden,
+    Expression<bool>? isShown,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (uri != null) 'uri': uri,
       if (favicon != null) 'favicon': favicon,
       if (locale != null) 'locale': locale,
-      if (isHidden != null) 'is_hidden': isHidden,
+      if (isShown != null) 'is_shown': isShown,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
-  WebFeedEntitiesCompanion copyWith(
+  NewsSourceEntitiesCompanion copyWith(
       {Value<Uri>? uri,
       Value<Uri>? favicon,
       Value<Locale>? locale,
-      Value<bool>? isHidden,
+      Value<bool>? isShown,
       Value<int>? rowid}) {
-    return WebFeedEntitiesCompanion(
+    return NewsSourceEntitiesCompanion(
       uri: uri ?? this.uri,
       favicon: favicon ?? this.favicon,
       locale: locale ?? this.locale,
-      isHidden: isHidden ?? this.isHidden,
+      isShown: isShown ?? this.isShown,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -906,18 +907,18 @@ class WebFeedEntitiesCompanion extends UpdateCompanion<WebFeedEntity> {
     final map = <String, Expression>{};
     if (uri.present) {
       map['uri'] = Variable<String>(
-          $WebFeedEntitiesTable.$converteruri.toSql(uri.value));
+          $NewsSourceEntitiesTable.$converteruri.toSql(uri.value));
     }
     if (favicon.present) {
       map['favicon'] = Variable<String>(
-          $WebFeedEntitiesTable.$converterfavicon.toSql(favicon.value));
+          $NewsSourceEntitiesTable.$converterfavicon.toSql(favicon.value));
     }
     if (locale.present) {
       map['locale'] = Variable<String>(
-          $WebFeedEntitiesTable.$converterlocale.toSql(locale.value));
+          $NewsSourceEntitiesTable.$converterlocale.toSql(locale.value));
     }
-    if (isHidden.present) {
-      map['is_hidden'] = Variable<bool>(isHidden.value);
+    if (isShown.present) {
+      map['is_shown'] = Variable<bool>(isShown.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -927,11 +928,11 @@ class WebFeedEntitiesCompanion extends UpdateCompanion<WebFeedEntity> {
 
   @override
   String toString() {
-    return (StringBuffer('WebFeedEntitiesCompanion(')
+    return (StringBuffer('NewsSourceEntitiesCompanion(')
           ..write('uri: $uri, ')
           ..write('favicon: $favicon, ')
           ..write('locale: $locale, ')
-          ..write('isHidden: $isHidden, ')
+          ..write('isShown: $isShown, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -943,12 +944,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $GalleryTable gallery = $GalleryTable(this);
   late final $GalleryTranslationsTable galleryTranslations =
       $GalleryTranslationsTable(this);
-  late final $WebFeedEntitiesTable webFeedEntities =
-      $WebFeedEntitiesTable(this);
+  late final $NewsSourceEntitiesTable newsSourceEntities =
+      $NewsSourceEntitiesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [gallery, galleryTranslations, webFeedEntities];
+      [gallery, galleryTranslations, newsSourceEntities];
 }

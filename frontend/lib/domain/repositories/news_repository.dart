@@ -1,37 +1,52 @@
+import 'dart:async';
+
 import 'package:flutter_astronomy/data/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 
 abstract interface class NewsRepository {
   const NewsRepository();
 
-  Future<FetchNewsResult> fetchNews({
-    required List<WebFeed> webFeeds,
+  Stream<List<NewsSource>> get sourceStream;
+
+  Future<FetchNewsResult> fetchNews();
+
+  Future<List<NewsSource>> fetchSources();
+
+  Future<void> toggleShowSources({
+    required List<NewsSource> sources,
   });
 }
 
 class NewsRepositoryImpl implements NewsRepository {
-  const NewsRepositoryImpl({
+  NewsRepositoryImpl({
     required RemoteNewsDataSource remoteNewsDataSource,
-  }) : _remoteNewsDataSource = remoteNewsDataSource;
+    required LocalNewsSourceDataSource localNewsSourceDataSource,
+  })  : _remoteNewsDataSource = remoteNewsDataSource,
+        _localNewsSourceDataSource = localNewsSourceDataSource;
 
   final RemoteNewsDataSource _remoteNewsDataSource;
+  final LocalNewsSourceDataSource _localNewsSourceDataSource;
+
+  final _sourceController = StreamController<List<NewsSource>>.broadcast();
 
   @override
-  Future<FetchNewsResult> fetchNews({
-    required List<WebFeed> webFeeds,
-  }) async {
-    final articles = <Article>[];
-    final failures = <WebFeed>[];
+  Stream<List<NewsSource>> get sourceStream => _sourceController.stream;
 
-    for (final webFeed in webFeeds) {
+  @override
+  Future<FetchNewsResult> fetchNews() async {
+    final articles = <Article>[];
+    final failures = <NewsSource>[];
+    final sources = await _localNewsSourceDataSource.getShownNewsSources();
+
+    for (final source in sources) {
       try {
         final response = await _remoteNewsDataSource.getNews(
-          webFeed: webFeed,
+          source: source,
         );
 
         articles.addAll(response);
       } on Exception catch (_) {
-        failures.add(webFeed);
+        failures.add(source);
       }
     }
 
@@ -42,6 +57,25 @@ class NewsRepositoryImpl implements NewsRepository {
       failures: failures,
     );
   }
+
+  @override
+  Future<List<NewsSource>> fetchSources() {
+    return _localNewsSourceDataSource.getNewsSources();
+  }
+
+  @override
+  Future<void> toggleShowSources({
+    required List<NewsSource> sources,
+  }) async {
+    await _localNewsSourceDataSource.cacheNewsSources(
+      newsSources: sources.map((i) => i.copyWith(isShown: !i.isShown)).toList(),
+      onConflictUpdate: true,
+    );
+
+    final updatedFeeds = await _localNewsSourceDataSource.getNewsSources();
+
+    _sourceController.add(updatedFeeds);
+  }
 }
 
 class FetchNewsResult {
@@ -51,5 +85,5 @@ class FetchNewsResult {
   });
 
   final List<Article> articles;
-  final List<WebFeed> failures;
+  final List<NewsSource> failures;
 }

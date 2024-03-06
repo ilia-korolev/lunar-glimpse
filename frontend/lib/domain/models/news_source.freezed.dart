@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'web_feed.dart';
+part of 'news_source.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,30 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$WebFeed {
+mixin _$NewsSource {
   Uri get uri => throw _privateConstructorUsedError;
   Uri get favicon => throw _privateConstructorUsedError;
   Locale get locale => throw _privateConstructorUsedError;
-  bool get isHidden => throw _privateConstructorUsedError;
+  bool get isShown => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $WebFeedCopyWith<WebFeed> get copyWith => throw _privateConstructorUsedError;
+  $NewsSourceCopyWith<NewsSource> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WebFeedCopyWith<$Res> {
-  factory $WebFeedCopyWith(WebFeed value, $Res Function(WebFeed) then) =
-      _$WebFeedCopyWithImpl<$Res, WebFeed>;
+abstract class $NewsSourceCopyWith<$Res> {
+  factory $NewsSourceCopyWith(
+          NewsSource value, $Res Function(NewsSource) then) =
+      _$NewsSourceCopyWithImpl<$Res, NewsSource>;
   @useResult
-  $Res call({Uri uri, Uri favicon, Locale locale, bool isHidden});
+  $Res call({Uri uri, Uri favicon, Locale locale, bool isShown});
 }
 
 /// @nodoc
-class _$WebFeedCopyWithImpl<$Res, $Val extends WebFeed>
-    implements $WebFeedCopyWith<$Res> {
-  _$WebFeedCopyWithImpl(this._value, this._then);
+class _$NewsSourceCopyWithImpl<$Res, $Val extends NewsSource>
+    implements $NewsSourceCopyWith<$Res> {
+  _$NewsSourceCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -49,7 +51,7 @@ class _$WebFeedCopyWithImpl<$Res, $Val extends WebFeed>
     Object? uri = null,
     Object? favicon = null,
     Object? locale = null,
-    Object? isHidden = null,
+    Object? isShown = null,
   }) {
     return _then(_value.copyWith(
       uri: null == uri
@@ -64,30 +66,31 @@ class _$WebFeedCopyWithImpl<$Res, $Val extends WebFeed>
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
-      isHidden: null == isHidden
-          ? _value.isHidden
-          : isHidden // ignore: cast_nullable_to_non_nullable
+      isShown: null == isShown
+          ? _value.isShown
+          : isShown // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$WebFeedImplCopyWith<$Res> implements $WebFeedCopyWith<$Res> {
-  factory _$$WebFeedImplCopyWith(
-          _$WebFeedImpl value, $Res Function(_$WebFeedImpl) then) =
-      __$$WebFeedImplCopyWithImpl<$Res>;
+abstract class _$$NewsSourceImplCopyWith<$Res>
+    implements $NewsSourceCopyWith<$Res> {
+  factory _$$NewsSourceImplCopyWith(
+          _$NewsSourceImpl value, $Res Function(_$NewsSourceImpl) then) =
+      __$$NewsSourceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Uri uri, Uri favicon, Locale locale, bool isHidden});
+  $Res call({Uri uri, Uri favicon, Locale locale, bool isShown});
 }
 
 /// @nodoc
-class __$$WebFeedImplCopyWithImpl<$Res>
-    extends _$WebFeedCopyWithImpl<$Res, _$WebFeedImpl>
-    implements _$$WebFeedImplCopyWith<$Res> {
-  __$$WebFeedImplCopyWithImpl(
-      _$WebFeedImpl _value, $Res Function(_$WebFeedImpl) _then)
+class __$$NewsSourceImplCopyWithImpl<$Res>
+    extends _$NewsSourceCopyWithImpl<$Res, _$NewsSourceImpl>
+    implements _$$NewsSourceImplCopyWith<$Res> {
+  __$$NewsSourceImplCopyWithImpl(
+      _$NewsSourceImpl _value, $Res Function(_$NewsSourceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,9 +99,9 @@ class __$$WebFeedImplCopyWithImpl<$Res>
     Object? uri = null,
     Object? favicon = null,
     Object? locale = null,
-    Object? isHidden = null,
+    Object? isShown = null,
   }) {
-    return _then(_$WebFeedImpl(
+    return _then(_$NewsSourceImpl(
       uri: null == uri
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -111,9 +114,9 @@ class __$$WebFeedImplCopyWithImpl<$Res>
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
-      isHidden: null == isHidden
-          ? _value.isHidden
-          : isHidden // ignore: cast_nullable_to_non_nullable
+      isShown: null == isShown
+          ? _value.isShown
+          : isShown // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -121,12 +124,12 @@ class __$$WebFeedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WebFeedImpl extends _WebFeed {
-  const _$WebFeedImpl(
+class _$NewsSourceImpl extends _NewsSource {
+  const _$NewsSourceImpl(
       {required this.uri,
       required this.favicon,
       required this.locale,
-      required this.isHidden})
+      required this.isShown})
       : super._();
 
   @override
@@ -136,42 +139,41 @@ class _$WebFeedImpl extends _WebFeed {
   @override
   final Locale locale;
   @override
-  final bool isHidden;
+  final bool isShown;
 
   @override
   String toString() {
-    return 'WebFeed(uri: $uri, favicon: $favicon, locale: $locale, isHidden: $isHidden)';
+    return 'NewsSource(uri: $uri, favicon: $favicon, locale: $locale, isShown: $isShown)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WebFeedImpl &&
+            other is _$NewsSourceImpl &&
             (identical(other.uri, uri) || other.uri == uri) &&
             (identical(other.favicon, favicon) || other.favicon == favicon) &&
             (identical(other.locale, locale) || other.locale == locale) &&
-            (identical(other.isHidden, isHidden) ||
-                other.isHidden == isHidden));
+            (identical(other.isShown, isShown) || other.isShown == isShown));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, uri, favicon, locale, isHidden);
+  int get hashCode => Object.hash(runtimeType, uri, favicon, locale, isShown);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WebFeedImplCopyWith<_$WebFeedImpl> get copyWith =>
-      __$$WebFeedImplCopyWithImpl<_$WebFeedImpl>(this, _$identity);
+  _$$NewsSourceImplCopyWith<_$NewsSourceImpl> get copyWith =>
+      __$$NewsSourceImplCopyWithImpl<_$NewsSourceImpl>(this, _$identity);
 }
 
-abstract class _WebFeed extends WebFeed {
-  const factory _WebFeed(
+abstract class _NewsSource extends NewsSource {
+  const factory _NewsSource(
       {required final Uri uri,
       required final Uri favicon,
       required final Locale locale,
-      required final bool isHidden}) = _$WebFeedImpl;
-  const _WebFeed._() : super._();
+      required final bool isShown}) = _$NewsSourceImpl;
+  const _NewsSource._() : super._();
 
   @override
   Uri get uri;
@@ -180,9 +182,9 @@ abstract class _WebFeed extends WebFeed {
   @override
   Locale get locale;
   @override
-  bool get isHidden;
+  bool get isShown;
   @override
   @JsonKey(ignore: true)
-  _$$WebFeedImplCopyWith<_$WebFeedImpl> get copyWith =>
+  _$$NewsSourceImplCopyWith<_$NewsSourceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

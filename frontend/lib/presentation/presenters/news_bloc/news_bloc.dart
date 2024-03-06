@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
@@ -13,9 +15,7 @@ const _throttleDuration = Duration(milliseconds: 100);
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsBloc({
     required NewsRepository newsRepository,
-    required WebFeedRepository webFeedRepository,
   })  : _newsRepository = newsRepository,
-        _webFeedRepository = webFeedRepository,
         super(
           const NewsState(
             status: BlocStatus.initial,
@@ -35,10 +35,15 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       (event, emit) async => _triedAgain(emit),
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
+
+    _newsSourcesListener = _newsRepository.sourceStream.listen((event) {
+      add(const NewsRefreshed());
+    });
   }
 
   final NewsRepository _newsRepository;
-  final WebFeedRepository _webFeedRepository;
+
+  late final StreamSubscription<List<NewsSource>> _newsSourcesListener;
 
   NewsEvent? _previousEvent;
 
@@ -47,6 +52,13 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     _storeEvent(event);
 
     super.onEvent(event);
+  }
+
+  @override
+  Future<void> close() async {
+    await _newsSourcesListener.cancel();
+
+    return super.close();
   }
 
   void _storeEvent(NewsEvent event) {
@@ -70,8 +82,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         ),
       );
 
-      final webFeeds = await _webFeedRepository.fetchWebFeedsToShow();
-      final response = await _newsRepository.fetchNews(webFeeds: webFeeds);
+      final response = await _newsRepository.fetchNews();
 
       emit(
         state.copyWith(

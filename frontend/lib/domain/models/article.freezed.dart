@@ -20,7 +20,7 @@ mixin _$Article {
   String get description => throw _privateConstructorUsedError;
   Uri get uri => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  WebFeed get source => throw _privateConstructorUsedError;
+  NewsSource get source => throw _privateConstructorUsedError;
   Uri? get thumbnail => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
 
@@ -38,11 +38,11 @@ abstract class $ArticleCopyWith<$Res> {
       String description,
       Uri uri,
       DateTime date,
-      WebFeed source,
+      NewsSource source,
       Uri? thumbnail,
       String? author});
 
-  $WebFeedCopyWith<$Res> get source;
+  $NewsSourceCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -86,7 +86,7 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as WebFeed,
+              as NewsSource,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
@@ -100,8 +100,8 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
 
   @override
   @pragma('vm:prefer-inline')
-  $WebFeedCopyWith<$Res> get source {
-    return $WebFeedCopyWith<$Res>(_value.source, (value) {
+  $NewsSourceCopyWith<$Res> get source {
+    return $NewsSourceCopyWith<$Res>(_value.source, (value) {
       return _then(_value.copyWith(source: value) as $Val);
     });
   }
@@ -119,12 +119,12 @@ abstract class _$$ArticleImplCopyWith<$Res> implements $ArticleCopyWith<$Res> {
       String description,
       Uri uri,
       DateTime date,
-      WebFeed source,
+      NewsSource source,
       Uri? thumbnail,
       String? author});
 
   @override
-  $WebFeedCopyWith<$Res> get source;
+  $NewsSourceCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -166,7 +166,7 @@ class __$$ArticleImplCopyWithImpl<$Res>
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as WebFeed,
+              as NewsSource,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
@@ -200,7 +200,7 @@ class _$ArticleImpl implements _Article {
   @override
   final DateTime date;
   @override
-  final WebFeed source;
+  final NewsSource source;
   @override
   final Uri? thumbnail;
   @override
@@ -244,7 +244,7 @@ abstract class _Article implements Article {
       required final String description,
       required final Uri uri,
       required final DateTime date,
-      required final WebFeed source,
+      required final NewsSource source,
       final Uri? thumbnail,
       final String? author}) = _$ArticleImpl;
 
@@ -257,7 +257,7 @@ abstract class _Article implements Article {
   @override
   DateTime get date;
   @override
-  WebFeed get source;
+  NewsSource get source;
   @override
   Uri? get thumbnail;
   @override

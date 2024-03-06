@@ -32,18 +32,15 @@ class GithubInfoPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: theme.spacing.medium),
-            SizedBox(
-              width: theme.sizes.buttonWidth,
-              child: FilledButton(
-                onPressed: () {
-                  url_launcher.launchUrl(
-                    Uri.parse(
-                      'https://github.com/ilia-korolev/flutter_astronomy',
-                    ),
-                  );
-                },
-                child: Text(l10n.gitHubInfoPageButton),
-              ),
+            PrimaryButton(
+              text: l10n.gitHubInfoPageButton,
+              onPressed: () {
+                url_launcher.launchUrl(
+                  Uri.parse(
+                    'https://github.com/ilia-korolev/flutter_astronomy',
+                  ),
+                );
+              },
             ),
           ],
         ),

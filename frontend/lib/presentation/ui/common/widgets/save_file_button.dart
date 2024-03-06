@@ -96,7 +96,7 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
               begin: _previousProgress ?? 0,
               end: widget.progress ?? 0,
             ),
-            duration: theme.durations.medium,
+            duration: theme.durations.short,
             builder: (context, value, child) {
               return CircularProgressIndicator(
                 value: widget.isDownloading ? value : 1,
@@ -109,7 +109,7 @@ class _SaveFileButtonBodyState extends State<_SaveFileButtonBody> {
         ),
         ClipOval(
           child: AnimatedSwitcher(
-            duration: theme.durations.medium,
+            duration: theme.durations.short,
             switchInCurve: Curves.easeInCubic,
             switchOutCurve: Curves.easeOutCubic,
             transitionBuilder: (child, animation) {

@@ -54,7 +54,7 @@ class HomeNavigationRail extends StatelessWidget {
             NavigationRailDestination(
               icon: AnimatedSettingsIcon(
                 isSelected: activeTab == HomePageTab.settings,
-                duration: theme.durations.long,
+                duration: theme.durations.medium,
               ),
               label: Text(HomePageTab.settings.title(l10n)),
             ),

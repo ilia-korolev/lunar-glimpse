@@ -4,6 +4,7 @@
   "systemLanguageName": "端末の言語",
   "galleryTitle": "NASAギャラリー",
   "newsTitle": "ニュース",
+  "newsSourcesTitle": "ニュースソース",
   "settingsTitle": "設定",
   "themeSettingsTitle": "テーマ",
   "systemThemeModeTitle": "システムデフォルト",
@@ -60,5 +61,6 @@
   },
   "saveImageSuccessSnackBarText": "画像が保存されました: ",
   "saveImageFailedSnackBarText": "画像の保存に失敗しました",
-  "buttonClose": "閉じる"
+  "closeButton": "閉じる",
+  "applyButton": "Apply"
 }

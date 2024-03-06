@@ -9,9 +9,9 @@ class AppDurations extends ThemeExtension<AppDurations> {
 
   const AppDurations.regular()
       : this(
-          short: const Duration(milliseconds: 100),
-          medium: const Duration(milliseconds: 250),
-          long: const Duration(milliseconds: 500),
+          short: const Duration(milliseconds: 250),
+          medium: const Duration(milliseconds: 500),
+          long: const Duration(milliseconds: 750),
         );
 
   final Duration short;

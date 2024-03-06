@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
+import 'package:flutter_astronomy/core/misc/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,7 +105,7 @@ class _TranslationSettings extends StatelessWidget {
                               _adaptiveAction(
                                 context: context,
                                 onPressed: () => Navigator.pop(context),
-                                child: Text(l10n.buttonClose),
+                                child: Text(l10n.closeButton),
                               ),
                             ],
                           );
@@ -255,23 +256,11 @@ class _FlagIcon extends StatelessWidget {
           return SizedBox(
             width: theme.sizes.largeIconSize,
             height: theme.sizes.largeIconSize,
-            child: SvgPicture.asset(
-              _getFlagAsset(locale!),
-            ),
+            child: SvgPicture.asset(locale!.flagAsset),
           );
         },
       ),
     );
-  }
-
-  String _getFlagAsset(Locale locale) {
-    return switch (locale.languageCode) {
-      'en' => AssetNames.flags.us,
-      'ja' => AssetNames.flags.jp,
-      'ru' => AssetNames.flags.ru,
-      'zh' => AssetNames.flags.ch,
-      _ => throw UnimplementedError('This locale is not supported: $locale'),
-    };
   }
 }
 

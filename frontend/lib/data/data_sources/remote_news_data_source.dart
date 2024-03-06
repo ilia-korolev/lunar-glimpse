@@ -7,28 +7,28 @@ abstract interface class RemoteNewsDataSource {
   const RemoteNewsDataSource();
 
   Future<List<Article>> getNews({
-    required WebFeed webFeed,
+    required NewsSource source,
   });
 }
 
 class RssNewsDataSource implements RemoteNewsDataSource {
   const RssNewsDataSource({
     required HttpService httpService,
-    required WebFeedParser webFeedParser,
+    required RssParser rssParser,
   })  : _httpService = httpService,
-        _webFeedParser = webFeedParser;
+        _rssParser = rssParser;
 
   final HttpService _httpService;
-  final WebFeedParser _webFeedParser;
+  final RssParser _rssParser;
 
   @override
   Future<List<Article>> getNews({
-    required WebFeed webFeed,
+    required NewsSource source,
   }) async {
-    final response = await _httpService.get<dynamic>(webFeed.uri.toString());
+    final response = await _httpService.get<dynamic>(source.uri.toString());
 
     final xmlDocument = XmlDocument.parse(response.data as String);
 
-    return _webFeedParser.parse(xmlDocument: xmlDocument, source: webFeed);
+    return _rssParser.parse(xmlDocument: xmlDocument, source: source);
   }
 }

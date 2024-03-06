@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
       case Breakpoint.compact:
         return Scaffold(
           body: PageSwitcher(
-            duration: theme.durations.medium,
+            duration: theme.durations.short,
             index: tab.index,
             children: const [
               GalleryView(),
@@ -69,15 +69,16 @@ class HomePage extends StatelessWidget {
 
       case Breakpoint.medium:
       case Breakpoint.expanded:
+      case Breakpoint.large:
         return Scaffold(
           body: HomeNavigationRail(
             activeTab: tab,
             onTabSelected: (tab) {
               context.go(tab.path);
             },
-            isExtended: activeBreakpoint.isExpanded,
+            isExtended: activeBreakpoint.isExpanded || activeBreakpoint.isLarge,
             body: PageSwitcher(
-              duration: theme.durations.medium,
+              duration: theme.durations.short,
               index: tab.index,
               children: const [
                 GalleryView(),

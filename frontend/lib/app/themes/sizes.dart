@@ -14,6 +14,7 @@ class Sizes extends ThemeExtension<Sizes> {
     required this.largeIconSize,
     required this.avatarSize,
     required this.expandedArticleCardHeight,
+    required this.panelWidth,
     required this.narrowContentWidth,
     required this.mediumContentWidth,
     required this.wideContentWidth,
@@ -31,6 +32,7 @@ class Sizes extends ThemeExtension<Sizes> {
           largeIconSize: 32,
           avatarSize: 90,
           expandedArticleCardHeight: 175,
+          panelWidth: 360,
           narrowContentWidth: 600,
           mediumContentWidth: 840,
           wideContentWidth: 1024,
@@ -46,6 +48,7 @@ class Sizes extends ThemeExtension<Sizes> {
   final double largeIconSize;
   final double avatarSize;
   final double expandedArticleCardHeight;
+  final double panelWidth;
   final double narrowContentWidth;
   final double mediumContentWidth;
   final double wideContentWidth;
@@ -62,6 +65,7 @@ class Sizes extends ThemeExtension<Sizes> {
     double? largeIconSize,
     double? avatarSize,
     double? expandedArticleCardHeight,
+    double? panelWidth,
     double? narrowContentWidth,
     double? mediumContentWidth,
     double? wideContentWidth,
@@ -79,6 +83,7 @@ class Sizes extends ThemeExtension<Sizes> {
       avatarSize: avatarSize ?? this.avatarSize,
       expandedArticleCardHeight:
           expandedArticleCardHeight ?? this.expandedArticleCardHeight,
+      panelWidth: panelWidth ?? this.panelWidth,
       narrowContentWidth: narrowContentWidth ?? this.narrowContentWidth,
       mediumContentWidth: mediumContentWidth ?? this.mediumContentWidth,
       wideContentWidth: wideContentWidth ?? this.wideContentWidth,
@@ -143,6 +148,11 @@ class Sizes extends ThemeExtension<Sizes> {
       expandedArticleCardHeight: lerpDouble(
         expandedArticleCardHeight,
         other.expandedArticleCardHeight,
+        t,
+      )!,
+      panelWidth: lerpDouble(
+        panelWidth,
+        other.panelWidth,
         t,
       )!,
       narrowContentWidth: lerpDouble(

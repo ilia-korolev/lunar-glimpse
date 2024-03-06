@@ -41,12 +41,12 @@ class GalleryTranslations extends Table {
   Set<Column<Object>>? get primaryKey => {date, language};
 }
 
-@DataClassName('WebFeedEntity')
-class WebFeedEntities extends Table {
+@DataClassName('NewsSourceEntity')
+class NewsSourceEntities extends Table {
   TextColumn get uri => text().map(const _UriConverter())();
   TextColumn get favicon => text().map(const _UriConverter())();
   TextColumn get locale => text().map(const LocaleConverter())();
-  BoolColumn get isHidden => boolean()();
+  BoolColumn get isShown => boolean()();
 
   @override
   Set<Column<Object>>? get primaryKey => {uri};
@@ -56,7 +56,7 @@ class WebFeedEntities extends Table {
   tables: [
     Gallery,
     GalleryTranslations,
-    WebFeedEntities,
+    NewsSourceEntities,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -88,7 +88,7 @@ class AppDatabase extends _$AppDatabase {
           await migrator.createAll();
 
           await batch(
-            (batch) => batch.insertAll(webFeedEntities, _initialWebFeeds),
+            (batch) => batch.insertAll(newsSourceEntities, _initialNewsSources),
           );
         },
         beforeOpen: (details) async {

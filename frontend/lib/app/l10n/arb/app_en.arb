@@ -4,6 +4,7 @@
   "systemLanguageName": "System default",
   "galleryTitle": "NASA Gallery",
   "newsTitle": "News",
+  "newsSourcesTitle": "News sources",
   "settingsTitle": "Settings",
   "themeSettingsTitle": "Theme",
   "systemThemeModeTitle": "System default",
@@ -60,5 +61,6 @@
   },
   "saveImageSuccessSnackBarText": "The image saved to: ",
   "saveImageFailedSnackBarText": "Unable to save the image",
-  "buttonClose": "Close"
+  "closeButton": "Close",
+  "applyButton": "Apply"
 }

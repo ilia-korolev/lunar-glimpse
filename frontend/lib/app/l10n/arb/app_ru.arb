@@ -4,6 +4,7 @@
   "systemLanguageName": "Системный",
   "galleryTitle": "Галерея НАСА",
   "newsTitle": "Новости",
+  "newsSourcesTitle": "Источники новостей",
   "settingsTitle": "Настройки",
   "themeSettingsTitle": "Тема",
   "systemThemeModeTitle": "Системная тема",
@@ -60,5 +61,6 @@
   },
   "saveImageSuccessSnackBarText": "Изображение сохранено в: ",
   "saveImageFailedSnackBarText": "Не удалось сохранить изображение",
-  "buttonClose": "Закрыть"
+  "closeButton": "Закрыть",
+  "applyButton": "Применить"
 }

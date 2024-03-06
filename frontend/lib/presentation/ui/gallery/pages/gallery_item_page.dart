@@ -136,6 +136,7 @@ class _Body extends StatelessWidget {
               Breakpoint.compact => _SuccessView(item: item),
               Breakpoint.medium => _SuccessView(item: item),
               Breakpoint.expanded => _ExpandedSuccessView(item: item),
+              Breakpoint.large => _ExpandedSuccessView(item: item),
             };
           },
           failure: (String message) {

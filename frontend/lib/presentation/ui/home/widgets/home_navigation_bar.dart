@@ -40,7 +40,7 @@ class HomeNavigationBar extends StatelessWidget {
         NavigationDestination(
           icon: AnimatedSettingsIcon(
             isSelected: activeTab == HomePageTab.settings,
-            duration: theme.durations.long,
+            duration: theme.durations.medium,
           ),
           label: HomePageTab.settings.title(l10n),
         ),

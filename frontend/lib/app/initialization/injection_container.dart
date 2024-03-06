@@ -67,8 +67,8 @@ Future<void> _registerServices() async {
     ..registerLazySingleton<GlobalKey<ScaffoldMessengerState>>(
       GlobalKey<ScaffoldMessengerState>.new,
     )
-    ..registerLazySingleton<WebFeedParser>(
-      WebFeedParserImpl.new,
+    ..registerLazySingleton<RssParser>(
+      RssParserImpl.new,
     )
     ..registerLazySingleton<FileSaver>(
       FileSaver.new,
@@ -94,8 +94,8 @@ Future<void> _registerDataSources() async {
         AppDatabase,
       ],
     )
-    ..registerLazySingleton<LocalWebFeedDataSource>(
-      () => DriftWebFeedDataSource(
+    ..registerLazySingleton<LocalNewsSourceDataSource>(
+      () => DriftNewsSourceDataSource(
         database: _getIt(),
       ),
     )
@@ -108,7 +108,7 @@ Future<void> _registerDataSources() async {
     ..registerLazySingleton<RemoteNewsDataSource>(
       () => RssNewsDataSource(
         httpService: _getIt(),
-        webFeedParser: _getIt(),
+        rssParser: _getIt(),
       ),
     )
     ..registerLazySingleton<RemoteDownloadFileDataSource>(
@@ -137,11 +137,7 @@ Future<void> _registerRepositories() async {
     ..registerLazySingleton<NewsRepository>(
       () => NewsRepositoryImpl(
         remoteNewsDataSource: _getIt(),
-      ),
-    )
-    ..registerLazySingleton<WebFeedRepository>(
-      () => WebFeedRepositoryImpl(
-        localWebFeedDataSource: _getIt(),
+        localNewsSourceDataSource: _getIt(),
       ),
     )
     ..registerLazySingleton<SaveFileRepository>(
@@ -168,7 +164,6 @@ Future<void> _registerBlocs() async {
     ..registerLazySingleton<NewsBloc>(
       () => NewsBloc(
         newsRepository: _getIt(),
-        webFeedRepository: _getIt(),
       ),
     );
 }
