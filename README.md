@@ -18,8 +18,8 @@ Build and push the web frontend docker image
 ```
 git pull &&
 cd frontend/ &&
-flutter build web --dart-define FLAVOR=production &&
-docker build . -f web.Dockerfile -t ghcr.io/ilia-korolev/astro-web:latest &&
+flutter build web --dart-define FLAVOR=production --web-renderer html &&
+docker build . -f web.Dockerfile -t ghcr.io/ilia-korolev/astro-web:latest --platform=linux/amd64 &&
 docker push ghcr.io/ilia-korolev/astro-web:latest &&
 cd ..
 ```
@@ -30,6 +30,6 @@ git pull &&
 cd backend/ &&
 dart_frog build &&
 cd build/ &&
-docker build . -t ghcr.io/ilia-korolev/astro-backend:latest &&
+docker build . -t ghcr.io/ilia-korolev/astro-backend:latest --platform=linux/amd64 &&
 docker push ghcr.io/ilia-korolev/astro-backend:latest
 ```
