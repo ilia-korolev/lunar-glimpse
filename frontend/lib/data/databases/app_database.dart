@@ -1,19 +1,12 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
-import 'package:drift/isolate.dart';
-import 'package:drift/native.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_astronomy/data/_export.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
+import 'connection/_export.dart' as impl;
 
 part 'app_database.g.dart';
 part 'app_database.initial_data.dart';
-
-const _dbPath = 'db.sqlite';
 
 @DataClassName('GalleryEntity')
 class Gallery extends Table {
@@ -60,24 +53,7 @@ class NewsSourceEntities extends Table {
   ],
 )
 class AppDatabase extends _$AppDatabase {
-  AppDatabase(super.queryExecutor) : super();
-
-  static Future<DriftIsolate> createDriftIsolate() async {
-    final token = RootIsolateToken.instance;
-
-    return DriftIsolate.spawn(() {
-      if (token != null) {
-        BackgroundIsolateBinaryMessenger.ensureInitialized(token);
-      }
-
-      return LazyDatabase(() async {
-        final dbFolder = await getApplicationDocumentsDirectory();
-        final dbPath = path.join(dbFolder.path, _dbPath);
-
-        return NativeDatabase(File(dbPath));
-      });
-    });
-  }
+  AppDatabase() : super(impl.connect());
 
   @override
   int get schemaVersion => 1;

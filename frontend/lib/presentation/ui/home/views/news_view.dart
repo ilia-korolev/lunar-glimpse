@@ -8,7 +8,6 @@ import 'package:flutter_astronomy/core/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -386,7 +385,7 @@ class _NewsSourceListBody extends StatelessWidget {
                   leading: SizedBox(
                     width: theme.sizes.largeIconSize,
                     height: theme.sizes.largeIconSize,
-                    child: SvgPicture.asset(locale.flagAsset),
+                    child: Image.asset(locale.flagAsset),
                   ),
                   title: Text(l10n.languageName),
                   shape: RoundedRectangleBorder(

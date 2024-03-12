@@ -20,8 +20,8 @@ class _Flags {
 
   static const _path = '$_basePath/flags';
 
-  String get ch => '$_path/cn.svg';
-  String get jp => '$_path/jp.svg';
-  String get ru => '$_path/ru.svg';
-  String get us => '$_path/us.svg';
+  String get ch => '$_path/cn.png';
+  String get jp => '$_path/jp.png';
+  String get ru => '$_path/ru.png';
+  String get us => '$_path/us.png';
 }

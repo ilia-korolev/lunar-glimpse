@@ -14,6 +14,7 @@ dependencies:
   bloc_concurrency: ^0.2.4
   cached_network_image: ^3.3.1
   collection: ^1.18.0
+  cupertino_icons: ^1.0.6
   device_info_plus: ^9.1.2
   drift: ^2.15.0
   file_saver: ^0.2.11
@@ -23,7 +24,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_staggered_grid_view: ^0.7.0
-  flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
   freezed_annotation: ^2.4.1
   get_it: ^7.6.7
@@ -40,6 +40,7 @@ dependencies:
   share_plus: ^7.2.2
   shared_preferences: ^2.2.2
   skeletonizer: ^1.0.1
+  sqlite3: ^2.4.0
   sqlite3_flutter_libs: ^0.5.20
   url_launcher: ^6.2.5
   xml: ^6.5.0

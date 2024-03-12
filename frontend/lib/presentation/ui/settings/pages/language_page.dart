@@ -7,7 +7,6 @@ import 'package:flutter_astronomy/core/misc/_export.dart';
 import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/_export.dart';
@@ -256,7 +255,7 @@ class _FlagIcon extends StatelessWidget {
           return SizedBox(
             width: theme.sizes.largeIconSize,
             height: theme.sizes.largeIconSize,
-            child: SvgPicture.asset(locale!.flagAsset),
+            child: Image.asset(locale!.flagAsset),
           );
         },
       ),

@@ -159,6 +159,7 @@ class LoggingDioInterceptor extends Interceptor {
     final stringBuffer = StringBuffer()
       ..writeln('--API Error--')
       ..writeln('STATUS CODE: $statusCode')
+      ..writeln('MESSAGE: ${err.message}')
       ..write('URI: ${err.requestOptions.uri}');
 
     _logger.e(stringBuffer.toString());

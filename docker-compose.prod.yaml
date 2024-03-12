@@ -27,6 +27,15 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
 
+  frontend:
+    image: ghcr.io/ilia-korolev/astro-web:latest
+    container_name: astro-frontend-container
+    restart: always
+    expose:
+      - 9000
+    depends_on:
+      - backend
+
   backend:
     image: ghcr.io/ilia-korolev/astro-backend:latest
     container_name: astro-backend-container

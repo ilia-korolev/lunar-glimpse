@@ -28,13 +28,8 @@ Future<void> _registerServices() async {
     ..registerSingletonAsync<SharedPreferences>(
       () async => SharedPreferences.getInstance(),
     )
-    ..registerSingletonAsync<AppDatabase>(
-      () async {
-        final isolate = await AppDatabase.createDriftIsolate();
-        final connection = await isolate.connect(singleClientMode: true);
-
-        return AppDatabase(connection);
-      },
+    ..registerLazySingleton<AppDatabase>(
+      AppDatabase.new,
     )
     ..registerLazySingleton<Logger>(
       () => Logger(
@@ -88,11 +83,8 @@ Future<void> _registerDataSources() async {
         SharedPreferences,
       ],
     )
-    ..registerSingletonWithDependencies<LocalGalleryDataSource>(
+    ..registerLazySingleton<LocalGalleryDataSource>(
       () => DriftGalleryDataSource(database: _getIt()),
-      dependsOn: [
-        AppDatabase,
-      ],
     )
     ..registerLazySingleton<LocalNewsSourceDataSource>(
       () => DriftNewsSourceDataSource(

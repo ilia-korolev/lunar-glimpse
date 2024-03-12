@@ -5,11 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "[DEV] frontend",
+            "name": "[DEV] frontend (debug)",
             "request": "launch",
             "type": "dart",
             "cwd": "frontend",
-            "args": ["--flavor", "development"]
+            "args": [
+                "--dart-define",
+                "FLAVOR=development",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
             "name": "[DEV] frontend (profile mode)",
@@ -17,7 +22,12 @@
             "type": "dart",
             "cwd": "frontend",
             "flutterMode": "profile",
-            "args": ["--flavor", "development"]
+            "args": [
+                "--dart-define",
+                "FLAVOR=development",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
             "name": "[DEV] frontend (release mode)",
@@ -25,14 +35,24 @@
             "type": "dart",
             "cwd": "frontend",
             "flutterMode": "release",
-            "args": ["--flavor", "development"]
+            "args": [
+                "--dart-define",
+                "FLAVOR=development",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
-            "name": "[PROD] frontend",
+            "name": "[PROD] frontend (debug)",
             "request": "launch",
             "type": "dart",
             "cwd": "frontend",
-            "args": ["--flavor", "production"]
+            "args": [
+                "--dart-define",
+                "FLAVOR=production",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
             "name": "[PROD] frontend (profile mode)",
@@ -40,7 +60,12 @@
             "type": "dart",
             "cwd": "frontend",
             "flutterMode": "profile",
-            "args": ["--flavor", "production"]
+            "args": [
+                "--dart-define",
+                "FLAVOR=production",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
             "name": "[PROD] frontend (release mode)",
@@ -48,7 +73,12 @@
             "type": "dart",
             "cwd": "frontend",
             "flutterMode": "release",
-            "args": ["--flavor", "production"]
+            "args": [
+                "--dart-define",
+                "FLAVOR=production",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         }
     ]
 }

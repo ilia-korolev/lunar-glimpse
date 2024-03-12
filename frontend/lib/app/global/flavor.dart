@@ -1,8 +1,6 @@
-import 'package:flutter/services.dart' as services;
-
 abstract interface class Flavor {
   factory Flavor.fromEnvironment() {
-    const appFlavor = services.appFlavor;
+    const appFlavor = String.fromEnvironment('FLAVOR');
 
     return switch (appFlavor) {
       'development' => const DevelopmentFlavor(),

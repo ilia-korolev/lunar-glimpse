@@ -10,3 +10,9 @@ icons_launcher:
     macos:
       enable: true
       image_path: "assets/launcher_icons/ic_launcher_macos.png"
+    web:
+      enable: true
+      # TODO(ilia-korolev): this package doesn't support 32×32 icons
+      # until then replace it manually
+      # https://github.com/mrrhak/icons_launcher/issues/36
+      favicon_path: "assets/launcher_icons/favicon.png"
