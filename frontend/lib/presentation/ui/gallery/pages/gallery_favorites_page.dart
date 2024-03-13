@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_astronomy/app/_export.dart';
@@ -171,9 +169,8 @@ class _SuccessView extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final crossAxisCount = math.max(
-          constraints.maxWidth ~/ theme.sizes.galleryItemCardMinWidth,
-          1,
+        final crossAxisCount = theme.sizes.calcCrossAxisGalleryItemCount(
+          availableWidth: constraints.maxWidth,
         );
 
         return AlignedGridView.count(

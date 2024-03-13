@@ -172,4 +172,13 @@ class Sizes extends ThemeExtension<Sizes> {
       )!,
     );
   }
+
+  int calcCrossAxisGalleryItemCount({required double availableWidth}) {
+    const upperLimit = 5;
+
+    return (availableWidth ~/ galleryItemCardMinWidth).clamp(
+      1,
+      upperLimit,
+    );
+  }
 }
