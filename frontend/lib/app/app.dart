@@ -28,8 +28,7 @@ class App extends StatelessWidget {
               return MaterialApp.router(
                 scaffoldMessengerKey: GetIt.instance(),
                 routerConfig: Routing.appRouter,
-                // TODO(ilia-korolev): change the title
-                title: 'Flutter Demo',
+                title: 'Lunar Glimpse',
                 theme: GetIt.instance<Theming>().light,
                 darkTheme: GetIt.instance<Theming>().dark,
                 themeMode: settings.themeMode,

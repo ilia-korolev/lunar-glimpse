@@ -1,11 +1,11 @@
 {
-    "name": "frontend",
-    "short_name": "frontend",
+    "name": "Lunar Glimpse",
+    "short_name": "Lunar Glimpse",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#009DFF",
+    "theme_color": "#009DFF",
+    "description": "Explore the wonders of the universe with Lunar Glimpse",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
