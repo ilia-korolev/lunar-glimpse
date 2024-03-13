@@ -38,8 +38,17 @@ class _NewsViewState extends State<NewsView> {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: SelectionTransformer.separated(
-        child: BlocProvider.value(
-          value: _bloc,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: _bloc,
+            ),
+            BlocProvider(
+              create: (context) => NewsSourcesBloc(
+                newsRepository: GetIt.instance(),
+              )..add(const NewsSourcesEvent.initialized()),
+            ),
+          ],
           child: PrimaryRefreshIndicator(
             onRefresh: () async {
               _bloc.add(const NewsEvent.refreshed());
@@ -84,14 +93,19 @@ class _AppBar extends StatelessWidget {
               icon: FontAwesomeIcons.sliders,
               size: IconButtonSize.medium,
               onPressed: (_) async {
+                final bloc = context.read<NewsSourcesBloc>();
+
                 await showModalBottomSheet<void>(
                   context: context,
-                  builder: (context) => _NewsSourceList(
-                    backgroundColor: Colors.transparent,
-                    tileColor: theme.surfaceColors.surfaceContainerLowest,
-                    onApplyPressed: () {
-                      context.pop();
-                    },
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: _NewsSourceList(
+                      backgroundColor: Colors.transparent,
+                      tileColor: theme.surfaceColors.surfaceContainerLowest,
+                      onApplyPressed: () {
+                        context.pop();
+                      },
+                    ),
                   ),
                 );
               },
@@ -130,25 +144,33 @@ class _NewsSourcePanel extends StatelessWidget {
     final theme = Theme.of(context);
     final activeBreakpoint = Breakpoint.getActive(context);
 
-    return AnimatedSize(
-      duration: theme.durations.long,
-      curve: Curves.easeInOutCubicEmphasized,
-      alignment: Alignment.centerLeft,
-      child: SizedBox(
-        width: activeBreakpoint.isLarge ? theme.sizes.panelWidth : 0,
-        child: OverflowBox(
-          maxWidth: theme.sizes.panelWidth,
+    return BlocBuilder<NewsSourcesBloc, NewsSourcesState>(
+      buildWhen: (previous, current) =>
+          previous.hasShownSources != current.hasShownSources,
+      builder: (context, state) {
+        return AnimatedSize(
+          duration: theme.durations.long,
+          curve: Curves.easeInOutCubicEmphasized,
           alignment: Alignment.centerLeft,
-          child: _NewsSourceList(
-            backgroundColor: ElevationOverlay.applySurfaceTint(
-              theme.colorScheme.surface,
-              theme.colorScheme.surfaceTint,
-              3,
+          child: SizedBox(
+            width: activeBreakpoint.isLarge && state.hasShownSources
+                ? theme.sizes.panelWidth
+                : 0,
+            child: OverflowBox(
+              maxWidth: theme.sizes.panelWidth,
+              alignment: Alignment.centerLeft,
+              child: _NewsSourceList(
+                backgroundColor: ElevationOverlay.applySurfaceTint(
+                  theme.colorScheme.surface,
+                  theme.colorScheme.surfaceTint,
+                  3,
+                ),
+                tileColor: theme.surfaceColors.surfaceContainerLowest,
+              ),
             ),
-            tileColor: theme.surfaceColors.surfaceContainerLowest,
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -292,45 +314,35 @@ class _NewsSourceList extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return BlocProvider(
-      create: (context) => NewsSourcesBloc(
-        newsRepository: GetIt.instance(),
-      )..add(const NewsSourcesEvent.initialized()),
-      child: Builder(
-        builder: (context) {
-          return BlocBuilder<NewsSourcesBloc, NewsSourcesState>(
-            builder: (context, state) {
-              final localeToInputsMap =
-                  groupBy(state.inputs, (i) => i.source.locale);
+    return BlocBuilder<NewsSourcesBloc, NewsSourcesState>(
+      builder: (context, state) {
+        final localeToInputsMap = groupBy(state.inputs, (i) => i.source.locale);
 
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  final double padding = math.max(
-                    (constraints.maxWidth - theme.sizes.narrowContentWidth) / 2,
-                    theme.spacing.medium,
-                  );
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final double padding = math.max(
+              (constraints.maxWidth - theme.sizes.narrowContentWidth) / 2,
+              theme.spacing.medium,
+            );
 
-                  return _NewsSourceListBody(
-                    padding: padding,
-                    tileColor: tileColor,
-                    backgroundColor: backgroundColor,
-                    localeToInputsMap: localeToInputsMap,
-                    onApplyPressed: state.isPure
-                        ? null
-                        : () {
-                            context.read<NewsSourcesBloc>().add(
-                                  const NewsSourcesEvent.changesApplied(),
-                                );
+            return _NewsSourceListBody(
+              padding: padding,
+              tileColor: tileColor,
+              backgroundColor: backgroundColor,
+              localeToInputsMap: localeToInputsMap,
+              onApplyPressed: state.isPure
+                  ? null
+                  : () {
+                      context.read<NewsSourcesBloc>().add(
+                            const NewsSourcesEvent.changesApplied(),
+                          );
 
-                            onApplyPressed?.call();
-                          },
-                  );
-                },
-              );
-            },
-          );
-        },
-      ),
+                      onApplyPressed?.call();
+                    },
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -10,7 +10,7 @@ class NewsSourcesState with _$NewsSourcesState {
   const NewsSourcesState._();
 
   bool get isPure => !inputs.any((i) => i.isChanged);
-  bool get hasShownSources => inputs.any((i) => i.isShown);
+  bool get hasShownSources => inputs.any((i) => i.isShown ^ i.isChanged);
 
   @override
   String toString() {
