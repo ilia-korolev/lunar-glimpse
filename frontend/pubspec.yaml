@@ -17,7 +17,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   device_info_plus: ^9.1.2
   drift: ^2.15.0
-  file_saver: ^0.2.11
+  file_saver: ^0.2.12
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
@@ -30,7 +30,7 @@ dependencies:
   go_router: ^13.2.0
   intl: ^0.18.1
   json_annotation: ^4.8.1
-  logger: ^2.0.2+1
+  logger: ^2.1.0
   lottie: ^3.1.0
   material_color_utilities: ^0.8.0
   package_info_plus: ^5.0.1
@@ -39,7 +39,7 @@ dependencies:
   rxdart: ^0.27.7
   share_plus: ^7.2.2
   shared_preferences: ^2.2.2
-  skeletonizer: ^1.0.1
+  skeletonizer: ^1.1.0
   sqlite3: ^2.4.0
   sqlite3_flutter_libs: ^0.5.20
   url_launcher: ^6.2.5
