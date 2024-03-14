@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:astro_common/astro_common.dart';
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_astronomy/core/_export.dart';
@@ -53,6 +54,7 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
 
     on<GalleryAppSettingsChanged>(
       (event, emit) async => _appSettingsChanged(emit, event.appSettings),
+      transformer: restartable(),
     );
 
     _itemChangesListener = _galleryRepository.changes.listen(
@@ -156,15 +158,39 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   }
 
   Future<void> _refreshed(Emitter<GalleryState> emit) async {
-    emit(
-      state.copyWith(
-        status: BlocStatus.loading,
-        items: [],
-        hasReachedMax: false,
-      ),
-    );
+    try {
+      emit(
+        state.copyWith(
+          status: BlocStatus.loading,
+          items: [],
+          hasReachedMax: false,
+        ),
+      );
 
-    await _fetched(emit);
+      final response = await _galleryRepository.getLatestItems(
+        count: pageSize,
+        language: _language,
+      );
+
+      final items = response
+          // TODO(ilia-korolev): implement a video player
+          .where((m) => m.type == GalleryItemType.image)
+          .toList();
+
+      emit(
+        state.copyWith(
+          status: BlocStatus.success,
+          items: items,
+          hasReachedMax: response.length < pageSize,
+        ),
+      );
+    } on Exception catch (_) {
+      emit(
+        state.copyWith(
+          status: BlocStatus.failure,
+        ),
+      );
+    }
   }
 
   Future<void> _favoriteToggled(
