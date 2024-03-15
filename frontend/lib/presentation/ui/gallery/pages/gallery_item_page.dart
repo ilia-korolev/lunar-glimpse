@@ -261,6 +261,14 @@ class _GalleryItemAppBar extends StatelessWidget {
           ),
         ),
       ),
+      // TODO(ilia-korolev): Anti-aliasing bug workaround
+      // https://github.com/flutter/flutter/issues/14288
+      shape: Border(
+        bottom: BorderSide(
+          width: 0,
+          color: theme.colorScheme.background,
+        ),
+      ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(
           buttonSize,
