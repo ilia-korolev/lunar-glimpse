@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:astro_common/astro_common.dart';
-import 'package:flutter_astronomy/data/_export.dart';
+import 'package:frontend/data/_export.dart';
 
 abstract interface class GalleryRepository {
   const GalleryRepository();

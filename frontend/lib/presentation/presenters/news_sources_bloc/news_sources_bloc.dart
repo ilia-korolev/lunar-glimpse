@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/domain/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
+part 'news_sources_bloc.freezed.dart';
 part 'news_sources_event.dart';
 part 'news_sources_state.dart';
-part 'news_sources_bloc.freezed.dart';
 
 class NewsSourcesBloc extends Bloc<NewsSourcesEvent, NewsSourcesState> {
   NewsSourcesBloc({

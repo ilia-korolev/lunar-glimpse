@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:frontend/domain/_export.dart';
 
 class AppSettingsCubit extends Cubit<AppSettings> {
   AppSettingsCubit({

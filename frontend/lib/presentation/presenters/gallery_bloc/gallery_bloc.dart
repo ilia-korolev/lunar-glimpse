@@ -5,10 +5,10 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_astronomy/core/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/core/_export.dart';
+import 'package:frontend/domain/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
 part 'gallery_bloc.freezed.dart';
 part 'gallery_event.dart';

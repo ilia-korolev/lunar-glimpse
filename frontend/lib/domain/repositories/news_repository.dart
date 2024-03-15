@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_astronomy/data/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:frontend/data/_export.dart';
+import 'package:frontend/domain/_export.dart';
 
 abstract interface class NewsRepository {
   const NewsRepository();

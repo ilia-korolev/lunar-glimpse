@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:frontend/domain/_export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract interface class LocalAppSettingsDataSource {

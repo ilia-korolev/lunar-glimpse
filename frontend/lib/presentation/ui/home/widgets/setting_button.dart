@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
 class SettingButton extends StatelessWidget {
   const SettingButton({

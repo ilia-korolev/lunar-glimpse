@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class GithubInfoPage extends StatelessWidget {
@@ -37,7 +37,7 @@ class GithubInfoPage extends StatelessWidget {
               onPressed: () {
                 url_launcher.launchUrl(
                   Uri.parse(
-                    'https://github.com/ilia-korolev/flutter_astronomy',
+                    'https://github.com/ilia-korolev/frontend',
                   ),
                 );
               },

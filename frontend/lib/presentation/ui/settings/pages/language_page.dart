@@ -2,12 +2,12 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/core/misc/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/core/misc/_export.dart';
+import 'package:frontend/domain/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
 import '../widgets/_export.dart';
 

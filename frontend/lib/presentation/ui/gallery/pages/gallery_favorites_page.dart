@@ -1,10 +1,10 @@
 import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/core/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/core/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 

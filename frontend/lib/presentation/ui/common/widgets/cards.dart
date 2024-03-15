@@ -1,10 +1,10 @@
 import 'package:astro_common/astro_common.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:flutter_astronomy/presentation/ui/_export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/domain/_export.dart';
+import 'package:frontend/presentation/ui/_export.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';

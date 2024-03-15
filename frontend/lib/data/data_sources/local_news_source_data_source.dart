@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
-import 'package:flutter_astronomy/data/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:frontend/data/_export.dart';
+import 'package:frontend/domain/_export.dart';
 
 abstract interface class LocalNewsSourceDataSource {
   const LocalNewsSourceDataSource();

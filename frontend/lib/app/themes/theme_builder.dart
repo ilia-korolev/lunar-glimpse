@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
+import 'package:frontend/app/_export.dart';
 import 'package:material_color_utilities/hct/cam16.dart';
 import 'package:material_color_utilities/palettes/tonal_palette.dart';
 

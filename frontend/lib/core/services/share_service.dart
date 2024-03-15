@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/core/_export.dart';
+import 'package:frontend/core/_export.dart';
 import 'package:share_plus/share_plus.dart';
 
 abstract class ShareService {

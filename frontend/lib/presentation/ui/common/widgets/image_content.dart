@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
 class ImageContent extends StatelessWidget {
   const ImageContent({

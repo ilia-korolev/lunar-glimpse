@@ -1,4 +1,4 @@
-import 'package:flutter_astronomy/app/_export.dart';
+import 'package:frontend/app/_export.dart';
 
 void main() {
   bootstrap(App.new);

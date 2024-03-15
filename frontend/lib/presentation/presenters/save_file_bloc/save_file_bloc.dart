@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/domain/_export.dart';
 import 'package:rxdart/rxdart.dart';
 
+part 'save_file_bloc.freezed.dart';
 part 'save_file_event.dart';
 part 'save_file_state.dart';
-part 'save_file_bloc.freezed.dart';
 
 const _progressThrottleDuration = Duration(milliseconds: 75);
 const _readyDuration = Duration(seconds: 2);

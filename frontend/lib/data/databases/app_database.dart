@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
-import 'package:flutter_astronomy/data/_export.dart';
+import 'package:frontend/data/_export.dart';
 import 'connection/_export.dart' as impl;
 
 part 'app_database.g.dart';

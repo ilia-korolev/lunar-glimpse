@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/themes/theme_builder.dart';
+import 'package:frontend/app/themes/theme_builder.dart';
 
 class Theming {
   Theming({required ThemeBuilder builder})

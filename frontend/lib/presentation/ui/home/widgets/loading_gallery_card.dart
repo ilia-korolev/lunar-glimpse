@@ -1,6 +1,6 @@
 import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
 class LoadingGalleryCard extends StatelessWidget {
   const LoadingGalleryCard({

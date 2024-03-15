@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter_astronomy/app/_export.dart';
+import 'package:frontend/app/_export.dart';
 
 extension LocaleX on Locale {
   String get flagAsset {

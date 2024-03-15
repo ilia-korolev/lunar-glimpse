@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
+import 'package:frontend/app/_export.dart';
 import 'package:lottie/lottie.dart';
 
 class ImageView extends StatelessWidget {

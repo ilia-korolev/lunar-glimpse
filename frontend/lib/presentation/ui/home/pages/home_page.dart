@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/core/_export.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/core/_export.dart';
 import 'package:go_router/go_router.dart';
 
 import '../views/_export.dart';

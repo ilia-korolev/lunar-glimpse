@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_astronomy/core/_export.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
-import 'package:flutter_astronomy/presentation/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/core/_export.dart';
+import 'package:frontend/domain/_export.dart';
+import 'package:frontend/presentation/_export.dart';
 
 part 'news_bloc.freezed.dart';
 part 'news_event.dart';

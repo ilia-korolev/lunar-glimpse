@@ -1,8 +1,8 @@
 import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_astronomy/app/_export.dart';
-import 'package:flutter_astronomy/data/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/app/_export.dart';
+import 'package:frontend/data/_export.dart';
 
 part 'app_settings.freezed.dart';
 part 'app_settings.g.dart';

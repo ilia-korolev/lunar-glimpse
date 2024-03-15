@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:astro_common/astro_common.dart';
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend/domain/_export.dart';
 
 part 'gallery_item_bloc.freezed.dart';
 part 'gallery_item_event.dart';

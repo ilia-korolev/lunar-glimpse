@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_astronomy/domain/_export.dart';
+import 'package:frontend/domain/_export.dart';
 import 'package:xml/xml.dart';
 
 abstract interface class RssParser {
