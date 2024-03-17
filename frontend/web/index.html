@@ -28,7 +28,7 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png">
 
   <title>Lunar Glimpse</title>
   <link rel="manifest" href="manifest.json">
@@ -38,94 +38,109 @@
     const serviceWorkerVersion = null;
   </script>
   <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
-</head>
+  <script src="flutter.js" defer=""></script>
 
-<!-- Loading indicator -->
-<div id="loading">
-  <style>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
     body {
-      inset: 0;
-      overflow: hidden;
       margin: 0;
-      padding: 0;
-      position: fixed;
-      background-color: #009DFF;
+      min-height: 100%;
+      background-color: #F8F9FF;
+      background-size: 100% 100%;
     }
 
-    #loading {
-      align-items: center;
-      display: flex;
-      height: 100%;
-      justify-content: center;
-      width: 100%;
+    #splash img {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      animation: breathe 2s ease-in-out infinite;
     }
 
-    #loading img {
-      animation: 1s ease-in-out 0s infinite alternate breathe;
-      opacity: .66;
-      transition: opacity .4s;
-      border-radius: 36px;
+    #splash.init_done img {
+      animation: zoom .33s ease-in-out forwards;
     }
 
-    #loading.main_done img {
-      opacity: 1;
-    }
-
-    #loading.init_done img {
-      animation: .33s ease-in-out 0s 1 forwards zoom;
-      opacity: .05;
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #101418;
+      }
     }
 
     @keyframes breathe {
-      from {
-        transform: scale(1)
+      0% {
+        -ms-transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
       }
 
-      to {
-        transform: scale(0.95)
+      50% {
+        -ms-transform: translate(-50%, -50%) scale(1.1);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      100% {
+        -ms-transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
       }
     }
 
     @keyframes zoom {
-      from {
-        transform: scale(1)
+      0% {
+        -ms-transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
       }
 
-      to {
-        transform: scale(0.01)
+      100% {
+        -ms-transform: translate(-50%, -50%) scale(0.05);
+        transform: translate(-50%, -50%) scale(0.05);
       }
     }
   </style>
-  <img src="icons/Icon-192.png" alt="Loading indicator..." />
-</div>
+</head>
 
 <body>
+  <picture id="splash">
+    <source srcset="splash/splash-1x.png 1x, splash/splash-2x.png 2x, splash/splash-3x.png 3x, splash/splash-4x.png 4x">
+    <img aria-hidden="true" src="splash/splash-1x.png" alt="">
+  </picture>
+
   <script>
     window.addEventListener('load', function (ev) {
-      var loading = document.querySelector('#loading');
-
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function (engineInitializer) {
-          loading.classList.add('main_done');
           engineInitializer.initializeEngine().then(function (appRunner) {
-            loading.classList.add('init_done');
+            zoomSplash();
             appRunner.runApp();
           }).then(function (app) {
             // Wait a few milliseconds so users can see the "zoom" animation
             // before getting rid of the "loading" div.
             window.setTimeout(function () {
-              loading.remove();
+              removeSplash();
             }, 200);
           });
         }
       });
     });
+
+    function zoomSplash() {
+      document.getElementById('splash').classList.add('init_done');
+    }
+
+    function removeSplash() {
+      document.getElementById('splash').remove();
+      document.body.style.background = "transparent";
+    }
   </script>
+
 </body>
 
 </html>

@@ -3,7 +3,7 @@
     "short_name": "Lunar Glimpse",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#009DFF",
+    "background_color": "#F8f9FF",
     "theme_color": "#009DFF",
     "description": "Explore the wonders of the universe with Lunar Glimpse",
     "orientation": "portrait-primary",
