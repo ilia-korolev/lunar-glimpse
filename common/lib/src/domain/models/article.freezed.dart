@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Article _$ArticleFromJson(Map<String, dynamic> json) {
+  return _Article.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Article {
   String get title => throw _privateConstructorUsedError;
@@ -24,6 +28,7 @@ mixin _$Article {
   Uri? get thumbnail => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ArticleCopyWith<Article> get copyWith => throw _privateConstructorUsedError;
 }
@@ -180,8 +185,8 @@ class __$$ArticleImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$ArticleImpl implements _Article {
+@JsonSerializable()
+class _$ArticleImpl extends _Article {
   const _$ArticleImpl(
       {required this.title,
       required this.description,
@@ -189,7 +194,11 @@ class _$ArticleImpl implements _Article {
       required this.date,
       required this.source,
       this.thumbnail,
-      this.author});
+      this.author})
+      : super._();
+
+  factory _$ArticleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ArticleImplFromJson(json);
 
   @override
   final String title;
@@ -227,6 +236,7 @@ class _$ArticleImpl implements _Article {
             (identical(other.author, author) || other.author == author));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, title, description, uri, date, source, thumbnail, author);
@@ -236,9 +246,16 @@ class _$ArticleImpl implements _Article {
   @pragma('vm:prefer-inline')
   _$$ArticleImplCopyWith<_$ArticleImpl> get copyWith =>
       __$$ArticleImplCopyWithImpl<_$ArticleImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ArticleImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Article implements Article {
+abstract class _Article extends Article {
   const factory _Article(
       {required final String title,
       required final String description,
@@ -247,6 +264,9 @@ abstract class _Article implements Article {
       required final NewsSource source,
       final Uri? thumbnail,
       final String? author}) = _$ArticleImpl;
+  const _Article._() : super._();
+
+  factory _Article.fromJson(Map<String, dynamic> json) = _$ArticleImpl.fromJson;
 
   @override
   String get title;

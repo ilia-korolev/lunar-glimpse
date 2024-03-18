@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+NewsSource _$NewsSourceFromJson(Map<String, dynamic> json) {
+  return _NewsSource.fromJson(json);
+}
+
 /// @nodoc
 mixin _$NewsSource {
   Uri get uri => throw _privateConstructorUsedError;
@@ -21,6 +25,7 @@ mixin _$NewsSource {
   ContentLanguage get language => throw _privateConstructorUsedError;
   bool get isShown => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $NewsSourceCopyWith<NewsSource> get copyWith =>
       throw _privateConstructorUsedError;
@@ -123,7 +128,7 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$NewsSourceImpl extends _NewsSource {
   const _$NewsSourceImpl(
       {required this.uri,
@@ -131,6 +136,9 @@ class _$NewsSourceImpl extends _NewsSource {
       required this.language,
       required this.isShown})
       : super._();
+
+  factory _$NewsSourceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewsSourceImplFromJson(json);
 
   @override
   final Uri uri;
@@ -158,6 +166,7 @@ class _$NewsSourceImpl extends _NewsSource {
             (identical(other.isShown, isShown) || other.isShown == isShown));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, uri, favicon, language, isShown);
 
@@ -166,6 +175,13 @@ class _$NewsSourceImpl extends _NewsSource {
   @pragma('vm:prefer-inline')
   _$$NewsSourceImplCopyWith<_$NewsSourceImpl> get copyWith =>
       __$$NewsSourceImplCopyWithImpl<_$NewsSourceImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NewsSourceImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _NewsSource extends NewsSource {
@@ -175,6 +191,9 @@ abstract class _NewsSource extends NewsSource {
       required final ContentLanguage language,
       required final bool isShown}) = _$NewsSourceImpl;
   const _NewsSource._() : super._();
+
+  factory _NewsSource.fromJson(Map<String, dynamic> json) =
+      _$NewsSourceImpl.fromJson;
 
   @override
   Uri get uri;
