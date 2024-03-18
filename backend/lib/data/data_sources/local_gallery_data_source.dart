@@ -1,8 +1,6 @@
-import 'package:astro_backend/_export.dart';
+import 'package:astro_backend/core/_export.dart';
+import 'package:astro_backend/data/_export.dart';
 import 'package:astro_common/astro_common.dart';
-import 'package:postgres/postgres.dart';
-
-typedef PostgresPool = Pool<dynamic>;
 
 abstract interface class LocalGalleryDataSource {
   const LocalGalleryDataSource();
