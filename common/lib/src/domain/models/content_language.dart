@@ -15,6 +15,16 @@ enum ContentLanguage {
           ),
       };
 
+  static ContentLanguage fromString(String language) => switch (language) {
+        'english' => ContentLanguage.english,
+        'japanese' => ContentLanguage.japanese,
+        'russian' => ContentLanguage.russian,
+        'chinese' => ContentLanguage.chinese,
+        _ => throw UnsupportedError(
+            'The language is not supported: $language',
+          ),
+      };
+
   String get languageCode => switch (this) {
         ContentLanguage.english => 'en',
         ContentLanguage.japanese => 'ja',

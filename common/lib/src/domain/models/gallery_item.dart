@@ -8,7 +8,17 @@ enum GalleryItemType {
   video,
   image,
   other,
-  empty,
+  empty;
+
+  static GalleryItemType fromString(String type) => switch (type) {
+        'video' => GalleryItemType.video,
+        'image' => GalleryItemType.image,
+        'other' => GalleryItemType.other,
+        'empty' => GalleryItemType.empty,
+        _ => throw UnsupportedError(
+            'The type is not supported: $type',
+          ),
+      };
 }
 
 @freezed
