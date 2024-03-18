@@ -21,7 +21,7 @@ Future<Response> onRequest(RequestContext context) async {
     }
 
     final languageIsSupported =
-        GalleryItemLanguage.values.any((l) => l.name == languageName);
+        ContentLanguage.values.any((l) => l.name == languageName);
 
     if (!languageIsSupported) {
       return Response(

@@ -1,5 +1,5 @@
+import 'package:astro_common/src/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend/domain/_export.dart';
 
 part 'article.freezed.dart';
 

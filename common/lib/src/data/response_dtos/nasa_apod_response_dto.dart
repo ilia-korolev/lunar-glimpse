@@ -34,8 +34,8 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
       copyright: copyright,
       type: mediaType,
       isFavorite: false,
-      language: GalleryItemLanguage.english,
-      originalLanguage: GalleryItemLanguage.english,
+      language: ContentLanguage.english,
+      originalLanguage: ContentLanguage.english,
       title: title,
       explanation: explanation,
     );

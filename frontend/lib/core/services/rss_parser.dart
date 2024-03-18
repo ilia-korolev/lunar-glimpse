@@ -1,5 +1,5 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:collection/collection.dart';
-import 'package:frontend/domain/_export.dart';
 import 'package:xml/xml.dart';
 
 abstract interface class RssParser {

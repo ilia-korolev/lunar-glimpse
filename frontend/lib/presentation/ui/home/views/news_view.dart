@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:astro_common/astro_common.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/app/_export.dart';
 import 'package:frontend/core/_export.dart';
-import 'package:frontend/domain/_export.dart';
 import 'package:frontend/presentation/_export.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -316,7 +316,8 @@ class _NewsSourceList extends StatelessWidget {
 
     return BlocBuilder<NewsSourcesBloc, NewsSourcesState>(
       builder: (context, state) {
-        final localeToInputsMap = groupBy(state.inputs, (i) => i.source.locale);
+        final languageToInputsMap =
+            groupBy(state.inputs, (i) => i.source.language);
 
         return LayoutBuilder(
           builder: (context, constraints) {
@@ -329,7 +330,7 @@ class _NewsSourceList extends StatelessWidget {
               padding: padding,
               tileColor: tileColor,
               backgroundColor: backgroundColor,
-              localeToInputsMap: localeToInputsMap,
+              languageToInputsMap: languageToInputsMap,
               onApplyPressed: state.isPure
                   ? null
                   : () {
@@ -352,21 +353,21 @@ class _NewsSourceListBody extends StatelessWidget {
     required this.backgroundColor,
     required this.padding,
     required this.tileColor,
-    required this.localeToInputsMap,
+    required this.languageToInputsMap,
     required this.onApplyPressed,
   });
 
   final Color backgroundColor;
   final double padding;
   final Color tileColor;
-  final Map<Locale, List<NewsSourceInput>> localeToInputsMap;
+  final Map<ContentLanguage, List<NewsSourceInput>> languageToInputsMap;
   final void Function()? onApplyPressed;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
-    final locales = localeToInputsMap.keys.toList();
+    final languages = languageToInputsMap.keys.toList();
 
     return ColoredBox(
       color: backgroundColor,
@@ -387,7 +388,10 @@ class _NewsSourceListBody extends StatelessWidget {
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: padding),
               itemBuilder: (context, index) {
-                final locale = locales[index];
+                final language = languages[index];
+                final locale = AppLocalizations.supportedLocales.singleWhere(
+                  (l) => l.languageCode == language.languageCode,
+                );
                 final l10n = lookupAppLocalizations(locale);
 
                 // TODO(ilia-korolev): InkSplash functionality is broken
@@ -420,7 +424,7 @@ class _NewsSourceListBody extends StatelessWidget {
                       height: 1,
                     ),
                     SizedBox(height: theme.spacing.extraSmall),
-                    ...localeToInputsMap[locale]!
+                    ...languageToInputsMap[language]!
                         .map((i) => _NewsSourceTile(input: i)),
                   ],
                 );
@@ -428,7 +432,7 @@ class _NewsSourceListBody extends StatelessWidget {
               separatorBuilder: (context, index) {
                 return SizedBox(height: theme.spacing.semiSmall);
               },
-              itemCount: localeToInputsMap.length,
+              itemCount: languageToInputsMap.length,
             ),
           ),
           SizedBox(height: theme.spacing.medium),

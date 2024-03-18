@@ -76,7 +76,7 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   final AppSettingsRepository _appSettingsRepository;
   final int pageSize;
 
-  late GalleryItemLanguage _language;
+  late ContentLanguage _language;
 
   late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
   late final StreamSubscription<AppSettings> _appSettingsListener;

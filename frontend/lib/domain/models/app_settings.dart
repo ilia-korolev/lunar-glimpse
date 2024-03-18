@@ -28,9 +28,9 @@ class AppSettings with _$AppSettings {
         );
   }
 
-  GalleryItemLanguage get galleryLanguage => !translateGallery
-      ? GalleryItemLanguage.english
-      : GalleryItemLanguage.fromLanguageCode(
+  ContentLanguage get galleryLanguage => !translateGallery
+      ? ContentLanguage.english
+      : ContentLanguage.fromLanguageCode(
           localeOfDefault.languageCode,
         );
 

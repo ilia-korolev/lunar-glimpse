@@ -12,7 +12,7 @@ part of 'astro_backend_gallery_items_request_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AstroBackendGalleryItemsRequestDto _$AstroBackendGalleryItemsRequestDtoFromJson(
     Map<String, dynamic> json) {
@@ -23,7 +23,7 @@ AstroBackendGalleryItemsRequestDto _$AstroBackendGalleryItemsRequestDtoFromJson(
 mixin _$AstroBackendGalleryItemsRequestDto {
   Date get startDate => throw _privateConstructorUsedError;
   Date get endDate => throw _privateConstructorUsedError;
-  GalleryItemLanguage get language => throw _privateConstructorUsedError;
+  ContentLanguage get language => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +40,7 @@ abstract class $AstroBackendGalleryItemsRequestDtoCopyWith<$Res> {
       _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
           AstroBackendGalleryItemsRequestDto>;
   @useResult
-  $Res call({Date startDate, Date endDate, GalleryItemLanguage language});
+  $Res call({Date startDate, Date endDate, ContentLanguage language});
 
   $DateCopyWith<$Res> get startDate;
   $DateCopyWith<$Res> get endDate;
@@ -76,7 +76,7 @@ class _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
     ) as $Val);
   }
 
@@ -106,7 +106,7 @@ abstract class _$$AstroBackendGalleryItemsRequestDtoImplCopyWith<$Res>
       __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Date startDate, Date endDate, GalleryItemLanguage language});
+  $Res call({Date startDate, Date endDate, ContentLanguage language});
 
   @override
   $DateCopyWith<$Res> get startDate;
@@ -143,7 +143,7 @@ class __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
     ));
   }
 }
@@ -166,7 +166,7 @@ class _$AstroBackendGalleryItemsRequestDtoImpl
   @override
   final Date endDate;
   @override
-  final GalleryItemLanguage language;
+  final ContentLanguage language;
 
   @override
   String toString() {
@@ -210,7 +210,7 @@ abstract class _AstroBackendGalleryItemsRequestDto
   const factory _AstroBackendGalleryItemsRequestDto(
           {required final Date startDate,
           required final Date endDate,
-          required final GalleryItemLanguage language}) =
+          required final ContentLanguage language}) =
       _$AstroBackendGalleryItemsRequestDtoImpl;
   const _AstroBackendGalleryItemsRequestDto._() : super._();
 
@@ -223,7 +223,7 @@ abstract class _AstroBackendGalleryItemsRequestDto
   @override
   Date get endDate;
   @override
-  GalleryItemLanguage get language;
+  ContentLanguage get language;
   @override
   @JsonKey(ignore: true)
   _$$AstroBackendGalleryItemsRequestDtoImplCopyWith<

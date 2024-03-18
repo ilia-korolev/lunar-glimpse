@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
 import 'package:frontend/data/_export.dart';
@@ -25,8 +23,8 @@ class Gallery extends Table {
 class GalleryTranslations extends Table {
   IntColumn get date =>
       integer().map(const DateConverter()).references(Gallery, #date)();
-  TextColumn get language => textEnum<GalleryItemLanguage>()();
-  TextColumn get originalLanguage => textEnum<GalleryItemLanguage>()();
+  TextColumn get language => textEnum<ContentLanguage>()();
+  TextColumn get originalLanguage => textEnum<ContentLanguage>()();
   TextColumn get title => text()();
   TextColumn get explanation => text()();
 
@@ -38,7 +36,7 @@ class GalleryTranslations extends Table {
 class NewsSourceEntities extends Table {
   TextColumn get uri => text().map(const _UriConverter())();
   TextColumn get favicon => text().map(const _UriConverter())();
-  TextColumn get locale => text().map(const LocaleConverter())();
+  TextColumn get language => textEnum<ContentLanguage>()();
   BoolColumn get isShown => boolean()();
 
   @override

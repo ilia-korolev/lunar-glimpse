@@ -16,9 +16,9 @@ _$GalleryItemImpl _$$GalleryItemImplFromJson(Map<String, dynamic> json) =>
       copyright: json['copyright'] as String?,
       type: $enumDecode(_$GalleryItemTypeEnumMap, json['type']),
       isFavorite: json['isFavorite'] as bool,
-      language: $enumDecode(_$GalleryItemLanguageEnumMap, json['language']),
+      language: $enumDecode(_$ContentLanguageEnumMap, json['language']),
       originalLanguage:
-          $enumDecode(_$GalleryItemLanguageEnumMap, json['originalLanguage']),
+          $enumDecode(_$ContentLanguageEnumMap, json['originalLanguage']),
       title: json['title'] as String,
       explanation: json['explanation'] as String,
     );
@@ -31,9 +31,8 @@ Map<String, dynamic> _$$GalleryItemImplToJson(_$GalleryItemImpl instance) =>
       'copyright': instance.copyright,
       'type': _$GalleryItemTypeEnumMap[instance.type]!,
       'isFavorite': instance.isFavorite,
-      'language': _$GalleryItemLanguageEnumMap[instance.language]!,
-      'originalLanguage':
-          _$GalleryItemLanguageEnumMap[instance.originalLanguage]!,
+      'language': _$ContentLanguageEnumMap[instance.language]!,
+      'originalLanguage': _$ContentLanguageEnumMap[instance.originalLanguage]!,
       'title': instance.title,
       'explanation': instance.explanation,
     };
@@ -45,9 +44,9 @@ const _$GalleryItemTypeEnumMap = {
   GalleryItemType.empty: 'empty',
 };
 
-const _$GalleryItemLanguageEnumMap = {
-  GalleryItemLanguage.english: 'english',
-  GalleryItemLanguage.japanese: 'japanese',
-  GalleryItemLanguage.russian: 'russian',
-  GalleryItemLanguage.chinese: 'chinese',
+const _$ContentLanguageEnumMap = {
+  ContentLanguage.english: 'english',
+  ContentLanguage.japanese: 'japanese',
+  ContentLanguage.russian: 'russian',
+  ContentLanguage.chinese: 'chinese',
 };

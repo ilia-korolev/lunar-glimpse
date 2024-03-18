@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NewsSource {
   Uri get uri => throw _privateConstructorUsedError;
   Uri get favicon => throw _privateConstructorUsedError;
-  Locale get locale => throw _privateConstructorUsedError;
+  ContentLanguage get language => throw _privateConstructorUsedError;
   bool get isShown => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +32,7 @@ abstract class $NewsSourceCopyWith<$Res> {
           NewsSource value, $Res Function(NewsSource) then) =
       _$NewsSourceCopyWithImpl<$Res, NewsSource>;
   @useResult
-  $Res call({Uri uri, Uri favicon, Locale locale, bool isShown});
+  $Res call({Uri uri, Uri favicon, ContentLanguage language, bool isShown});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$NewsSourceCopyWithImpl<$Res, $Val extends NewsSource>
   $Res call({
     Object? uri = null,
     Object? favicon = null,
-    Object? locale = null,
+    Object? language = null,
     Object? isShown = null,
   }) {
     return _then(_value.copyWith(
@@ -62,10 +62,10 @@ class _$NewsSourceCopyWithImpl<$Res, $Val extends NewsSource>
           ? _value.favicon
           : favicon // ignore: cast_nullable_to_non_nullable
               as Uri,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as ContentLanguage,
       isShown: null == isShown
           ? _value.isShown
           : isShown // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$NewsSourceImplCopyWith<$Res>
       __$$NewsSourceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Uri uri, Uri favicon, Locale locale, bool isShown});
+  $Res call({Uri uri, Uri favicon, ContentLanguage language, bool isShown});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
   $Res call({
     Object? uri = null,
     Object? favicon = null,
-    Object? locale = null,
+    Object? language = null,
     Object? isShown = null,
   }) {
     return _then(_$NewsSourceImpl(
@@ -110,10 +110,10 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
           ? _value.favicon
           : favicon // ignore: cast_nullable_to_non_nullable
               as Uri,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as ContentLanguage,
       isShown: null == isShown
           ? _value.isShown
           : isShown // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ class _$NewsSourceImpl extends _NewsSource {
   const _$NewsSourceImpl(
       {required this.uri,
       required this.favicon,
-      required this.locale,
+      required this.language,
       required this.isShown})
       : super._();
 
@@ -137,13 +137,13 @@ class _$NewsSourceImpl extends _NewsSource {
   @override
   final Uri favicon;
   @override
-  final Locale locale;
+  final ContentLanguage language;
   @override
   final bool isShown;
 
   @override
   String toString() {
-    return 'NewsSource(uri: $uri, favicon: $favicon, locale: $locale, isShown: $isShown)';
+    return 'NewsSource(uri: $uri, favicon: $favicon, language: $language, isShown: $isShown)';
   }
 
   @override
@@ -153,12 +153,13 @@ class _$NewsSourceImpl extends _NewsSource {
             other is _$NewsSourceImpl &&
             (identical(other.uri, uri) || other.uri == uri) &&
             (identical(other.favicon, favicon) || other.favicon == favicon) &&
-            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.isShown, isShown) || other.isShown == isShown));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, uri, favicon, locale, isShown);
+  int get hashCode => Object.hash(runtimeType, uri, favicon, language, isShown);
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +172,7 @@ abstract class _NewsSource extends NewsSource {
   const factory _NewsSource(
       {required final Uri uri,
       required final Uri favicon,
-      required final Locale locale,
+      required final ContentLanguage language,
       required final bool isShown}) = _$NewsSourceImpl;
   const _NewsSource._() : super._();
 
@@ -180,7 +181,7 @@ abstract class _NewsSource extends NewsSource {
   @override
   Uri get favicon;
   @override
-  Locale get locale;
+  ContentLanguage get language;
   @override
   bool get isShown;
   @override

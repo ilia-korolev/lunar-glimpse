@@ -71,7 +71,7 @@ class GalleryFavoritesBloc
   final StreamController<GalleryItem> _removedFavoriteController =
       StreamController<GalleryItem>.broadcast();
 
-  late GalleryItemLanguage _language;
+  late ContentLanguage _language;
 
   late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
   late final StreamSubscription<AppSettings> _appSettingsListener;

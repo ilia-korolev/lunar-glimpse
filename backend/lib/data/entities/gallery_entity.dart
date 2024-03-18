@@ -103,8 +103,8 @@ const _galleryItemTypeEnumMap = {
 };
 
 const _galleryItemLanguageEnumMap = {
-  'english': GalleryItemLanguage.english,
-  'japanese': GalleryItemLanguage.japanese,
-  'russian': GalleryItemLanguage.russian,
-  'chinese': GalleryItemLanguage.chinese,
+  'english': ContentLanguage.english,
+  'japanese': ContentLanguage.japanese,
+  'russian': ContentLanguage.russian,
+  'chinese': ContentLanguage.chinese,
 };

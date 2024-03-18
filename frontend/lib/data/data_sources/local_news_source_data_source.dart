@@ -1,7 +1,7 @@
+import 'package:astro_common/astro_common.dart';
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:frontend/data/_export.dart';
-import 'package:frontend/domain/_export.dart';
 
 abstract interface class LocalNewsSourceDataSource {
   const LocalNewsSourceDataSource();
@@ -32,11 +32,11 @@ class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
           (e) => NewsSource(
             uri: e.uri,
             favicon: e.favicon,
-            locale: e.locale,
+            language: e.language,
             isShown: e.isShown,
           ),
         )
-        .sortedBy((s) => s.locale.languageCode + s.name)
+        .sortedBy((s) => s.language.languageCode + s.name)
         .toList();
 
     return models;
@@ -53,7 +53,7 @@ class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
           (e) => NewsSource(
             uri: e.uri,
             favicon: e.favicon,
-            locale: e.locale,
+            language: e.language,
             isShown: e.isShown,
           ),
         )
@@ -79,7 +79,7 @@ class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
             (i) => NewsSourceEntity(
               uri: i.uri,
               favicon: i.favicon,
-              locale: i.locale,
+              language: i.language,
               isShown: i.isShown,
             ),
           ),

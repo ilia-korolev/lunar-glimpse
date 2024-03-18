@@ -4,13 +4,13 @@ abstract interface class RemoteMultiLanguageGalleryDataSource {
   const RemoteMultiLanguageGalleryDataSource();
 
   Future<GalleryItem> getLatestItem({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 
   Future<List<GalleryItem>> getGalleryItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 }
 
@@ -27,7 +27,7 @@ class AstroBackendGalleryDataSource
 
   @override
   Future<GalleryItem> getLatestItem({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final request = AstroBackendGalleryLatestRequestDto(
       language: language,
@@ -53,7 +53,7 @@ class AstroBackendGalleryDataSource
   Future<List<GalleryItem>> getGalleryItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final request = AstroBackendGalleryItemsRequestDto(
       startDate: startDate,

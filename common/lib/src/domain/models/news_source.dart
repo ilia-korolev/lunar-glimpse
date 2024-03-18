@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:astro_common/src/_export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'news_source.freezed.dart';
@@ -9,7 +8,7 @@ class NewsSource with _$NewsSource {
   const factory NewsSource({
     required Uri uri,
     required Uri favicon,
-    required Locale locale,
+    required ContentLanguage language,
     required bool isShown,
   }) = _NewsSource;
 
