@@ -31,7 +31,7 @@ class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
         .map(
           (e) => NewsSource(
             uri: e.uri,
-            favicon: e.favicon,
+            iconUri: e.favicon,
             language: e.language,
             isShown: e.isShown,
           ),
@@ -52,7 +52,7 @@ class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
         .map(
           (e) => NewsSource(
             uri: e.uri,
-            favicon: e.favicon,
+            iconUri: e.favicon,
             language: e.language,
             isShown: e.isShown,
           ),
@@ -78,7 +78,7 @@ class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
           newsSources.map(
             (i) => NewsSourceEntity(
               uri: i.uri,
-              favicon: i.favicon,
+              favicon: i.iconUri,
               language: i.language,
               isShown: i.isShown,
             ),

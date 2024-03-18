@@ -21,7 +21,7 @@ NewsSource _$NewsSourceFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NewsSource {
   Uri get uri => throw _privateConstructorUsedError;
-  Uri get favicon => throw _privateConstructorUsedError;
+  Uri get iconUri => throw _privateConstructorUsedError;
   ContentLanguage get language => throw _privateConstructorUsedError;
   bool get isShown => throw _privateConstructorUsedError;
 
@@ -37,7 +37,7 @@ abstract class $NewsSourceCopyWith<$Res> {
           NewsSource value, $Res Function(NewsSource) then) =
       _$NewsSourceCopyWithImpl<$Res, NewsSource>;
   @useResult
-  $Res call({Uri uri, Uri favicon, ContentLanguage language, bool isShown});
+  $Res call({Uri uri, Uri iconUri, ContentLanguage language, bool isShown});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$NewsSourceCopyWithImpl<$Res, $Val extends NewsSource>
   @override
   $Res call({
     Object? uri = null,
-    Object? favicon = null,
+    Object? iconUri = null,
     Object? language = null,
     Object? isShown = null,
   }) {
@@ -63,9 +63,9 @@ class _$NewsSourceCopyWithImpl<$Res, $Val extends NewsSource>
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
               as Uri,
-      favicon: null == favicon
-          ? _value.favicon
-          : favicon // ignore: cast_nullable_to_non_nullable
+      iconUri: null == iconUri
+          ? _value.iconUri
+          : iconUri // ignore: cast_nullable_to_non_nullable
               as Uri,
       language: null == language
           ? _value.language
@@ -87,7 +87,7 @@ abstract class _$$NewsSourceImplCopyWith<$Res>
       __$$NewsSourceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Uri uri, Uri favicon, ContentLanguage language, bool isShown});
+  $Res call({Uri uri, Uri iconUri, ContentLanguage language, bool isShown});
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uri = null,
-    Object? favicon = null,
+    Object? iconUri = null,
     Object? language = null,
     Object? isShown = null,
   }) {
@@ -111,9 +111,9 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
               as Uri,
-      favicon: null == favicon
-          ? _value.favicon
-          : favicon // ignore: cast_nullable_to_non_nullable
+      iconUri: null == iconUri
+          ? _value.iconUri
+          : iconUri // ignore: cast_nullable_to_non_nullable
               as Uri,
       language: null == language
           ? _value.language
@@ -132,7 +132,7 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
 class _$NewsSourceImpl extends _NewsSource {
   const _$NewsSourceImpl(
       {required this.uri,
-      required this.favicon,
+      required this.iconUri,
       required this.language,
       required this.isShown})
       : super._();
@@ -143,7 +143,7 @@ class _$NewsSourceImpl extends _NewsSource {
   @override
   final Uri uri;
   @override
-  final Uri favicon;
+  final Uri iconUri;
   @override
   final ContentLanguage language;
   @override
@@ -151,7 +151,7 @@ class _$NewsSourceImpl extends _NewsSource {
 
   @override
   String toString() {
-    return 'NewsSource(uri: $uri, favicon: $favicon, language: $language, isShown: $isShown)';
+    return 'NewsSource(uri: $uri, iconUri: $iconUri, language: $language, isShown: $isShown)';
   }
 
   @override
@@ -160,7 +160,7 @@ class _$NewsSourceImpl extends _NewsSource {
         (other.runtimeType == runtimeType &&
             other is _$NewsSourceImpl &&
             (identical(other.uri, uri) || other.uri == uri) &&
-            (identical(other.favicon, favicon) || other.favicon == favicon) &&
+            (identical(other.iconUri, iconUri) || other.iconUri == iconUri) &&
             (identical(other.language, language) ||
                 other.language == language) &&
             (identical(other.isShown, isShown) || other.isShown == isShown));
@@ -168,7 +168,7 @@ class _$NewsSourceImpl extends _NewsSource {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uri, favicon, language, isShown);
+  int get hashCode => Object.hash(runtimeType, uri, iconUri, language, isShown);
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +187,7 @@ class _$NewsSourceImpl extends _NewsSource {
 abstract class _NewsSource extends NewsSource {
   const factory _NewsSource(
       {required final Uri uri,
-      required final Uri favicon,
+      required final Uri iconUri,
       required final ContentLanguage language,
       required final bool isShown}) = _$NewsSourceImpl;
   const _NewsSource._() : super._();
@@ -198,7 +198,7 @@ abstract class _NewsSource extends NewsSource {
   @override
   Uri get uri;
   @override
-  Uri get favicon;
+  Uri get iconUri;
   @override
   ContentLanguage get language;
   @override

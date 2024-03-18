@@ -11,7 +11,7 @@ part of 'news_source.dart';
 _$NewsSourceImpl _$$NewsSourceImplFromJson(Map<String, dynamic> json) =>
     _$NewsSourceImpl(
       uri: Uri.parse(json['uri'] as String),
-      favicon: Uri.parse(json['favicon'] as String),
+      iconUri: Uri.parse(json['iconUri'] as String),
       language: $enumDecode(_$ContentLanguageEnumMap, json['language']),
       isShown: json['isShown'] as bool,
     );
@@ -19,7 +19,7 @@ _$NewsSourceImpl _$$NewsSourceImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$NewsSourceImplToJson(_$NewsSourceImpl instance) =>
     <String, dynamic>{
       'uri': instance.uri.toString(),
-      'favicon': instance.favicon.toString(),
+      'iconUri': instance.iconUri.toString(),
       'language': _$ContentLanguageEnumMap[instance.language]!,
       'isShown': instance.isShown,
     };

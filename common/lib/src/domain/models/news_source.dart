@@ -8,7 +8,7 @@ part 'news_source.g.dart';
 class NewsSource with _$NewsSource {
   const factory NewsSource({
     required Uri uri,
-    required Uri favicon,
+    required Uri iconUri,
     required ContentLanguage language,
     required bool isShown,
   }) = _NewsSource;

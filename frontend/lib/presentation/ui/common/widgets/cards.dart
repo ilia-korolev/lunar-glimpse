@@ -335,7 +335,7 @@ class _ArticleInfo extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
-                  imageUrl: article.source.favicon.toString(),
+                  imageUrl: article.source.iconUri.toString(),
                 ),
               ),
               SizedBox(width: theme.spacing.small),

@@ -470,7 +470,7 @@ class _NewsSourceTile extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: CachedNetworkImage(
           fit: BoxFit.cover,
-          imageUrl: input.source.favicon.toString(),
+          imageUrl: input.source.iconUri.toString(),
         ),
       ),
       trailing: Switch.adaptive(
