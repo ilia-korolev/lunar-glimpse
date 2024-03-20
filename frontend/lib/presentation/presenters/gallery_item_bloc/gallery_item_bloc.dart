@@ -57,7 +57,7 @@ class GalleryItemBloc extends Bloc<GalleryItemEvent, GalleryItemState> {
   final GalleryRepository _galleryRepository;
   final AppSettingsRepository _appSettingsRepository;
 
-  late GalleryItemLanguage _language;
+  late ContentLanguage _language;
 
   late final StreamSubscription<List<GalleryItem>> _itemChangesListener;
   late final StreamSubscription<AppSettings> _appSettingsListener;

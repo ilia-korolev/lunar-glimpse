@@ -13,7 +13,7 @@ abstract interface class LocalGalleryDataSource {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 
   Future<List<Date>> getFavoriteDates();
@@ -76,7 +76,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final startDateInt = startDate.toInt();
     final endDateInt = endDate.toInt();

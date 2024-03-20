@@ -11,17 +11,17 @@ abstract interface class GalleryRepository {
   Future<List<GalleryItem>> getItems({
     required Date endDate,
     required int count,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 
   Future<GalleryItem> getItem({
     required Date date,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 
   Future<List<GalleryItem>> getLatestItems({
     required int count,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 
   Future<void> toggleFavorite({
@@ -29,7 +29,7 @@ abstract interface class GalleryRepository {
   });
 
   Future<List<GalleryItem>> getFavorites({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 }
 
@@ -51,7 +51,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
   @override
   Future<List<GalleryItem>> getLatestItems({
     required int count,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final latestItem = await _remoteGalleryDataSource.getLatestItem(
       language: language,
@@ -72,7 +72,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<List<GalleryItem>> getItems({
     required Date endDate,
     required int count,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final startDate = endDate.subtract(Duration(days: count - 1));
 
@@ -86,7 +86,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
   @override
   Future<GalleryItem> getItem({
     required Date date,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final item = await getItems(
       endDate: date,
@@ -116,7 +116,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
   @override
   Future<List<GalleryItem>> getFavorites({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final dates = await _localGalleryDataSource.getFavoriteDates();
     final periods = dates.toPeriods();
@@ -141,7 +141,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<List<GalleryItem>> _getItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final cachedItems = await _localGalleryDataSource.getItems(
       startDate: startDate,
@@ -172,7 +172,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
     required Date endDate,
     required Date startDate,
     required List<GalleryItem> cachedItems,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final count = endDate.difference(startDate).inDays + 1;
 

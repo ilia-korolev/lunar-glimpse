@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/app/_export.dart';
-import 'package:frontend/domain/_export.dart';
 import 'package:frontend/presentation/ui/_export.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -336,7 +335,7 @@ class _ArticleInfo extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
-                  imageUrl: article.source.favicon.toString(),
+                  imageUrl: article.source.iconUri.toString(),
                 ),
               ),
               SizedBox(width: theme.spacing.small),

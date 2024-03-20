@@ -14,7 +14,7 @@ _$AstroBackendGalleryItemsRequestDtoImpl
         _$AstroBackendGalleryItemsRequestDtoImpl(
           startDate: Date.fromJson(json['start_date'] as String),
           endDate: Date.fromJson(json['end_date'] as String),
-          language: $enumDecode(_$GalleryItemLanguageEnumMap, json['language']),
+          language: $enumDecode(_$ContentLanguageEnumMap, json['language']),
         );
 
 Map<String, dynamic> _$$AstroBackendGalleryItemsRequestDtoImplToJson(
@@ -22,12 +22,12 @@ Map<String, dynamic> _$$AstroBackendGalleryItemsRequestDtoImplToJson(
     <String, dynamic>{
       'start_date': instance.startDate.toJson(),
       'end_date': instance.endDate.toJson(),
-      'language': _$GalleryItemLanguageEnumMap[instance.language]!,
+      'language': _$ContentLanguageEnumMap[instance.language]!,
     };
 
-const _$GalleryItemLanguageEnumMap = {
-  GalleryItemLanguage.english: 'english',
-  GalleryItemLanguage.japanese: 'japanese',
-  GalleryItemLanguage.russian: 'russian',
-  GalleryItemLanguage.chinese: 'chinese',
+const _$ContentLanguageEnumMap = {
+  ContentLanguage.english: 'english',
+  ContentLanguage.japanese: 'japanese',
+  ContentLanguage.russian: 'russian',
+  ContentLanguage.chinese: 'chinese',
 };

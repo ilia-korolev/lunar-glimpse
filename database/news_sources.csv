@@ -1,0 +1,11 @@
+uri,icon_uri,language
+https://www.space.com/feeds/all,https://www.space.com/favicon.ico,english
+https://www.nasa.gov/news-release/feed/,https://www.nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-32x32.png,english
+http://skyandtelescope.com/feed,https://skyandtelescope.org/favicon.ico,english
+https://www.universetoday.com/feed/,https://www.universetoday.com/favicon.ico,english
+https://www.newscientist.com/subject/space/feed/,https://www.newscientist.com/favicon.ico,english
+https://www.jaxa.jp/rss/press_j.rdf,https://www.jaxa.jp/favicon.ico,japanese
+http://news.local-group.jp/rss.rdf,http://news.local-group.jp/favicon.ico,japanese
+https://elementy.ru/rss/news/cosmos,https://elementy.ru/favicon.ico,russian
+https://naked-science.ru/article/category/cosmonautics/feed,https://naked-science.ru/favicon.ico,russian
+https://www.sciencetoday.ru/cosmos?format=feed&type=rss,https://sciencetoday.ru/templates/ja_teline_v/favicon.ico,russian

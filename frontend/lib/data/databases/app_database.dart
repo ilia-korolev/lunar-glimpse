@@ -1,12 +1,9 @@
-import 'dart:ui';
-
 import 'package:astro_common/astro_common.dart';
 import 'package:drift/drift.dart';
 import 'package:frontend/data/_export.dart';
 import 'connection/_export.dart' as impl;
 
 part 'app_database.g.dart';
-part 'app_database.initial_data.dart';
 
 @DataClassName('GalleryEntity')
 class Gallery extends Table {
@@ -25,8 +22,8 @@ class Gallery extends Table {
 class GalleryTranslations extends Table {
   IntColumn get date =>
       integer().map(const DateConverter()).references(Gallery, #date)();
-  TextColumn get language => textEnum<GalleryItemLanguage>()();
-  TextColumn get originalLanguage => textEnum<GalleryItemLanguage>()();
+  TextColumn get language => textEnum<ContentLanguage>()();
+  TextColumn get originalLanguage => textEnum<ContentLanguage>()();
   TextColumn get title => text()();
   TextColumn get explanation => text()();
 
@@ -37,8 +34,8 @@ class GalleryTranslations extends Table {
 @DataClassName('NewsSourceEntity')
 class NewsSourceEntities extends Table {
   TextColumn get uri => text().map(const _UriConverter())();
-  TextColumn get favicon => text().map(const _UriConverter())();
-  TextColumn get locale => text().map(const LocaleConverter())();
+  TextColumn get iconUri => text().map(const _UriConverter())();
+  TextColumn get language => textEnum<ContentLanguage>()();
   BoolColumn get isShown => boolean()();
 
   @override
@@ -60,13 +57,6 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onCreate: (Migrator migrator) async {
-          await migrator.createAll();
-
-          await batch(
-            (batch) => batch.insertAll(newsSourceEntities, _initialNewsSources),
-          );
-        },
         beforeOpen: (details) async {
           await customStatement('PRAGMA foreign_keys = ON');
         },

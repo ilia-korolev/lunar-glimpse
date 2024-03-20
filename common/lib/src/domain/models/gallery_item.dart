@@ -8,31 +8,16 @@ enum GalleryItemType {
   video,
   image,
   other,
-  empty,
-}
+  empty;
 
-enum GalleryItemLanguage {
-  english,
-  japanese,
-  russian,
-  chinese;
-
-  static GalleryItemLanguage fromLanguageCode(String languageCode) =>
-      switch (languageCode) {
-        'en' => GalleryItemLanguage.english,
-        'ja' => GalleryItemLanguage.japanese,
-        'ru' => GalleryItemLanguage.russian,
-        'zh' => GalleryItemLanguage.chinese,
+  static GalleryItemType fromString(String type) => switch (type) {
+        'video' => GalleryItemType.video,
+        'image' => GalleryItemType.image,
+        'other' => GalleryItemType.other,
+        'empty' => GalleryItemType.empty,
         _ => throw UnsupportedError(
-            'The language code is not supported: $languageCode',
+            'The type is not supported: $type',
           ),
-      };
-
-  String get languageCode => switch (this) {
-        GalleryItemLanguage.english => 'en',
-        GalleryItemLanguage.japanese => 'ja',
-        GalleryItemLanguage.russian => 'ru',
-        GalleryItemLanguage.chinese => 'zh',
       };
 }
 
@@ -45,8 +30,8 @@ class GalleryItem with _$GalleryItem {
     required String? copyright,
     required GalleryItemType type,
     required bool isFavorite,
-    required GalleryItemLanguage language,
-    required GalleryItemLanguage originalLanguage,
+    required ContentLanguage language,
+    required ContentLanguage originalLanguage,
     required String title,
     required String explanation,
   }) = _GalleryItem;

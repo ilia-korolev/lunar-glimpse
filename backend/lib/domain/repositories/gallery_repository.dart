@@ -7,11 +7,11 @@ abstract interface class GalleryRepository {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 
   Future<GalleryItem> getLatestItem({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   });
 }
 
@@ -32,7 +32,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<List<GalleryItem>> getItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     if (language == _remoteGalleryDataSource.language) {
       return _getItemsInOriginalLanguage(
@@ -50,7 +50,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
   @override
   Future<GalleryItem> getLatestItem({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final itemInOriginalLanguage =
         await _remoteGalleryDataSource.getLatestItem();
@@ -134,7 +134,7 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<List<GalleryItem>> _getTranslatedItems({
     required Date startDate,
     required Date endDate,
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) async {
     final cachedItems = await _localGalleryDataSource.getItems(
       startDate: startDate,
@@ -198,8 +198,8 @@ class GalleryRepositoryImpl implements GalleryRepository {
 
   Future<List<GalleryItem>> _translateItems({
     required List<GalleryItem> englishItems,
-    required GalleryItemLanguage sourceLanguage,
-    required GalleryItemLanguage targetLanguage,
+    required ContentLanguage sourceLanguage,
+    required ContentLanguage targetLanguage,
   }) async {
     final translatedItems = <GalleryItem>[];
 

@@ -17,6 +17,13 @@ CREATE TABLE gallery_translations (
     explanation text NOT NULL
 );
 
+CREATE TABLE news_sources (
+    PRIMARY KEY(uri),
+    uri text NOT NULL,
+    icon_uri text NOT NULL,
+    language text NOT NULL
+);
+
 COPY gallery
 FROM '/docker-entrypoint-initdb.d/gallery.csv'
 DELIMITER ','
@@ -43,6 +50,12 @@ CSV HEADER;
 
 COPY gallery_translations
 FROM '/docker-entrypoint-initdb.d/gallery_translations_zh.csv'
+DELIMITER ','
+NULL AS E'\'\''
+CSV HEADER;
+
+COPY news_sources
+FROM '/docker-entrypoint-initdb.d/news_sources.csv'
 DELIMITER ','
 NULL AS E'\'\''
 CSV HEADER;

@@ -12,7 +12,7 @@ part of 'gallery_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GalleryItem _$GalleryItemFromJson(Map<String, dynamic> json) {
   return _GalleryItem.fromJson(json);
@@ -26,9 +26,8 @@ mixin _$GalleryItem {
   String? get copyright => throw _privateConstructorUsedError;
   GalleryItemType get type => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
-  GalleryItemLanguage get language => throw _privateConstructorUsedError;
-  GalleryItemLanguage get originalLanguage =>
-      throw _privateConstructorUsedError;
+  ContentLanguage get language => throw _privateConstructorUsedError;
+  ContentLanguage get originalLanguage => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get explanation => throw _privateConstructorUsedError;
 
@@ -51,8 +50,8 @@ abstract class $GalleryItemCopyWith<$Res> {
       String? copyright,
       GalleryItemType type,
       bool isFavorite,
-      GalleryItemLanguage language,
-      GalleryItemLanguage originalLanguage,
+      ContentLanguage language,
+      ContentLanguage originalLanguage,
       String title,
       String explanation});
 
@@ -111,11 +110,11 @@ class _$GalleryItemCopyWithImpl<$Res, $Val extends GalleryItem>
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
       originalLanguage: null == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -151,8 +150,8 @@ abstract class _$$GalleryItemImplCopyWith<$Res>
       String? copyright,
       GalleryItemType type,
       bool isFavorite,
-      GalleryItemLanguage language,
-      GalleryItemLanguage originalLanguage,
+      ContentLanguage language,
+      ContentLanguage originalLanguage,
       String title,
       String explanation});
 
@@ -210,11 +209,11 @@ class __$$GalleryItemImplCopyWithImpl<$Res>
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
       originalLanguage: null == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -258,9 +257,9 @@ class _$GalleryItemImpl implements _GalleryItem {
   @override
   final bool isFavorite;
   @override
-  final GalleryItemLanguage language;
+  final ContentLanguage language;
   @override
-  final GalleryItemLanguage originalLanguage;
+  final ContentLanguage originalLanguage;
   @override
   final String title;
   @override
@@ -320,8 +319,8 @@ abstract class _GalleryItem implements GalleryItem {
       required final String? copyright,
       required final GalleryItemType type,
       required final bool isFavorite,
-      required final GalleryItemLanguage language,
-      required final GalleryItemLanguage originalLanguage,
+      required final ContentLanguage language,
+      required final ContentLanguage originalLanguage,
       required final String title,
       required final String explanation}) = _$GalleryItemImpl;
 
@@ -341,9 +340,9 @@ abstract class _GalleryItem implements GalleryItem {
   @override
   bool get isFavorite;
   @override
-  GalleryItemLanguage get language;
+  ContentLanguage get language;
   @override
-  GalleryItemLanguage get originalLanguage;
+  ContentLanguage get originalLanguage;
   @override
   String get title;
   @override

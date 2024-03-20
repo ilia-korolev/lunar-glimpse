@@ -9,7 +9,7 @@ class AstroBackendGalleryLatestRequestDto
     with _$AstroBackendGalleryLatestRequestDto {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory AstroBackendGalleryLatestRequestDto({
-    required GalleryItemLanguage language,
+    required ContentLanguage language,
   }) = _AstroBackendGalleryLatestRequestDto;
 
   const AstroBackendGalleryLatestRequestDto._();

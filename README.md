@@ -4,14 +4,20 @@ Flutter Astronomy
 
 ## Getting Started
 
-Docker compose dev (only DB):
+Docker compose [DEV] (only DB):
 ```
 docker compose -f docker-compose.dev.yaml --env-file .env.dev up
 ```
 
-Docker compose prod:
+Docker compose [PROD]:
 ```
 docker compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+```
+
+Run the backend [DEV] (make sure the db is running):
+```
+cd backend &&
+DB_HOST=localhost DB_NAME='dev_db' DB_USER='dev_user' DB_PASSWORD='dev_password' TRANSLATION_SOURCE=none dart_frog dev
 ```
 
 Build and push the web frontend docker image

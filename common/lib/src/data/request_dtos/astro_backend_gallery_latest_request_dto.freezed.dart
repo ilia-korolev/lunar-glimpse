@@ -12,7 +12,7 @@ part of 'astro_backend_gallery_latest_request_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AstroBackendGalleryLatestRequestDto
     _$AstroBackendGalleryLatestRequestDtoFromJson(Map<String, dynamic> json) {
@@ -21,7 +21,7 @@ AstroBackendGalleryLatestRequestDto
 
 /// @nodoc
 mixin _$AstroBackendGalleryLatestRequestDto {
-  GalleryItemLanguage get language => throw _privateConstructorUsedError;
+  ContentLanguage get language => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $AstroBackendGalleryLatestRequestDtoCopyWith<$Res> {
       _$AstroBackendGalleryLatestRequestDtoCopyWithImpl<$Res,
           AstroBackendGalleryLatestRequestDto>;
   @useResult
-  $Res call({GalleryItemLanguage language});
+  $Res call({ContentLanguage language});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$AstroBackendGalleryLatestRequestDtoCopyWithImpl<$Res,
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$AstroBackendGalleryLatestRequestDtoImplCopyWith<$Res>
       __$$AstroBackendGalleryLatestRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GalleryItemLanguage language});
+  $Res call({ContentLanguage language});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$AstroBackendGalleryLatestRequestDtoImplCopyWithImpl<$Res>
       language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as GalleryItemLanguage,
+              as ContentLanguage,
     ));
   }
 }
@@ -115,7 +115,7 @@ class _$AstroBackendGalleryLatestRequestDtoImpl
       _$$AstroBackendGalleryLatestRequestDtoImplFromJson(json);
 
   @override
-  final GalleryItemLanguage language;
+  final ContentLanguage language;
 
   @override
   String toString() {
@@ -154,7 +154,7 @@ class _$AstroBackendGalleryLatestRequestDtoImpl
 abstract class _AstroBackendGalleryLatestRequestDto
     extends AstroBackendGalleryLatestRequestDto {
   const factory _AstroBackendGalleryLatestRequestDto(
-          {required final GalleryItemLanguage language}) =
+          {required final ContentLanguage language}) =
       _$AstroBackendGalleryLatestRequestDtoImpl;
   const _AstroBackendGalleryLatestRequestDto._() : super._();
 
@@ -163,7 +163,7 @@ abstract class _AstroBackendGalleryLatestRequestDto
       _$AstroBackendGalleryLatestRequestDtoImpl.fromJson;
 
   @override
-  GalleryItemLanguage get language;
+  ContentLanguage get language;
   @override
   @JsonKey(ignore: true)
   _$$AstroBackendGalleryLatestRequestDtoImplCopyWith<

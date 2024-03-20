@@ -85,26 +85,12 @@ class GalleryEntity {
       uri: Uri.parse(uri),
       hdUri: Uri.parse(hdUri),
       copyright: copyright,
-      type: _galleryItemTypeEnumMap[type]!,
+      type: GalleryItemType.fromString(type),
       isFavorite: false,
-      language: _galleryItemLanguageEnumMap[language]!,
-      originalLanguage: _galleryItemLanguageEnumMap[originalLanguage]!,
+      language: ContentLanguage.fromString(language),
+      originalLanguage: ContentLanguage.fromString(originalLanguage),
       title: title,
       explanation: explanation,
     );
   }
 }
-
-const _galleryItemTypeEnumMap = {
-  'video': GalleryItemType.video,
-  'image': GalleryItemType.image,
-  'other': GalleryItemType.other,
-  'empty': GalleryItemType.empty,
-};
-
-const _galleryItemLanguageEnumMap = {
-  'english': GalleryItemLanguage.english,
-  'japanese': GalleryItemLanguage.japanese,
-  'russian': GalleryItemLanguage.russian,
-  'chinese': GalleryItemLanguage.chinese,
-};

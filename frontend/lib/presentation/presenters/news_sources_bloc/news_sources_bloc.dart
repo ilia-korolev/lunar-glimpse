@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:astro_common/astro_common.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frontend/domain/_export.dart';
@@ -11,20 +12,20 @@ part 'news_sources_state.dart';
 
 class NewsSourcesBloc extends Bloc<NewsSourcesEvent, NewsSourcesState> {
   NewsSourcesBloc({
-    required NewsRepository newsRepository,
-  })  : _newsRepository = newsRepository,
+    required NewsSourceRepository newsSourceRepository,
+  })  : _newsSourceRepository = newsSourceRepository,
         super(const NewsSourcesState(status: BlocStatus.initial)) {
     on<NewsSourcesInitialized>(_initialized);
     on<NewsSourcesSourceShowToggled>(_sourceShowToggled);
     on<NewsSourcesChangesApplied>(_changesApplied);
     on<NewsSourcesSourcesChanged>(_newsSourcesChanged);
 
-    _newsSourcesListener = _newsRepository.sourceStream.listen((event) {
+    _newsSourcesListener = _newsSourceRepository.sourceStream.listen((event) {
       add(const NewsSourcesInitialized());
     });
   }
 
-  final NewsRepository _newsRepository;
+  final NewsSourceRepository _newsSourceRepository;
 
   late final StreamSubscription<List<NewsSource>> _newsSourcesListener;
 
@@ -41,7 +42,7 @@ class NewsSourcesBloc extends Bloc<NewsSourcesEvent, NewsSourcesState> {
   ) async {
     emit(state.copyWith(status: BlocStatus.loading));
 
-    final sources = await _newsRepository.fetchSources();
+    final sources = await _newsSourceRepository.fetchSources();
 
     emit(
       state.copyWith(
@@ -86,7 +87,7 @@ class NewsSourcesBloc extends Bloc<NewsSourcesEvent, NewsSourcesState> {
     final sourcesToToggle =
         state.inputs.where((i) => i.isChanged).map((i) => i.source).toList();
 
-    await _newsRepository.toggleShowSources(sources: sourcesToToggle);
+    await _newsSourceRepository.toggleShowSources(sources: sourcesToToggle);
 
     emit(state.copyWith(status: BlocStatus.success));
   }

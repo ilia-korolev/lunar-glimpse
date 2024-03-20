@@ -12,18 +12,18 @@ _$AstroBackendGalleryLatestRequestDtoImpl
     _$$AstroBackendGalleryLatestRequestDtoImplFromJson(
             Map<String, dynamic> json) =>
         _$AstroBackendGalleryLatestRequestDtoImpl(
-          language: $enumDecode(_$GalleryItemLanguageEnumMap, json['language']),
+          language: $enumDecode(_$ContentLanguageEnumMap, json['language']),
         );
 
 Map<String, dynamic> _$$AstroBackendGalleryLatestRequestDtoImplToJson(
         _$AstroBackendGalleryLatestRequestDtoImpl instance) =>
     <String, dynamic>{
-      'language': _$GalleryItemLanguageEnumMap[instance.language]!,
+      'language': _$ContentLanguageEnumMap[instance.language]!,
     };
 
-const _$GalleryItemLanguageEnumMap = {
-  GalleryItemLanguage.english: 'english',
-  GalleryItemLanguage.japanese: 'japanese',
-  GalleryItemLanguage.russian: 'russian',
-  GalleryItemLanguage.chinese: 'chinese',
+const _$ContentLanguageEnumMap = {
+  ContentLanguage.english: 'english',
+  ContentLanguage.japanese: 'japanese',
+  ContentLanguage.russian: 'russian',
+  ContentLanguage.chinese: 'chinese',
 };

@@ -14,8 +14,8 @@ class LoadingGalleryCard extends StatelessWidget {
     copyright: 'This is a copyright',
     type: GalleryItemType.image,
     isFavorite: false,
-    language: GalleryItemLanguage.english,
-    originalLanguage: GalleryItemLanguage.english,
+    language: ContentLanguage.english,
+    originalLanguage: ContentLanguage.english,
     title: 'This is a really really really long title',
     explanation: 'This is an explanation',
   );
