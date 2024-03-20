@@ -62,9 +62,6 @@ Future<void> _registerServices() async {
     ..registerLazySingleton<GlobalKey<ScaffoldMessengerState>>(
       GlobalKey<ScaffoldMessengerState>.new,
     )
-    ..registerLazySingleton<RssParser>(
-      RssParserImpl.new,
-    )
     ..registerLazySingleton<FileSaver>(
       FileSaver.new,
     )
@@ -104,9 +101,9 @@ Future<void> _registerDataSources() async {
       ),
     )
     ..registerLazySingleton<RemoteNewsArticleDataSource>(
-      () => RssNewsArticleDataSource(
+      () => BackendNewsArticleDataSource(
         httpService: _getIt(),
-        rssParser: _getIt(),
+        apiUrl: _getIt<Flavor>().apiUrl,
       ),
     )
     ..registerLazySingleton<RemoteDownloadFileDataSource>(
