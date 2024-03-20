@@ -9,10 +9,10 @@ Handler middleware(Handler handler) {
 }
 
 Middleware _galleryRepositoryProvider() {
-  return provider<Future<NewsRepository>>(
+  return provider<Future<NewsSourceRepository>>(
     (context) async {
-      return NewsRepositoryImpl(
-        localNewsDataSource: PostgresNewsDataSource(
+      return NewsSourceRepositoryImpl(
+        localNewsSourceDataSource: PostgresNewsSourceDataSource(
           postgresPool: _postgresPool,
         ),
       );

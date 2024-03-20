@@ -2,14 +2,14 @@ import 'package:astro_backend/core/_export.dart';
 import 'package:astro_backend/data/_export.dart';
 import 'package:astro_common/astro_common.dart';
 
-abstract interface class LocalNewsDataSource {
-  const LocalNewsDataSource();
+abstract interface class LocalNewsSourceDataSource {
+  const LocalNewsSourceDataSource();
 
   Future<List<NewsSource>> getSources();
 }
 
-class PostgresNewsDataSource implements LocalNewsDataSource {
-  const PostgresNewsDataSource({
+class PostgresNewsSourceDataSource implements LocalNewsSourceDataSource {
+  const PostgresNewsSourceDataSource({
     required PostgresPool postgresPool,
   }) : _postgresPool = postgresPool;
 
