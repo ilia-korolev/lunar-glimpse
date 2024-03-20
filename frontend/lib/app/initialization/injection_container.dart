@@ -94,11 +94,17 @@ Future<void> _registerDataSources() async {
     ..registerLazySingleton<RemoteMultiLanguageGalleryDataSource>(
       () => AstroBackendGalleryDataSource(
         httpService: _getIt(),
-        apiUrl: _getIt<Flavor>().galleryApiUrl,
+        apiUrl: _getIt<Flavor>().apiUrl,
       ),
     )
-    ..registerLazySingleton<RemoteNewsDataSource>(
-      () => RssNewsDataSource(
+    ..registerLazySingleton<RemoteNewsSourceDataSource>(
+      () => BackendNewsSourceDataSource(
+        httpService: _getIt(),
+        apiUrl: _getIt<Flavor>().apiUrl,
+      ),
+    )
+    ..registerLazySingleton<RemoteNewsArticleDataSource>(
+      () => RssNewsArticleDataSource(
         httpService: _getIt(),
         rssParser: _getIt(),
       ),
@@ -126,9 +132,14 @@ Future<void> _registerRepositories() async {
         remoteGalleryDataSource: _getIt(),
       ),
     )
-    ..registerLazySingleton<NewsRepository>(
-      () => NewsRepositoryImpl(
+    ..registerLazySingleton<NewsArticleRepository>(
+      () => NewsArticleRepositoryImpl(
         remoteNewsDataSource: _getIt(),
+      ),
+    )
+    ..registerLazySingleton<NewsSourceRepository>(
+      () => NewsSourceRepositoryImpl(
+        remoteNewsSourceDataSource: _getIt(),
         localNewsSourceDataSource: _getIt(),
       ),
     )
@@ -155,7 +166,8 @@ Future<void> _registerBlocs() async {
     )
     ..registerLazySingleton<NewsBloc>(
       () => NewsBloc(
-        newsRepository: _getIt(),
+        newsArticleRepository: _getIt(),
+        newsSourceRepository: _getIt(),
       ),
     );
 }

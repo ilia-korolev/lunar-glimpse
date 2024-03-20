@@ -15,8 +15,10 @@ const _throttleDuration = Duration(milliseconds: 100);
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsBloc({
-    required NewsRepository newsRepository,
-  })  : _newsRepository = newsRepository,
+    required NewsArticleRepository newsArticleRepository,
+    required NewsSourceRepository newsSourceRepository,
+  })  : _newsArticleRepository = newsArticleRepository,
+        _newsSourceRepository = newsSourceRepository,
         super(
           const NewsState(
             status: BlocStatus.initial,
@@ -37,12 +39,13 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       transformer: throttleDroppableTransformer(_throttleDuration),
     );
 
-    _newsSourcesListener = _newsRepository.sourceStream.listen((event) {
+    _newsSourcesListener = _newsSourceRepository.sourceStream.listen((event) {
       add(const NewsRefreshed());
     });
   }
 
-  final NewsRepository _newsRepository;
+  final NewsArticleRepository _newsArticleRepository;
+  final NewsSourceRepository _newsSourceRepository;
 
   late final StreamSubscription<List<NewsSource>> _newsSourcesListener;
 
@@ -83,7 +86,10 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         ),
       );
 
-      final response = await _newsRepository.fetchNews();
+      final sources = await _newsSourceRepository.fetchSources();
+      final shownSources = sources.where((s) => s.isShown).toList();
+      final response =
+          await _newsArticleRepository.fetchNews(sources: shownSources);
 
       emit(
         state.copyWith(

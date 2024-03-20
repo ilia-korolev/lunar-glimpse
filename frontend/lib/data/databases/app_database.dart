@@ -4,7 +4,6 @@ import 'package:frontend/data/_export.dart';
 import 'connection/_export.dart' as impl;
 
 part 'app_database.g.dart';
-part 'app_database.initial_data.dart';
 
 @DataClassName('GalleryEntity')
 class Gallery extends Table {
@@ -35,7 +34,7 @@ class GalleryTranslations extends Table {
 @DataClassName('NewsSourceEntity')
 class NewsSourceEntities extends Table {
   TextColumn get uri => text().map(const _UriConverter())();
-  TextColumn get favicon => text().map(const _UriConverter())();
+  TextColumn get iconUri => text().map(const _UriConverter())();
   TextColumn get language => textEnum<ContentLanguage>()();
   BoolColumn get isShown => boolean()();
 
@@ -58,13 +57,6 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onCreate: (Migrator migrator) async {
-          await migrator.createAll();
-
-          await batch(
-            (batch) => batch.insertAll(newsSourceEntities, _initialNewsSources),
-          );
-        },
         beforeOpen: (details) async {
           await customStatement('PRAGMA foreign_keys = ON');
         },

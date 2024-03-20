@@ -9,19 +9,19 @@ abstract interface class Flavor {
     };
   }
 
-  String get galleryApiUrl;
+  String get apiUrl;
 }
 
 class DevelopmentFlavor implements Flavor {
   const DevelopmentFlavor();
 
   @override
-  String get galleryApiUrl => 'http://localhost:8080';
+  String get apiUrl => 'http://localhost:8080';
 }
 
 class ProductionFlavor implements Flavor {
   const ProductionFlavor();
 
   @override
-  String get galleryApiUrl => 'https://lunarglimpse.com/api';
+  String get apiUrl => 'https://lunarglimpse.com/api';
 }

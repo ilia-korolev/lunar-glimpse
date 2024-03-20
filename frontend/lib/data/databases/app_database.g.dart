@@ -680,13 +680,13 @@ class $NewsSourceEntitiesTable extends NewsSourceEntities
       GeneratedColumn<String>('uri', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<Uri>($NewsSourceEntitiesTable.$converteruri);
-  static const VerificationMeta _faviconMeta =
-      const VerificationMeta('favicon');
+  static const VerificationMeta _iconUriMeta =
+      const VerificationMeta('iconUri');
   @override
-  late final GeneratedColumnWithTypeConverter<Uri, String> favicon =
-      GeneratedColumn<String>('favicon', aliasedName, false,
+  late final GeneratedColumnWithTypeConverter<Uri, String> iconUri =
+      GeneratedColumn<String>('icon_uri', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<Uri>($NewsSourceEntitiesTable.$converterfavicon);
+          .withConverter<Uri>($NewsSourceEntitiesTable.$convertericonUri);
   static const VerificationMeta _languageMeta =
       const VerificationMeta('language');
   @override
@@ -705,7 +705,7 @@ class $NewsSourceEntitiesTable extends NewsSourceEntities
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_shown" IN (0, 1))'));
   @override
-  List<GeneratedColumn> get $columns => [uri, favicon, language, isShown];
+  List<GeneratedColumn> get $columns => [uri, iconUri, language, isShown];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -717,7 +717,7 @@ class $NewsSourceEntitiesTable extends NewsSourceEntities
     final context = VerificationContext();
     final data = instance.toColumns(true);
     context.handle(_uriMeta, const VerificationResult.success());
-    context.handle(_faviconMeta, const VerificationResult.success());
+    context.handle(_iconUriMeta, const VerificationResult.success());
     context.handle(_languageMeta, const VerificationResult.success());
     if (data.containsKey('is_shown')) {
       context.handle(_isShownMeta,
@@ -737,9 +737,9 @@ class $NewsSourceEntitiesTable extends NewsSourceEntities
       uri: $NewsSourceEntitiesTable.$converteruri.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}uri'])!),
-      favicon: $NewsSourceEntitiesTable.$converterfavicon.fromSql(
+      iconUri: $NewsSourceEntitiesTable.$convertericonUri.fromSql(
           attachedDatabase.typeMapping
-              .read(DriftSqlType.string, data['${effectivePrefix}favicon'])!),
+              .read(DriftSqlType.string, data['${effectivePrefix}icon_uri'])!),
       language: $NewsSourceEntitiesTable.$converterlanguage.fromSql(
           attachedDatabase.typeMapping
               .read(DriftSqlType.string, data['${effectivePrefix}language'])!),
@@ -754,7 +754,7 @@ class $NewsSourceEntitiesTable extends NewsSourceEntities
   }
 
   static TypeConverter<Uri, String> $converteruri = const _UriConverter();
-  static TypeConverter<Uri, String> $converterfavicon = const _UriConverter();
+  static TypeConverter<Uri, String> $convertericonUri = const _UriConverter();
   static JsonTypeConverter2<ContentLanguage, String, String>
       $converterlanguage =
       const EnumNameConverter<ContentLanguage>(ContentLanguage.values);
@@ -763,12 +763,12 @@ class $NewsSourceEntitiesTable extends NewsSourceEntities
 class NewsSourceEntity extends DataClass
     implements Insertable<NewsSourceEntity> {
   final Uri uri;
-  final Uri favicon;
+  final Uri iconUri;
   final ContentLanguage language;
   final bool isShown;
   const NewsSourceEntity(
       {required this.uri,
-      required this.favicon,
+      required this.iconUri,
       required this.language,
       required this.isShown});
   @override
@@ -779,8 +779,8 @@ class NewsSourceEntity extends DataClass
           Variable<String>($NewsSourceEntitiesTable.$converteruri.toSql(uri));
     }
     {
-      map['favicon'] = Variable<String>(
-          $NewsSourceEntitiesTable.$converterfavicon.toSql(favicon));
+      map['icon_uri'] = Variable<String>(
+          $NewsSourceEntitiesTable.$convertericonUri.toSql(iconUri));
     }
     {
       map['language'] = Variable<String>(
@@ -793,7 +793,7 @@ class NewsSourceEntity extends DataClass
   NewsSourceEntitiesCompanion toCompanion(bool nullToAbsent) {
     return NewsSourceEntitiesCompanion(
       uri: Value(uri),
-      favicon: Value(favicon),
+      iconUri: Value(iconUri),
       language: Value(language),
       isShown: Value(isShown),
     );
@@ -804,7 +804,7 @@ class NewsSourceEntity extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return NewsSourceEntity(
       uri: serializer.fromJson<Uri>(json['uri']),
-      favicon: serializer.fromJson<Uri>(json['favicon']),
+      iconUri: serializer.fromJson<Uri>(json['iconUri']),
       language: $NewsSourceEntitiesTable.$converterlanguage
           .fromJson(serializer.fromJson<String>(json['language'])),
       isShown: serializer.fromJson<bool>(json['isShown']),
@@ -815,7 +815,7 @@ class NewsSourceEntity extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'uri': serializer.toJson<Uri>(uri),
-      'favicon': serializer.toJson<Uri>(favicon),
+      'iconUri': serializer.toJson<Uri>(iconUri),
       'language': serializer.toJson<String>(
           $NewsSourceEntitiesTable.$converterlanguage.toJson(language)),
       'isShown': serializer.toJson<bool>(isShown),
@@ -823,10 +823,10 @@ class NewsSourceEntity extends DataClass
   }
 
   NewsSourceEntity copyWith(
-          {Uri? uri, Uri? favicon, ContentLanguage? language, bool? isShown}) =>
+          {Uri? uri, Uri? iconUri, ContentLanguage? language, bool? isShown}) =>
       NewsSourceEntity(
         uri: uri ?? this.uri,
-        favicon: favicon ?? this.favicon,
+        iconUri: iconUri ?? this.iconUri,
         language: language ?? this.language,
         isShown: isShown ?? this.isShown,
       );
@@ -834,7 +834,7 @@ class NewsSourceEntity extends DataClass
   String toString() {
     return (StringBuffer('NewsSourceEntity(')
           ..write('uri: $uri, ')
-          ..write('favicon: $favicon, ')
+          ..write('iconUri: $iconUri, ')
           ..write('language: $language, ')
           ..write('isShown: $isShown')
           ..write(')'))
@@ -842,50 +842,50 @@ class NewsSourceEntity extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(uri, favicon, language, isShown);
+  int get hashCode => Object.hash(uri, iconUri, language, isShown);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is NewsSourceEntity &&
           other.uri == this.uri &&
-          other.favicon == this.favicon &&
+          other.iconUri == this.iconUri &&
           other.language == this.language &&
           other.isShown == this.isShown);
 }
 
 class NewsSourceEntitiesCompanion extends UpdateCompanion<NewsSourceEntity> {
   final Value<Uri> uri;
-  final Value<Uri> favicon;
+  final Value<Uri> iconUri;
   final Value<ContentLanguage> language;
   final Value<bool> isShown;
   final Value<int> rowid;
   const NewsSourceEntitiesCompanion({
     this.uri = const Value.absent(),
-    this.favicon = const Value.absent(),
+    this.iconUri = const Value.absent(),
     this.language = const Value.absent(),
     this.isShown = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   NewsSourceEntitiesCompanion.insert({
     required Uri uri,
-    required Uri favicon,
+    required Uri iconUri,
     required ContentLanguage language,
     required bool isShown,
     this.rowid = const Value.absent(),
   })  : uri = Value(uri),
-        favicon = Value(favicon),
+        iconUri = Value(iconUri),
         language = Value(language),
         isShown = Value(isShown);
   static Insertable<NewsSourceEntity> custom({
     Expression<String>? uri,
-    Expression<String>? favicon,
+    Expression<String>? iconUri,
     Expression<String>? language,
     Expression<bool>? isShown,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (uri != null) 'uri': uri,
-      if (favicon != null) 'favicon': favicon,
+      if (iconUri != null) 'icon_uri': iconUri,
       if (language != null) 'language': language,
       if (isShown != null) 'is_shown': isShown,
       if (rowid != null) 'rowid': rowid,
@@ -894,13 +894,13 @@ class NewsSourceEntitiesCompanion extends UpdateCompanion<NewsSourceEntity> {
 
   NewsSourceEntitiesCompanion copyWith(
       {Value<Uri>? uri,
-      Value<Uri>? favicon,
+      Value<Uri>? iconUri,
       Value<ContentLanguage>? language,
       Value<bool>? isShown,
       Value<int>? rowid}) {
     return NewsSourceEntitiesCompanion(
       uri: uri ?? this.uri,
-      favicon: favicon ?? this.favicon,
+      iconUri: iconUri ?? this.iconUri,
       language: language ?? this.language,
       isShown: isShown ?? this.isShown,
       rowid: rowid ?? this.rowid,
@@ -914,9 +914,9 @@ class NewsSourceEntitiesCompanion extends UpdateCompanion<NewsSourceEntity> {
       map['uri'] = Variable<String>(
           $NewsSourceEntitiesTable.$converteruri.toSql(uri.value));
     }
-    if (favicon.present) {
-      map['favicon'] = Variable<String>(
-          $NewsSourceEntitiesTable.$converterfavicon.toSql(favicon.value));
+    if (iconUri.present) {
+      map['icon_uri'] = Variable<String>(
+          $NewsSourceEntitiesTable.$convertericonUri.toSql(iconUri.value));
     }
     if (language.present) {
       map['language'] = Variable<String>(
@@ -935,7 +935,7 @@ class NewsSourceEntitiesCompanion extends UpdateCompanion<NewsSourceEntity> {
   String toString() {
     return (StringBuffer('NewsSourceEntitiesCompanion(')
           ..write('uri: $uri, ')
-          ..write('favicon: $favicon, ')
+          ..write('iconUri: $iconUri, ')
           ..write('language: $language, ')
           ..write('isShown: $isShown, ')
           ..write('rowid: $rowid')

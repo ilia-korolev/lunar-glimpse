@@ -45,7 +45,7 @@ class _NewsViewState extends State<NewsView> {
             ),
             BlocProvider(
               create: (context) => NewsSourcesBloc(
-                newsRepository: GetIt.instance(),
+                newsSourceRepository: GetIt.instance(),
               )..add(const NewsSourcesEvent.initialized()),
             ),
           ],
