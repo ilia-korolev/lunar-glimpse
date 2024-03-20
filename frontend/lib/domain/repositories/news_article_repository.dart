@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:astro_common/astro_common.dart';
-import 'package:frontend/data/_export.dart';
 
 abstract interface class NewsArticleRepository {
   const NewsArticleRepository();
