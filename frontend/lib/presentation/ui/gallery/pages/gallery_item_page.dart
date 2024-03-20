@@ -10,6 +10,7 @@ import 'package:frontend/core/_export.dart';
 import 'package:frontend/presentation/_export.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class GalleryItemPage extends StatelessWidget {
   const GalleryItemPage({
@@ -567,6 +568,13 @@ class _SaveImageButton extends StatelessWidget {
             complete: (_) => null,
             orElse: () {
               return () {
+                // Due to CORS restrictions
+                // the image will be opened in a new tab.
+                if (Platform.isWeb) {
+                  url_launcher.launchUrl(imageUri);
+                  return;
+                }
+
                 context.read<SaveFileBloc>().add(
                       SaveFileEvent.started(
                         fileUri: imageUri,
