@@ -5,6 +5,8 @@ abstract interface class NewsSourceRepository {
   const NewsSourceRepository();
 
   Future<List<NewsSource>> getSources();
+
+  Future<NewsSource?> getSourceByUri({required Uri sourceUri});
 }
 
 class NewsSourceRepositoryImpl implements NewsSourceRepository {
@@ -17,5 +19,10 @@ class NewsSourceRepositoryImpl implements NewsSourceRepository {
   @override
   Future<List<NewsSource>> getSources() {
     return _localNewsSourceDataSource.getSources();
+  }
+
+  @override
+  Future<NewsSource?> getSourceByUri({required Uri sourceUri}) {
+    return _localNewsSourceDataSource.getSourceByUri(sourceUri: sourceUri);
   }
 }

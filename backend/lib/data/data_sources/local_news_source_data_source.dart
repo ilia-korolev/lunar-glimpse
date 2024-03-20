@@ -6,6 +6,8 @@ abstract interface class LocalNewsSourceDataSource {
   const LocalNewsSourceDataSource();
 
   Future<List<NewsSource>> getSources();
+
+  Future<NewsSource?> getSourceByUri({required Uri sourceUri});
 }
 
 class PostgresNewsSourceDataSource implements LocalNewsSourceDataSource {
@@ -26,5 +28,21 @@ class PostgresNewsSourceDataSource implements LocalNewsSourceDataSource {
         .toList();
 
     return models;
+  }
+
+  @override
+  Future<NewsSource?> getSourceByUri({required Uri sourceUri}) async {
+    final result = await _postgresPool.execute(
+      "SELECT * FROM news_sources WHERE uri='$sourceUri' LIMIT 1;",
+    );
+
+    if (result.isEmpty) {
+      return null;
+    }
+
+    final source =
+        NewsSourceEntity.fromQueryResult(queryResult: result.single).toModel();
+
+    return source;
   }
 }

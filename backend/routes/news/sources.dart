@@ -8,8 +8,9 @@ Future<Response> onRequest(RequestContext context) async {
     return Response(statusCode: HttpStatus.methodNotAllowed);
   }
 
-  final newsRepository = await context.read<Future<NewsSourceRepository>>();
-  final sources = await newsRepository.getSources();
+  final newsSourceRepository =
+      await context.read<Future<NewsSourceRepository>>();
+  final sources = await newsSourceRepository.getSources();
 
   return Response.json(body: sources.map((s) => s.toJson()).toList());
 }
