@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:astro_common/astro_common.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:frontend/data/_export.dart';
 
 abstract interface class NewsSourceRepository {
@@ -36,6 +37,9 @@ class NewsSourceRepositoryImpl implements NewsSourceRepository {
     final remoteSources = await _remoteNewsSourceDataSource.getNewsSources();
     final localSources = await _localNewsSourceDataSource.getNewsSources();
 
+    remoteSources.sortBy((s) => s.language.languageCode + s.name);
+    localSources.sortBy((s) => s.language.languageCode + s.name);
+
     NewsSource? findLocal(NewsSource source) =>
         localSources.firstWhereOrNull((l) => l.uri == source.uri);
 
@@ -45,11 +49,15 @@ class NewsSourceRepositoryImpl implements NewsSourceRepository {
         )
         .toList();
 
-    await _localNewsSourceDataSource.deleteAllSources();
+    if (!listEquals(syncedSources, localSources)) {
+      await _localNewsSourceDataSource.deleteAllSources();
 
-    await _localNewsSourceDataSource.cacheNewsSources(
-      newsSources: syncedSources,
-    );
+      await _localNewsSourceDataSource.cacheNewsSources(
+        newsSources: syncedSources,
+      );
+
+      _sourceController.add(syncedSources);
+    }
 
     return syncedSources;
   }
