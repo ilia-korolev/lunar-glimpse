@@ -37,7 +37,7 @@ class GithubInfoPage extends StatelessWidget {
               onPressed: () {
                 url_launcher.launchUrl(
                   Uri.parse(
-                    'https://github.com/ilia-korolev/frontend',
+                    'https://github.com/ilia-korolev/flutter_astronomy',
                   ),
                 );
               },
