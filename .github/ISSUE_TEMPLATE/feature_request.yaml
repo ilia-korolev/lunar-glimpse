@@ -1,0 +1,45 @@
+name: Feature Request
+description: Suggest an idea for this project
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+  attributes:
+    value: "Thank you for suggesting a feature request. Please fill out the necessary information below."
+
+  - type: input
+  id: feature-summary
+  attributes:
+    label: Feature Summary
+    description: A brief summary of the feature you're requesting.
+    placeholder: "Ex: Add a night mode for the gallery..."
+  validations:
+    required: true
+
+  - type: textarea
+  id: problem-solution
+  attributes:
+    label: Problem & Solution
+    description: Describe the problem that this feature would address and how it solves it.
+    placeholder: "Ex: The current gallery is too bright at night, causing eye strain. A night mode would allow for a more comfortable viewing experience..."
+  validations:
+    required: true
+
+  - type: textarea
+  id: alternatives
+  attributes:
+    label: Alternatives Considered
+    description: Describe any alternative solutions or features you've considered.
+    placeholder: "Ex: An alternative could be to adjust the brightness automatically based on the time of day..."
+  validations:
+    required: false
+
+  - type: textarea
+  id: additional-context
+  attributes:
+    label: Additional Context
+    description: Add any other context or screenshots about the feature request here.
+    placeholder: "Ex: I've noticed many apps have a night mode and it's very useful..."
+  validations:
+    required: false
+    
