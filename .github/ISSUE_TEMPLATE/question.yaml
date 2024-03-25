@@ -4,23 +4,23 @@ title: "[QUESTION]: "
 labels: ["question"]
 body:
   - type: markdown
-  attributes:
-    value: "We're here to help! Please provide as much detail as possible to help us understand your question."
+    attributes:
+      value: "We're here to help! Please provide as much detail as possible to help us understand your question."
 
   - type: textarea
-  id: question
-  attributes:
-    label: Your Question
-    description: What would you like to ask or clarify?
-    placeholder: "Ex: How does the image sharing feature work?"
-  validations:
-    required: true
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to ask or clarify?
+      placeholder: "Ex: How does the image sharing feature work?"
+    validations:
+      required: true
 
   - type: textarea
-  id: additional-context
-  attributes:
-    label: Additional Context
-    description: Add any other context about the question here.
-    placeholder: "Ex: I'm looking at the documentation but I can't find information on..."
-  validations:
-    required: false
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the question here.
+      placeholder: "Ex: I'm looking at the documentation but I can't find information on..."
+    validations:
+      required: false
