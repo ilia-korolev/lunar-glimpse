@@ -2,7 +2,7 @@ name: frontend
 description: Explore the wonders of the universe with Lunar Glimpse
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
