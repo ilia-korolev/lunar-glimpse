@@ -28,6 +28,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final l10n = context.l10n;
 
     return SliverList(
@@ -65,12 +66,19 @@ class _Body extends StatelessWidget {
             subtitle: l10n.aboutSettingsDescription,
             onPressed: () async {
               final packageInfo = await PackageInfo.fromPlatform();
+              final iconSize =
+                  theme.iconTheme.size ?? const IconThemeData.fallback().size;
 
               if (!context.mounted) return;
 
               showAboutDialog(
-                applicationName: packageInfo.appName,
+                applicationName: l10n.appName,
                 applicationVersion: packageInfo.version,
+                applicationIcon: Image.asset(
+                  AssetNames.appLogos.small,
+                  height: iconSize,
+                  width: iconSize,
+                ),
                 context: context,
               );
             },

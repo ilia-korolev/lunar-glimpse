@@ -3,6 +3,7 @@ const _basePath = 'assets';
 class AssetNames {
   static const animations = _Animations();
   static const flags = _Flags();
+  static const appLogos = _AppLogos();
 }
 
 class _Animations {
@@ -24,4 +25,12 @@ class _Flags {
   String get jp => '$_path/jp.png';
   String get ru => '$_path/ru.png';
   String get us => '$_path/us.png';
+}
+
+class _AppLogos {
+  const _AppLogos();
+
+  static const _path = '$_basePath/app_logos';
+
+  String get small => '$_path/small.png';
 }
