@@ -62,5 +62,5 @@
   "saveImageSuccessSnackBarText": "画像が保存されました: ",
   "saveImageFailedSnackBarText": "画像の保存に失敗しました",
   "closeButton": "閉じる",
-  "applyButton": "Apply"
+  "applyButton": "適用"
 }
