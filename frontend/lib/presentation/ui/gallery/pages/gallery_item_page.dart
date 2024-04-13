@@ -221,6 +221,7 @@ class _GalleryItemAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final lightTheme = GetIt.instance<Theming>().light;
 
     final buttonSize = theme.sizes.largeIconSize + 2 * theme.spacing.semiSmall;
 
@@ -293,7 +294,8 @@ class _GalleryItemAppBar extends StatelessWidget {
                 PrimaryIconButton(
                   icon: FontAwesomeIcons.shareNodes,
                   size: IconButtonSize.large,
-                  backgroundColor: theme.colorScheme.surface,
+                  iconColor: theme.colorScheme.onSurface,
+                  backgroundColor: theme.surfaceColors.surfaceContainerHigh,
                   elevation: 7,
                   onPressed: (BuildContext context) {
                     GetIt.instance<ShareService>().shareUri(
@@ -309,11 +311,11 @@ class _GalleryItemAppBar extends StatelessWidget {
                       : FontAwesomeIcons.star,
                   size: IconButtonSize.large,
                   iconColor: item.isFavorite
-                      ? theme.colorScheme.surface
+                      ? lightTheme.colorScheme.surface
                       : theme.colorScheme.onSurface,
                   backgroundColor: item.isFavorite
-                      ? theme.colorScheme.onSurface
-                      : theme.colorScheme.surface,
+                      ? lightTheme.colorScheme.primary
+                      : theme.surfaceColors.surfaceContainerHigh,
                   elevation: 7,
                   onPressed: (_) {
                     context

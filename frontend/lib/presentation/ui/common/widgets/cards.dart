@@ -173,7 +173,7 @@ class _GalleryCardState extends State<GalleryCard> {
                             ? lightTheme.colorScheme.surface
                             : lightTheme.colorScheme.onSurface,
                         backgroundColor: widget.item.isFavorite
-                            ? lightTheme.colorScheme.onSurface
+                            ? lightTheme.colorScheme.primary
                             : lightTheme.colorScheme.surface,
                       ),
                     ],
