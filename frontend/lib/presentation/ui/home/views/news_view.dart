@@ -220,6 +220,10 @@ class _SuccessView extends StatelessWidget {
       sliver: SliverList(
         delegate: SliverSeparatedChildBuilderDelegate(
           itemBuilder: (context, index) {
+            if (index == articles.length) {
+              return const _NoMoreNews();
+            }
+
             final article = articles[index];
 
             switch (activeBreakpoint) {
@@ -257,9 +261,23 @@ class _SuccessView extends StatelessWidget {
           separatorBuilder: (context, index) {
             return SizedBox(height: padding);
           },
-          childCount: articles.length,
+          childCount: articles.length + 1,
         ),
       ),
+    );
+  }
+}
+
+class _NoMoreNews extends StatelessWidget {
+  const _NoMoreNews();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    return Text(
+      l10n.noMoreNews,
+      textAlign: TextAlign.center,
     );
   }
 }
