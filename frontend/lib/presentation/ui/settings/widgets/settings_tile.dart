@@ -30,7 +30,7 @@ class SettingsTile extends StatelessWidget {
           bottom: isLast ? theme.radiuses.medium : Radius.zero,
         ),
       ),
-      tileColor: theme.surfaceColors.surfaceContainer,
+      tileColor: theme.colorScheme.surfaceContainer,
       contentPadding: EdgeInsets.symmetric(
         horizontal: theme.spacing.semiLarge,
         vertical: theme.spacing.extraSmall,

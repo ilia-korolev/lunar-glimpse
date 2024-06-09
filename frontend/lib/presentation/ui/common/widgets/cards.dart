@@ -267,7 +267,7 @@ class _ArticleCardBase extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: theme.surfaceColors.surfaceContainer,
+        color: theme.colorScheme.surfaceContainer,
         borderRadius: BorderRadius.all(theme.radiuses.large),
       ),
       child: Stack(

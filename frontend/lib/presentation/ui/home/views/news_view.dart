@@ -116,7 +116,7 @@ class _AppBar extends StatelessWidget {
                     value: bloc,
                     child: _NewsSourceList(
                       backgroundColor: Colors.transparent,
-                      tileColor: theme.surfaceColors.surfaceContainerLowest,
+                      tileColor: theme.colorScheme.surfaceContainerLowest,
                       onApplyPressed: () {
                         context.pop();
                       },
@@ -180,7 +180,7 @@ class _NewsSourcePanel extends StatelessWidget {
                   theme.colorScheme.surfaceTint,
                   3,
                 ),
-                tileColor: theme.surfaceColors.surfaceContainerLowest,
+                tileColor: theme.colorScheme.surfaceContainerLowest,
               ),
             ),
           ),
@@ -325,7 +325,7 @@ class _NewsSourcesView extends StatelessWidget {
       child: SizedBox.shrink(
         child: _NewsSourceList(
           backgroundColor: Colors.transparent,
-          tileColor: theme.surfaceColors.surfaceContainer,
+          tileColor: theme.colorScheme.surfaceContainer,
         ),
       ),
     );

@@ -295,7 +295,7 @@ class _GalleryItemAppBar extends StatelessWidget {
                   icon: FontAwesomeIcons.shareNodes,
                   size: IconButtonSize.large,
                   iconColor: theme.colorScheme.onSurface,
-                  backgroundColor: theme.surfaceColors.surfaceContainerHigh,
+                  backgroundColor: theme.colorScheme.surfaceContainerHigh,
                   elevation: 7,
                   onPressed: (BuildContext context) {
                     GetIt.instance<ShareService>().shareUri(
@@ -315,7 +315,7 @@ class _GalleryItemAppBar extends StatelessWidget {
                       : theme.colorScheme.onSurface,
                   backgroundColor: item.isFavorite
                       ? lightTheme.colorScheme.primary
-                      : theme.surfaceColors.surfaceContainerHigh,
+                      : theme.colorScheme.surfaceContainerHigh,
                   elevation: 7,
                   onPressed: (_) {
                     context

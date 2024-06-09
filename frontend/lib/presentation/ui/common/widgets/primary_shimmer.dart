@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/_export.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class PrimaryShimmer extends StatelessWidget {
@@ -16,10 +15,10 @@ class PrimaryShimmer extends StatelessWidget {
 
     return Skeletonizer(
       effect: ShimmerEffect(
-        baseColor: theme.surfaceColors.surfaceContainer,
+        baseColor: theme.colorScheme.surfaceContainer,
         highlightColor: theme.brightness == Brightness.light
-            ? theme.surfaceColors.surfaceContainerLow
-            : theme.surfaceColors.surfaceContainerHigh,
+            ? theme.colorScheme.surfaceContainerLow
+            : theme.colorScheme.surfaceContainerHigh,
       ),
       child: child,
     );

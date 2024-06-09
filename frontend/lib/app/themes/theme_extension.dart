@@ -7,5 +7,4 @@ extension ThemeX on ThemeData {
   Radiuses get radiuses => extension<Radiuses>()!;
   Sizes get sizes => extension<Sizes>()!;
   Spacing get spacing => extension<Spacing>()!;
-  SurfaceColors get surfaceColors => extension<SurfaceColors>()!;
 }

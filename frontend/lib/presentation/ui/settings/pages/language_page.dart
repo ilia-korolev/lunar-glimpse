@@ -172,10 +172,10 @@ class _LanguageList extends StatelessWidget {
       },
       separatorBuilder: (context, index) {
         return ColoredBox(
-          color: theme.surfaceColors.surfaceContainer,
+          color: theme.colorScheme.surfaceContainer,
           child: Divider(
             height: 1,
-            color: theme.surfaceColors.surfaceContainerHighest,
+            color: theme.colorScheme.surfaceContainerHighest,
             indent: theme.spacing.semiLarge,
             endIndent: theme.spacing.semiLarge,
           ),
