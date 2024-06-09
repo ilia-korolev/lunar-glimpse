@@ -8,6 +8,7 @@ export 'primary_icon_button.dart';
 export 'primary_refresh_indicator.dart';
 export 'primary_shimmer.dart';
 export 'save_file_button.dart';
+export 'scroll_to_top.dart';
 export 'selection_transformer.dart';
 export 'sliver_separated_child_builder_delegate.dart';
 export 'stream_listener.dart';

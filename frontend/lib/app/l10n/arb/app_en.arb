@@ -64,5 +64,6 @@
   "saveImageSuccessSnackBarText": "The image saved to: ",
   "saveImageFailedSnackBarText": "Unable to save the image",
   "closeButton": "Close",
-  "applyButton": "Apply"
+  "applyButton": "Apply",
+  "scrollToTopButton": "Scroll to Top"
 }

@@ -24,6 +24,7 @@ class NewsView extends StatefulWidget {
 
 class _NewsViewState extends State<NewsView> {
   final NewsBloc _bloc = GetIt.instance();
+  final _scrollController = ScrollToTopController();
 
   @override
   void initState() {
@@ -35,40 +36,54 @@ class _NewsViewState extends State<NewsView> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SelectionArea(
-      child: SelectionTransformer.separated(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: _bloc,
-            ),
-            BlocProvider(
-              create: (context) => NewsSourcesBloc(
-                newsSourceRepository: GetIt.instance(),
-              )..add(const NewsSourcesEvent.initialized()),
-            ),
-          ],
-          child: PrimaryRefreshIndicator(
-            onRefresh: () async {
-              _bloc.add(const NewsEvent.refreshed());
+  void dispose() {
+    _scrollController.dispose();
 
-              await _bloc.stream.firstWhere(
-                (state) => !state.status.isLoading,
-              );
-            },
-            child: const Row(
-              children: [
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      _AppBar(),
-                      _Body(),
-                    ],
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return ScrollToTop(
+      appBarHeight: theme.sizes.smallAppBarHeight,
+      scrollController: _scrollController,
+      child: SelectionArea(
+        child: SelectionTransformer.separated(
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: _bloc,
+              ),
+              BlocProvider(
+                create: (context) => NewsSourcesBloc(
+                  newsSourceRepository: GetIt.instance(),
+                )..add(const NewsSourcesEvent.initialized()),
+              ),
+            ],
+            child: PrimaryRefreshIndicator(
+              onRefresh: () async {
+                _bloc.add(const NewsEvent.refreshed());
+
+                await _bloc.stream.firstWhere(
+                  (state) => !state.status.isLoading,
+                );
+              },
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CustomScrollView(
+                      controller: _scrollController,
+                      slivers: const [
+                        _AppBar(),
+                        _Body(),
+                      ],
+                    ),
                   ),
-                ),
-                _NewsSourcePanel(),
-              ],
+                  const _NewsSourcePanel(),
+                ],
+              ),
             ),
           ),
         ),

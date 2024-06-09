@@ -22,14 +22,14 @@ class GalleryView extends StatefulWidget {
 
 class _GalleryViewState extends State<GalleryView> with WidgetsBindingObserver {
   final GalleryBloc _bloc = GetIt.instance();
-  final _scrollController = ScrollController();
+  final _scrollController = ScrollToTopController();
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addObserver(this);
-    _scrollController.addListener(_onScrollExtentChanged);
+    _scrollController.addListener(_fetchItemsListener);
 
     if (_bloc.state.status.isInitial) {
       _bloc.add(const GalleryEvent.fetched());
@@ -40,13 +40,13 @@ class _GalleryViewState extends State<GalleryView> with WidgetsBindingObserver {
   void didChangeMetrics() {
     super.didChangeMetrics();
 
-    _onScrollExtentChanged();
+    _fetchItemsListener();
   }
 
   @override
   void dispose() {
     _scrollController
-      ..removeListener(_onScrollExtentChanged)
+      ..removeListener(_fetchItemsListener)
       ..dispose();
 
     super.dispose();
@@ -54,34 +54,40 @@ class _GalleryViewState extends State<GalleryView> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return SelectionArea(
-      child: SelectionTransformer.separated(
-        child: BlocProvider.value(
-          value: _bloc,
-          child: PrimaryRefreshIndicator(
-            onRefresh: () async {
-              _bloc.add(const GalleryEvent.refreshed());
+    final theme = Theme.of(context);
 
-              await _bloc.stream.firstWhere(
-                (state) => !state.status.isLoading,
-              );
-            },
-            child: CustomScrollView(
-              controller: _scrollController,
-              cacheExtent: 2000,
-              slivers: [
-                HomeAppBar(
-                  title: context.l10n.galleryTitle,
-                  trailing: PrimaryIconButton(
-                    icon: FontAwesomeIcons.solidStar,
-                    size: IconButtonSize.medium,
-                    onPressed: (_) {
-                      context.go('/gallery/favorites');
-                    },
+    return ScrollToTop(
+      appBarHeight: theme.sizes.smallAppBarHeight,
+      scrollController: _scrollController,
+      child: SelectionArea(
+        child: SelectionTransformer.separated(
+          child: BlocProvider.value(
+            value: _bloc,
+            child: PrimaryRefreshIndicator(
+              onRefresh: () async {
+                _bloc.add(const GalleryEvent.refreshed());
+
+                await _bloc.stream.firstWhere(
+                  (state) => !state.status.isLoading,
+                );
+              },
+              child: CustomScrollView(
+                controller: _scrollController,
+                cacheExtent: 2000,
+                slivers: [
+                  HomeAppBar(
+                    title: context.l10n.galleryTitle,
+                    trailing: PrimaryIconButton(
+                      icon: FontAwesomeIcons.solidStar,
+                      size: IconButtonSize.medium,
+                      onPressed: (_) {
+                        context.go('/gallery/favorites');
+                      },
+                    ),
                   ),
-                ),
-                const _GalleryContent(),
-              ],
+                  const _GalleryContent(),
+                ],
+              ),
             ),
           ),
         ),
@@ -89,7 +95,7 @@ class _GalleryViewState extends State<GalleryView> with WidgetsBindingObserver {
     );
   }
 
-  void _onScrollExtentChanged() {
+  void _fetchItemsListener() {
     if (!_bloc.state.status.isSuccess || _bloc.state.items.isEmpty) {
       return;
     }

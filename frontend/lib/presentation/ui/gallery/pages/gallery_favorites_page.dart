@@ -21,6 +21,8 @@ class _GalleryFavoritesPageState extends State<GalleryFavoritesPage> {
     appSettingsRepository: GetIt.instance(),
   );
 
+  final _scrollController = ScrollToTopController();
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +35,7 @@ class _GalleryFavoritesPageState extends State<GalleryFavoritesPage> {
   @override
   void dispose() {
     _bloc.close();
+    _scrollController.dispose();
 
     super.dispose();
   }
@@ -42,74 +45,96 @@ class _GalleryFavoritesPageState extends State<GalleryFavoritesPage> {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    return SelectionArea(
-      child: SelectionTransformer.separated(
-        child: BlocProvider.value(
-          value: _bloc,
-          child: Scaffold(
-            appBar: PrimaryAppBar(
-              height: theme.sizes.mediumAppBarHeight,
-              title: Text(l10n.favoritesPageTitle),
-            ),
-            body: SafeArea(
-              child: StreamListener(
-                stream: _bloc.removedFavoriteStream,
-                onData: (item) {
-                  final removedSnackBar = SnackBar(
-                    action: SnackBarAction(
-                      label: l10n.removedFromFavoritesSnackBarButton,
-                      onPressed: () {
-                        GetIt.instance<GalleryBloc>()
-                            .add(GalleryEvent.favoriteToggled(item: item));
+    final appBarHeight = theme.sizes.mediumAppBarHeight;
 
-                        final restoredSnackBar = SnackBar(
-                          content: Text(l10n.favoriteRestoredSnackBarButton),
-                        );
+    return ScrollToTop(
+      appBarHeight: appBarHeight,
+      scrollController: _scrollController,
+      child: SelectionArea(
+        child: SelectionTransformer.separated(
+          child: BlocProvider.value(
+            value: _bloc,
+            child: Scaffold(
+              appBar: PrimaryAppBar(
+                height: appBarHeight,
+                title: Text(l10n.favoritesPageTitle),
+              ),
+              body: SafeArea(
+                child: StreamListener(
+                  stream: _bloc.removedFavoriteStream,
+                  onData: (item) {
+                    _scrollController.update();
 
-                        GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
-                            .currentState
-                          ?..clearSnackBars()
-                          ..showSnackBar(restoredSnackBar);
-                      },
-                    ),
-                    content: Text(l10n.removedFromFavoritesSnackBarText),
-                  );
+                    final removedSnackBar = SnackBar(
+                      action: SnackBarAction(
+                        label: l10n.removedFromFavoritesSnackBarButton,
+                        onPressed: () {
+                          GetIt.instance<GalleryBloc>()
+                              .add(GalleryEvent.favoriteToggled(item: item));
 
-                  GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
-                      .currentState
-                    ?..clearSnackBars()
-                    ..showSnackBar(removedSnackBar);
-                },
-                child: BlocBuilder<GalleryFavoritesBloc, GalleryFavoritesState>(
-                  builder: (context, state) {
-                    switch (state.status) {
-                      case BlocStatus.initial:
-                        return const _InitialView();
+                          final restoredSnackBar = SnackBar(
+                            content: Text(l10n.favoriteRestoredSnackBarButton),
+                          );
 
-                      case BlocStatus.loading:
-                        return state.items.isEmpty
-                            ? const _LoadingView()
-                            : _SuccessView(
-                                galleryItems: state.items,
-                              );
+                          GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
+                              .currentState
+                            ?..clearSnackBars()
+                            ..showSnackBar(restoredSnackBar);
+                        },
+                      ),
+                      content: Text(l10n.removedFromFavoritesSnackBarText),
+                    );
 
-                      case BlocStatus.success:
-                        return state.items.isEmpty
-                            ? const _EmptyView()
-                            : _SuccessView(
-                                galleryItems: state.items,
-                              );
-
-                      case BlocStatus.failure:
-                        return const _FailureView();
-                    }
+                    GetIt.instance<GlobalKey<ScaffoldMessengerState>>()
+                        .currentState
+                      ?..clearSnackBars()
+                      ..showSnackBar(removedSnackBar);
                   },
+                  child: CustomScrollView(
+                    controller: _scrollController,
+                    slivers: const [
+                      _GalleryContent(),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _GalleryContent extends StatelessWidget {
+  const _GalleryContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GalleryFavoritesBloc, GalleryFavoritesState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case BlocStatus.initial:
+            return const _InitialView();
+
+          case BlocStatus.loading:
+            return state.items.isEmpty
+                ? const _LoadingView()
+                : _SuccessView(
+                    galleryItems: state.items,
+                  );
+
+          case BlocStatus.success:
+            return state.items.isEmpty
+                ? const _EmptyView()
+                : _SuccessView(
+                    galleryItems: state.items,
+                  );
+
+          case BlocStatus.failure:
+            return const _FailureView();
+        }
+      },
     );
   }
 }
@@ -122,12 +147,17 @@ class _EmptyView extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    return ImageView(
-      assetName: AssetNames.animations.astronautOnPlanet,
-      child: Text(
-        l10n.favoritesPageNoFavoritesText,
-        style: theme.textTheme.titleLarge,
-        textAlign: TextAlign.center,
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: SizedBox.shrink(
+        child: ImageView(
+          assetName: AssetNames.animations.astronautOnPlanet,
+          child: Text(
+            l10n.favoritesPageNoFavoritesText,
+            style: theme.textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
     );
   }
@@ -138,7 +168,7 @@ class _InitialView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SliverFillRemaining(child: Container());
   }
 }
 
@@ -147,8 +177,10 @@ class _LoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
+    return const SliverFillRemaining(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
@@ -167,45 +199,47 @@ class _SuccessView extends StatelessWidget {
     final padding =
         activeBreakpoint.isCompact ? theme.spacing.medium : theme.spacing.large;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final crossAxisCount = theme.sizes.calcCrossAxisGalleryItemCount(
-          availableWidth: constraints.maxWidth,
-        );
+    return SliverPadding(
+      padding: EdgeInsets.only(
+        bottom: padding,
+        left: padding,
+        right: padding,
+      ),
+      sliver: SliverLayoutBuilder(
+        builder: (context, constraints) {
+          final crossAxisCount = theme.sizes.calcCrossAxisGalleryItemCount(
+            availableWidth: constraints.crossAxisExtent,
+          );
 
-        return AlignedGridView.count(
-          padding: EdgeInsets.only(
-            bottom: padding,
-            left: padding,
-            right: padding,
-          ),
-          crossAxisCount: crossAxisCount,
-          mainAxisSpacing: padding,
-          crossAxisSpacing: padding,
-          itemBuilder: (context, index) {
-            return GalleryCard(
-              item: galleryItems[index],
-              onCardPressed: (context, item) {
-                context.go('/gallery/favorites/${item.date.toInt()}');
-              },
-              onFavoritePressed: (context, item) async {
-                if (item.isFavorite) {
+          return SliverAlignedGrid(
+            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+            ),
+            mainAxisSpacing: padding,
+            crossAxisSpacing: padding,
+            itemBuilder: (context, index) {
+              return GalleryCard(
+                item: galleryItems[index],
+                onCardPressed: (context, item) {
+                  context.go('/gallery/${item.date.toInt()}');
+                },
+                onFavoritePressed: (context, item) {
                   context
                       .read<GalleryFavoritesBloc>()
                       .add(GalleryFavoritesEvent.itemUnfavorited(item: item));
-                }
-              },
-              onSharePressed: (context, item) {
-                GetIt.instance<ShareService>().shareUri(
-                  uri: item.uri,
-                  context: context,
-                );
-              },
-            );
-          },
-          itemCount: galleryItems.length,
-        );
-      },
+                },
+                onSharePressed: (context, item) {
+                  GetIt.instance<ShareService>().shareUri(
+                    uri: item.uri,
+                    context: context,
+                  );
+                },
+              );
+            },
+            itemCount: galleryItems.length,
+          );
+        },
+      ),
     );
   }
 }
@@ -215,12 +249,17 @@ class _FailureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FailureView(
-      onPressed: () {
-        context
-            .read<GalleryFavoritesBloc>()
-            .add(const GalleryFavoritesEvent.triedAgain());
-      },
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: SizedBox.shrink(
+        child: FailureView(
+          onPressed: () {
+            context
+                .read<GalleryFavoritesBloc>()
+                .add(const GalleryFavoritesEvent.triedAgain());
+          },
+        ),
+      ),
     );
   }
 }

@@ -64,5 +64,6 @@
   "saveImageSuccessSnackBarText": "图像已保存至: ",
   "saveImageFailedSnackBarText": "无法保存图像",
   "closeButton": "关闭",
-  "applyButton": "应用"
+  "applyButton": "应用",
+  "scrollToTopButton": "回到顶部"
 }

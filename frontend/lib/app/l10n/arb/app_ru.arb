@@ -64,5 +64,6 @@
   "saveImageSuccessSnackBarText": "Изображение сохранено в: ",
   "saveImageFailedSnackBarText": "Не удалось сохранить изображение",
   "closeButton": "Закрыть",
-  "applyButton": "Применить"
+  "applyButton": "Применить",
+  "scrollToTopButton": "Вверх"
 }
