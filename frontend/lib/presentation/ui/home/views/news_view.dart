@@ -427,9 +427,6 @@ class _NewsSourceListBody extends StatelessWidget {
                 );
                 final l10n = lookupAppLocalizations(locale);
 
-                // TODO(ilia-korolev): InkSplash functionality is broken
-                // Fixed in pull request: https://github.com/flutter/flutter/pull/141777
-                // Remove this comment when the fix is released
                 return ExpansionTile(
                   leading: SizedBox(
                     width: theme.sizes.largeIconSize,
