@@ -10,11 +10,11 @@ dependencies:
   astro_common:
     path: ../common
   dart_frog: ^1.1.0
-  intl: ^0.18.1
-  logger: ^2.2.0
-  postgres: ^3.2.0
+  intl: ^0.19.0
+  logger: ^2.3.0
+  postgres: ^3.2.1
 
 dev_dependencies:
   mocktail: ^1.0.3
-  test: ^1.25.5
+  test: ^1.25.7
   very_good_analysis: ^5.1.0
