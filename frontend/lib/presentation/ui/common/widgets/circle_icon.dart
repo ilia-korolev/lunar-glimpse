@@ -31,30 +31,20 @@ class CircleIcon extends StatelessWidget {
         color: backgroundColor,
       ),
       alignment: Alignment.center,
-      // TODO(ilia-korolev): fix the shadow when it's ready
-      // https://github.com/fluttercommunity/font_awesome_flutter/pull/247
       child: Container(
         height: theme.sizes.mediumIconSize,
         width: theme.sizes.mediumIconSize,
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: color.withOpacity(.25),
-              blurRadius: theme.sizes.mediumIconSize,
-            ),
-          ],
-        ),
         child: FaIcon(
           icon,
           color: color,
           size: theme.sizes.mediumIconSize,
-          // shadows: [
-          //   Shadow(
-          //     color: color.withOpacity(.5),
-          //     blurRadius: theme.sizes.largeIconSize,
-          //   ),
-          // ],
+          shadows: [
+            Shadow(
+              color: color.withOpacity(.35),
+              blurRadius: theme.sizes.largeIconSize,
+            ),
+          ],
         ),
       ),
     );
