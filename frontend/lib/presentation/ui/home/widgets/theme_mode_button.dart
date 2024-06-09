@@ -86,9 +86,9 @@ class ThemeModeButton extends StatelessWidget {
       case ThemeMode.system:
         return theming.light.colorScheme.primary;
       case ThemeMode.light:
-        return theming.light.colorScheme.background;
+        return theming.light.colorScheme.surface;
       case ThemeMode.dark:
-        return theming.dark.colorScheme.background;
+        return theming.dark.colorScheme.surface;
     }
   }
 

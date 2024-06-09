@@ -20,7 +20,7 @@ class PrimaryButton extends StatelessWidget {
       padding: EdgeInsets.only(bottom: theme.spacing.large),
       child: FilledButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsets>(
+          padding: WidgetStateProperty.all<EdgeInsets>(
             EdgeInsets.symmetric(vertical: theme.spacing.medium),
           ),
         ),

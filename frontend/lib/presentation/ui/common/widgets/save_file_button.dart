@@ -24,7 +24,7 @@ class SaveFileButton extends StatelessWidget {
 
     return Material(
       type: MaterialType.circle,
-      color: theme.colorScheme.background.withOpacity(0.4),
+      color: theme.colorScheme.surface.withOpacity(0.4),
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onStartSaving,

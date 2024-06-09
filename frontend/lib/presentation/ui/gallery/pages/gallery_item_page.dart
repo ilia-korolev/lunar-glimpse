@@ -234,7 +234,7 @@ class _GalleryItemAppBar extends StatelessWidget {
         child: PrimaryIconButton(
           icon: FontAwesomeIcons.chevronLeft,
           size: IconButtonSize.medium,
-          backgroundColor: theme.colorScheme.background.withOpacity(0.4),
+          backgroundColor: theme.colorScheme.surface.withOpacity(0.4),
           onPressed: (_) => context.pop(),
         ),
       ),
@@ -268,7 +268,7 @@ class _GalleryItemAppBar extends StatelessWidget {
       shape: Border(
         bottom: BorderSide(
           width: 0,
-          color: theme.colorScheme.background,
+          color: theme.colorScheme.surface,
         ),
       ),
       bottom: PreferredSize(
@@ -285,7 +285,7 @@ class _GalleryItemAppBar extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                   top: theme.radiuses.large,
                 ),
-                color: theme.colorScheme.background,
+                color: theme.colorScheme.surface,
               ),
             ),
             Row(
@@ -650,7 +650,7 @@ Future<Dialog?> _showImageViewerDialog({
               child: PrimaryIconButton(
                 icon: FontAwesomeIcons.xmark,
                 size: IconButtonSize.medium,
-                backgroundColor: theme.colorScheme.background.withOpacity(0.4),
+                backgroundColor: theme.colorScheme.surface.withOpacity(0.4),
                 onPressed: (_) => context.pop(),
               ),
             ),
