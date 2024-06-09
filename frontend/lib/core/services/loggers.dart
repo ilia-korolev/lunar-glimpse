@@ -12,9 +12,6 @@ class DeveloperLogOutput extends LogOutput {
       sb.writeln(l);
     }
 
-    // TODO(ilia-korolev): developer.log is broken for web
-    // Fixed in the pull request: https://github.com/dart-lang/webdev/pull/2333
-    // Remove this comment when the fix is released
     log(sb.toString());
   }
 }
