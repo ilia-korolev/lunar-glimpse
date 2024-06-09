@@ -49,21 +49,7 @@
 
 ## Accessing Lunar Glimpse
 
-Visit [Lunar Glimpse](https://lunarglimpse.com/) to start your journey through the cosmos. The web version is currently in progress, and we recommend using the mobile app when available for the best experience.
-
-
-## Coming Soon
-
-•  Mobile App (Android - First!)
-
-•  Improved Web Version Performance
-
-•  Gallery Image Optimization
-
-•  Information about Near Earth Asteroids
-
-•  Enhanced Gallery Translations
-
+Download the Android app [here](https://play.google.com/store/apps/details?id=com.lunarglimpse.app) or visit the website [here](https://lunarglimpse.com/) to start your journey through the cosmos. The web version is currently in progress, and we recommend using the mobile app.
 
 ## Known Issues
 
