@@ -428,10 +428,16 @@ class _NewsSourceListBody extends StatelessWidget {
                 final l10n = lookupAppLocalizations(locale);
 
                 return ExpansionTile(
-                  leading: SizedBox(
-                    width: theme.sizes.largeIconSize,
-                    height: theme.sizes.largeIconSize,
-                    child: Image.asset(locale.flagAsset),
+                  leading: Material(
+                    color: theme.colorScheme.surface,
+                    type: MaterialType.circle,
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 1,
+                    child: SizedBox(
+                      width: theme.sizes.largeIconSize,
+                      height: theme.sizes.largeIconSize,
+                      child: Image.asset(locale.flagAsset),
+                    ),
                   ),
                   title: Text(l10n.languageName),
                   shape: RoundedRectangleBorder(
