@@ -221,7 +221,7 @@ class _SuccessView extends StatelessWidget {
               return GalleryCard(
                 item: galleryItems[index],
                 onCardPressed: (context, item) {
-                  context.go('/gallery/${item.date.toInt()}');
+                  context.go('/gallery/favorites/${item.date.toInt()}');
                 },
                 onFavoritePressed: (context, item) {
                   context
