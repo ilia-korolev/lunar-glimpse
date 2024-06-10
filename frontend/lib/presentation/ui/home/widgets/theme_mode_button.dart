@@ -40,6 +40,7 @@ class ThemeModeButton extends StatelessWidget {
             Text(
               themeMode.getTitle(l10n),
               style: theme.textTheme.bodyLarge,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: theme.spacing.small),
             const Spacer(),
