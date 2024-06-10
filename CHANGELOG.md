@@ -1,3 +1,8 @@
+## 1.0.2
+* **Bug fixes:**
+    * fix gallery navigation bug
+    * fix theme mode title alignment
+
 ## 1.0.1
 * **Features:**
     * update favorite button
