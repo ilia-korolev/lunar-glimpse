@@ -22,6 +22,8 @@ class AstroBackendGalleryDataSource
   })  : _httpService = httpService,
         _apiUrl = apiUrl;
 
+  static const earliestDate = Date(year: 1995, month: 6, day: 16);
+
   final HttpService _httpService;
   final String _apiUrl;
 
@@ -55,8 +57,11 @@ class AstroBackendGalleryDataSource
     required Date endDate,
     required ContentLanguage language,
   }) async {
+    final startDateNormalized =
+        startDate.compareTo(earliestDate) < 0 ? earliestDate : startDate;
+
     final request = AstroBackendGalleryItemsRequestDto(
-      startDate: startDate,
+      startDate: startDateNormalized,
       endDate: endDate,
       language: language,
     );
