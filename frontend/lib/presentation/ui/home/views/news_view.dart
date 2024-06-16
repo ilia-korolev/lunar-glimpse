@@ -289,10 +289,14 @@ class _NoMoreNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
 
     return Text(
       l10n.noMoreNews,
       textAlign: TextAlign.center,
+      style: theme.textTheme.bodyMedium?.copyWith(
+        color: theme.colorScheme.outline,
+      ),
     );
   }
 }
