@@ -12,3 +12,4 @@ export 'scroll_to_top.dart';
 export 'selection_transformer.dart';
 export 'sliver_separated_child_builder_delegate.dart';
 export 'stream_listener.dart';
+export 'super_sliver_grid.dart';

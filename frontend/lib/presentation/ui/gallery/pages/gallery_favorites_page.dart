@@ -1,7 +1,6 @@
 import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:frontend/app/_export.dart';
 import 'package:frontend/core/_export.dart';
 import 'package:frontend/presentation/_export.dart';
@@ -207,16 +206,14 @@ class _SuccessView extends StatelessWidget {
       ),
       sliver: SliverLayoutBuilder(
         builder: (context, constraints) {
-          final crossAxisCount = theme.sizes.calcCrossAxisGalleryItemCount(
+          final crossAxisCount = theme.sizes.calcGalleryItemsPerRow(
             availableWidth: constraints.crossAxisExtent,
           );
 
-          return SliverAlignedGrid(
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-            ),
-            mainAxisSpacing: padding,
-            crossAxisSpacing: padding,
+          return SuperSliverGrid(
+            itemsPerRow: crossAxisCount,
+            spacing: padding,
+            itemCount: galleryItems.length,
             itemBuilder: (context, index) {
               return GalleryCard(
                 item: galleryItems[index],
@@ -236,7 +233,6 @@ class _SuccessView extends StatelessWidget {
                 },
               );
             },
-            itemCount: galleryItems.length,
           );
         },
       ),

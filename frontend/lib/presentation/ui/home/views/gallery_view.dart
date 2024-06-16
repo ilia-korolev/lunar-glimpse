@@ -1,7 +1,6 @@
 import 'package:astro_common/astro_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/app/_export.dart';
 import 'package:frontend/core/_export.dart';
@@ -73,7 +72,6 @@ class _GalleryViewState extends State<GalleryView> with WidgetsBindingObserver {
               },
               child: CustomScrollView(
                 controller: _scrollController,
-                cacheExtent: 2000,
                 slivers: [
                   HomeAppBar(
                     title: context.l10n.galleryTitle,
@@ -200,16 +198,20 @@ class _SuccessView extends StatelessWidget {
       ),
       sliver: SliverLayoutBuilder(
         builder: (context, constraints) {
-          final crossAxisCount = theme.sizes.calcCrossAxisGalleryItemCount(
+          final itemsPerRow = theme.sizes.calcGalleryItemsPerRow(
             availableWidth: constraints.crossAxisExtent,
           );
 
-          return SliverAlignedGrid(
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-            ),
-            mainAxisSpacing: padding,
-            crossAxisSpacing: padding,
+          final itemCount = hasReachedMax
+              ? galleryItems.length
+              : galleryItems.length +
+                  (itemsPerRow - galleryItems.length % itemsPerRow) +
+                  itemsPerRow;
+
+          return SuperSliverGrid(
+            itemCount: itemCount,
+            itemsPerRow: itemsPerRow,
+            spacing: padding,
             itemBuilder: (context, index) {
               if (index >= galleryItems.length) {
                 return const LoadingGalleryCard();
@@ -233,9 +235,6 @@ class _SuccessView extends StatelessWidget {
                 },
               );
             },
-            itemCount: hasReachedMax
-                ? galleryItems.length
-                : galleryItems.length + _loadingTileCount,
           );
         },
       ),
