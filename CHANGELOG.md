@@ -1,3 +1,11 @@
+## 1.0.3
+* **Bug fixes:**
+    * fix gallery: prevent loading images before minimum date
+
+* **Improvements:**
+    * optimize gallery grid performance
+    * updated "NoMoreNews" label color
+
 ## 1.0.2
 * **Bug fixes:**
     * fix gallery navigation bug
