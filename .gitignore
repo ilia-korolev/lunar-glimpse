@@ -9,3 +9,5 @@ cron_job.sh
 
 # Certbot files
 certbot/
+
+utils/

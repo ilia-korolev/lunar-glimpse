@@ -18,7 +18,7 @@ _$NasaApodRequestDtoImpl _$$NasaApodRequestDtoImplFromJson(
       endDate: json['end_date'] == null
           ? null
           : Date.fromJson(json['end_date'] as String),
-      count: json['count'] as int?,
+      count: (json['count'] as num?)?.toInt(),
       thumbs: json['thumbs'] as bool? ?? false,
       apiKey: json['api_key'] as String? ?? 'DEMO_KEY',
     );

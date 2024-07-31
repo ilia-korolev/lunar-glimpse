@@ -30,8 +30,12 @@ mixin _$NasaApodResponseDto {
   @JsonKey(name: 'hdurl')
   String? get hdUrl => throw _privateConstructorUsedError;
 
+  /// Serializes this NasaApodResponseDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NasaApodResponseDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NasaApodResponseDtoCopyWith<NasaApodResponseDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NasaApodResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +113,8 @@ class _$NasaApodResponseDtoCopyWithImpl<$Res, $Val extends NasaApodResponseDto>
     ) as $Val);
   }
 
+  /// Create a copy of NasaApodResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res> get date {
@@ -145,6 +153,8 @@ class __$$NasaApodResponseDtoImplCopyWithImpl<$Res>
       $Res Function(_$NasaApodResponseDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NasaApodResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -245,12 +255,14 @@ class _$NasaApodResponseDtoImpl extends _NasaApodResponseDto {
             (identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, date, explanation, title, mediaType, copyright, url, hdUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NasaApodResponseDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NasaApodResponseDtoImplCopyWith<_$NasaApodResponseDtoImpl> get copyWith =>
@@ -295,8 +307,11 @@ abstract class _NasaApodResponseDto extends NasaApodResponseDto {
   @override
   @JsonKey(name: 'hdurl')
   String? get hdUrl;
+
+  /// Create a copy of NasaApodResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NasaApodResponseDtoImplCopyWith<_$NasaApodResponseDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

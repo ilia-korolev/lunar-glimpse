@@ -29,12 +29,14 @@ class HttpOptions {
     this.responseType,
     this.contentType,
     this.followRedirects,
+    this.validateStatus,
     this.headers,
   });
 
   final HttpResponseType? responseType;
   final String? contentType;
   final bool? followRedirects;
+  final bool Function(int?)? validateStatus;
   final Map<String, String?>? headers;
 }
 

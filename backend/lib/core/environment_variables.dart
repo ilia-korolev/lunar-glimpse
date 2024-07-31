@@ -15,6 +15,10 @@ class EnvironmentVariables {
     required this.dbMaxConnectionAge,
     required this.dbMaxSessionUse,
     required this.dbMaxQueryCount,
+    required this.mediaStorage,
+    required this.cloudinaryApiKey,
+    required this.cloudinaryApiSecret,
+    required this.cloudinaryCloudName,
   });
 
   factory EnvironmentVariables._init() {
@@ -90,6 +94,34 @@ class EnvironmentVariables {
     final dbMaxQueryCount =
         int.tryParse(Platform.environment[_dbMaxQueryCountEnv] ?? '');
 
+    final mediaStorage = MediaStorage.fromString(
+      Platform.environment[_mediaStorageEnv],
+    );
+
+    final cloudinaryApiKey = Platform.environment[_cloudinaryApiKeyEnv];
+    if (mediaStorage == MediaStorage.cloudinary &&
+        (cloudinaryApiKey?.isEmpty ?? true)) {
+      throw ArgumentError(
+        'Environment variable $_cloudinaryApiKeyEnv must be provided',
+      );
+    }
+
+    final cloudinaryApiSecret = Platform.environment[_cloudinaryApiSecretEnv];
+    if (mediaStorage == MediaStorage.cloudinary &&
+        (cloudinaryApiSecret?.isEmpty ?? true)) {
+      throw ArgumentError(
+        'Environment variable $_cloudinaryApiSecretEnv must be provided',
+      );
+    }
+
+    final cloudinaryCloudName = Platform.environment[_cloudinaryCloudNameEnv];
+    if (mediaStorage == MediaStorage.cloudinary &&
+        (cloudinaryCloudName?.isEmpty ?? true)) {
+      throw ArgumentError(
+        'Environment variable $_cloudinaryCloudNameEnv must be provided',
+      );
+    }
+
     return EnvironmentVariables._(
       dbHost: dbHost!,
       dbName: dbName!,
@@ -104,6 +136,10 @@ class EnvironmentVariables {
       dbMaxConnectionAge: dbMaxConnectionAge,
       dbMaxSessionUse: dbMaxSessionUse,
       dbMaxQueryCount: dbMaxQueryCount,
+      mediaStorage: mediaStorage,
+      cloudinaryApiKey: cloudinaryApiKey,
+      cloudinaryApiSecret: cloudinaryApiSecret,
+      cloudinaryCloudName: cloudinaryCloudName,
     );
   }
 
@@ -120,6 +156,10 @@ class EnvironmentVariables {
   final Duration? dbMaxConnectionAge;
   final Duration? dbMaxSessionUse;
   final int? dbMaxQueryCount;
+  final MediaStorage mediaStorage;
+  final String? cloudinaryApiKey;
+  final String? cloudinaryApiSecret;
+  final String? cloudinaryCloudName;
 
   static const _dbHostEnv = 'DB_HOST';
   static const _dbNameEnv = 'DB_NAME';
@@ -134,6 +174,10 @@ class EnvironmentVariables {
   static const _dbMaxConnectionAgeEnv = 'DB_MAX_CONNECTION_AGE';
   static const _dbMaxSessionUseEnv = 'DB_MAX_SESSION_USE';
   static const _dbMaxQueryCountEnv = 'DB_MAX_QUERY_COUNT';
+  static const _mediaStorageEnv = 'MEDIA_STORAGE';
+  static const _cloudinaryApiKeyEnv = 'CLOUDINARY_API_KEY';
+  static const _cloudinaryApiSecretEnv = 'CLOUDINARY_API_SECRET';
+  static const _cloudinaryCloudNameEnv = 'CLOUDINARY_CLOUD_NAME';
 
   static final instance = EnvironmentVariables._init();
 }
@@ -147,5 +191,15 @@ enum TranslationSource {
         'google' => TranslationSource.google,
         'deepl' => TranslationSource.deepl,
         _ => TranslationSource.mock,
+      };
+}
+
+enum MediaStorage {
+  cloudinary,
+  mock;
+
+  static MediaStorage fromString(String? str) => switch (str) {
+        'cloudinary' => MediaStorage.cloudinary,
+        _ => MediaStorage.mock,
       };
 }

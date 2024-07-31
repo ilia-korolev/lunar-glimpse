@@ -25,8 +25,12 @@ mixin _$NewsSource {
   ContentLanguage get language => throw _privateConstructorUsedError;
   bool get isShown => throw _privateConstructorUsedError;
 
+  /// Serializes this NewsSource to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NewsSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsSourceCopyWith<NewsSource> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$NewsSourceCopyWithImpl<$Res, $Val extends NewsSource>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsSource
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,6 +104,8 @@ class __$$NewsSourceImplCopyWithImpl<$Res>
       _$NewsSourceImpl _value, $Res Function(_$NewsSourceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsSource
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,11 +174,13 @@ class _$NewsSourceImpl extends _NewsSource {
             (identical(other.isShown, isShown) || other.isShown == isShown));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, uri, iconUri, language, isShown);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsSourceImplCopyWith<_$NewsSourceImpl> get copyWith =>
@@ -203,8 +213,11 @@ abstract class _NewsSource extends NewsSource {
   ContentLanguage get language;
   @override
   bool get isShown;
+
+  /// Create a copy of NewsSource
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsSourceImplCopyWith<_$NewsSourceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

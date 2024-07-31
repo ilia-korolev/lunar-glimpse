@@ -52,8 +52,12 @@ mixin _$NasaApodRequestDto {
   /// api.nasa.gov key for expanded usage
   String get apiKey => throw _privateConstructorUsedError;
 
+  /// Serializes this NasaApodRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NasaApodRequestDtoCopyWith<NasaApodRequestDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -87,6 +91,8 @@ class _$NasaApodRequestDtoCopyWithImpl<$Res, $Val extends NasaApodRequestDto>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +131,8 @@ class _$NasaApodRequestDtoCopyWithImpl<$Res, $Val extends NasaApodRequestDto>
     ) as $Val);
   }
 
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res>? get date {
@@ -137,6 +145,8 @@ class _$NasaApodRequestDtoCopyWithImpl<$Res, $Val extends NasaApodRequestDto>
     });
   }
 
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res>? get startDate {
@@ -149,6 +159,8 @@ class _$NasaApodRequestDtoCopyWithImpl<$Res, $Val extends NasaApodRequestDto>
     });
   }
 
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res>? get endDate {
@@ -194,6 +206,8 @@ class __$$NasaApodRequestDtoImplCopyWithImpl<$Res>
       $Res Function(_$NasaApodRequestDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -320,12 +334,14 @@ class _$NasaApodRequestDtoImpl extends _NasaApodRequestDto {
             (identical(other.apiKey, apiKey) || other.apiKey == apiKey));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, date, startDate, endDate, count, thumbs, apiKey);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NasaApodRequestDtoImplCopyWith<_$NasaApodRequestDtoImpl> get copyWith =>
@@ -353,46 +369,48 @@ abstract class _NasaApodRequestDto extends NasaApodRequestDto {
   factory _NasaApodRequestDto.fromJson(Map<String, dynamic> json) =
       _$NasaApodRequestDtoImpl.fromJson;
 
-  @override
-
   /// The date of the APOD image to retrieve.
   ///
   /// Cannot be used with count or startDate and endDate.
   ///
   /// Default value is today
-  Date? get date;
   @override
+  Date? get date;
 
   /// The start of a date range, when requesting date for a range of dates.
   ///
   /// Cannot be used with date or count.
-  Date? get startDate;
   @override
+  Date? get startDate;
 
   /// The end of the date range, when used with startDate.
   ///
   /// Cannot be used with date or count.
   ///
   /// Default value is today
-  Date? get endDate;
   @override
+  Date? get endDate;
 
   /// If this is specified then count randomly chosen images will be returned.
   ///
   /// Cannot be used with date or startDate and endDate.
-  int? get count;
   @override
+  int? get count;
 
   /// Return the URL of video thumbnail.
   ///
   /// If an APOD is not a video, this parameter is ignored.
-  bool get thumbs;
   @override
+  bool get thumbs;
 
   /// api.nasa.gov key for expanded usage
-  String get apiKey;
   @override
-  @JsonKey(ignore: true)
+  String get apiKey;
+
+  /// Create a copy of NasaApodRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NasaApodRequestDtoImplCopyWith<_$NasaApodRequestDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

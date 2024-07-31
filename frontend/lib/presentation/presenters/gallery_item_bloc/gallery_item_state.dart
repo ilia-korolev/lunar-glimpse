@@ -29,7 +29,7 @@ class GalleryItemState with _$GalleryItemState {
         return '''
 GalleryItemState.success(
     date: ${item.date},
-    title: ${item.title},
+    title: ${item.info.title},
   )''';
       },
       failure: (String message) {

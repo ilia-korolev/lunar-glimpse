@@ -224,6 +224,7 @@ class _GalleryItemAppBar extends StatelessWidget {
     final lightTheme = GetIt.instance<Theming>().light;
 
     final buttonSize = theme.sizes.largeIconSize + 2 * theme.spacing.semiSmall;
+    final image = item.media as GalleryImage;
 
     return SliverAppBar(
       leading: Padding(
@@ -245,7 +246,7 @@ class _GalleryItemAppBar extends StatelessWidget {
             top: theme.spacing.small,
           ),
           child: _SaveImageButton(
-            imageUri: item.hdUri,
+            imageUri: image.hdUri,
           ),
         ),
       ],
@@ -258,8 +259,12 @@ class _GalleryItemAppBar extends StatelessWidget {
               item: item,
             );
           },
-          child: ImageContent(
-            uri: item.uri.toString(),
+          child: AspectRatio(
+            aspectRatio: image.aspectRatio,
+            child: ImageContent.blurHash(
+              uri: image.uri.toString(),
+              blurHash: image.blurHash,
+            ),
           ),
         ),
       ),
@@ -356,7 +361,7 @@ class _GalleryItemDescription extends StatelessWidget {
       sliver: SliverList.list(
         children: [
           Text(
-            item.title,
+            item.info.title,
             style: theme.textTheme.headlineSmall,
           ),
           SizedBox(height: theme.spacing.semiSmall),
@@ -366,7 +371,7 @@ class _GalleryItemDescription extends StatelessWidget {
           ),
           SizedBox(height: theme.spacing.semiSmall),
           Text(
-            item.explanation,
+            item.info.explanation,
             style: theme.textTheme.bodyMedium,
           ),
           if (item.copyright case final copyright?) ...[
@@ -414,7 +419,7 @@ class _ExpandedSuccessView extends StatelessWidget {
             ),
             children: [
               Text(
-                item.title,
+                item.info.title,
                 style: theme.textTheme.headlineSmall,
               ),
               _ExpandedActionRow(item: item),
@@ -422,7 +427,7 @@ class _ExpandedSuccessView extends StatelessWidget {
               _ExpandedImage(item: item),
               SizedBox(height: theme.spacing.large),
               Text(
-                item.explanation,
+                item.info.explanation,
                 style: theme.textTheme.bodyMedium,
               ),
             ],
@@ -444,6 +449,7 @@ class _ExpandedActionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+    final image = item.media as GalleryImage;
 
     return Row(
       children: [
@@ -469,7 +475,7 @@ class _ExpandedActionRow extends StatelessWidget {
         ),
         const Spacer(),
         _SaveImageButton(
-          imageUri: item.hdUri,
+          imageUri: image.hdUri,
         ),
         SizedBox(width: theme.spacing.small),
         PrimaryIconButton(
@@ -509,6 +515,7 @@ class _ExpandedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final image = item.media as GalleryImage;
 
     return Container(
       clipBehavior: Clip.antiAlias,
@@ -520,8 +527,12 @@ class _ExpandedImage extends StatelessWidget {
       child: Stack(
         fit: StackFit.passthrough,
         children: [
-          ImageContent(
-            uri: item.uri.toString(),
+          AspectRatio(
+            aspectRatio: image.aspectRatio,
+            child: ImageContent.blurHash(
+              uri: item.uri.toString(),
+              blurHash: image.blurHash,
+            ),
           ),
           Positioned.fill(
             child: Material(
@@ -599,6 +610,7 @@ Future<Dialog?> _showImageViewerDialog({
     context: context,
     builder: (context) {
       final theme = Theme.of(context);
+      final image = item.media as GalleryImage;
 
       return Dialog(
         insetPadding: EdgeInsets.zero,
@@ -622,7 +634,7 @@ Future<Dialog?> _showImageViewerDialog({
                       child: Center(
                         child: CachedNetworkImage(
                           fit: BoxFit.contain,
-                          imageUrl: item.hdUri.toString(),
+                          imageUrl: image.hdUri.toString(),
                           progressIndicatorBuilder: (_, __, downloadProgress) {
                             final progress =
                                 downloadProgress.progress?.clamp(0.0, 1.0) ??

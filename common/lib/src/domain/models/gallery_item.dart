@@ -25,17 +25,71 @@ enum GalleryItemType {
 class GalleryItem with _$GalleryItem {
   const factory GalleryItem({
     required Date date,
+    required String? copyright,
+    required GalleryMedia media,
+    required GalleryInfo info,
+    required bool isFavorite,
+  }) = _GalleryItem;
+
+  const GalleryItem._();
+
+  factory GalleryItem.fromJson(Map<String, dynamic> json) =>
+      _$GalleryItemFromJson(json);
+
+  Uri get uri => switch (media) {
+        final GalleryImage image => image.uri,
+        final GalleryVideo video => video.uri,
+        final GalleryOther other => other.uri,
+        final GalleryEmpty _ => throw UnimplementedError(
+            'trying get uri from an empty media object',
+          ),
+        _ => throw UnimplementedError(),
+      };
+
+  GalleryItemType get type => switch (media) {
+        final GalleryImage _ => GalleryItemType.image,
+        final GalleryVideo _ => GalleryItemType.video,
+        final GalleryOther _ => GalleryItemType.other,
+        final GalleryEmpty _ => GalleryItemType.empty,
+        _ => throw UnimplementedError(),
+      };
+}
+
+@Freezed(unionKey: 'type')
+class GalleryMedia with _$GalleryMedia {
+  const factory GalleryMedia.image({
     required Uri uri,
     required Uri hdUri,
-    required String? copyright,
-    required GalleryItemType type,
-    required bool isFavorite,
+    required Uri thumbUri,
+    required double aspectRatio,
+    required double aspectRatioThumb,
+    required String blurHash,
+    required String blurHashThumb,
+  }) = GalleryImage;
+
+  const factory GalleryMedia.video({
+    required Uri uri,
+  }) = GalleryVideo;
+
+  const factory GalleryMedia.other({
+    required Uri uri,
+  }) = GalleryOther;
+
+  const factory GalleryMedia.empty() = GalleryEmpty;
+
+  factory GalleryMedia.fromJson(Map<String, dynamic> json) =>
+      _$GalleryMediaFromJson(json);
+}
+
+@freezed
+class GalleryInfo with _$GalleryInfo {
+  const factory GalleryInfo({
     required ContentLanguage language,
     required ContentLanguage originalLanguage,
     required String title,
     required String explanation,
-  }) = _GalleryItem;
+  }) = _GalleryInfo;
 
-  factory GalleryItem.fromJson(Map<String, dynamic> json) =>
-      _$GalleryItemFromJson(json);
+  factory GalleryInfo.fromJson(Map<String, dynamic> json) =>
+      _$GalleryInfoFromJson(json);
 }

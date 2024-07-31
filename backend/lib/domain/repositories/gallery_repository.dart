@@ -17,16 +17,19 @@ abstract interface class GalleryRepository {
 
 class GalleryRepositoryImpl implements GalleryRepository {
   GalleryRepositoryImpl({
-    required LocalGalleryDataSource localGalleryDataSource,
-    required RemoteGalleryDataSource remoteGalleryDataSource,
-    required RemoteTranslationDataSource remoteTranslationDataSource,
-  })  : _localGalleryDataSource = localGalleryDataSource,
-        _remoteGalleryDataSource = remoteGalleryDataSource,
-        _remoteTranslationDataSource = remoteTranslationDataSource;
+    required LocalGalleryDataSource localDataSource,
+    required RemoteBasicGalleryDataSource remoteDataSource,
+    required RemoteGalleryTranslationDataSource translationDataSource,
+    required RemoteGalleryMapperDataSource mapperDataSource,
+  })  : _localDataSource = localDataSource,
+        _remoteDataSource = remoteDataSource,
+        _translationDataSource = translationDataSource,
+        _mapperDataSource = mapperDataSource;
 
-  final LocalGalleryDataSource _localGalleryDataSource;
-  final RemoteGalleryDataSource _remoteGalleryDataSource;
-  final RemoteTranslationDataSource _remoteTranslationDataSource;
+  final LocalGalleryDataSource _localDataSource;
+  final RemoteBasicGalleryDataSource _remoteDataSource;
+  final RemoteGalleryTranslationDataSource _translationDataSource;
+  final RemoteGalleryMapperDataSource _mapperDataSource;
 
   @override
   Future<List<GalleryItem>> getItems({
@@ -34,196 +37,173 @@ class GalleryRepositoryImpl implements GalleryRepository {
     required Date endDate,
     required ContentLanguage language,
   }) async {
-    if (language == _remoteGalleryDataSource.language) {
-      return _getItemsInOriginalLanguage(
-        startDate: startDate,
-        endDate: endDate,
-      );
-    }
-
-    return _getTranslatedItems(
+    final cached = await _localDataSource.getItems(
       startDate: startDate,
       endDate: endDate,
       language: language,
     );
+
+    final dates = _generateDateList(startDate, endDate);
+    final missedDates = _getMissedDates(cached, dates);
+
+    final needsTranslation = language != _remoteDataSource.language;
+
+    final items = (!needsTranslation
+        ? await _fetchAndCacheItems(
+            missedDates: missedDates,
+            cached: cached,
+          )
+        : await _fetchTranslateAndCacheItems(
+            missedDates: missedDates,
+            translatedCached: cached,
+            language: language,
+          ))
+      ..sort((a, b) => a.date.compareTo(b.date));
+
+    return items;
   }
 
   @override
   Future<GalleryItem> getLatestItem({
     required ContentLanguage language,
   }) async {
-    final itemInOriginalLanguage =
-        await _remoteGalleryDataSource.getLatestItem();
-
-    await _localGalleryDataSource.cacheItems(
-      galleryItems: [itemInOriginalLanguage],
-    );
-
-    if (language == _remoteGalleryDataSource.language) {
-      return itemInOriginalLanguage;
-    }
-
-    final items = await _getTranslatedItems(
-      startDate: itemInOriginalLanguage.date,
-      endDate: itemInOriginalLanguage.date,
+    final basic = await _remoteDataSource.getLatestItem();
+    final cached = await _localDataSource.getItem(
+      date: basic.date,
       language: language,
     );
 
-    return items.first;
+    if (cached != null) {
+      return cached;
+    }
+
+    final needsTranslation = language != _remoteDataSource.language;
+
+    final item = !needsTranslation
+        ? await _mapAndCacheItem(
+            basic: basic,
+            language: language,
+          )
+        : await _translateAndCacheItem(
+            basic: basic,
+            language: language,
+          );
+
+    return item;
   }
 
-  Future<List<GalleryItem>> _getItemsInOriginalLanguage({
-    required Date startDate,
-    required Date endDate,
-  }) async {
-    final cachedItems = await _localGalleryDataSource.getItems(
-      startDate: startDate,
-      endDate: endDate,
-      language: _remoteGalleryDataSource.language,
-    );
-
-    final uncachedItems = await _getUncachedEnglishItems(
-      endDate: endDate,
-      startDate: startDate,
-      cachedItems: cachedItems,
-    );
-
-    await _localGalleryDataSource.cacheItems(
-      galleryItems: uncachedItems,
-    );
-
-    final items = [
-      ...cachedItems,
-      ...uncachedItems,
-    ]..sort((a, b) => a.date.compareTo(b.date));
-
-    return items;
-  }
-
-  Future<List<GalleryItem>> _getUncachedEnglishItems({
-    required Date endDate,
-    required Date startDate,
-    required List<GalleryItem> cachedItems,
-  }) async {
+  List<Date> _generateDateList(Date startDate, Date endDate) {
     final count = endDate.difference(startDate).inDays + 1;
 
-    final requestedDates = List<Date>.generate(
+    return List<Date>.generate(
       count,
       (index) => startDate.add(Duration(days: index)),
       growable: false,
     );
+  }
 
-    final cachedDates = cachedItems.map((e) => e.date);
-    final uncachedDates = requestedDates.difference(cachedDates);
-    final uncachedPeriods = uncachedDates.toPeriods();
+  List<Date> _getMissedDates(List<GalleryItem> items, List<Date> dates) {
+    final cachedDates = items.map((e) => e.date).toSet();
+    return dates.where((date) => !cachedDates.contains(date)).toList();
+  }
 
-    final uncachedItems = <GalleryItem>[];
+  Future<List<GalleryItem>> _fetchAndCacheItems({
+    required List<Date> missedDates,
+    required List<GalleryItem> cached,
+  }) async {
+    final missedPeriods = missedDates.toPeriods();
+    final basic = <BasicGalleryItem>[];
 
-    for (final uncachedPeriod in uncachedPeriods) {
-      uncachedItems.addAll(
-        await _remoteGalleryDataSource.getGalleryItems(
-          startDate: uncachedPeriod.startDate,
-          endDate: uncachedPeriod.endDate,
+    for (final period in missedPeriods) {
+      basic.addAll(
+        await _remoteDataSource.getGalleryItems(
+          startDate: period.startDate,
+          endDate: period.endDate,
         ),
       );
     }
 
-    return uncachedItems;
+    final uncached = await Future.wait(
+      basic.map(
+        (b) => _mapperDataSource.map(
+          basic: b,
+          language: _remoteDataSource.language,
+        ),
+      ),
+    );
+
+    await _localDataSource.cacheItems(galleryItems: uncached);
+
+    return [...cached, ...uncached];
   }
 
-  Future<List<GalleryItem>> _getTranslatedItems({
-    required Date startDate,
-    required Date endDate,
+  Future<List<GalleryItem>> _fetchTranslateAndCacheItems({
+    required List<Date> missedDates,
+    required List<GalleryItem> translatedCached,
     required ContentLanguage language,
   }) async {
-    final cachedItems = await _localGalleryDataSource.getItems(
-      startDate: startDate,
-      endDate: endDate,
-      language: language,
+    final missedPeriods = missedDates.toPeriods();
+    final untranslatedCached = <GalleryItem>[];
+
+    for (final period in missedPeriods) {
+      untranslatedCached.addAll(
+        await _localDataSource.getItems(
+          startDate: period.startDate,
+          endDate: period.endDate,
+          language: _remoteDataSource.language,
+        ),
+      );
+    }
+    final untranslatedUncachedDates =
+        _getMissedDates(untranslatedCached, missedDates);
+
+    final untranslated = await _fetchAndCacheItems(
+      missedDates: untranslatedUncachedDates,
+      cached: untranslatedCached,
     );
 
-    final itemsInOriginalLanguage = await _getItemsToTranslate(
-      startDate: startDate,
-      endDate: endDate,
-      cachedItems: cachedItems,
-    );
-
-    final translatedItems = await _translateItems(
-      englishItems: itemsInOriginalLanguage,
-      sourceLanguage: _remoteGalleryDataSource.language,
+    final translatedUncached = await _translationDataSource.translateItems(
+      items: untranslated,
+      sourceLanguage: _remoteDataSource.language,
       targetLanguage: language,
     );
 
-    await _localGalleryDataSource.cacheItems(
-      galleryItems: translatedItems,
-    );
+    await _localDataSource.cacheItems(galleryItems: translatedUncached);
 
-    final items = [
-      ...cachedItems,
-      ...translatedItems,
-    ]..sort((a, b) => a.date.compareTo(b.date));
-
-    return items;
+    return [...translatedCached, ...translatedUncached];
   }
 
-  Future<List<GalleryItem>> _getItemsToTranslate({
-    required Date startDate,
-    required Date endDate,
-    required List<GalleryItem> cachedItems,
+  Future<GalleryItem> _mapAndCacheItem({
+    required BasicGalleryItem basic,
+    required ContentLanguage language,
   }) async {
-    final count = endDate.difference(startDate).inDays + 1;
-
-    final requestedDates = List<Date>.generate(
-      count,
-      (index) => startDate.add(Duration(days: index)),
-      growable: false,
+    final item = await _mapperDataSource.map(
+      basic: basic,
+      language: language,
     );
 
-    final cachedDates = cachedItems.map((e) => e.date);
-    final uncachedDates = requestedDates.difference(cachedDates);
-    final uncachedPeriods = uncachedDates.toPeriods();
-
-    final englishItems = <GalleryItem>[];
-
-    for (final uncachedPeriod in uncachedPeriods) {
-      englishItems.addAll(
-        await _getItemsInOriginalLanguage(
-          startDate: uncachedPeriod.startDate,
-          endDate: uncachedPeriod.endDate,
-        ),
-      );
-    }
-    return englishItems;
+    await _localDataSource.cacheItems(galleryItems: [item]);
+    return item;
   }
 
-  Future<List<GalleryItem>> _translateItems({
-    required List<GalleryItem> englishItems,
-    required ContentLanguage sourceLanguage,
-    required ContentLanguage targetLanguage,
+  Future<GalleryItem> _translateAndCacheItem({
+    required BasicGalleryItem basic,
+    required ContentLanguage language,
   }) async {
-    final translatedItems = <GalleryItem>[];
+    var item = await _localDataSource.getItem(
+      date: basic.date,
+      language: _remoteDataSource.language,
+    );
 
-    for (final englishItem in englishItems) {
-      final textToTranslate = [
-        englishItem.title,
-        englishItem.explanation,
-      ];
+    item ??= await _mapAndCacheItem(basic: basic, language: language);
 
-      final translatedText = await _remoteTranslationDataSource.translateText(
-        source: textToTranslate,
-        sourceLanguage: sourceLanguage.languageCode,
-        targetLanguage: targetLanguage.languageCode,
-      );
+    final translated = await _translationDataSource.translateItem(
+      item: item,
+      sourceLanguage: _remoteDataSource.language,
+      targetLanguage: language,
+    );
 
-      translatedItems.add(
-        englishItem.copyWith(
-          title: translatedText[0],
-          explanation: translatedText[1],
-          language: targetLanguage,
-        ),
-      );
-    }
-
-    return translatedItems;
+    await _localDataSource.cacheItems(galleryItems: [translated]);
+    return translated;
   }
 }

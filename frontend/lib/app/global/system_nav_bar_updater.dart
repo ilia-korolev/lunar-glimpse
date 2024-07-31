@@ -81,15 +81,9 @@ class _SystemNavBarUpdaterState extends State<SystemNavBarUpdater>
   }
 
   void _updateNavBar(ThemeData theme) {
-    final color = ElevationOverlay.applySurfaceTint(
-      theme.colorScheme.surface,
-      theme.colorScheme.surfaceTint,
-      3,
-    );
-
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        systemNavigationBarColor: color,
+        systemNavigationBarColor: theme.colorScheme.surfaceContainer,
         systemNavigationBarIconBrightness: _reverseBrightness(theme.brightness),
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:astro_backend/core/_export.dart';
 import 'package:astro_backend/data/_export.dart';
 import 'package:astro_common/astro_common.dart';
 
@@ -10,39 +9,48 @@ abstract interface class LocalNewsSourceDataSource {
   Future<NewsSource?> getSourceByUri({required Uri sourceUri});
 }
 
-class PostgresNewsSourceDataSource implements LocalNewsSourceDataSource {
-  const PostgresNewsSourceDataSource({
-    required PostgresPool postgresPool,
-  }) : _postgresPool = postgresPool;
+class DriftNewsSourceDataSource implements LocalNewsSourceDataSource {
+  const DriftNewsSourceDataSource({
+    required AppDatabase database,
+  }) : _database = database;
 
-  final PostgresPool _postgresPool;
-
-  @override
-  Future<List<NewsSource>> getSources() async {
-    final result = await _postgresPool.execute(
-      'SELECT * FROM news_sources g;',
-    );
-
-    final models = result
-        .map((r) => NewsSourceEntity.fromQueryResult(queryResult: r).toModel())
-        .toList();
-
-    return models;
-  }
+  final AppDatabase _database;
 
   @override
   Future<NewsSource?> getSourceByUri({required Uri sourceUri}) async {
-    final result = await _postgresPool.execute(
-      "SELECT * FROM news_sources WHERE uri='$sourceUri' LIMIT 1;",
-    );
+    final query = _database.select(_database.newsSourceEntities)
+      ..where((t) => t.uri.equals(sourceUri.toString()));
 
-    if (result.isEmpty) {
-      return null;
-    }
+    final dbEntity = (await query.get()).singleOrNull;
 
-    final source =
-        NewsSourceEntity.fromQueryResult(queryResult: result.single).toModel();
+    final model = dbEntity == null
+        ? null
+        : NewsSource(
+            uri: dbEntity.uri,
+            iconUri: dbEntity.iconUri,
+            language: dbEntity.language,
+            isShown: false,
+          );
 
-    return source;
+    return model;
+  }
+
+  @override
+  Future<List<NewsSource>> getSources() async {
+    final dbEntities =
+        await _database.select(_database.newsSourceEntities).get();
+
+    final models = dbEntities
+        .map(
+          (e) => NewsSource(
+            uri: e.uri,
+            iconUri: e.iconUri,
+            language: e.language,
+            isShown: false,
+          ),
+        )
+        .toList();
+
+    return models;
   }
 }

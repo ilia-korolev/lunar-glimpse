@@ -24,8 +24,12 @@ mixin _$GoogleTranslateTextResponseDto {
   List<GoogleTextTranslation> get translations =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this GoogleTranslateTextResponseDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GoogleTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GoogleTranslateTextResponseDtoCopyWith<GoogleTranslateTextResponseDto>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$GoogleTranslateTextResponseDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GoogleTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +94,8 @@ class __$$GoogleTranslateTextResponseDtoImplCopyWithImpl<$Res>
       $Res Function(_$GoogleTranslateTextResponseDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GoogleTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,12 +145,14 @@ class _$GoogleTranslateTextResponseDtoImpl
                 .equals(other._translations, _translations));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_translations));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GoogleTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GoogleTranslateTextResponseDtoImplCopyWith<
@@ -170,8 +180,11 @@ abstract class _GoogleTranslateTextResponseDto
 
   @override
   List<GoogleTextTranslation> get translations;
+
+  /// Create a copy of GoogleTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GoogleTranslateTextResponseDtoImplCopyWith<
           _$GoogleTranslateTextResponseDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -187,8 +200,12 @@ mixin _$GoogleTextTranslation {
   String get translatedText => throw _privateConstructorUsedError;
   String? get detectedSourceLanguage => throw _privateConstructorUsedError;
 
+  /// Serializes this GoogleTextTranslation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GoogleTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GoogleTextTranslationCopyWith<GoogleTextTranslation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -213,6 +230,8 @@ class _$GoogleTextTranslationCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GoogleTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -253,6 +272,8 @@ class __$$GoogleTextTranslationImplCopyWithImpl<$Res>
       $Res Function(_$GoogleTextTranslationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GoogleTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -303,12 +324,14 @@ class _$GoogleTextTranslationImpl extends _GoogleTextTranslation {
                 other.detectedSourceLanguage == detectedSourceLanguage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, translatedText, detectedSourceLanguage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GoogleTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GoogleTextTranslationImplCopyWith<_$GoogleTextTranslationImpl>
@@ -336,8 +359,11 @@ abstract class _GoogleTextTranslation extends GoogleTextTranslation {
   String get translatedText;
   @override
   String? get detectedSourceLanguage;
+
+  /// Create a copy of GoogleTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GoogleTextTranslationImplCopyWith<_$GoogleTextTranslationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

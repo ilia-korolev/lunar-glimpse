@@ -24,7 +24,7 @@ class CompactArticleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final thumbnailUri = article.thumbnail;
+    final thumbUri = article.thumbnail;
 
     return Center(
       child: _ArticleCardBase(
@@ -34,8 +34,8 @@ class CompactArticleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (thumbnailUri != null) ...[
-              _Thumbnail(thumbnailUri: thumbnailUri),
+            if (thumbUri != null) ...[
+              _Thumbnail(thumbUri: thumbUri),
             ],
             _ArticleInfo(
               article: article,
@@ -63,7 +63,7 @@ class ExpandedArticleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final thumbnailUri = article.thumbnail;
+    final thumbUri = article.thumbnail;
 
     return Center(
       child: ConstrainedBox(
@@ -78,13 +78,13 @@ class ExpandedArticleCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (thumbnailUri != null) ...[
-                _Thumbnail(thumbnailUri: thumbnailUri),
+              if (thumbUri != null) ...[
+                _Thumbnail(thumbUri: thumbUri),
               ],
               Expanded(
                 child: _ArticleInfo(
                   article: article,
-                  isExpanded: thumbnailUri != null,
+                  isExpanded: thumbUri != null,
                 ),
               ),
             ],
@@ -124,12 +124,17 @@ class _GalleryCardState extends State<GalleryCard> {
     final isMobile = theme.platform == TargetPlatform.android ||
         theme.platform == TargetPlatform.iOS;
 
+    final image = widget.item.media as GalleryImage;
+
     return Column(
       children: [
         Skeleton.leaf(
           child: Stack(
             children: [
-              _Thumbnail(thumbnailUri: widget.item.uri),
+              _Thumbnail(
+                thumbUri: image.thumbUri,
+                blurHash: image.blurHashThumb,
+              ),
               Positioned.fill(
                 child: Material(
                   color: Colors.transparent,
@@ -202,7 +207,7 @@ class _GalleryCardState extends State<GalleryCard> {
           children: [
             Expanded(
               child: Text(
-                widget.item.title,
+                widget.item.info.title,
                 style: theme.textTheme.titleSmall!.copyWith(
                   color: theme.colorScheme.onSurface,
                 ),
@@ -225,10 +230,12 @@ class _GalleryCardState extends State<GalleryCard> {
 
 class _Thumbnail extends StatelessWidget {
   const _Thumbnail({
-    required this.thumbnailUri,
+    required this.thumbUri,
+    this.blurHash,
   });
 
-  final Uri thumbnailUri;
+  final Uri thumbUri;
+  final String? blurHash;
 
   @override
   Widget build(BuildContext context) {
@@ -241,7 +248,14 @@ class _Thumbnail extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(theme.radiuses.large),
         ),
-        child: ImageContent(uri: thumbnailUri.toString()),
+        child: blurHash != null
+            ? ImageContent.blurHash(
+                uri: thumbUri.toString(),
+                blurHash: blurHash!,
+              )
+            : ImageContent.indicator(
+                uri: thumbUri.toString(),
+              ),
       ),
     );
   }

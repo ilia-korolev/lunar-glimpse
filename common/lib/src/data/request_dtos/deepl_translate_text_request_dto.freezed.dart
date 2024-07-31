@@ -29,8 +29,12 @@ mixin _$DeepLTranslateTextRequestDto {
   String get targetLanguage => throw _privateConstructorUsedError;
   DeepLFormality get formality => throw _privateConstructorUsedError;
 
+  /// Serializes this DeepLTranslateTextRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeepLTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeepLTranslateTextRequestDtoCopyWith<DeepLTranslateTextRequestDto>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$DeepLTranslateTextRequestDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeepLTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,6 +122,8 @@ class __$$DeepLTranslateTextRequestDtoImplCopyWithImpl<$Res>
       $Res Function(_$DeepLTranslateTextRequestDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeepLTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,7 +205,7 @@ class _$DeepLTranslateTextRequestDtoImpl extends _DeepLTranslateTextRequestDto {
                 other.formality == formality));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -206,7 +214,9 @@ class _$DeepLTranslateTextRequestDtoImpl extends _DeepLTranslateTextRequestDto {
       targetLanguage,
       formality);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeepLTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeepLTranslateTextRequestDtoImplCopyWith<
@@ -246,8 +256,11 @@ abstract class _DeepLTranslateTextRequestDto
   String get targetLanguage;
   @override
   DeepLFormality get formality;
+
+  /// Create a copy of DeepLTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeepLTranslateTextRequestDtoImplCopyWith<
           _$DeepLTranslateTextRequestDtoImpl>
       get copyWith => throw _privateConstructorUsedError;

@@ -23,21 +23,18 @@ class NasaApodResponseDto with _$NasaApodResponseDto {
       _$NasaApodResponseDtoFromJson(json);
 
   /// Throws a [FormatException] if the dto cannot be converted.
-  GalleryItem toModel() {
+  BasicGalleryItem toModel() {
     final urlOrDefault =
         url ?? 'https://apod.nasa.gov/apod/ap${date.format('yyMMdd')}.html';
 
-    return GalleryItem(
+    return BasicGalleryItem(
       date: date,
+      copyright: copyright,
       uri: Uri.parse(urlOrDefault),
       hdUri: Uri.parse(hdUrl ?? urlOrDefault),
-      copyright: copyright,
-      type: mediaType,
-      isFavorite: false,
-      language: ContentLanguage.english,
-      originalLanguage: ContentLanguage.english,
       title: title,
       explanation: explanation,
+      type: mediaType,
     );
   }
 }

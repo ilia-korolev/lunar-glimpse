@@ -89,6 +89,7 @@ class DioHttpService implements HttpService {
       contentType: options.contentType,
       headers: options.headers,
       followRedirects: options.followRedirects,
+      validateStatus: options.validateStatus,
     );
   }
 

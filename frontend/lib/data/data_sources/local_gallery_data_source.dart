@@ -34,16 +34,23 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
       return;
     }
 
+    final detailedImages =
+        galleryItems.where((i) => i.type == GalleryItemType.image).toList();
+    final videos =
+        galleryItems.where((i) => i.type == GalleryItemType.video).toList();
+    final others =
+        galleryItems.where((i) => i.type == GalleryItemType.other).toList();
+    final empty =
+        galleryItems.where((i) => i.type == GalleryItemType.empty).toList();
+
     await _database.batch(
       (batch) {
         batch
           ..insertAll(
-            _database.gallery,
+            _database.galleryBaseEntities,
             galleryItems.map(
-              (i) => GalleryEntity(
+              (i) => GalleryBaseEntity(
                 date: i.date,
-                uri: i.uri,
-                hdUri: i.hdUri,
                 copyright: i.copyright,
                 type: i.type,
                 isFavorite: i.isFavorite,
@@ -54,15 +61,78 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
                 : InsertMode.insertOrIgnore,
           )
           ..insertAll(
-            _database.galleryTranslations,
+            _database.galleryInfoEntities,
             galleryItems.map(
-              (i) => GalleryTranslationEntity(
+              (i) => GalleryInfoEntity(
                 date: i.date,
-                language: i.language,
-                originalLanguage: i.originalLanguage,
-                title: i.title,
-                explanation: i.explanation,
+                language: i.info.language,
+                originalLanguage: i.info.originalLanguage,
+                title: i.info.title,
+                explanation: i.info.explanation,
               ),
+            ),
+            mode: onConflictUpdate
+                ? InsertMode.insertOrReplace
+                : InsertMode.insertOrIgnore,
+          )
+          ..insertAll(
+            _database.galleryImageEntities,
+            detailedImages.map(
+              (i) {
+                final media = i.media as GalleryImage;
+
+                return GalleryImageEntity(
+                  date: i.date,
+                  uri: media.uri,
+                  hdUri: media.hdUri,
+                  thumbUri: media.thumbUri,
+                  aspectRatio: media.aspectRatio,
+                  aspectRatioThumb: media.aspectRatioThumb,
+                  blurHash: media.blurHash,
+                  blurHashThumb: media.blurHashThumb,
+                );
+              },
+            ),
+            mode: onConflictUpdate
+                ? InsertMode.insertOrReplace
+                : InsertMode.insertOrIgnore,
+          )
+          ..insertAll(
+            _database.galleryVideoEntities,
+            videos.map(
+              (i) {
+                final media = i.media as GalleryVideo;
+
+                return GalleryVideoEntity(
+                  date: i.date,
+                  uri: media.uri,
+                );
+              },
+            ),
+            mode: onConflictUpdate
+                ? InsertMode.insertOrReplace
+                : InsertMode.insertOrIgnore,
+          )
+          ..insertAll(
+            _database.galleryOtherEntities,
+            others.map(
+              (i) {
+                final media = i.media as GalleryOther;
+
+                return GalleryOtherEntity(
+                  date: i.date,
+                  uri: media.uri,
+                );
+              },
+            ),
+            mode: onConflictUpdate
+                ? InsertMode.insertOrReplace
+                : InsertMode.insertOrIgnore,
+          )
+          ..insertAll(
+            _database.galleryEmptyEntities,
+            empty.map(
+              (i) => GalleryEmptyEntity(date: i.date),
             ),
             mode: onConflictUpdate
                 ? InsertMode.insertOrReplace
@@ -81,34 +151,53 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
     final startDateInt = startDate.toInt();
     final endDateInt = endDate.toInt();
 
-    final gTable = _database.gallery;
-    final tTable = _database.galleryTranslations;
+    final baseTable = _database.galleryBaseEntities;
+    final infoTable = _database.galleryInfoEntities;
+    final imageTable = _database.galleryImageEntities;
+    final videoTable = _database.galleryVideoEntities;
+    final otherTable = _database.galleryOtherEntities;
 
-    final query = _database
-        .select(gTable)
-        .join([innerJoin(tTable, tTable.date.equalsExp(gTable.date))])
-      ..where(gTable.date.isBetweenValues(startDateInt, endDateInt))
-      ..where(tTable.language.equals(language.name))
-      ..orderBy([OrderingTerm.desc(gTable.date)]);
+    final query = _database.select(baseTable).join(
+      [
+        leftOuterJoin(
+          imageTable,
+          imageTable.date.equalsExp(baseTable.date),
+        ),
+        leftOuterJoin(
+          videoTable,
+          videoTable.date.equalsExp(baseTable.date),
+        ),
+        leftOuterJoin(
+          otherTable,
+          otherTable.date.equalsExp(baseTable.date),
+        ),
+        innerJoin(infoTable, infoTable.date.equalsExp(baseTable.date)),
+      ],
+    )
+      ..where(baseTable.date.isBetweenValues(startDateInt, endDateInt))
+      ..where(infoTable.language.equals(language.name))
+      ..orderBy([OrderingTerm.desc(baseTable.date)]);
 
     final queryResult = await query.get();
 
     final models = queryResult.map(
       (r) {
-        final g = r.readTable(gTable);
-        final t = r.readTable(tTable);
+        final base = r.readTable(baseTable);
+        final info = r.readTable(infoTable);
+
+        final media = _readMedia(result: r, type: base.type);
 
         return GalleryItem(
-          date: g.date,
-          uri: g.uri,
-          hdUri: g.hdUri,
-          copyright: g.copyright,
-          type: g.type,
-          isFavorite: g.isFavorite,
-          language: t.language,
-          originalLanguage: t.originalLanguage,
-          title: t.title,
-          explanation: t.explanation,
+          date: base.date,
+          copyright: base.copyright,
+          isFavorite: base.isFavorite,
+          media: media,
+          info: GalleryInfo(
+            language: info.language,
+            originalLanguage: info.originalLanguage,
+            title: info.title,
+            explanation: info.explanation,
+          ),
         );
       },
     ).toList();
@@ -116,9 +205,46 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
     return models;
   }
 
+  GalleryMedia _readMedia({
+    required TypedResult result,
+    required GalleryItemType type,
+  }) {
+    switch (type) {
+      case GalleryItemType.image:
+        final detailedImage = result.readTable(_database.galleryImageEntities);
+
+        return GalleryImage(
+          uri: detailedImage.uri,
+          hdUri: detailedImage.hdUri,
+          thumbUri: detailedImage.thumbUri,
+          aspectRatio: detailedImage.aspectRatio,
+          aspectRatioThumb: detailedImage.aspectRatioThumb,
+          blurHash: detailedImage.blurHash,
+          blurHashThumb: detailedImage.blurHashThumb,
+        );
+
+      case GalleryItemType.video:
+        final video = result.readTable(_database.galleryVideoEntities);
+
+        return GalleryVideo(
+          uri: video.uri,
+        );
+
+      case GalleryItemType.other:
+        final other = result.readTable(_database.galleryOtherEntities);
+
+        return GalleryOther(
+          uri: other.uri,
+        );
+
+      case GalleryItemType.empty:
+        return const GalleryEmpty();
+    }
+  }
+
   @override
   Future<List<Date>> getFavoriteDates() async {
-    final query = _database.select(_database.gallery)
+    final query = _database.select(_database.galleryBaseEntities)
       ..where((g) => g.isFavorite)
       ..orderBy([(g) => OrderingTerm.desc(g.date)]);
 

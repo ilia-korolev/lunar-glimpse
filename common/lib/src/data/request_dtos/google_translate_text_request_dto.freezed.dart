@@ -28,8 +28,12 @@ mixin _$GoogleTranslateTextRequestDto {
   @JsonKey(name: 'target')
   String get targetLanguage => throw _privateConstructorUsedError;
 
+  /// Serializes this GoogleTranslateTextRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GoogleTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GoogleTranslateTextRequestDtoCopyWith<GoogleTranslateTextRequestDto>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$GoogleTranslateTextRequestDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GoogleTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,6 +114,8 @@ class __$$GoogleTranslateTextRequestDtoImplCopyWithImpl<$Res>
       $Res Function(_$GoogleTranslateTextRequestDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GoogleTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -180,7 +188,7 @@ class _$GoogleTranslateTextRequestDtoImpl
                 other.targetLanguage == targetLanguage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -188,7 +196,9 @@ class _$GoogleTranslateTextRequestDtoImpl
       sourceLanguage,
       targetLanguage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GoogleTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GoogleTranslateTextRequestDtoImplCopyWith<
@@ -225,8 +235,11 @@ abstract class _GoogleTranslateTextRequestDto
   @override
   @JsonKey(name: 'target')
   String get targetLanguage;
+
+  /// Create a copy of GoogleTranslateTextRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GoogleTranslateTextRequestDtoImplCopyWith<
           _$GoogleTranslateTextRequestDtoImpl>
       get copyWith => throw _privateConstructorUsedError;

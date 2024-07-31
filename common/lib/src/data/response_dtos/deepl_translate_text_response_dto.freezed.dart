@@ -24,8 +24,12 @@ mixin _$DeepLTranslateTextResponseDto {
   List<DeepLTextTranslation> get translations =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this DeepLTranslateTextResponseDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeepLTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeepLTranslateTextResponseDtoCopyWith<DeepLTranslateTextResponseDto>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$DeepLTranslateTextResponseDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeepLTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +94,8 @@ class __$$DeepLTranslateTextResponseDtoImplCopyWithImpl<$Res>
       $Res Function(_$DeepLTranslateTextResponseDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeepLTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,12 +145,14 @@ class _$DeepLTranslateTextResponseDtoImpl
                 .equals(other._translations, _translations));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_translations));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeepLTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeepLTranslateTextResponseDtoImplCopyWith<
@@ -170,8 +180,11 @@ abstract class _DeepLTranslateTextResponseDto
 
   @override
   List<DeepLTextTranslation> get translations;
+
+  /// Create a copy of DeepLTranslateTextResponseDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeepLTranslateTextResponseDtoImplCopyWith<
           _$DeepLTranslateTextResponseDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -186,8 +199,12 @@ mixin _$DeepLTextTranslation {
   String get text => throw _privateConstructorUsedError;
   String? get detectedSourceLanguage => throw _privateConstructorUsedError;
 
+  /// Serializes this DeepLTextTranslation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeepLTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeepLTextTranslationCopyWith<DeepLTextTranslation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -212,6 +229,8 @@ class _$DeepLTextTranslationCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeepLTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,6 +269,8 @@ class __$$DeepLTextTranslationImplCopyWithImpl<$Res>
       $Res Function(_$DeepLTextTranslationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeepLTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -299,11 +320,13 @@ class _$DeepLTextTranslationImpl extends _DeepLTextTranslation {
                 other.detectedSourceLanguage == detectedSourceLanguage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, text, detectedSourceLanguage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeepLTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeepLTextTranslationImplCopyWith<_$DeepLTextTranslationImpl>
@@ -332,8 +355,11 @@ abstract class _DeepLTextTranslation extends DeepLTextTranslation {
   String get text;
   @override
   String? get detectedSourceLanguage;
+
+  /// Create a copy of DeepLTextTranslation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeepLTextTranslationImplCopyWith<_$DeepLTextTranslationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

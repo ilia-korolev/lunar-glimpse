@@ -25,8 +25,12 @@ mixin _$AstroBackendGalleryItemsRequestDto {
   Date get endDate => throw _privateConstructorUsedError;
   ContentLanguage get language => throw _privateConstructorUsedError;
 
+  /// Serializes this AstroBackendGalleryItemsRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AstroBackendGalleryItemsRequestDtoCopyWith<
           AstroBackendGalleryItemsRequestDto>
       get copyWith => throw _privateConstructorUsedError;
@@ -57,6 +61,8 @@ class _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res> get startDate {
@@ -88,6 +96,8 @@ class _$AstroBackendGalleryItemsRequestDtoCopyWithImpl<$Res,
     });
   }
 
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res> get endDate {
@@ -124,6 +134,8 @@ class __$$AstroBackendGalleryItemsRequestDtoImplCopyWithImpl<$Res>
       $Res Function(_$AstroBackendGalleryItemsRequestDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -185,11 +197,13 @@ class _$AstroBackendGalleryItemsRequestDtoImpl
                 other.language == language));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, startDate, endDate, language);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AstroBackendGalleryItemsRequestDtoImplCopyWith<
@@ -224,8 +238,11 @@ abstract class _AstroBackendGalleryItemsRequestDto
   Date get endDate;
   @override
   ContentLanguage get language;
+
+  /// Create a copy of AstroBackendGalleryItemsRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AstroBackendGalleryItemsRequestDtoImplCopyWith<
           _$AstroBackendGalleryItemsRequestDtoImpl>
       get copyWith => throw _privateConstructorUsedError;

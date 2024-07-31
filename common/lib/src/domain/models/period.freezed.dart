@@ -19,7 +19,9 @@ mixin _$Period {
   Date get startDate => throw _privateConstructorUsedError;
   Date get endDate => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PeriodCopyWith<Period> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -44,6 +46,8 @@ class _$PeriodCopyWithImpl<$Res, $Val extends Period>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -62,6 +66,8 @@ class _$PeriodCopyWithImpl<$Res, $Val extends Period>
     ) as $Val);
   }
 
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res> get startDate {
@@ -70,6 +76,8 @@ class _$PeriodCopyWithImpl<$Res, $Val extends Period>
     });
   }
 
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res> get endDate {
@@ -102,6 +110,8 @@ class __$$PeriodImplCopyWithImpl<$Res>
       _$PeriodImpl _value, $Res Function(_$PeriodImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +161,9 @@ class _$PeriodImpl implements _Period {
   @override
   int get hashCode => Object.hash(runtimeType, startDate, endDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PeriodImplCopyWith<_$PeriodImpl> get copyWith =>
@@ -167,8 +179,11 @@ abstract class _Period implements Period {
   Date get startDate;
   @override
   Date get endDate;
+
+  /// Create a copy of Period
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PeriodImplCopyWith<_$PeriodImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

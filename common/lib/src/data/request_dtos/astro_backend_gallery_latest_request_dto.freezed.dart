@@ -23,8 +23,12 @@ AstroBackendGalleryLatestRequestDto
 mixin _$AstroBackendGalleryLatestRequestDto {
   ContentLanguage get language => throw _privateConstructorUsedError;
 
+  /// Serializes this AstroBackendGalleryLatestRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AstroBackendGalleryLatestRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AstroBackendGalleryLatestRequestDtoCopyWith<
           AstroBackendGalleryLatestRequestDto>
       get copyWith => throw _privateConstructorUsedError;
@@ -52,6 +56,8 @@ class _$AstroBackendGalleryLatestRequestDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AstroBackendGalleryLatestRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +94,8 @@ class __$$AstroBackendGalleryLatestRequestDtoImplCopyWithImpl<$Res>
       $Res Function(_$AstroBackendGalleryLatestRequestDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AstroBackendGalleryLatestRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,11 +139,13 @@ class _$AstroBackendGalleryLatestRequestDtoImpl
                 other.language == language));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, language);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AstroBackendGalleryLatestRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AstroBackendGalleryLatestRequestDtoImplCopyWith<
@@ -164,8 +174,11 @@ abstract class _AstroBackendGalleryLatestRequestDto
 
   @override
   ContentLanguage get language;
+
+  /// Create a copy of AstroBackendGalleryLatestRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AstroBackendGalleryLatestRequestDtoImplCopyWith<
           _$AstroBackendGalleryLatestRequestDtoImpl>
       get copyWith => throw _privateConstructorUsedError;

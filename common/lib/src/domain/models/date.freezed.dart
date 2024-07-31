@@ -20,7 +20,9 @@ mixin _$Date {
   int get month => throw _privateConstructorUsedError;
   int get day => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Date
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DateCopyWith<Date> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -42,6 +44,8 @@ class _$DateCopyWithImpl<$Res, $Val extends Date>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Date
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +87,8 @@ class __$$DateImplCopyWithImpl<$Res>
   __$$DateImplCopyWithImpl(_$DateImpl _value, $Res Function(_$DateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Date
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -143,7 +149,9 @@ class _$DateImpl extends _Date {
   @override
   int get hashCode => Object.hash(runtimeType, year, month, day);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Date
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DateImplCopyWith<_$DateImpl> get copyWith =>
@@ -163,8 +171,11 @@ abstract class _Date extends Date {
   int get month;
   @override
   int get day;
+
+  /// Create a copy of Date
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DateImplCopyWith<_$DateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

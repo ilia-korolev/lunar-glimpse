@@ -23,8 +23,12 @@ AstroBackendNewsArticlesRequestDto _$AstroBackendNewsArticlesRequestDtoFromJson(
 mixin _$AstroBackendNewsArticlesRequestDto {
   Uri get sourceUri => throw _privateConstructorUsedError;
 
+  /// Serializes this AstroBackendNewsArticlesRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AstroBackendNewsArticlesRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AstroBackendNewsArticlesRequestDtoCopyWith<
           AstroBackendNewsArticlesRequestDto>
       get copyWith => throw _privateConstructorUsedError;
@@ -52,6 +56,8 @@ class _$AstroBackendNewsArticlesRequestDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AstroBackendNewsArticlesRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +94,8 @@ class __$$AstroBackendNewsArticlesRequestDtoImplCopyWithImpl<$Res>
       $Res Function(_$AstroBackendNewsArticlesRequestDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AstroBackendNewsArticlesRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,11 +139,13 @@ class _$AstroBackendNewsArticlesRequestDtoImpl
                 other.sourceUri == sourceUri));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, sourceUri);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AstroBackendNewsArticlesRequestDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AstroBackendNewsArticlesRequestDtoImplCopyWith<
@@ -164,8 +174,11 @@ abstract class _AstroBackendNewsArticlesRequestDto
 
   @override
   Uri get sourceUri;
+
+  /// Create a copy of AstroBackendNewsArticlesRequestDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AstroBackendNewsArticlesRequestDtoImplCopyWith<
           _$AstroBackendNewsArticlesRequestDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
