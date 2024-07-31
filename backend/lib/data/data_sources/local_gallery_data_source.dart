@@ -47,7 +47,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
               type: i.type,
             ),
           ),
-          mode: InsertMode.insertOrIgnore,
+          onConflict: DoNothing<Table, dynamic>(),
         );
       },
     );
@@ -65,7 +65,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
               explanation: i.info.explanation,
             ),
           ),
-          mode: InsertMode.insertOrIgnore,
+          onConflict: DoNothing<Table, dynamic>(),
         );
       },
     );
@@ -94,7 +94,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
                 );
               },
             ),
-            mode: InsertMode.insertOrIgnore,
+            onConflict: DoNothing<Table, dynamic>(),
           );
         },
       );
@@ -118,7 +118,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
                 );
               },
             ),
-            mode: InsertMode.insertOrIgnore,
+            onConflict: DoNothing<Table, dynamic>(),
           );
         },
       );
@@ -142,7 +142,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
                 );
               },
             ),
-            mode: InsertMode.insertOrIgnore,
+            onConflict: DoNothing<Table, dynamic>(),
           );
         },
       );
@@ -159,7 +159,7 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
             empty.map(
               (i) => GalleryEmptyEntity(date: i.date),
             ),
-            mode: InsertMode.insertOrIgnore,
+            onConflict: DoNothing<Table, dynamic>(),
           );
         },
       );
@@ -278,4 +278,10 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
     ))
         .firstOrNull;
   }
+
+  // void insertOrIgnore({
+  //   required GalleryBaseEntities table,
+  //   required Function(dynamic t) keyPredicateBuilder,
+  //   required Iterable<GalleryBaseEntity> rowsToInsert,
+  // }) {}
 }
