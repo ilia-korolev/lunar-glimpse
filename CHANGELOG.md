@@ -1,3 +1,15 @@
+## 1.1.0
+* **Features:**
+    * add optimized thumbnails to gallery images
+    * add blurhash to gallery images
+
+* **Improvements:**
+    * update database structure
+    * update android project
+    * update web project
+    * update system nav bar color
+    * upgrade dependencies
+
 ## 1.0.3
 * **Bug fixes:**
     * fix gallery: prevent loading images before minimum date
