@@ -195,7 +195,10 @@ class GalleryRepositoryImpl implements GalleryRepository {
       language: _remoteDataSource.language,
     );
 
-    item ??= await _mapAndCacheItem(basic: basic, language: language);
+    item ??= await _mapAndCacheItem(
+      basic: basic,
+      language: _remoteDataSource.language,
+    );
 
     final translated = await _translationDataSource.translateItem(
       item: item,
