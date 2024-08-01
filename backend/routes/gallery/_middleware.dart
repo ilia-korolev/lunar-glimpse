@@ -59,6 +59,7 @@ Middleware _galleryRepositoryProvider() {
           },
           blurHashGenerator: const BlurHashGeneratorImpl(),
         ),
+        cacheExpiryDataSource: const InMemoryCacheExpiryDataSource(),
       );
     },
   );

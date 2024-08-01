@@ -19,6 +19,10 @@ abstract interface class LocalGalleryDataSource {
     required Date date,
     required ContentLanguage language,
   });
+
+  Future<GalleryItem> getLatestItem({
+    required ContentLanguage language,
+  });
 }
 
 class DriftGalleryDataSource implements LocalGalleryDataSource {
@@ -229,6 +233,59 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
     return models;
   }
 
+  @override
+  Future<GalleryItem> getLatestItem({
+    required ContentLanguage language,
+  }) async {
+    final baseTable = _database.galleryBaseEntities;
+    final infoTable = _database.galleryInfoEntities;
+    final imageTable = _database.galleryImageEntities;
+    final videoTable = _database.galleryVideoEntities;
+    final otherTable = _database.galleryOtherEntities;
+
+    final query = _database.select(baseTable).join(
+      [
+        leftOuterJoin(
+          imageTable,
+          imageTable.date.equalsExp(baseTable.date),
+        ),
+        leftOuterJoin(
+          videoTable,
+          videoTable.date.equalsExp(baseTable.date),
+        ),
+        leftOuterJoin(
+          otherTable,
+          otherTable.date.equalsExp(baseTable.date),
+        ),
+        innerJoin(infoTable, infoTable.date.equalsExp(baseTable.date)),
+      ],
+    )
+      ..where(infoTable.language.equals(language.name))
+      ..orderBy([OrderingTerm.desc(baseTable.date)])
+      ..limit(1);
+
+    final queryResult = await query.get();
+    final result = queryResult.first;
+
+    final base = result.readTable(baseTable);
+    final info = result.readTable(infoTable);
+
+    final media = _readMedia(result: result, type: base.type);
+
+    return GalleryItem(
+      date: base.date,
+      copyright: base.copyright,
+      isFavorite: false,
+      media: media,
+      info: GalleryInfo(
+        language: info.language,
+        originalLanguage: info.originalLanguage,
+        title: info.title,
+        explanation: info.explanation,
+      ),
+    );
+  }
+
   GalleryMedia _readMedia({
     required TypedResult result,
     required GalleryItemType type,
@@ -278,10 +335,4 @@ class DriftGalleryDataSource implements LocalGalleryDataSource {
     ))
         .firstOrNull;
   }
-
-  // void insertOrIgnore({
-  //   required GalleryBaseEntities table,
-  //   required Function(dynamic t) keyPredicateBuilder,
-  //   required Iterable<GalleryBaseEntity> rowsToInsert,
-  // }) {}
 }

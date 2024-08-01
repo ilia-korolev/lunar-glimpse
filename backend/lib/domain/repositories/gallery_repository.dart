@@ -21,15 +21,18 @@ class GalleryRepositoryImpl implements GalleryRepository {
     required RemoteBasicGalleryDataSource remoteDataSource,
     required RemoteGalleryTranslationDataSource translationDataSource,
     required RemoteGalleryMapperDataSource mapperDataSource,
+    required LocalCacheExpiryDataSource cacheExpiryDataSource,
   })  : _localDataSource = localDataSource,
         _remoteDataSource = remoteDataSource,
         _translationDataSource = translationDataSource,
-        _mapperDataSource = mapperDataSource;
+        _mapperDataSource = mapperDataSource,
+        _cacheExpiryDataSource = cacheExpiryDataSource;
 
   final LocalGalleryDataSource _localDataSource;
   final RemoteBasicGalleryDataSource _remoteDataSource;
   final RemoteGalleryTranslationDataSource _translationDataSource;
   final RemoteGalleryMapperDataSource _mapperDataSource;
+  final LocalCacheExpiryDataSource _cacheExpiryDataSource;
 
   @override
   Future<List<GalleryItem>> getItems({
@@ -67,7 +70,45 @@ class GalleryRepositoryImpl implements GalleryRepository {
   Future<GalleryItem> getLatestItem({
     required ContentLanguage language,
   }) async {
+    if (!_cacheExpiryDataSource.isLatestGalleryItemExpired()) {
+      return _getLatestLocalItem(language);
+    }
+
+    return _getLatestRemoteItem(language);
+  }
+
+  Future<GalleryItem> _getLatestLocalItem(ContentLanguage language) async {
+    final latestItem = await _localDataSource.getLatestItem(
+      language: _remoteDataSource.language,
+    );
+
+    if (_remoteDataSource.language == language) {
+      return latestItem;
+    }
+
+    final cached = await _localDataSource.getItem(
+      date: latestItem.date,
+      language: language,
+    );
+
+    if (cached != null) {
+      return cached;
+    }
+
+    final translated = await _translationDataSource.translateItem(
+      item: latestItem,
+      sourceLanguage: _remoteDataSource.language,
+      targetLanguage: language,
+    );
+
+    await _localDataSource.cacheItems(galleryItems: [translated]);
+    return translated;
+  }
+
+  Future<GalleryItem> _getLatestRemoteItem(ContentLanguage language) async {
     final basic = await _remoteDataSource.getLatestItem();
+    _cacheExpiryDataSource.updateTimeStamp();
+
     final cached = await _localDataSource.getItem(
       date: basic.date,
       language: language,
