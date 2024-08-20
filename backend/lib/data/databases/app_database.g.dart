@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, invalid_use_of_internal_member, unnecessary_null_comparison, unnecessary_non_null_assertion
 
 part of 'app_database.dart';
 
@@ -1835,44 +1835,103 @@ typedef $$GalleryBaseEntitiesTableUpdateCompanionBuilder
   Value<GalleryItemType> type,
 });
 
-class $$GalleryBaseEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GalleryBaseEntitiesTable,
-    GalleryBaseEntity,
-    $$GalleryBaseEntitiesTableFilterComposer,
-    $$GalleryBaseEntitiesTableOrderingComposer,
-    $$GalleryBaseEntitiesTableCreateCompanionBuilder,
-    $$GalleryBaseEntitiesTableUpdateCompanionBuilder> {
-  $$GalleryBaseEntitiesTableTableManager(
-      _$AppDatabase db, $GalleryBaseEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$GalleryBaseEntitiesTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$GalleryBaseEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            Value<String?> copyright = const Value.absent(),
-            Value<GalleryItemType> type = const Value.absent(),
-          }) =>
-              GalleryBaseEntitiesCompanion(
-            date: date,
-            copyright: copyright,
-            type: type,
-          ),
-          createCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            Value<String?> copyright = const Value.absent(),
-            required GalleryItemType type,
-          }) =>
-              GalleryBaseEntitiesCompanion.insert(
-            date: date,
-            copyright: copyright,
-            type: type,
-          ),
-        ));
+final class $$GalleryBaseEntitiesTableReferences extends BaseReferences<
+    _$AppDatabase, $GalleryBaseEntitiesTable, GalleryBaseEntity> {
+  $$GalleryBaseEntitiesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$GalleryImageEntitiesTable,
+      List<GalleryImageEntity>> _galleryImageEntitiesRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.galleryImageEntities,
+          aliasName: $_aliasNameGenerator(
+              db.galleryBaseEntities.date, db.galleryImageEntities.date));
+
+  $$GalleryImageEntitiesTableProcessedTableManager
+      get galleryImageEntitiesRefs {
+    final manager =
+        $$GalleryImageEntitiesTableTableManager($_db, $_db.galleryImageEntities)
+            .filter((f) => f.date.date($_item.date));
+
+    final cache =
+        $_typedResult.readTableOrNull(_galleryImageEntitiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$GalleryVideoEntitiesTable,
+      List<GalleryVideoEntity>> _galleryVideoEntitiesRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.galleryVideoEntities,
+          aliasName: $_aliasNameGenerator(
+              db.galleryBaseEntities.date, db.galleryVideoEntities.date));
+
+  $$GalleryVideoEntitiesTableProcessedTableManager
+      get galleryVideoEntitiesRefs {
+    final manager =
+        $$GalleryVideoEntitiesTableTableManager($_db, $_db.galleryVideoEntities)
+            .filter((f) => f.date.date($_item.date));
+
+    final cache =
+        $_typedResult.readTableOrNull(_galleryVideoEntitiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$GalleryOtherEntitiesTable,
+      List<GalleryOtherEntity>> _galleryOtherEntitiesRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.galleryOtherEntities,
+          aliasName: $_aliasNameGenerator(
+              db.galleryBaseEntities.date, db.galleryOtherEntities.date));
+
+  $$GalleryOtherEntitiesTableProcessedTableManager
+      get galleryOtherEntitiesRefs {
+    final manager =
+        $$GalleryOtherEntitiesTableTableManager($_db, $_db.galleryOtherEntities)
+            .filter((f) => f.date.date($_item.date));
+
+    final cache =
+        $_typedResult.readTableOrNull(_galleryOtherEntitiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$GalleryEmptyEntitiesTable,
+      List<GalleryEmptyEntity>> _galleryEmptyEntitiesRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.galleryEmptyEntities,
+          aliasName: $_aliasNameGenerator(
+              db.galleryBaseEntities.date, db.galleryEmptyEntities.date));
+
+  $$GalleryEmptyEntitiesTableProcessedTableManager
+      get galleryEmptyEntitiesRefs {
+    final manager =
+        $$GalleryEmptyEntitiesTableTableManager($_db, $_db.galleryEmptyEntities)
+            .filter((f) => f.date.date($_item.date));
+
+    final cache =
+        $_typedResult.readTableOrNull(_galleryEmptyEntitiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$GalleryInfoEntitiesTable, List<GalleryInfoEntity>>
+      _galleryInfoEntitiesRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.galleryInfoEntities,
+              aliasName: $_aliasNameGenerator(
+                  db.galleryBaseEntities.date, db.galleryInfoEntities.date));
+
+  $$GalleryInfoEntitiesTableProcessedTableManager get galleryInfoEntitiesRefs {
+    final manager =
+        $$GalleryInfoEntitiesTableTableManager($_db, $_db.galleryInfoEntities)
+            .filter((f) => f.date.date($_item.date));
+
+    final cache =
+        $_typedResult.readTableOrNull(_galleryInfoEntitiesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
 }
 
 class $$GalleryBaseEntitiesTableFilterComposer
@@ -2006,6 +2065,158 @@ class $$GalleryBaseEntitiesTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+class $$GalleryBaseEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GalleryBaseEntitiesTable,
+    GalleryBaseEntity,
+    $$GalleryBaseEntitiesTableFilterComposer,
+    $$GalleryBaseEntitiesTableOrderingComposer,
+    $$GalleryBaseEntitiesTableCreateCompanionBuilder,
+    $$GalleryBaseEntitiesTableUpdateCompanionBuilder,
+    (GalleryBaseEntity, $$GalleryBaseEntitiesTableReferences),
+    GalleryBaseEntity,
+    PrefetchHooks Function(
+        {bool galleryImageEntitiesRefs,
+        bool galleryVideoEntitiesRefs,
+        bool galleryOtherEntitiesRefs,
+        bool galleryEmptyEntitiesRefs,
+        bool galleryInfoEntitiesRefs})> {
+  $$GalleryBaseEntitiesTableTableManager(
+      _$AppDatabase db, $GalleryBaseEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$GalleryBaseEntitiesTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$GalleryBaseEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            Value<String?> copyright = const Value.absent(),
+            Value<GalleryItemType> type = const Value.absent(),
+          }) =>
+              GalleryBaseEntitiesCompanion(
+            date: date,
+            copyright: copyright,
+            type: type,
+          ),
+          createCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            Value<String?> copyright = const Value.absent(),
+            required GalleryItemType type,
+          }) =>
+              GalleryBaseEntitiesCompanion.insert(
+            date: date,
+            copyright: copyright,
+            type: type,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GalleryBaseEntitiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: (
+              {galleryImageEntitiesRefs = false,
+              galleryVideoEntitiesRefs = false,
+              galleryOtherEntitiesRefs = false,
+              galleryEmptyEntitiesRefs = false,
+              galleryInfoEntitiesRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (galleryImageEntitiesRefs) db.galleryImageEntities,
+                if (galleryVideoEntitiesRefs) db.galleryVideoEntities,
+                if (galleryOtherEntitiesRefs) db.galleryOtherEntities,
+                if (galleryEmptyEntitiesRefs) db.galleryEmptyEntities,
+                if (galleryInfoEntitiesRefs) db.galleryInfoEntities
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (galleryImageEntitiesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$GalleryBaseEntitiesTableReferences
+                            ._galleryImageEntitiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$GalleryBaseEntitiesTableReferences(db, table, p0)
+                                .galleryImageEntitiesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.date == item.date),
+                        typedResults: items),
+                  if (galleryVideoEntitiesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$GalleryBaseEntitiesTableReferences
+                            ._galleryVideoEntitiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$GalleryBaseEntitiesTableReferences(db, table, p0)
+                                .galleryVideoEntitiesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.date == item.date),
+                        typedResults: items),
+                  if (galleryOtherEntitiesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$GalleryBaseEntitiesTableReferences
+                            ._galleryOtherEntitiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$GalleryBaseEntitiesTableReferences(db, table, p0)
+                                .galleryOtherEntitiesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.date == item.date),
+                        typedResults: items),
+                  if (galleryEmptyEntitiesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$GalleryBaseEntitiesTableReferences
+                            ._galleryEmptyEntitiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$GalleryBaseEntitiesTableReferences(db, table, p0)
+                                .galleryEmptyEntitiesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.date == item.date),
+                        typedResults: items),
+                  if (galleryInfoEntitiesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$GalleryBaseEntitiesTableReferences
+                            ._galleryInfoEntitiesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$GalleryBaseEntitiesTableReferences(db, table, p0)
+                                .galleryInfoEntitiesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.date == item.date),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GalleryBaseEntitiesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GalleryBaseEntitiesTable,
+    GalleryBaseEntity,
+    $$GalleryBaseEntitiesTableFilterComposer,
+    $$GalleryBaseEntitiesTableOrderingComposer,
+    $$GalleryBaseEntitiesTableCreateCompanionBuilder,
+    $$GalleryBaseEntitiesTableUpdateCompanionBuilder,
+    (GalleryBaseEntity, $$GalleryBaseEntitiesTableReferences),
+    GalleryBaseEntity,
+    PrefetchHooks Function(
+        {bool galleryImageEntitiesRefs,
+        bool galleryVideoEntitiesRefs,
+        bool galleryOtherEntitiesRefs,
+        bool galleryEmptyEntitiesRefs,
+        bool galleryInfoEntitiesRefs})>;
 typedef $$GalleryImageEntitiesTableCreateCompanionBuilder
     = GalleryImageEntitiesCompanion Function({
   Value<Date> date,
@@ -2029,64 +2240,25 @@ typedef $$GalleryImageEntitiesTableUpdateCompanionBuilder
   Value<String> blurHashThumb,
 });
 
-class $$GalleryImageEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GalleryImageEntitiesTable,
-    GalleryImageEntity,
-    $$GalleryImageEntitiesTableFilterComposer,
-    $$GalleryImageEntitiesTableOrderingComposer,
-    $$GalleryImageEntitiesTableCreateCompanionBuilder,
-    $$GalleryImageEntitiesTableUpdateCompanionBuilder> {
-  $$GalleryImageEntitiesTableTableManager(
-      _$AppDatabase db, $GalleryImageEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$GalleryImageEntitiesTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$GalleryImageEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            Value<Uri> uri = const Value.absent(),
-            Value<Uri> hdUri = const Value.absent(),
-            Value<Uri> thumbUri = const Value.absent(),
-            Value<double> aspectRatio = const Value.absent(),
-            Value<double> aspectRatioThumb = const Value.absent(),
-            Value<String> blurHash = const Value.absent(),
-            Value<String> blurHashThumb = const Value.absent(),
-          }) =>
-              GalleryImageEntitiesCompanion(
-            date: date,
-            uri: uri,
-            hdUri: hdUri,
-            thumbUri: thumbUri,
-            aspectRatio: aspectRatio,
-            aspectRatioThumb: aspectRatioThumb,
-            blurHash: blurHash,
-            blurHashThumb: blurHashThumb,
-          ),
-          createCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            required Uri uri,
-            required Uri hdUri,
-            required Uri thumbUri,
-            required double aspectRatio,
-            required double aspectRatioThumb,
-            required String blurHash,
-            required String blurHashThumb,
-          }) =>
-              GalleryImageEntitiesCompanion.insert(
-            date: date,
-            uri: uri,
-            hdUri: hdUri,
-            thumbUri: thumbUri,
-            aspectRatio: aspectRatio,
-            aspectRatioThumb: aspectRatioThumb,
-            blurHash: blurHash,
-            blurHashThumb: blurHashThumb,
-          ),
-        ));
+final class $$GalleryImageEntitiesTableReferences extends BaseReferences<
+    _$AppDatabase, $GalleryImageEntitiesTable, GalleryImageEntity> {
+  $$GalleryImageEntitiesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $GalleryBaseEntitiesTable _dateTable(_$AppDatabase db) =>
+      db.galleryBaseEntities.createAlias($_aliasNameGenerator(
+          db.galleryImageEntities.date, db.galleryBaseEntities.date));
+
+  $$GalleryBaseEntitiesTableProcessedTableManager? get date {
+    if ($_item.date == null) return null;
+    final manager =
+        $$GalleryBaseEntitiesTableTableManager($_db, $_db.galleryBaseEntities)
+            .filter((f) => f.date($_item.date!));
+    final item = $_typedResult.readTableOrNull(_dateTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
 }
 
 class $$GalleryImageEntitiesTableFilterComposer
@@ -2205,6 +2377,122 @@ class $$GalleryImageEntitiesTableOrderingComposer
   }
 }
 
+class $$GalleryImageEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GalleryImageEntitiesTable,
+    GalleryImageEntity,
+    $$GalleryImageEntitiesTableFilterComposer,
+    $$GalleryImageEntitiesTableOrderingComposer,
+    $$GalleryImageEntitiesTableCreateCompanionBuilder,
+    $$GalleryImageEntitiesTableUpdateCompanionBuilder,
+    (GalleryImageEntity, $$GalleryImageEntitiesTableReferences),
+    GalleryImageEntity,
+    PrefetchHooks Function({bool date})> {
+  $$GalleryImageEntitiesTableTableManager(
+      _$AppDatabase db, $GalleryImageEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$GalleryImageEntitiesTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$GalleryImageEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            Value<Uri> uri = const Value.absent(),
+            Value<Uri> hdUri = const Value.absent(),
+            Value<Uri> thumbUri = const Value.absent(),
+            Value<double> aspectRatio = const Value.absent(),
+            Value<double> aspectRatioThumb = const Value.absent(),
+            Value<String> blurHash = const Value.absent(),
+            Value<String> blurHashThumb = const Value.absent(),
+          }) =>
+              GalleryImageEntitiesCompanion(
+            date: date,
+            uri: uri,
+            hdUri: hdUri,
+            thumbUri: thumbUri,
+            aspectRatio: aspectRatio,
+            aspectRatioThumb: aspectRatioThumb,
+            blurHash: blurHash,
+            blurHashThumb: blurHashThumb,
+          ),
+          createCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            required Uri uri,
+            required Uri hdUri,
+            required Uri thumbUri,
+            required double aspectRatio,
+            required double aspectRatioThumb,
+            required String blurHash,
+            required String blurHashThumb,
+          }) =>
+              GalleryImageEntitiesCompanion.insert(
+            date: date,
+            uri: uri,
+            hdUri: hdUri,
+            thumbUri: thumbUri,
+            aspectRatio: aspectRatio,
+            aspectRatioThumb: aspectRatioThumb,
+            blurHash: blurHash,
+            blurHashThumb: blurHashThumb,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GalleryImageEntitiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({date = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (date) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.date,
+                    referencedTable:
+                        $$GalleryImageEntitiesTableReferences._dateTable(db),
+                    referencedColumn: $$GalleryImageEntitiesTableReferences
+                        ._dateTable(db)
+                        .date,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GalleryImageEntitiesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $GalleryImageEntitiesTable,
+        GalleryImageEntity,
+        $$GalleryImageEntitiesTableFilterComposer,
+        $$GalleryImageEntitiesTableOrderingComposer,
+        $$GalleryImageEntitiesTableCreateCompanionBuilder,
+        $$GalleryImageEntitiesTableUpdateCompanionBuilder,
+        (GalleryImageEntity, $$GalleryImageEntitiesTableReferences),
+        GalleryImageEntity,
+        PrefetchHooks Function({bool date})>;
 typedef $$GalleryVideoEntitiesTableCreateCompanionBuilder
     = GalleryVideoEntitiesCompanion Function({
   Value<Date> date,
@@ -2216,40 +2504,25 @@ typedef $$GalleryVideoEntitiesTableUpdateCompanionBuilder
   Value<Uri> uri,
 });
 
-class $$GalleryVideoEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GalleryVideoEntitiesTable,
-    GalleryVideoEntity,
-    $$GalleryVideoEntitiesTableFilterComposer,
-    $$GalleryVideoEntitiesTableOrderingComposer,
-    $$GalleryVideoEntitiesTableCreateCompanionBuilder,
-    $$GalleryVideoEntitiesTableUpdateCompanionBuilder> {
-  $$GalleryVideoEntitiesTableTableManager(
-      _$AppDatabase db, $GalleryVideoEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$GalleryVideoEntitiesTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$GalleryVideoEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            Value<Uri> uri = const Value.absent(),
-          }) =>
-              GalleryVideoEntitiesCompanion(
-            date: date,
-            uri: uri,
-          ),
-          createCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            required Uri uri,
-          }) =>
-              GalleryVideoEntitiesCompanion.insert(
-            date: date,
-            uri: uri,
-          ),
-        ));
+final class $$GalleryVideoEntitiesTableReferences extends BaseReferences<
+    _$AppDatabase, $GalleryVideoEntitiesTable, GalleryVideoEntity> {
+  $$GalleryVideoEntitiesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $GalleryBaseEntitiesTable _dateTable(_$AppDatabase db) =>
+      db.galleryBaseEntities.createAlias($_aliasNameGenerator(
+          db.galleryVideoEntities.date, db.galleryBaseEntities.date));
+
+  $$GalleryBaseEntitiesTableProcessedTableManager? get date {
+    if ($_item.date == null) return null;
+    final manager =
+        $$GalleryBaseEntitiesTableTableManager($_db, $_db.galleryBaseEntities)
+            .filter((f) => f.date($_item.date!));
+    final item = $_typedResult.readTableOrNull(_dateTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
 }
 
 class $$GalleryVideoEntitiesTableFilterComposer
@@ -2304,6 +2577,98 @@ class $$GalleryVideoEntitiesTableOrderingComposer
   }
 }
 
+class $$GalleryVideoEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GalleryVideoEntitiesTable,
+    GalleryVideoEntity,
+    $$GalleryVideoEntitiesTableFilterComposer,
+    $$GalleryVideoEntitiesTableOrderingComposer,
+    $$GalleryVideoEntitiesTableCreateCompanionBuilder,
+    $$GalleryVideoEntitiesTableUpdateCompanionBuilder,
+    (GalleryVideoEntity, $$GalleryVideoEntitiesTableReferences),
+    GalleryVideoEntity,
+    PrefetchHooks Function({bool date})> {
+  $$GalleryVideoEntitiesTableTableManager(
+      _$AppDatabase db, $GalleryVideoEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$GalleryVideoEntitiesTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$GalleryVideoEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            Value<Uri> uri = const Value.absent(),
+          }) =>
+              GalleryVideoEntitiesCompanion(
+            date: date,
+            uri: uri,
+          ),
+          createCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            required Uri uri,
+          }) =>
+              GalleryVideoEntitiesCompanion.insert(
+            date: date,
+            uri: uri,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GalleryVideoEntitiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({date = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (date) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.date,
+                    referencedTable:
+                        $$GalleryVideoEntitiesTableReferences._dateTable(db),
+                    referencedColumn: $$GalleryVideoEntitiesTableReferences
+                        ._dateTable(db)
+                        .date,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GalleryVideoEntitiesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $GalleryVideoEntitiesTable,
+        GalleryVideoEntity,
+        $$GalleryVideoEntitiesTableFilterComposer,
+        $$GalleryVideoEntitiesTableOrderingComposer,
+        $$GalleryVideoEntitiesTableCreateCompanionBuilder,
+        $$GalleryVideoEntitiesTableUpdateCompanionBuilder,
+        (GalleryVideoEntity, $$GalleryVideoEntitiesTableReferences),
+        GalleryVideoEntity,
+        PrefetchHooks Function({bool date})>;
 typedef $$GalleryOtherEntitiesTableCreateCompanionBuilder
     = GalleryOtherEntitiesCompanion Function({
   Value<Date> date,
@@ -2315,40 +2680,25 @@ typedef $$GalleryOtherEntitiesTableUpdateCompanionBuilder
   Value<Uri> uri,
 });
 
-class $$GalleryOtherEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GalleryOtherEntitiesTable,
-    GalleryOtherEntity,
-    $$GalleryOtherEntitiesTableFilterComposer,
-    $$GalleryOtherEntitiesTableOrderingComposer,
-    $$GalleryOtherEntitiesTableCreateCompanionBuilder,
-    $$GalleryOtherEntitiesTableUpdateCompanionBuilder> {
-  $$GalleryOtherEntitiesTableTableManager(
-      _$AppDatabase db, $GalleryOtherEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$GalleryOtherEntitiesTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$GalleryOtherEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            Value<Uri> uri = const Value.absent(),
-          }) =>
-              GalleryOtherEntitiesCompanion(
-            date: date,
-            uri: uri,
-          ),
-          createCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            required Uri uri,
-          }) =>
-              GalleryOtherEntitiesCompanion.insert(
-            date: date,
-            uri: uri,
-          ),
-        ));
+final class $$GalleryOtherEntitiesTableReferences extends BaseReferences<
+    _$AppDatabase, $GalleryOtherEntitiesTable, GalleryOtherEntity> {
+  $$GalleryOtherEntitiesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $GalleryBaseEntitiesTable _dateTable(_$AppDatabase db) =>
+      db.galleryBaseEntities.createAlias($_aliasNameGenerator(
+          db.galleryOtherEntities.date, db.galleryBaseEntities.date));
+
+  $$GalleryBaseEntitiesTableProcessedTableManager? get date {
+    if ($_item.date == null) return null;
+    final manager =
+        $$GalleryBaseEntitiesTableTableManager($_db, $_db.galleryBaseEntities)
+            .filter((f) => f.date($_item.date!));
+    final item = $_typedResult.readTableOrNull(_dateTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
 }
 
 class $$GalleryOtherEntitiesTableFilterComposer
@@ -2403,6 +2753,98 @@ class $$GalleryOtherEntitiesTableOrderingComposer
   }
 }
 
+class $$GalleryOtherEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GalleryOtherEntitiesTable,
+    GalleryOtherEntity,
+    $$GalleryOtherEntitiesTableFilterComposer,
+    $$GalleryOtherEntitiesTableOrderingComposer,
+    $$GalleryOtherEntitiesTableCreateCompanionBuilder,
+    $$GalleryOtherEntitiesTableUpdateCompanionBuilder,
+    (GalleryOtherEntity, $$GalleryOtherEntitiesTableReferences),
+    GalleryOtherEntity,
+    PrefetchHooks Function({bool date})> {
+  $$GalleryOtherEntitiesTableTableManager(
+      _$AppDatabase db, $GalleryOtherEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$GalleryOtherEntitiesTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$GalleryOtherEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            Value<Uri> uri = const Value.absent(),
+          }) =>
+              GalleryOtherEntitiesCompanion(
+            date: date,
+            uri: uri,
+          ),
+          createCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            required Uri uri,
+          }) =>
+              GalleryOtherEntitiesCompanion.insert(
+            date: date,
+            uri: uri,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GalleryOtherEntitiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({date = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (date) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.date,
+                    referencedTable:
+                        $$GalleryOtherEntitiesTableReferences._dateTable(db),
+                    referencedColumn: $$GalleryOtherEntitiesTableReferences
+                        ._dateTable(db)
+                        .date,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GalleryOtherEntitiesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $GalleryOtherEntitiesTable,
+        GalleryOtherEntity,
+        $$GalleryOtherEntitiesTableFilterComposer,
+        $$GalleryOtherEntitiesTableOrderingComposer,
+        $$GalleryOtherEntitiesTableCreateCompanionBuilder,
+        $$GalleryOtherEntitiesTableUpdateCompanionBuilder,
+        (GalleryOtherEntity, $$GalleryOtherEntitiesTableReferences),
+        GalleryOtherEntity,
+        PrefetchHooks Function({bool date})>;
 typedef $$GalleryEmptyEntitiesTableCreateCompanionBuilder
     = GalleryEmptyEntitiesCompanion Function({
   Value<Date> date,
@@ -2412,36 +2854,25 @@ typedef $$GalleryEmptyEntitiesTableUpdateCompanionBuilder
   Value<Date> date,
 });
 
-class $$GalleryEmptyEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GalleryEmptyEntitiesTable,
-    GalleryEmptyEntity,
-    $$GalleryEmptyEntitiesTableFilterComposer,
-    $$GalleryEmptyEntitiesTableOrderingComposer,
-    $$GalleryEmptyEntitiesTableCreateCompanionBuilder,
-    $$GalleryEmptyEntitiesTableUpdateCompanionBuilder> {
-  $$GalleryEmptyEntitiesTableTableManager(
-      _$AppDatabase db, $GalleryEmptyEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$GalleryEmptyEntitiesTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$GalleryEmptyEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-          }) =>
-              GalleryEmptyEntitiesCompanion(
-            date: date,
-          ),
-          createCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-          }) =>
-              GalleryEmptyEntitiesCompanion.insert(
-            date: date,
-          ),
-        ));
+final class $$GalleryEmptyEntitiesTableReferences extends BaseReferences<
+    _$AppDatabase, $GalleryEmptyEntitiesTable, GalleryEmptyEntity> {
+  $$GalleryEmptyEntitiesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $GalleryBaseEntitiesTable _dateTable(_$AppDatabase db) =>
+      db.galleryBaseEntities.createAlias($_aliasNameGenerator(
+          db.galleryEmptyEntities.date, db.galleryBaseEntities.date));
+
+  $$GalleryBaseEntitiesTableProcessedTableManager? get date {
+    if ($_item.date == null) return null;
+    final manager =
+        $$GalleryBaseEntitiesTableTableManager($_db, $_db.galleryBaseEntities)
+            .filter((f) => f.date($_item.date!));
+    final item = $_typedResult.readTableOrNull(_dateTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
 }
 
 class $$GalleryEmptyEntitiesTableFilterComposer
@@ -2484,6 +2915,94 @@ class $$GalleryEmptyEntitiesTableOrderingComposer
   }
 }
 
+class $$GalleryEmptyEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GalleryEmptyEntitiesTable,
+    GalleryEmptyEntity,
+    $$GalleryEmptyEntitiesTableFilterComposer,
+    $$GalleryEmptyEntitiesTableOrderingComposer,
+    $$GalleryEmptyEntitiesTableCreateCompanionBuilder,
+    $$GalleryEmptyEntitiesTableUpdateCompanionBuilder,
+    (GalleryEmptyEntity, $$GalleryEmptyEntitiesTableReferences),
+    GalleryEmptyEntity,
+    PrefetchHooks Function({bool date})> {
+  $$GalleryEmptyEntitiesTableTableManager(
+      _$AppDatabase db, $GalleryEmptyEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$GalleryEmptyEntitiesTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$GalleryEmptyEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+          }) =>
+              GalleryEmptyEntitiesCompanion(
+            date: date,
+          ),
+          createCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+          }) =>
+              GalleryEmptyEntitiesCompanion.insert(
+            date: date,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GalleryEmptyEntitiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({date = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (date) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.date,
+                    referencedTable:
+                        $$GalleryEmptyEntitiesTableReferences._dateTable(db),
+                    referencedColumn: $$GalleryEmptyEntitiesTableReferences
+                        ._dateTable(db)
+                        .date,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GalleryEmptyEntitiesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $GalleryEmptyEntitiesTable,
+        GalleryEmptyEntity,
+        $$GalleryEmptyEntitiesTableFilterComposer,
+        $$GalleryEmptyEntitiesTableOrderingComposer,
+        $$GalleryEmptyEntitiesTableCreateCompanionBuilder,
+        $$GalleryEmptyEntitiesTableUpdateCompanionBuilder,
+        (GalleryEmptyEntity, $$GalleryEmptyEntitiesTableReferences),
+        GalleryEmptyEntity,
+        PrefetchHooks Function({bool date})>;
 typedef $$GalleryInfoEntitiesTableCreateCompanionBuilder
     = GalleryInfoEntitiesCompanion Function({
   required Date date,
@@ -2503,56 +3022,25 @@ typedef $$GalleryInfoEntitiesTableUpdateCompanionBuilder
   Value<int> rowid,
 });
 
-class $$GalleryInfoEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GalleryInfoEntitiesTable,
-    GalleryInfoEntity,
-    $$GalleryInfoEntitiesTableFilterComposer,
-    $$GalleryInfoEntitiesTableOrderingComposer,
-    $$GalleryInfoEntitiesTableCreateCompanionBuilder,
-    $$GalleryInfoEntitiesTableUpdateCompanionBuilder> {
-  $$GalleryInfoEntitiesTableTableManager(
-      _$AppDatabase db, $GalleryInfoEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$GalleryInfoEntitiesTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$GalleryInfoEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Date> date = const Value.absent(),
-            Value<ContentLanguage> language = const Value.absent(),
-            Value<ContentLanguage> originalLanguage = const Value.absent(),
-            Value<String> title = const Value.absent(),
-            Value<String> explanation = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GalleryInfoEntitiesCompanion(
-            date: date,
-            language: language,
-            originalLanguage: originalLanguage,
-            title: title,
-            explanation: explanation,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required Date date,
-            required ContentLanguage language,
-            required ContentLanguage originalLanguage,
-            required String title,
-            required String explanation,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GalleryInfoEntitiesCompanion.insert(
-            date: date,
-            language: language,
-            originalLanguage: originalLanguage,
-            title: title,
-            explanation: explanation,
-            rowid: rowid,
-          ),
-        ));
+final class $$GalleryInfoEntitiesTableReferences extends BaseReferences<
+    _$AppDatabase, $GalleryInfoEntitiesTable, GalleryInfoEntity> {
+  $$GalleryInfoEntitiesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $GalleryBaseEntitiesTable _dateTable(_$AppDatabase db) =>
+      db.galleryBaseEntities.createAlias($_aliasNameGenerator(
+          db.galleryInfoEntities.date, db.galleryBaseEntities.date));
+
+  $$GalleryBaseEntitiesTableProcessedTableManager? get date {
+    if ($_item.date == null) return null;
+    final manager =
+        $$GalleryBaseEntitiesTableTableManager($_db, $_db.galleryBaseEntities)
+            .filter((f) => f.date($_item.date!));
+    final item = $_typedResult.readTableOrNull(_dateTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
 }
 
 class $$GalleryInfoEntitiesTableFilterComposer
@@ -2639,6 +3127,113 @@ class $$GalleryInfoEntitiesTableOrderingComposer
   }
 }
 
+class $$GalleryInfoEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GalleryInfoEntitiesTable,
+    GalleryInfoEntity,
+    $$GalleryInfoEntitiesTableFilterComposer,
+    $$GalleryInfoEntitiesTableOrderingComposer,
+    $$GalleryInfoEntitiesTableCreateCompanionBuilder,
+    $$GalleryInfoEntitiesTableUpdateCompanionBuilder,
+    (GalleryInfoEntity, $$GalleryInfoEntitiesTableReferences),
+    GalleryInfoEntity,
+    PrefetchHooks Function({bool date})> {
+  $$GalleryInfoEntitiesTableTableManager(
+      _$AppDatabase db, $GalleryInfoEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$GalleryInfoEntitiesTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$GalleryInfoEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Date> date = const Value.absent(),
+            Value<ContentLanguage> language = const Value.absent(),
+            Value<ContentLanguage> originalLanguage = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> explanation = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GalleryInfoEntitiesCompanion(
+            date: date,
+            language: language,
+            originalLanguage: originalLanguage,
+            title: title,
+            explanation: explanation,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required Date date,
+            required ContentLanguage language,
+            required ContentLanguage originalLanguage,
+            required String title,
+            required String explanation,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GalleryInfoEntitiesCompanion.insert(
+            date: date,
+            language: language,
+            originalLanguage: originalLanguage,
+            title: title,
+            explanation: explanation,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GalleryInfoEntitiesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({date = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (date) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.date,
+                    referencedTable:
+                        $$GalleryInfoEntitiesTableReferences._dateTable(db),
+                    referencedColumn: $$GalleryInfoEntitiesTableReferences
+                        ._dateTable(db)
+                        .date,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GalleryInfoEntitiesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GalleryInfoEntitiesTable,
+    GalleryInfoEntity,
+    $$GalleryInfoEntitiesTableFilterComposer,
+    $$GalleryInfoEntitiesTableOrderingComposer,
+    $$GalleryInfoEntitiesTableCreateCompanionBuilder,
+    $$GalleryInfoEntitiesTableUpdateCompanionBuilder,
+    (GalleryInfoEntity, $$GalleryInfoEntitiesTableReferences),
+    GalleryInfoEntity,
+    PrefetchHooks Function({bool date})>;
 typedef $$NewsSourceEntitiesTableCreateCompanionBuilder
     = NewsSourceEntitiesCompanion Function({
   required Uri uri,
@@ -2653,50 +3248,6 @@ typedef $$NewsSourceEntitiesTableUpdateCompanionBuilder
   Value<ContentLanguage> language,
   Value<int> rowid,
 });
-
-class $$NewsSourceEntitiesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $NewsSourceEntitiesTable,
-    NewsSourceEntity,
-    $$NewsSourceEntitiesTableFilterComposer,
-    $$NewsSourceEntitiesTableOrderingComposer,
-    $$NewsSourceEntitiesTableCreateCompanionBuilder,
-    $$NewsSourceEntitiesTableUpdateCompanionBuilder> {
-  $$NewsSourceEntitiesTableTableManager(
-      _$AppDatabase db, $NewsSourceEntitiesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$NewsSourceEntitiesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer: $$NewsSourceEntitiesTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<Uri> uri = const Value.absent(),
-            Value<Uri> iconUri = const Value.absent(),
-            Value<ContentLanguage> language = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              NewsSourceEntitiesCompanion(
-            uri: uri,
-            iconUri: iconUri,
-            language: language,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required Uri uri,
-            required Uri iconUri,
-            required ContentLanguage language,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              NewsSourceEntitiesCompanion.insert(
-            uri: uri,
-            iconUri: iconUri,
-            language: language,
-            rowid: rowid,
-          ),
-        ));
-}
 
 class $$NewsSourceEntitiesTableFilterComposer
     extends FilterComposer<_$AppDatabase, $NewsSourceEntitiesTable> {
@@ -2741,6 +3292,75 @@ class $$NewsSourceEntitiesTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
+
+class $$NewsSourceEntitiesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $NewsSourceEntitiesTable,
+    NewsSourceEntity,
+    $$NewsSourceEntitiesTableFilterComposer,
+    $$NewsSourceEntitiesTableOrderingComposer,
+    $$NewsSourceEntitiesTableCreateCompanionBuilder,
+    $$NewsSourceEntitiesTableUpdateCompanionBuilder,
+    (
+      NewsSourceEntity,
+      BaseReferences<_$AppDatabase, $NewsSourceEntitiesTable, NewsSourceEntity>
+    ),
+    NewsSourceEntity,
+    PrefetchHooks Function()> {
+  $$NewsSourceEntitiesTableTableManager(
+      _$AppDatabase db, $NewsSourceEntitiesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$NewsSourceEntitiesTableFilterComposer(ComposerState(db, table)),
+          orderingComposer: $$NewsSourceEntitiesTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<Uri> uri = const Value.absent(),
+            Value<Uri> iconUri = const Value.absent(),
+            Value<ContentLanguage> language = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              NewsSourceEntitiesCompanion(
+            uri: uri,
+            iconUri: iconUri,
+            language: language,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required Uri uri,
+            required Uri iconUri,
+            required ContentLanguage language,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              NewsSourceEntitiesCompanion.insert(
+            uri: uri,
+            iconUri: iconUri,
+            language: language,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$NewsSourceEntitiesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $NewsSourceEntitiesTable,
+    NewsSourceEntity,
+    $$NewsSourceEntitiesTableFilterComposer,
+    $$NewsSourceEntitiesTableOrderingComposer,
+    $$NewsSourceEntitiesTableCreateCompanionBuilder,
+    $$NewsSourceEntitiesTableUpdateCompanionBuilder,
+    (
+      NewsSourceEntity,
+      BaseReferences<_$AppDatabase, $NewsSourceEntitiesTable, NewsSourceEntity>
+    ),
+    NewsSourceEntity,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

@@ -91,6 +91,9 @@ class _$GalleryItemEventCopyWithImpl<$Res, $Val extends GalleryItemEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -112,6 +115,8 @@ class __$$GalleryItemFetchedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryItemFetchedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +130,8 @@ class __$$GalleryItemFetchedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DateCopyWith<$Res> get date {
@@ -158,7 +165,9 @@ class _$GalleryItemFetchedImpl implements GalleryItemFetched {
   @override
   int get hashCode => Object.hash(runtimeType, date);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryItemFetchedImplCopyWith<_$GalleryItemFetchedImpl> get copyWith =>
@@ -252,7 +261,10 @@ abstract class GalleryItemFetched implements GalleryItemEvent {
       _$GalleryItemFetchedImpl;
 
   Date get date;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryItemFetchedImplCopyWith<_$GalleryItemFetchedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -274,6 +286,9 @@ class __$$GalleryItemFavoriteToggledImplCopyWithImpl<$Res>
       _$GalleryItemFavoriteToggledImpl _value,
       $Res Function(_$GalleryItemFavoriteToggledImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -397,6 +412,9 @@ class __$$GalleryItemTriedAgainImplCopyWithImpl<$Res>
   __$$GalleryItemTriedAgainImplCopyWithImpl(_$GalleryItemTriedAgainImpl _value,
       $Res Function(_$GalleryItemTriedAgainImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -524,6 +542,8 @@ class __$$GalleryItemItemsChangedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryItemItemsChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -569,7 +589,9 @@ class _$GalleryItemItemsChangedImpl implements GalleryItemItemsChanged {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryItemItemsChangedImplCopyWith<_$GalleryItemItemsChangedImpl>
@@ -663,7 +685,10 @@ abstract class GalleryItemItemsChanged implements GalleryItemEvent {
       {required final List<GalleryItem> items}) = _$GalleryItemItemsChangedImpl;
 
   List<GalleryItem> get items;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryItemItemsChangedImplCopyWith<_$GalleryItemItemsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -690,6 +715,8 @@ class __$$GalleryItemAppSettingsChangedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryItemAppSettingsChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -703,6 +730,8 @@ class __$$GalleryItemAppSettingsChangedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppSettingsCopyWith<$Res> get appSettings {
@@ -738,7 +767,9 @@ class _$GalleryItemAppSettingsChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, appSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryItemAppSettingsChangedImplCopyWith<
@@ -834,7 +865,10 @@ abstract class GalleryItemAppSettingsChanged implements GalleryItemEvent {
       _$GalleryItemAppSettingsChangedImpl;
 
   AppSettings get appSettings;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryItemEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryItemAppSettingsChangedImplCopyWith<
           _$GalleryItemAppSettingsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -910,6 +944,9 @@ class _$GalleryItemStateCopyWithImpl<$Res, $Val extends GalleryItemState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -926,6 +963,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1036,6 +1076,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1151,6 +1194,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1164,6 +1209,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GalleryItemCopyWith<$Res> get item {
@@ -1192,7 +1239,9 @@ class _$SuccessImpl extends _Success {
   @override
   int get hashCode => Object.hash(runtimeType, item);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -1278,7 +1327,10 @@ abstract class _Success extends GalleryItemState {
   const _Success._() : super._();
 
   GalleryItem get item;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1300,6 +1352,8 @@ class __$$FailureImplCopyWithImpl<$Res>
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1333,7 +1387,9 @@ class _$FailureImpl extends _Failure {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
@@ -1419,7 +1475,10 @@ abstract class _Failure extends GalleryItemState {
   const _Failure._() : super._();
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryItemState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -95,6 +95,9 @@ class _$GalleryFavoritesEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -114,6 +117,9 @@ class __$$GalleryFavoritesFetchedImplCopyWithImpl<$Res>
       _$GalleryFavoritesFetchedImpl _value,
       $Res Function(_$GalleryFavoritesFetchedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -256,6 +262,8 @@ class __$$GalleryFavoritesItemUnfavoritedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryFavoritesItemUnfavoritedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -269,6 +277,8 @@ class __$$GalleryFavoritesItemUnfavoritedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GalleryItemCopyWith<$Res> get item {
@@ -313,7 +323,9 @@ class _$GalleryFavoritesItemUnfavoritedImpl
   @override
   int get hashCode => Object.hash(runtimeType, item);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryFavoritesItemUnfavoritedImplCopyWith<
@@ -413,7 +425,10 @@ abstract class GalleryFavoritesItemUnfavorited
       _$GalleryFavoritesItemUnfavoritedImpl;
 
   GalleryItem get item;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryFavoritesItemUnfavoritedImplCopyWith<
           _$GalleryFavoritesItemUnfavoritedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -436,6 +451,9 @@ class __$$GalleryFavoritesTriedAgainImplCopyWithImpl<$Res>
       _$GalleryFavoritesTriedAgainImpl _value,
       $Res Function(_$GalleryFavoritesTriedAgainImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -576,6 +594,8 @@ class __$$GalleryFavoritesItemsChangedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryFavoritesItemsChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -632,7 +652,9 @@ class _$GalleryFavoritesItemsChangedImpl
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryFavoritesItemsChangedImplCopyWith<
@@ -731,7 +753,10 @@ abstract class GalleryFavoritesItemsChanged implements GalleryFavoritesEvent {
       _$GalleryFavoritesItemsChangedImpl;
 
   List<GalleryItem> get items;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryFavoritesItemsChangedImplCopyWith<
           _$GalleryFavoritesItemsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -759,6 +784,8 @@ class __$$GalleryFavoritesAppSettingsChangedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryFavoritesAppSettingsChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -772,6 +799,8 @@ class __$$GalleryFavoritesAppSettingsChangedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppSettingsCopyWith<$Res> get appSettings {
@@ -817,7 +846,9 @@ class _$GalleryFavoritesAppSettingsChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, appSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryFavoritesAppSettingsChangedImplCopyWith<
@@ -917,7 +948,10 @@ abstract class GalleryFavoritesAppSettingsChanged
       _$GalleryFavoritesAppSettingsChangedImpl;
 
   AppSettings get appSettings;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryFavoritesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryFavoritesAppSettingsChangedImplCopyWith<
           _$GalleryFavoritesAppSettingsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -928,7 +962,9 @@ mixin _$GalleryFavoritesState {
   BlocStatus get status => throw _privateConstructorUsedError;
   List<GalleryItem> get items => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryFavoritesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GalleryFavoritesStateCopyWith<GalleryFavoritesState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -953,6 +989,8 @@ class _$GalleryFavoritesStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GalleryFavoritesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -993,6 +1031,8 @@ class __$$GalleryFavoritesStateImplCopyWithImpl<$Res>
       $Res Function(_$GalleryFavoritesStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryFavoritesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1044,7 +1084,9 @@ class _$GalleryFavoritesStateImpl extends _GalleryFavoritesState {
   int get hashCode => Object.hash(
       runtimeType, status, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryFavoritesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryFavoritesStateImplCopyWith<_$GalleryFavoritesStateImpl>
@@ -1062,8 +1104,11 @@ abstract class _GalleryFavoritesState extends GalleryFavoritesState {
   BlocStatus get status;
   @override
   List<GalleryItem> get items;
+
+  /// Create a copy of GalleryFavoritesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryFavoritesStateImplCopyWith<_$GalleryFavoritesStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

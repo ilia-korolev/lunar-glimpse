@@ -9,3 +9,6 @@ targets:
             - unnecessary_null_checks
             - lines_longer_than_80_chars
             - unused_local_variable
+            - invalid_use_of_internal_member
+            - unnecessary_null_comparison
+            - unnecessary_non_null_assertion

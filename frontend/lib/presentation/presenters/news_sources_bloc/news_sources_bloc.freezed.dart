@@ -85,6 +85,9 @@ class _$NewsSourcesEventCopyWithImpl<$Res, $Val extends NewsSourcesEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -103,6 +106,9 @@ class __$$NewsSourcesInitializedImplCopyWithImpl<$Res>
       _$NewsSourcesInitializedImpl _value,
       $Res Function(_$NewsSourcesInitializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -227,6 +233,8 @@ class __$$NewsSourcesSourceShowToggledImplCopyWithImpl<$Res>
       $Res Function(_$NewsSourcesSourceShowToggledImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -240,6 +248,8 @@ class __$$NewsSourcesSourceShowToggledImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NewsSourceInputCopyWith<$Res> get input {
@@ -274,7 +284,9 @@ class _$NewsSourcesSourceShowToggledImpl
   @override
   int get hashCode => Object.hash(runtimeType, input);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsSourcesSourceShowToggledImplCopyWith<
@@ -364,7 +376,10 @@ abstract class NewsSourcesSourceShowToggled implements NewsSourcesEvent {
       _$NewsSourcesSourceShowToggledImpl;
 
   NewsSourceInput get input;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsSourcesSourceShowToggledImplCopyWith<
           _$NewsSourcesSourceShowToggledImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -387,6 +402,9 @@ class __$$NewsSourcesChangesAppliedImplCopyWithImpl<$Res>
       _$NewsSourcesChangesAppliedImpl _value,
       $Res Function(_$NewsSourcesChangesAppliedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -509,6 +527,8 @@ class __$$NewsSourcesSourcesChangedImplCopyWithImpl<$Res>
       $Res Function(_$NewsSourcesSourcesChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -555,7 +575,9 @@ class _$NewsSourcesSourcesChangedImpl implements NewsSourcesSourcesChanged {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_sources));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsSourcesSourcesChangedImplCopyWith<_$NewsSourcesSourcesChangedImpl>
@@ -644,7 +666,10 @@ abstract class NewsSourcesSourcesChanged implements NewsSourcesEvent {
       _$NewsSourcesSourcesChangedImpl;
 
   List<NewsSource> get sources;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NewsSourcesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsSourcesSourcesChangedImplCopyWith<_$NewsSourcesSourcesChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -654,7 +679,9 @@ mixin _$NewsSourcesState {
   BlocStatus get status => throw _privateConstructorUsedError;
   List<NewsSourceInput> get inputs => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSourcesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsSourcesStateCopyWith<NewsSourcesState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -678,6 +705,8 @@ class _$NewsSourcesStateCopyWithImpl<$Res, $Val extends NewsSourcesState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsSourcesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -716,6 +745,8 @@ class __$$NewsSourcesStateImplCopyWithImpl<$Res>
       $Res Function(_$NewsSourcesStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsSourcesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -767,7 +798,9 @@ class _$NewsSourcesStateImpl extends _NewsSourcesState {
   int get hashCode => Object.hash(
       runtimeType, status, const DeepCollectionEquality().hash(_inputs));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSourcesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsSourcesStateImplCopyWith<_$NewsSourcesStateImpl> get copyWith =>
@@ -785,8 +818,11 @@ abstract class _NewsSourcesState extends NewsSourcesState {
   BlocStatus get status;
   @override
   List<NewsSourceInput> get inputs;
+
+  /// Create a copy of NewsSourcesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsSourcesStateImplCopyWith<_$NewsSourcesStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -796,7 +832,9 @@ mixin _$NewsSourceInput {
   NewsSource get source => throw _privateConstructorUsedError;
   bool get isChanged => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSourceInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsSourceInputCopyWith<NewsSourceInput> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -822,6 +860,8 @@ class _$NewsSourceInputCopyWithImpl<$Res, $Val extends NewsSourceInput>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsSourceInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -840,6 +880,8 @@ class _$NewsSourceInputCopyWithImpl<$Res, $Val extends NewsSourceInput>
     ) as $Val);
   }
 
+  /// Create a copy of NewsSourceInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NewsSourceCopyWith<$Res> get source {
@@ -871,6 +913,8 @@ class __$$NewsSourceInputImplCopyWithImpl<$Res>
       _$NewsSourceInputImpl _value, $Res Function(_$NewsSourceInputImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsSourceInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -920,7 +964,9 @@ class _$NewsSourceInputImpl extends _NewsSourceInput {
   @override
   int get hashCode => Object.hash(runtimeType, source, isChanged);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsSourceInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsSourceInputImplCopyWith<_$NewsSourceInputImpl> get copyWith =>
@@ -938,8 +984,11 @@ abstract class _NewsSourceInput extends NewsSourceInput {
   NewsSource get source;
   @override
   bool get isChanged;
+
+  /// Create a copy of NewsSourceInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsSourceInputImplCopyWith<_$NewsSourceInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -50,7 +50,9 @@ mixin _$SaveFileEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SaveFileEventCopyWith<SaveFileEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -74,6 +76,8 @@ class _$SaveFileEventCopyWithImpl<$Res, $Val extends SaveFileEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SaveFileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +111,8 @@ class __$$SaveFileStartedImplCopyWithImpl<$Res>
       _$SaveFileStartedImpl _value, $Res Function(_$SaveFileStartedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SaveFileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,7 +151,9 @@ class _$SaveFileStartedImpl implements SaveFileStarted {
   @override
   int get hashCode => Object.hash(runtimeType, fileUri);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveFileStartedImplCopyWith<_$SaveFileStartedImpl> get copyWith =>
@@ -215,8 +223,11 @@ abstract class SaveFileStarted implements SaveFileEvent {
 
   @override
   Uri get fileUri;
+
+  /// Create a copy of SaveFileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveFileStartedImplCopyWith<_$SaveFileStartedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -291,6 +302,9 @@ class _$SaveFileStateCopyWithImpl<$Res, $Val extends SaveFileState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -307,6 +321,9 @@ class __$$SaveFileInitialImplCopyWithImpl<$Res>
   __$$SaveFileInitialImplCopyWithImpl(
       _$SaveFileInitialImpl _value, $Res Function(_$SaveFileInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -424,6 +441,8 @@ class __$$SaveFileInProgressImplCopyWithImpl<$Res>
       $Res Function(_$SaveFileInProgressImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -463,7 +482,9 @@ class _$SaveFileInProgressImpl implements SaveFileInProgress {
   @override
   int get hashCode => Object.hash(runtimeType, progress);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveFileInProgressImplCopyWith<_$SaveFileInProgressImpl> get copyWith =>
@@ -550,7 +571,10 @@ abstract class SaveFileInProgress implements SaveFileState {
       _$SaveFileInProgressImpl;
 
   double get progress;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveFileInProgressImplCopyWith<_$SaveFileInProgressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -572,6 +596,8 @@ class __$$SaveFileCompleteImplCopyWithImpl<$Res>
       $Res Function(_$SaveFileCompleteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -610,7 +636,9 @@ class _$SaveFileCompleteImpl implements SaveFileComplete {
   @override
   int get hashCode => Object.hash(runtimeType, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveFileCompleteImplCopyWith<_$SaveFileCompleteImpl> get copyWith =>
@@ -697,7 +725,10 @@ abstract class SaveFileComplete implements SaveFileState {
       _$SaveFileCompleteImpl;
 
   String get path;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveFileCompleteImplCopyWith<_$SaveFileCompleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -716,6 +747,9 @@ class __$$SaveFileFailureImplCopyWithImpl<$Res>
   __$$SaveFileFailureImplCopyWithImpl(
       _$SaveFileFailureImpl _value, $Res Function(_$SaveFileFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SaveFileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

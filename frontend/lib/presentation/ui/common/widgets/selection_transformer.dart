@@ -194,18 +194,17 @@ class SeparatedSelectionContainerDelegate
   void _updateLastEdgeEventsFromGeometries() {
     if (currentSelectionStartIndex != -1 &&
         selectables[currentSelectionStartIndex].value.hasSelection) {
-      final start = selectables[currentSelectionStartIndex];
-      final localStartEdge = start.value.startSelectionPoint!.localPosition +
-          Offset(0, -start.value.startSelectionPoint!.lineHeight / 2);
+      final Selectable start = selectables[currentSelectionStartIndex];
+      final Offset localStartEdge =
+          start.value.startSelectionPoint!.localPosition +
+              Offset(0, -start.value.startSelectionPoint!.lineHeight / 2);
       _lastStartEdgeUpdateGlobalPosition = MatrixUtils.transformPoint(
-        start.getTransformTo(null),
-        localStartEdge,
-      );
+          start.getTransformTo(null), localStartEdge);
     }
     if (currentSelectionEndIndex != -1 &&
         selectables[currentSelectionEndIndex].value.hasSelection) {
-      final end = selectables[currentSelectionEndIndex];
-      final localEndEdge = end.value.endSelectionPoint!.localPosition +
+      final Selectable end = selectables[currentSelectionEndIndex];
+      final Offset localEndEdge = end.value.endSelectionPoint!.localPosition +
           Offset(0, -end.value.endSelectionPoint!.lineHeight / 2);
       _lastEndEdgeUpdateGlobalPosition =
           MatrixUtils.transformPoint(end.getTransformTo(null), localEndEdge);
@@ -214,8 +213,8 @@ class SeparatedSelectionContainerDelegate
 
   @override
   SelectionResult handleSelectAll(SelectAllSelectionEvent event) {
-    final result = super.handleSelectAll(event);
-    for (final selectable in selectables) {
+    final SelectionResult result = super.handleSelectAll(event);
+    for (final Selectable selectable in selectables) {
       _hasReceivedStartEvent.add(selectable);
       _hasReceivedEndEvent.add(selectable);
     }
@@ -224,11 +223,26 @@ class SeparatedSelectionContainerDelegate
     return result;
   }
 
-  /// Selects a word in a selectable at the location
+  /// Selects a word in a [Selectable] at the location
   /// [SelectWordSelectionEvent.globalPosition].
   @override
   SelectionResult handleSelectWord(SelectWordSelectionEvent event) {
-    final result = super.handleSelectWord(event);
+    final SelectionResult result = super.handleSelectWord(event);
+    if (currentSelectionStartIndex != -1) {
+      _hasReceivedStartEvent.add(selectables[currentSelectionStartIndex]);
+    }
+    if (currentSelectionEndIndex != -1) {
+      _hasReceivedEndEvent.add(selectables[currentSelectionEndIndex]);
+    }
+    _updateLastEdgeEventsFromGeometries();
+    return result;
+  }
+
+  /// Selects a paragraph in a [Selectable] at the location
+  /// [SelectParagraphSelectionEvent.globalPosition].
+  @override
+  SelectionResult handleSelectParagraph(SelectParagraphSelectionEvent event) {
+    final SelectionResult result = super.handleSelectParagraph(event);
     if (currentSelectionStartIndex != -1) {
       _hasReceivedStartEvent.add(selectables[currentSelectionStartIndex]);
     }
@@ -241,7 +255,7 @@ class SeparatedSelectionContainerDelegate
 
   @override
   SelectionResult handleClearSelection(ClearSelectionEvent event) {
-    final result = super.handleClearSelection(event);
+    final SelectionResult result = super.handleClearSelection(event);
     _hasReceivedStartEvent.clear();
     _hasReceivedEndEvent.clear();
     _lastStartEdgeUpdateGlobalPosition = null;
@@ -268,9 +282,7 @@ class SeparatedSelectionContainerDelegate
 
   @override
   SelectionResult dispatchSelectionEventToChild(
-    Selectable selectable,
-    SelectionEvent event,
-  ) {
+      Selectable selectable, SelectionEvent event) {
     switch (event.type) {
       case SelectionEventType.startEdgeUpdate:
         _hasReceivedStartEvent.add(selectable);
@@ -283,6 +295,7 @@ class SeparatedSelectionContainerDelegate
         _hasReceivedEndEvent.remove(selectable);
       case SelectionEventType.selectAll:
       case SelectionEventType.selectWord:
+      case SelectionEventType.selectParagraph:
         break;
       case SelectionEventType.granularlyExtendSelection:
       case SelectionEventType.directionallyExtendSelection:
@@ -297,7 +310,8 @@ class SeparatedSelectionContainerDelegate
   void ensureChildUpdated(Selectable selectable) {
     if (_lastEndEdgeUpdateGlobalPosition != null &&
         _hasReceivedEndEvent.add(selectable)) {
-      final synthesizedEvent = SelectionEdgeUpdateEvent.forEnd(
+      final SelectionEdgeUpdateEvent synthesizedEvent =
+          SelectionEdgeUpdateEvent.forEnd(
         globalPosition: _lastEndEdgeUpdateGlobalPosition!,
       );
       if (currentSelectionEndIndex == -1) {
@@ -305,10 +319,10 @@ class SeparatedSelectionContainerDelegate
       }
       selectable.dispatchSelectionEvent(synthesizedEvent);
     }
-
     if (_lastStartEdgeUpdateGlobalPosition != null &&
         _hasReceivedStartEvent.add(selectable)) {
-      final synthesizedEvent = SelectionEdgeUpdateEvent.forStart(
+      final SelectionEdgeUpdateEvent synthesizedEvent =
+          SelectionEdgeUpdateEvent.forStart(
         globalPosition: _lastStartEdgeUpdateGlobalPosition!,
       );
       if (currentSelectionStartIndex == -1) {
@@ -327,7 +341,6 @@ class SeparatedSelectionContainerDelegate
         ),
       );
     }
-
     if (_lastStartEdgeUpdateGlobalPosition != null) {
       handleSelectionEdgeUpdate(
         SelectionEdgeUpdateEvent.forStart(
@@ -335,17 +348,11 @@ class SeparatedSelectionContainerDelegate
         ),
       );
     }
-
-    final selectableSet = selectables.toSet();
-
+    final Set<Selectable> selectableSet = selectables.toSet();
     _hasReceivedEndEvent.removeWhere(
-      (Selectable selectable) => !selectableSet.contains(selectable),
-    );
-
+        (Selectable selectable) => !selectableSet.contains(selectable));
     _hasReceivedStartEvent.removeWhere(
-      (Selectable selectable) => !selectableSet.contains(selectable),
-    );
-
+        (Selectable selectable) => !selectableSet.contains(selectable));
     super.didChangeSelectables();
   }
 

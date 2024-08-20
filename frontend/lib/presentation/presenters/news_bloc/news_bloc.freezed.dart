@@ -77,6 +77,9 @@ class _$NewsEventCopyWithImpl<$Res, $Val extends NewsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of NewsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -93,6 +96,9 @@ class __$$NewsFetchedImplCopyWithImpl<$Res>
   __$$NewsFetchedImplCopyWithImpl(
       _$NewsFetchedImpl _value, $Res Function(_$NewsFetchedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NewsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -201,6 +207,9 @@ class __$$NewsRefreshedImplCopyWithImpl<$Res>
   __$$NewsRefreshedImplCopyWithImpl(
       _$NewsRefreshedImpl _value, $Res Function(_$NewsRefreshedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NewsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -309,6 +318,9 @@ class __$$NewsTriedAgainImplCopyWithImpl<$Res>
   __$$NewsTriedAgainImplCopyWithImpl(
       _$NewsTriedAgainImpl _value, $Res Function(_$NewsTriedAgainImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of NewsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -408,7 +420,9 @@ mixin _$NewsState {
   BlocStatus get status => throw _privateConstructorUsedError;
   List<Article> get articles => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NewsStateCopyWith<NewsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -431,6 +445,8 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -469,6 +485,8 @@ class __$$NewsStateImplCopyWithImpl<$Res>
       _$NewsStateImpl _value, $Res Function(_$NewsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -520,7 +538,9 @@ class _$NewsStateImpl extends _NewsState {
   int get hashCode => Object.hash(
       runtimeType, status, const DeepCollectionEquality().hash(_articles));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NewsStateImplCopyWith<_$NewsStateImpl> get copyWith =>
@@ -537,8 +557,11 @@ abstract class _NewsState extends NewsState {
   BlocStatus get status;
   @override
   List<Article> get articles;
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NewsStateImplCopyWith<_$NewsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

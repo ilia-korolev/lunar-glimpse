@@ -97,6 +97,9 @@ class _$GalleryEventCopyWithImpl<$Res, $Val extends GalleryEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -113,6 +116,9 @@ class __$$GalleryFetchedImplCopyWithImpl<$Res>
   __$$GalleryFetchedImplCopyWithImpl(
       _$GalleryFetchedImpl _value, $Res Function(_$GalleryFetchedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -248,6 +254,9 @@ class __$$GalleryRefreshedImplCopyWithImpl<$Res>
   __$$GalleryRefreshedImplCopyWithImpl(_$GalleryRefreshedImpl _value,
       $Res Function(_$GalleryRefreshedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -390,6 +399,8 @@ class __$$GalleryFavoriteToggledImplCopyWithImpl<$Res>
       $Res Function(_$GalleryFavoriteToggledImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -403,6 +414,8 @@ class __$$GalleryFavoriteToggledImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GalleryItemCopyWith<$Res> get item {
@@ -446,7 +459,9 @@ class _$GalleryFavoriteToggledImpl
   @override
   int get hashCode => Object.hash(runtimeType, item);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryFavoriteToggledImplCopyWith<_$GalleryFavoriteToggledImpl>
@@ -546,7 +561,10 @@ abstract class GalleryFavoriteToggled implements GalleryEvent {
       _$GalleryFavoriteToggledImpl;
 
   GalleryItem get item;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryFavoriteToggledImplCopyWith<_$GalleryFavoriteToggledImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -565,6 +583,9 @@ class __$$GalleryTriedAgainImplCopyWithImpl<$Res>
   __$$GalleryTriedAgainImplCopyWithImpl(_$GalleryTriedAgainImpl _value,
       $Res Function(_$GalleryTriedAgainImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -703,6 +724,8 @@ class __$$GalleryItemsChangedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryItemsChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -758,7 +781,9 @@ class _$GalleryItemsChangedImpl
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryItemsChangedImplCopyWith<_$GalleryItemsChangedImpl> get copyWith =>
@@ -858,7 +883,10 @@ abstract class GalleryItemsChanged implements GalleryEvent {
       _$GalleryItemsChangedImpl;
 
   List<GalleryItem> get items;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryItemsChangedImplCopyWith<_$GalleryItemsChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -884,6 +912,8 @@ class __$$GalleryAppSettingsChangedImplCopyWithImpl<$Res>
       $Res Function(_$GalleryAppSettingsChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -897,6 +927,8 @@ class __$$GalleryAppSettingsChangedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppSettingsCopyWith<$Res> get appSettings {
@@ -941,7 +973,9 @@ class _$GalleryAppSettingsChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, appSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryAppSettingsChangedImplCopyWith<_$GalleryAppSettingsChangedImpl>
@@ -1042,7 +1076,10 @@ abstract class GalleryAppSettingsChanged implements GalleryEvent {
       _$GalleryAppSettingsChangedImpl;
 
   AppSettings get appSettings;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GalleryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryAppSettingsChangedImplCopyWith<_$GalleryAppSettingsChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1053,7 +1090,9 @@ mixin _$GalleryState {
   List<GalleryItem> get items => throw _privateConstructorUsedError;
   bool get hasReachedMax => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GalleryStateCopyWith<GalleryState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1077,6 +1116,8 @@ class _$GalleryStateCopyWithImpl<$Res, $Val extends GalleryState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GalleryState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1120,6 +1161,8 @@ class __$$GalleryStateImplCopyWithImpl<$Res>
       _$GalleryStateImpl _value, $Res Function(_$GalleryStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1184,7 +1227,9 @@ class _$GalleryStateImpl extends _GalleryState {
   int get hashCode => Object.hash(runtimeType, status,
       const DeepCollectionEquality().hash(_items), hasReachedMax);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryStateImplCopyWith<_$GalleryStateImpl> get copyWith =>
@@ -1204,8 +1249,11 @@ abstract class _GalleryState extends GalleryState {
   List<GalleryItem> get items;
   @override
   bool get hasReachedMax;
+
+  /// Create a copy of GalleryState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryStateImplCopyWith<_$GalleryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
