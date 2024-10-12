@@ -43,7 +43,7 @@ enum Breakpoint {
       case >= _maxExpandedWidth:
         return Breakpoint.large;
       default:
-        throw ArgumentError('The window width is not supported: width');
+        throw ArgumentError('The window width is not supported: $width');
     }
   }
 }
