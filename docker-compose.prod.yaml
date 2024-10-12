@@ -2,9 +2,9 @@ version: '3.9'
 
 services:
 
-  nginx:
-    image: nginx:latest
-    container_name: nginx-container
+  frontend:
+    image: ghcr.io/ilia-korolev/astro-web:latest
+    container_name: astro-frontend-container
     restart: always
     ports:
       - 80:80
@@ -27,18 +27,7 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
-
-  frontend:
-    image: ghcr.io/ilia-korolev/astro-web:latest
-    container_name: astro-frontend-container
-    restart: always
-    expose:
-      - 80
-    volumes:
-      - ./nginx/web-app.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - backend
-
+      
   backend:
     image: ghcr.io/ilia-korolev/astro-backend:latest
     container_name: astro-backend-container
