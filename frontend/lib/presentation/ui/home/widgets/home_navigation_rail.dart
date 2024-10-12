@@ -24,18 +24,12 @@ class HomeNavigationRail extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    final backgroundColor = ElevationOverlay.applySurfaceTint(
-      theme.colorScheme.surface,
-      theme.colorScheme.surfaceTint,
-      3,
-    );
-
     return Row(
       children: [
         NavigationRail(
           extended: isExtended,
           labelType: isExtended ? null : NavigationRailLabelType.all,
-          backgroundColor: backgroundColor,
+          backgroundColor: theme.colorScheme.surfaceContainer,
           selectedIndex: activeTab.index,
           onDestinationSelected: (index) {
             final selectedTab = HomePageTab.values[index];
