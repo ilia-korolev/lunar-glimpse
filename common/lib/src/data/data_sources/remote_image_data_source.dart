@@ -9,7 +9,7 @@ class CloudinaryException implements Exception {
 abstract interface class RemoteImageDataSource {
   const RemoteImageDataSource();
 
-  Future<Uri> upload({
+  Future<UploadResult> upload({
     required Uri fileUri,
     required String name,
   });
@@ -25,10 +25,11 @@ class CloudinaryImageDataSource implements RemoteImageDataSource {
   static const _assetFolder = 'gallery';
   static const _format = 'jpg';
   static const _deliveryType = 'private';
-  static const _template = 't_thumb';
+  static const _originalTemplate = 't_original';
+  static const _thumbTemplate = 't_thumb';
 
   @override
-  Future<Uri> upload({
+  Future<UploadResult> upload({
     required Uri fileUri,
     required String name,
   }) async {
@@ -50,20 +51,46 @@ class CloudinaryImageDataSource implements RemoteImageDataSource {
       throw CloudinaryException(message: errorMessage);
     }
 
-    return Uri.parse(
-      'https://res.cloudinary.com/${cloudinary.cloudName}/image/$_deliveryType/$_template/$name.$_format',
+    return UploadResult(
+      uri: _composeOriginalUri(name),
+      thumbUri: _composeThumbUri(name),
     );
   }
+
+  Uri _composeOriginalUri(String name) {
+    return Uri.parse(
+      'https://res.cloudinary.com/${cloudinary.cloudName}/image/$_deliveryType/$_originalTemplate/$name.$_format',
+    );
+  }
+
+  Uri _composeThumbUri(String name) {
+    return Uri.parse(
+      'https://res.cloudinary.com/${cloudinary.cloudName}/image/$_deliveryType/$_thumbTemplate/$name.$_format',
+    );
+  }
+}
+
+class UploadResult {
+  UploadResult({
+    required this.uri,
+    required this.thumbUri,
+  });
+
+  final Uri uri;
+  final Uri thumbUri;
 }
 
 class MockImageDataSource implements RemoteImageDataSource {
   const MockImageDataSource();
 
   @override
-  Future<Uri> upload({
+  Future<UploadResult> upload({
     required Uri fileUri,
     required String name,
   }) async {
-    return fileUri;
+    return UploadResult(
+      uri: fileUri,
+      thumbUri: fileUri,
+    );
   }
 }

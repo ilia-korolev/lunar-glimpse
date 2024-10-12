@@ -43,13 +43,13 @@ class RemoteGalleryMapperDataSourceImpl
     required BasicGalleryItem basic,
     required ContentLanguage language,
   }) async {
-    final thumbUri = await _remoteImageDataSource.upload(
+    final uploadResult = await _remoteImageDataSource.upload(
       fileUri: basic.uri,
       name: basic.date.format('yyyy-MM-dd'),
     );
 
-    final imageBytes = await _downloadFile(basic.uri);
-    final thumbBytes = await _downloadFile(thumbUri);
+    final imageBytes = await _downloadFile(uploadResult.uri);
+    final thumbBytes = await _downloadFile(uploadResult.thumbUri);
 
     final image = decodeImage(imageBytes)!;
     final thumbImage = decodeImage(thumbBytes)!;
@@ -65,9 +65,9 @@ class RemoteGalleryMapperDataSourceImpl
       copyright: basic.copyright,
       isFavorite: false,
       media: GalleryImage(
-        uri: basic.uri,
+        uri: uploadResult.uri,
         hdUri: basic.hdUri,
-        thumbUri: thumbUri,
+        thumbUri: uploadResult.thumbUri,
         aspectRatio: aspectRatio,
         aspectRatioThumb: thumbAspectRatio,
         blurHash: blurHash,
