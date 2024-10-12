@@ -93,7 +93,7 @@ docker compose -f docker-compose.prod.yaml --env-file .env.prod up -d
 ```bash
 git pull &&
 cd frontend/ &&
-flutter build web --dart-define FLAVOR=production --web-renderer html &&
+flutter build web --dart-define FLAVOR=production --wasm &&
 docker build . -f web.Dockerfile -t ghcr.io/ilia-korolev/astro-web:latest --platform=linux/amd64 &&
 docker push ghcr.io/ilia-korolev/astro-web:latest &&
 cd ..
