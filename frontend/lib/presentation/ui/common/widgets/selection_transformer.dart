@@ -194,17 +194,17 @@ class SeparatedSelectionContainerDelegate
   void _updateLastEdgeEventsFromGeometries() {
     if (currentSelectionStartIndex != -1 &&
         selectables[currentSelectionStartIndex].value.hasSelection) {
-      final Selectable start = selectables[currentSelectionStartIndex];
-      final Offset localStartEdge =
+      final start = selectables[currentSelectionStartIndex];
+      final localStartEdge =
           start.value.startSelectionPoint!.localPosition +
               Offset(0, -start.value.startSelectionPoint!.lineHeight / 2);
       _lastStartEdgeUpdateGlobalPosition = MatrixUtils.transformPoint(
-          start.getTransformTo(null), localStartEdge);
+          start.getTransformTo(null), localStartEdge,);
     }
     if (currentSelectionEndIndex != -1 &&
         selectables[currentSelectionEndIndex].value.hasSelection) {
-      final Selectable end = selectables[currentSelectionEndIndex];
-      final Offset localEndEdge = end.value.endSelectionPoint!.localPosition +
+      final end = selectables[currentSelectionEndIndex];
+      final localEndEdge = end.value.endSelectionPoint!.localPosition +
           Offset(0, -end.value.endSelectionPoint!.lineHeight / 2);
       _lastEndEdgeUpdateGlobalPosition =
           MatrixUtils.transformPoint(end.getTransformTo(null), localEndEdge);
@@ -213,8 +213,8 @@ class SeparatedSelectionContainerDelegate
 
   @override
   SelectionResult handleSelectAll(SelectAllSelectionEvent event) {
-    final SelectionResult result = super.handleSelectAll(event);
-    for (final Selectable selectable in selectables) {
+    final result = super.handleSelectAll(event);
+    for (final selectable in selectables) {
       _hasReceivedStartEvent.add(selectable);
       _hasReceivedEndEvent.add(selectable);
     }
@@ -227,7 +227,7 @@ class SeparatedSelectionContainerDelegate
   /// [SelectWordSelectionEvent.globalPosition].
   @override
   SelectionResult handleSelectWord(SelectWordSelectionEvent event) {
-    final SelectionResult result = super.handleSelectWord(event);
+    final result = super.handleSelectWord(event);
     if (currentSelectionStartIndex != -1) {
       _hasReceivedStartEvent.add(selectables[currentSelectionStartIndex]);
     }
@@ -242,7 +242,7 @@ class SeparatedSelectionContainerDelegate
   /// [SelectParagraphSelectionEvent.globalPosition].
   @override
   SelectionResult handleSelectParagraph(SelectParagraphSelectionEvent event) {
-    final SelectionResult result = super.handleSelectParagraph(event);
+    final result = super.handleSelectParagraph(event);
     if (currentSelectionStartIndex != -1) {
       _hasReceivedStartEvent.add(selectables[currentSelectionStartIndex]);
     }
@@ -255,7 +255,7 @@ class SeparatedSelectionContainerDelegate
 
   @override
   SelectionResult handleClearSelection(ClearSelectionEvent event) {
-    final SelectionResult result = super.handleClearSelection(event);
+    final result = super.handleClearSelection(event);
     _hasReceivedStartEvent.clear();
     _hasReceivedEndEvent.clear();
     _lastStartEdgeUpdateGlobalPosition = null;
@@ -282,7 +282,7 @@ class SeparatedSelectionContainerDelegate
 
   @override
   SelectionResult dispatchSelectionEventToChild(
-      Selectable selectable, SelectionEvent event) {
+      Selectable selectable, SelectionEvent event,) {
     switch (event.type) {
       case SelectionEventType.startEdgeUpdate:
         _hasReceivedStartEvent.add(selectable);
@@ -310,7 +310,7 @@ class SeparatedSelectionContainerDelegate
   void ensureChildUpdated(Selectable selectable) {
     if (_lastEndEdgeUpdateGlobalPosition != null &&
         _hasReceivedEndEvent.add(selectable)) {
-      final SelectionEdgeUpdateEvent synthesizedEvent =
+      final synthesizedEvent =
           SelectionEdgeUpdateEvent.forEnd(
         globalPosition: _lastEndEdgeUpdateGlobalPosition!,
       );
@@ -321,7 +321,7 @@ class SeparatedSelectionContainerDelegate
     }
     if (_lastStartEdgeUpdateGlobalPosition != null &&
         _hasReceivedStartEvent.add(selectable)) {
-      final SelectionEdgeUpdateEvent synthesizedEvent =
+      final synthesizedEvent =
           SelectionEdgeUpdateEvent.forStart(
         globalPosition: _lastStartEdgeUpdateGlobalPosition!,
       );
@@ -348,11 +348,11 @@ class SeparatedSelectionContainerDelegate
         ),
       );
     }
-    final Set<Selectable> selectableSet = selectables.toSet();
+    final selectableSet = selectables.toSet();
     _hasReceivedEndEvent.removeWhere(
-        (Selectable selectable) => !selectableSet.contains(selectable));
+        (Selectable selectable) => !selectableSet.contains(selectable),);
     _hasReceivedStartEvent.removeWhere(
-        (Selectable selectable) => !selectableSet.contains(selectable));
+        (Selectable selectable) => !selectableSet.contains(selectable),);
     super.didChangeSelectables();
   }
 
