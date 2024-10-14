@@ -5,7 +5,7 @@
 .env.prod
 
 # The cron job file
-cron_job.sh
+cron_job*.sh
 
 # Certbot files
 certbot/
